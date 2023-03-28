@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Http\Resources\DepotDeGarantieResouce;
 use App\Models\DepotDeGarantie;
 use Illuminate\Http\Request;
 
@@ -13,7 +14,7 @@ class DepotDeGarantieController extends Controller
      */
     public function index()
     {
-        return DepotDeGarantie::all()->toJson();
+        return DepotDeGarantieResouce::collection(DepotDeGarantie::all());
     }
 
     /**
@@ -29,7 +30,7 @@ class DepotDeGarantieController extends Controller
      */
     public function show(DepotDeGarantie $depotDeGarantie)
     {
-        return $depotDeGarantie->toJson();
+        return new DepotDeGarantieResouce($depotDeGarantie);
     }
 
     /**

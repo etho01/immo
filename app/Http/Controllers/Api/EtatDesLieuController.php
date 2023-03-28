@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Http\Resources\EtatDesLieuResouce;
 use App\Models\EtatDesLieu;
 use Illuminate\Http\Request;
 
@@ -13,7 +14,7 @@ class EtatDesLieuController extends Controller
      */
     public function index()
     {
-        return EtatDesLieu::all()->toJson();
+        return EtatDesLieuResouce::collection(EtatDesLieu::all());
     }
 
     /**
@@ -29,7 +30,7 @@ class EtatDesLieuController extends Controller
      */
     public function show(EtatDesLieu $etatDesLieu)
     {
-        return $etatDesLieu->toJson();
+        return new EtatDesLieuResouce($etatDesLieu);
     }
 
     /**

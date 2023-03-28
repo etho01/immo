@@ -14,6 +14,13 @@ class EtatDesLieuResouce extends JsonResource
      */
     public function toArray(Request $request): array
     {
-        return parent::toArray($request);
+        return [
+            'id' => $this->id,
+            'contrat_id' => $this->contrat_id,
+            'appart_id' => $this->appart_id,
+            'date' => $this->date,
+            'commentaire' => $this->commentaire,
+            'stade' => $this->stade
+        ];
     }
 }

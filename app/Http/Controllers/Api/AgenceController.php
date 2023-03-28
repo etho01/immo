@@ -30,7 +30,7 @@ class AgenceController extends Controller
      */
     public function show(Agence $agence)
     {
-        return $agence->toJson();
+        return new AgenceResouce($agence);
     }
 
     /**

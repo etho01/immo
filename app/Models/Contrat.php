@@ -20,7 +20,7 @@ class Contrat extends Model
     ];
 
     public function appart(){
-        return $this->belongsTo(Appart::class);
+        return $this->belongsTo(Appart::class, 'appart_id');
     }
 
     public function paiements(){
@@ -36,6 +36,6 @@ class Contrat extends Model
     }
 
     public function locataire(){
-        return $this->belongsTo(Locataire::class);
+        return $this->belongsTo(Locataire::class, 'locataire_id');
     }
 }

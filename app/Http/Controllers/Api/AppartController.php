@@ -30,7 +30,7 @@ class AppartController extends Controller
      */
     public function show(Appart $appart)
     {
-        return $appart->toJson();
+        return new AppartResouce($appart);
     }
 
     /**

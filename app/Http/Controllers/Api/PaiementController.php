@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Http\Resources\PaiementResouce;
 use App\Models\Paiement;
 use Illuminate\Http\Request;
 
@@ -13,7 +14,7 @@ class PaiementController extends Controller
      */
     public function index()
     {
-        return Paiement::all()->toJson();
+        return PaiementResouce::collection(Paiement::all());
     }
 
     /**
@@ -29,7 +30,7 @@ class PaiementController extends Controller
      */
     public function show(Paiement $paiement)
     {
-        return $paiement->toJson();
+        return new PaiementResouce($paiement);
     }
 
     /**

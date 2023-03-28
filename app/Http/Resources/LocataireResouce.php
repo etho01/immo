@@ -14,6 +14,16 @@ class LocataireResouce extends JsonResource
      */
     public function toArray(Request $request): array
     {
-        return parent::toArray($request);
+        return [
+            'id' => $this->id,
+            'nom' => $this->nom,
+            'prenom' => $this->prenom,
+            'date_naissance' => $this->date_naissance,
+            'email' => $this->email,
+            'telephone' => $this->telephone,
+            'iban' => $this->iban,
+            'bic' => $this->bic,
+            'genre' => $this->genre
+        ];
     }
 }

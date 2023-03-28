@@ -3,8 +3,10 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Http\Resources\LocataireResouce;
 use App\Models\Locataire;
 use Illuminate\Http\Request;
+use Locale;
 
 class LocataireController extends Controller
 {
@@ -13,7 +15,7 @@ class LocataireController extends Controller
      */
     public function index()
     {
-        return Locataire::all()->toJson();
+        return LocataireResouce::collection(Locataire::all());
     }
 
     /**
@@ -29,7 +31,7 @@ class LocataireController extends Controller
      */
     public function show(Locataire $locataire)
     {
-        return $locataire->toJson();
+        return new LocataireResouce($locataire);
     }
 
     /**

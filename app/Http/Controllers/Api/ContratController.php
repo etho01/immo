@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Http\Resources\ContratResouce;
 use App\Models\Appart;
 use App\Models\Contrat;
 use Illuminate\Http\Request;
@@ -14,7 +15,7 @@ class ContratController extends Controller
      */
     public function index()
     {
-        return Contrat::all()->toJson();
+        return ContratResouce::collection(Contrat::all());
     }
 
     /**
@@ -30,7 +31,7 @@ class ContratController extends Controller
      */
     public function show(Contrat $contrat)
     {
-        return $contrat->toJson();
+        return new ContratResouce($contrat);
     }
 
     /**
