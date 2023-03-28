@@ -17,4 +17,8 @@ class Agence extends Model
         'created_at',
         'updated_at'
     ];
+
+    public function apparts(){
+        return $this->hasMany(Appart::class);
+    }
 }

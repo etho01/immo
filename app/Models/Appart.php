@@ -22,4 +22,8 @@ class Appart extends Model
         'updated_at'
     ];
 
+    public function agence(){
+        return $this->belongsTo(Agence::class);
+    }
+
 }
