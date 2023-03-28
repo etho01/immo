@@ -23,4 +23,8 @@ class Locataire extends Model
         'updated_at'
     ];
 
+    public function contrats(){
+        return $this->hasMany(Contrat::class);
+    }
+
 }

@@ -19,4 +19,12 @@ class EtatDesLieu extends Model
         'created_at',
         'updated_at'
     ];
+
+    public function appart(){
+        return $this->belongsTo(Appart::class);
+    }
+
+    public function contrat(){
+        return $this->belongsTo(Contrat::class);
+    }
 }

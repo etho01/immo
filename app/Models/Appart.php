@@ -26,4 +26,12 @@ class Appart extends Model
         return $this->belongsTo(Agence::class);
     }
 
+    public function etatDesLieus(){
+        return $this->hasMany(EtatDesLieu::class);
+    }
+
+    public function contrats(){
+        return $this->hasMany(Contrat::class);
+    }
+
 }

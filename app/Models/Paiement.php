@@ -19,4 +19,8 @@ class Paiement extends Model
         'updated_at'
     ];
 
+    public function contrat(){
+        return $this->belongsTo(Contrat::class);
+    }
+
 }

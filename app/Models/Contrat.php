@@ -18,4 +18,24 @@ class Contrat extends Model
         'created_at',
         'updated_at'
     ];
+
+    public function appart(){
+        return $this->belongsTo(Appart::class);
+    }
+
+    public function paiements(){
+        return $this->hasMany(Paiement::class);
+    }
+
+    public function etatDesLieus(){
+        return $this->hasMany(EtatDesLieu::class);
+    }
+
+    public function depotDeGaranties(){
+        return $this->hasMany(DepotDeGarantie::class);
+    }
+
+    public function locataire(){
+        return $this->belongsTo(Locataire::class);
+    }
 }
