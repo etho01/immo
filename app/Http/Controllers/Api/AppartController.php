@@ -46,7 +46,7 @@ class AppartController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Appart $appart)
+    public function update(appartRequest $request, Appart $appart)
     {
         Appart::where('id', $appart->id)->update([
             'agence_id' => $request->agence_id,

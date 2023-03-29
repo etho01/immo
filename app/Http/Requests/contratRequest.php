@@ -2,10 +2,9 @@
 
 namespace App\Http\Requests;
 
-use Illuminate\Validation\Validator;
 use Illuminate\Foundation\Http\FormRequest;
 
-class appartRequest extends FormRequest
+class contratRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -30,7 +29,7 @@ class appartRequest extends FormRequest
 
     public function store(){
         return [
-      /*      'agence_id' => ['required'],
+         /*   'agence_id' => ['required'],
             'adresse' => ['required'],
             'adresse_compl' => ['required'],
             'cp' => ['required'],
@@ -44,7 +43,4 @@ class appartRequest extends FormRequest
         return [];
     }
 
-    public function destroy(){
-        return [];
-    }
 }
