@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\Api\AppartController;
+use App\Models\Appart;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -16,3 +18,8 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::get('/test', [AppartController::class, 'store']);
+
+Route::view('{any}', 'welcome')
+    ->where('any', '.*');
