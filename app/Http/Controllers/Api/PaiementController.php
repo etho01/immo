@@ -22,7 +22,12 @@ class PaiementController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        return new PaiementResouce(Paiement::create([
+            'contrat_id' => $request->contrat_id,
+            'date_paiement' => $request->date_paiement,
+            'montant_paiement' => $request->montant_paiement,
+            'origine' => $request->origine
+        ]));
     }
 
     /**
@@ -38,7 +43,13 @@ class PaiementController extends Controller
      */
     public function update(Request $request, Paiement $paiement)
     {
-        //
+        Paiement::where('id', $paiement->id)->update([
+            'contrat_id' => $request->contrat_id,
+            'date_paiement' => $request->date_paiement,
+            'montant_paiement' => $request->montant_paiement,
+            'origine' => $request->origine
+        ]);
+        return new PaiementResouce(Paiement::find($paiement->id));
     }
 
     /**
@@ -46,6 +57,6 @@ class PaiementController extends Controller
      */
     public function destroy(Paiement $paiement)
     {
-        //
+        $paiement->delete();
     }
 }

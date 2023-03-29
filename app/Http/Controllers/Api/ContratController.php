@@ -45,7 +45,7 @@ class ContratController extends Controller
      */
     public function update(contratRequest $request, Contrat $contrat)
     {
-        Appart::where('id', $contrat->id)->update([
+        Contrat::where('id', $contrat->id)->update([
             'appart_id' => $request->appart_id,
             'locataire_id' => $request->locataire_id,
             'date_debut' => $request->date_debut,

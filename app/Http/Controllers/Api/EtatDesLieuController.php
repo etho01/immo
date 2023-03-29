@@ -22,7 +22,13 @@ class EtatDesLieuController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        return new EtatDesLieuResouce(EtatDesLieu::create([
+            'contrat_id' => $request->contrat_id,
+            'appart_id' => $request->appart_id,
+            'date' => $request->date,
+            'commentaire' => $request->commentaire,
+            'stade' => $request->stade
+        ]));
     }
 
     /**
@@ -38,7 +44,14 @@ class EtatDesLieuController extends Controller
      */
     public function update(Request $request, EtatDesLieu $etatDesLieu)
     {
-        //
+        EtatDesLieu::where('id', $etatDesLieu->id)->update([
+            'contrat_id' => $request->contrat_id,
+            'appart_id' => $request->appart_id,
+            'date' => $request->date,
+            'commentaire' => $request->commentaire,
+            'stade' => $request->stade
+        ]);
+        return new EtatDesLieuResouce(EtatDesLieu::find($etatDesLieu->id));
     }
 
     /**
@@ -46,6 +59,6 @@ class EtatDesLieuController extends Controller
      */
     public function destroy(EtatDesLieu $etatDesLieu)
     {
-        //
+        $etatDesLieu->delete();
     }
 }

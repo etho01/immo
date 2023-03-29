@@ -23,7 +23,16 @@ class LocataireController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        return new LocataireResouce(Locataire::create([
+            'nom' => $request->nom,
+            'prenom' => $request->prenom,
+            'date_naissance' => $request->date_naissance,
+            'email' => $request->email,
+            'telephone' => $request->telephone,
+            'iban' => $request->iban,
+            'bic' => $request->bic,
+            'genre' => $request->genre
+        ]));
     }
 
     /**
@@ -39,7 +48,17 @@ class LocataireController extends Controller
      */
     public function update(Request $request, Locataire $locataire)
     {
-        //
+        Locataire::where('id', $locataire->id)->update([
+            'nom' => $request->nom,
+            'prenom' => $request->prenom,
+            'date_naissance' => $request->date_naissance,
+            'email' => $request->email,
+            'telephone' => $request->telephone,
+            'iban' => $request->iban,
+            'bic' => $request->bic,
+            'genre' => $request->genre
+        ]);
+        return new LocataireResouce(Locataire::find($locataire->id));
     }
 
     /**

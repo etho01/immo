@@ -22,7 +22,12 @@ class DepotDeGarantieController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        DepotDeGarantie::create([
+            'contrat_id' => $request->contrat_id,
+            'montant_encaisser' => $request->montant_encaisser,
+            'date_encaissement' => $request->date_encaissement,
+            'montant_restituer' => $request->montant_restituer, 
+        ]);
     }
 
     /**
@@ -38,7 +43,13 @@ class DepotDeGarantieController extends Controller
      */
     public function update(Request $request, DepotDeGarantie $depotDeGarantie)
     {
-        //
+        DepotDeGarantie::where('id', $depotDeGarantie->id)->update([
+            'contrat_id' => $request->contrat_id,
+            'montant_encaisser' => $request->montant_encaisser,
+            'date_encaissement' => $request->date_encaissement,
+            'montant_restituer' => $request->montant_restituer, 
+        ]);
+        return new DepotDeGarantieResouce(DepotDeGarantie::find($depotDeGarantie->id));
     }
 
     /**
@@ -46,6 +57,6 @@ class DepotDeGarantieController extends Controller
      */
     public function destroy(DepotDeGarantie $depotDeGarantie)
     {
-        //
+        $depotDeGarantie->delete();
     }
 }
