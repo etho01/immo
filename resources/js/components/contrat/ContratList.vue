@@ -1,10 +1,9 @@
 <template>
     <main class="w-full">
         <TitlePage title="Liste des Contrats"/>
-        <section class="block sm:container mx-auto">
-            <div class="border-4 p-3 border rounded bg-state-50">
-
-            </div>
+        <section class="grid grid-cols-2 sm:container mx-auto border-4 p-3 border rounded bg-state-50">
+            <Text label="test" @change="onChangeRecherche"/>
+            <Select label="df" :param="paramsTest" @change="onChangeSelect"/>
         </section>
 
         <section class="mx-3 block liste-element">
@@ -54,23 +53,41 @@
 
     import userContrat from '../../services/contratServices.js';
     import TitlePage from '../utils/TitlePage.vue';
+    import Text from '../utils/input/Text.vue';
+    import Select from '../utils/input/Select.vue';
 
     const { contrats, getContrats } = userContrat();
 
     export default {
         data() {
             return {
-                contrats
+                contrats,
+                recherche: '',
+                paramsTest: [{
+                        id: 1,
+                        name: 'dsd',
+                    }
+                ],
+                selects: undefined
             }
         },
         mounted() {
             getContrats();
         },
         methods: {
-            test(contrat) {
-                console.log(contrat)
+            onChangeRecherche(text) {
+                this.recherche = text;
+                this.refrechContrat();
+            },
+            refrechContrat(){
+                getContrats({
+                    recherche: this.recherche
+                })
+            },
+            onChangeSelect(id) {
+                this.selects = id;
             }
         },
-        components: { TitlePage }
+        components: { TitlePage, Text, Select }
 }
 </script>
