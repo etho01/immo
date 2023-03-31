@@ -1,23 +1,21 @@
 
 <template>
 
-  <div class="grid grid-cols-8 grid-rows-1">
+  <div class="flex h-full w-full">
     <Navbar />
-    <div class="col-span-6">
-      <RouterView />
-    </div>
+    <RouterView class="overflow-auto"/>
   </div>
 </template>
 
 <script>
 
 import Navbar from "./components/navbar/Navbar.vue";
-import PaiementRetard from "./components/paiement/PaiementRetard.vue";
+import ContratList from "./components/contrat/ContratList.vue";
 
 export default {
     name: 'App',
     components: {
-      PaiementRetard,
+      ContratList,
       Navbar
   }
 }

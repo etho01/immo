@@ -12,10 +12,16 @@ export default function userContrat(){
         contrat.value = response.data.data;
     }
 
+    const getContrats = async () => {
+        let response = await axios.get('api/contrat');
+        contrats.value = response.data.data;
+    }
+
     return {
         contrat,
         contrats,
-        getContrat
+        getContrat,
+        getContrats
     }
 
 }
