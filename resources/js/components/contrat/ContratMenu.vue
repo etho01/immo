@@ -1,7 +1,7 @@
 <template>
     <main class="w-full">
         <TitlePage title="Liste des Contrats"/>
-        <section class="grid grid-cols-2 sm:container mx-auto border-4 p-3 border rounded bg-state-50">
+        <section class="grid grid-cols-2 sm:container mx-auto border-4 p-3 rounded bg-state-50">
             <Select label="Agence" :param="agences" @change="onChangeAgence"/>
 
             <Text label="test" @change="onChangeRecherche"/>
@@ -34,14 +34,15 @@
             return {
                 contrats,
                 agences,
-                recherche: '',
                 paramsTest: [{
                         id: 1,
                         name: 'dsd',
                     }
                 ],
+                ContratCols,
+
                 agence_id: -1,
-                ContratCols
+                recherche: '',
             }
         },
         mounted() {

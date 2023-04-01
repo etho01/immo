@@ -53,19 +53,6 @@ export default function contratConst(){
             size: 1,
             id: 'appart.charge'
         },
-        {
-            nom : 'Charge du bien',
-            param: {
-                actions : [
-                    {
-                        type: 'button',
-                        event: 'd',
-                    }
-                ],
-            },
-            size: 1,
-            id: 'contrat.button'
-        },
     ];
 
     return {

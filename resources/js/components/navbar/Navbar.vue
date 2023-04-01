@@ -31,12 +31,15 @@
                 pages: [ 
                     {
                         nom: 'Contrat',
-                        name: 'paiement.retard'
+                        name: 'contrat.menu'
                     },
                     {
-                        nom: 'Autre',
-                        name: 'paiement.retard'
-                    },
+                        nom: 'Locataire',
+                        name: 'locataire.menu'
+                    },{
+                        nom: 'Appartement',
+                        name: 'appart.menu'
+                    }
                 ],
                 show: true,
                 mouseOver: false
