@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use League\CommonMark\Extension\CommonMark\Node\Inline\Code;
 
 class Contrat extends Model
 {
@@ -37,5 +38,13 @@ class Contrat extends Model
 
     public function locataire(){
         return $this->belongsTo(Locataire::class, 'locataire_id');
+    }
+
+    public static function rq($col = '*'){
+        return Contrat::select($col);
+    } 
+
+    public static function filtreAgence($rq, $agence_id){
+        return $rq->whereIn('appart_id', Appart::filtreAgence(Appart::rq('id'), $agence_id));
     }
 }

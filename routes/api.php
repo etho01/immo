@@ -21,14 +21,15 @@ use Illuminate\Support\Facades\Route;
 | be assigned to the "api" middleware group. Make something great!
 |
 */
-
-Route::apiResource('agence', AgenceController::class);
-Route::apiResource('appart', AppartController::class);
-Route::apiResource('contrat', ContratController::class);
-Route::apiResource('depotGarantie', DepotDeGarantieController::class);
-Route::apiResource('EtatDesLieux', EtatDesLieuController::class);
-Route::apiResource('locataire' , LocataireController::class);
-Route::apiResource('paiement', PaiementController::class);
+//Route::middleware('auth')->group(function() {
+    Route::apiResource('agence', AgenceController::class);
+    Route::apiResource('appart', AppartController::class);
+    Route::apiResource('contrat', ContratController::class);
+    Route::apiResource('depotGarantie', DepotDeGarantieController::class);
+    Route::apiResource('EtatDesLieux', EtatDesLieuController::class);
+    Route::apiResource('locataire' , LocataireController::class);
+    Route::apiResource('paiement', PaiementController::class);
+//});
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();

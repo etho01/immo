@@ -14,9 +14,11 @@ class ContratController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        return ContratResouce::collection(Contrat::all());
+        $eloquentContrat = Contrat::rq();
+        if ($request->query('agence_id', -1) != -1) $eloquentContrat = Contrat::filtreAgence($eloquentContrat, $request->query('agence_id', -1));
+        return ContratResouce::collection($eloquentContrat->get());
     }
 
     /**

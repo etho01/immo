@@ -34,4 +34,12 @@ class Appart extends Model
         return $this->hasMany(Contrat::class);
     }
 
+    public static function rq($col = '*'){
+        return Appart::select($col);
+    } 
+
+    public static function filtreAgence($rq, $agence_id){
+        return $rq->where('agence_id', $agence_id);
+    }
+
 }

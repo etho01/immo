@@ -4,11 +4,11 @@
             <Dropdown :text-botton="getLabel" >
 
                 <div class="w-full h-full my-1">
-                    <div  class="hover:bg-slate-200 w-full px-2" @click="change(undefined)">
+                    <div  class="hover:bg-slate-200 w-full px-2" @click="change(-1)">
                         --
                     </div>
                     <div :key="param.id" v-for="param in getParams" class="hover:bg-slate-200 w-full px-2" @click="change(param.id)">
-                        {{ param.name }}
+                        {{ param.nom }}
                     </div>
                 </div>
 
@@ -39,20 +39,27 @@ import Dropdown from '../component/Dropdown.vue';
     },
     computed: {
         getLabel() {
-            if (this.value == undefined){
+            if (this.value == -1){
                 return this.textDefault == undefined ? '--' : this.textDefault
             }
 
             let textButton = '--';
-            this.param.forEach(element => {
-                if (element.id == this.value){
-                    textButton = element.name;
-                }
-            });
+            if (this.param != undefined){
+                this.param.forEach(element => {
+                    if (element.id == this.value){
+                        textButton = element.nom;
+                    }
+                });
+            }
             return textButton;
         },
         getParams() {
             return this.param
+        }
+    },
+    mounted() {
+        if (this.value == undefined) {
+            this.value = -1;
         }
     },
     components: { Dropdown }

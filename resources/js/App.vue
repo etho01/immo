@@ -10,12 +10,12 @@
 <script>
 
 import Navbar from "./components/navbar/Navbar.vue";
-import ContratList from "./components/contrat/ContratList.vue";
+import ContratMenu from "./components/contrat/ContratMenu.vue";
 
 export default {
     name: 'App',
     components: {
-      ContratList,
+      ContratMenu,
       Navbar
   }
 }

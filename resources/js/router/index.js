@@ -1,17 +1,17 @@
 import { createRouter, createWebHistory } from "vue-router";
 
-import ContratList from "../components/contrat/ContratList.vue";
+import ContratMenu from "../components/contrat/ContratMenu.vue";
 
 const routes = [
     {
         path: '/dashboard',
         name: 'dashboard',
-        component: ContratList
+        component: ContratMenu
     },
     {
         path: '/contrat',
         name: 'paiement.retard',
-        component: ContratList
+        component: ContratMenu
     }
 ];
 
