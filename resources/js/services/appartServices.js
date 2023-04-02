@@ -7,7 +7,7 @@ export default function useAppart(){
     const appart = ref([]);
 
     const getApparts = async () => {
-        let response = axios.get('api/appart');
+        let response = axios.get('http://immo.test/api/appart');
         apparts.value = (await response).data.data;
     }
 

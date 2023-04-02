@@ -8,12 +8,12 @@ export default function userContrat(){
 
 
     const getContrat = async (id) => {
-        let response = await axios.get('api/contrat/'+ id );
+        let response = await axios.get('http://immo.test/api/contrat/'+ id );
         contrat.value = response.data.data;
     }
 
     const getContrats = async (data) => {
-        let response = await axios.get('api/contrat', {params: data});
+        let response = await axios.get('http://immo.test/api/contrat', {params: data});
         contrats.value = response.data.data;
     }
 

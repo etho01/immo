@@ -7,7 +7,7 @@ export default function usePaiement(){
     const paiement = ref([])
 
     const getPaiements = async (data) => {
-        let response = await axios.get('api/paiement', data);
+        let response = await axios.get('http://immo.test/api/paiement', data);
         paiements.value = response.data.data;
     }
 

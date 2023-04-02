@@ -7,7 +7,7 @@ export default function useLocataire(){
     const locataire = ref([]);
 
     const getLocataires = async () => {
-        let response = await axios.get('api/locataire');
+        let response = await axios.get('http://immo.test/api/locataire');
         locataires.value = response.data.data;
     }
 
