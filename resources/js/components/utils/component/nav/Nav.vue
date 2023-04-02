@@ -1,14 +1,16 @@
 <template>
 
-    <div class="flex">
-        <div class="mr-2" v-for="label in labels" :key="label.id" @click="changeShow(label.id)">
-            <div class="bg-gray-200 rounded-xl px-3 py-1">
+    <div class="flex content-end">
+        <div class="mr-2  content-end" v-for="label in labels" :key="label.id" @click="changeShow(label.id)">
+            <div class="round-nav px-3 py-1 self-end flex" :class="[label.id == activeItem ? 'bg-gray-400' : 'bg-gray-200 hover:bg-gray-300']">
                 {{ label.nom }}
             </div>
 
         </div>
-        <slot ></slot>
-
+          
+    </div>
+    <div class="px-3 py-2 rounded border-2">
+        <slot></slot>
     </div>
 
 </template>
@@ -17,19 +19,49 @@
     export default {
 
         props : [
-            'labels'
+            'labels',
+            'refs',
+            'activeItemDefault'
         ],
         data () {
             return {
-                activeItem : 0
+                activeItem : this.activeItemDefault,
+            }
+        },
+        mounted () {
+            if (this.activeItemDefault == undefined){
+                console.error('Erreur : le composant nav doit avoir un element par default')
+            } else {
+                this.changeShow(this.activeItemDefault)
             }
         },
         methods : {
             changeShow(idItem) {
-                this.activeItem = idItem;
-            }
+                this.activeItem = idItem
+                this.labels.forEach((label) => {
+                    if (label.id == idItem){
+                        document.querySelectorAll("[ref-nav='"+label.id+"']")[0].style.display = '';
+                    } else {
+                        document.querySelectorAll("[ref-nav='"+label.id+"']")[0].style.display = 'none';
+                    }
+                })
+            },
+
+        },
+        computed : {
+
         }
 
     }
 
 </script>
+
+<style>
+
+    .round-nav{
+        margin-top: auto;
+        margin-bottom: 0px;
+        border-radius: 0.75rem 0.75rem 0px 0px;
+    }
+
+</style>

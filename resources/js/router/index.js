@@ -4,6 +4,7 @@ import ContratMenu from "../components/contrat/ContratMenu.vue";
 import LocataireMenu from "../components/locataire/LocataireMenu.vue";
 import AppartMenu from "../components/appart/AppartMenu.vue";
 import ContratShow from "../components/contrat/ContratShow.vue";
+import LocataireShow from '../components/locataire/LocataireShow.vue'
 
 const routes = [
     {
@@ -27,9 +28,14 @@ const routes = [
         component: AppartMenu
     },
     {
-        path: '/contrat/:id',
-        name: 'contrat.list',
+        path: '/contrat/:id_contrat',
+        name: 'contrat.show',
         component: ContratShow,
+    },
+    {
+        path: '/locataire/:id_locataire',
+        name: 'locataire.show',
+        component: LocataireShow,
     },
 ];
 
