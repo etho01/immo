@@ -12,9 +12,16 @@ class EtatDesLieuController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        return EtatDesLieuResouce::collection(EtatDesLieu::all());
+        $eloquent = EtatDesLieu::select('*');
+        if ($request->input('contrat_id', -1) != -1){
+            $eloquent->where('contrat_id', $request->input('contrat_id'));
+        }
+        if ($request->input('appart_id', -1) != -1){
+            $eloquent->where('appart_id', $request->input('appart_id')); 
+        }
+        return EtatDesLieuResouce::collection($eloquent->get());
     }
 
     /**

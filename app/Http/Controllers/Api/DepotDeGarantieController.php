@@ -12,9 +12,13 @@ class DepotDeGarantieController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        return DepotDeGarantieResouce::collection(DepotDeGarantie::all());
+        $eloquent = DepotDeGarantie::select('*');
+        if ($request->input('contrat_id', -1) != -1){
+            $eloquent->where('contrat_id', $request->input('contrat_id'));
+        }
+        return DepotDeGarantieResouce::collection($eloquent->get());
     }
 
     /**

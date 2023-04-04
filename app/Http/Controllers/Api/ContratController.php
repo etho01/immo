@@ -8,6 +8,8 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\contratRequest;
 use App\Http\Resources\ContratResouce;
+use Illuminate\Contracts\Database\Eloquent\Builder;
+use Symfony\Component\HttpFoundation\Response;
 
 class ContratController extends Controller
 {
@@ -16,9 +18,29 @@ class ContratController extends Controller
      */
     public function index(Request $request)
     {
-        $eloquentContrat = Contrat::rq();
-        if ($request->query('agence_id', -1) != -1) $eloquentContrat = Contrat::filtreAgence($eloquentContrat, $request->query('agence_id', -1));
-        return ContratResouce::collection($eloquentContrat->get());
+
+        $eloquent = Contrat::with([
+            'locataire',
+            'depotDeGaranties',
+            'paiements',
+            'etatDesLieus',
+            'appart' => [
+                'agence'
+            ]
+        ]);
+
+        if ($request->input('agence_id', -1) != -1) {
+            $eloquent->whereHas('appart', function (Builder $query) use ($request) {
+                $query->where('agence_id', $request->input('agence_id', -1));
+            });
+        }
+        if ($request->input('locataire_id', -1 )!= -1){
+            $eloquent->where('locataire_id', $request->input('locataire_id', -1));
+        }
+        if ($request->input('appart_id', -1) != -1){
+            $eloquent->where('appart_id', $request->input('appart_id'));
+        }
+        return ContratResouce::collection($eloquent->get());
     }
 
     /**

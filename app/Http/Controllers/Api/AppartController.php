@@ -7,6 +7,7 @@ use App\Http\Requests\appart\storeRequest;
 use App\Http\Requests\appartRequest;
 use App\Http\Resources\AppartResouce;
 use App\Models\Appart;
+use Illuminate\Contracts\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
 
 class AppartController extends Controller
@@ -14,9 +15,18 @@ class AppartController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        return AppartResouce::collection(Appart::all());
+        $eloquent = Appart::with([
+            'agence',
+        ]);
+        if ($request->input('contrat_id', -1) != -1){
+            $request->whereHas('contrats', function (Builder $query) use ($request){
+                $query->where('id', $request->input('contrat_id'));
+            });
+        }
+
+        return AppartResouce::collection($eloquent->get());
     }
 
     /**

@@ -21,7 +21,7 @@ class Contrat extends Model
     ];
 
     public function appart(){
-        return $this->belongsTo(Appart::class, 'appart_id');
+        return $this->hasOne(Appart::class, 'id');
     }
 
     public function paiements(){
@@ -37,14 +37,6 @@ class Contrat extends Model
     }
 
     public function locataire(){
-        return $this->belongsTo(Locataire::class, 'locataire_id');
-    }
-
-    public static function rq($col = '*'){
-        return Contrat::select($col);
-    } 
-
-    public static function filtreAgence($rq, $agence_id){
-        return $rq->whereIn('appart_id', Appart::filtreAgence(Appart::rq('id'), $agence_id));
+        return $this->belongsTo(Locataire::class, 'locataire_id', 'id', 'id', 'id');
     }
 }

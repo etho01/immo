@@ -12,9 +12,13 @@ class PaiementController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        return PaiementResouce::collection(Paiement::all());
+        $eloquent = Paiement::select('*');
+        if ($request->input('contrat_id', -1) != -1){
+            $request->where('contrat_id', $request->input('contrat_id'));
+        }
+        return PaiementResouce::collection($eloquent->get());
     }
 
     /**

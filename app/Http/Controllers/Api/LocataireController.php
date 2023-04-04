@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\LocataireResouce;
 use App\Models\Locataire;
+use Illuminate\Contracts\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
 use Locale;
 
@@ -13,9 +14,15 @@ class LocataireController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        return LocataireResouce::collection(Locataire::all());
+        $elequent = Locataire::select('*');
+        if ($request->input('contrat_id', -1) != -1){
+            $elequent->whereHas('contrats', function (Builder $query) use ($request) {
+                $query->where('id', $request->input('contrat_id'));
+            });
+        }
+        return LocataireResouce::collection($elequent->get());
     }
 
     /**
