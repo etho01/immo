@@ -1,7 +1,7 @@
 <template>
 
     <div>
-        contrat_info
+        Loc
     </div>
 
 </template>

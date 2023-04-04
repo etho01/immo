@@ -39,6 +39,7 @@
             changeShow(idItem) {
                 this.activeItem = idItem
                 this.labels.forEach((label) => {
+                    console.log(document.querySelectorAll("[ref-nav='"+label.id+"']")[0]);
                     if (label.id == idItem){
                         document.querySelectorAll("[ref-nav='"+label.id+"']")[0].style.display = '';
                     } else {

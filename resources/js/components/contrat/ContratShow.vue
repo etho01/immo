@@ -24,9 +24,9 @@
                                     id : 'paiment'
                                 }                                
             ]" activeItemDefault="infos_contrat">
-            <div ref-nav="infos_contrat"></div>
-            <div ref-nav="infos_appart"></div>
-            <div ref-nav="infos_loc"></div>
+            <ContratInfo ref-nav="infos_contrat"/>
+            <AppartInfo ref-nav="infos_appart"/>
+            <LocataireInfo ref-nav="infos_loc" />
             <ListeElement :elements="contrat.etat_des_lieu" ref-nav="etat_des_lieu" :cols="etatDesLieuCols"/>
             <ListeElement :elements="contrat.paiement" ref-nav="paiment" :cols="paiementCols"/>
         
@@ -43,6 +43,9 @@
     import ListeElement from '../utils/component/liste/ListeElement.vue';
     import paiementConst from '../../const/PaiementConst.js'
     import etatDesLieuConst from '../../const/EtatDesLieuConst.js'
+    import ContratInfo from './ContratInfo.vue';
+    import AppartInfo from '../appart/AppartInfo.vue';
+    import LocataireInfo from '../locataire/LocataireInfo.vue';
 
     const { paiementCols } = paiementConst();
     const { etatDesLieuCols } = etatDesLieuConst();
@@ -67,7 +70,7 @@
     methods: {
         getContrat,
     },
-    components: { TitlePage, Nav, ListeElement }
+    components: { TitlePage, Nav, ListeElement, ContratInfo, AppartInfo, LocataireInfo }
 }
 
 </script>
