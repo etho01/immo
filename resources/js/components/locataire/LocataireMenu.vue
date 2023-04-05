@@ -5,16 +5,16 @@
 
         </section>
 
-        <ListeElement :elements="locataires" :cols="locataireCols" />
+        <ListeLocataire :elements="locataires"/>
 
     </main>
 </template>
 <script>
     import TitlePage from '../utils/TitlePage.vue';
-    import ListeElement from '../utils/component/liste/ListeElement.vue';
 
     import useLocataire from '../../services/LocataireServices.js';
     import locataireConst from '../../const/LocataireConst.js';
+    import ListeLocataire from '../liste/ListeLocataire.vue';
 
     const { locataireCols } = locataireConst()
 
@@ -33,6 +33,6 @@
         methods : {
             getLocataires
         },
-        components: { TitlePage, ListeElement }
+        components: { TitlePage, ListeLocataire }
     }
 </script>

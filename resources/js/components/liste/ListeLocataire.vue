@@ -1,20 +1,20 @@
 <template>
 
-    <ListeElement :elements="contrats" :cols="ContratCols"/>
+    <ListeElement :locataires="locataires" :cols="locataireCols"/>
 
 </template>
 <script>
 
-import contratConst from '../../const/ContratConst.js';
+import locataireConst from '../../const/LocataireConst.js';
 
-const { ContratCols } = contratConst();
+const { locataireCols } = locataireConst();
 import ListeElement from '../utils/component/liste/ListeElement.vue';
 
 export default {
-    props: ['contrats'],
+    props: ['locataires'],
     data() {
         return {
-            ContratCols
+            locataireCols
         }
     },
     methods: {
