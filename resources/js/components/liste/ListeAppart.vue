@@ -1,6 +1,6 @@
 <template>
 
-    <ListeElement :elements="apparts" :cols="appartCols" @showAppart="showAppart"/>
+    <ListeElement :elements="apparts" :cols="appartCols" @show-appart="showAppart"/>
 
 </template>
 <script>

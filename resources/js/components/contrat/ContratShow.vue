@@ -55,7 +55,7 @@
     export default {
     data() {
         return {
-            contrat_id: parseInt(this.$route.params.id_contrat),
+            contrat_id: parseInt(this.$route.params.contrat_id),
             contrat,
             paiementCols,
             etatDesLieuCols

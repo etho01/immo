@@ -1,6 +1,6 @@
 <template>
 
-    <ListeElement :locataires="locataires" :cols="locataireCols"/>
+    <ListeElement :locataires="locataires" :cols="locataireCols" @showLocataire="showLocataire"/>
 
 </template>
 <script>
@@ -18,8 +18,8 @@ export default {
         }
     },
     methods: {
-        showAppart(id) {
-            this.$router.push({ name: 'appart.show', params: { appart_id: id } })
+        showLocataire(id) {
+            this.$router.push({ name: 'locataire.show', params: { locataire_id: id } })
         }
     },
     components: { ListeElement }

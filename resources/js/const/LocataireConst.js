@@ -65,6 +65,27 @@ export default function locataireConst(){
             },
             size: 1,
             id: 'loc.genre'
+        },
+        {
+            nom: '',
+            param: {
+                class: 'flex justify-end',
+                actions: [
+                    {
+                        type: 'button',
+                        event: {
+                            nomEvent: 'showLocataire',
+                            data: (locataire) => locataire.id 
+                        },
+                        class: 'bg-gray-100 px-2 py-1 rounded-xl border-gray-200 border-2 cursor-pointer',
+                        icone: {
+                            icone: ['fas', 'arrow-up-right-from-square'],
+                        }
+                    }
+                ]
+            },
+            size: 1,
+            id: 'loc.button'
         }
     ];
 

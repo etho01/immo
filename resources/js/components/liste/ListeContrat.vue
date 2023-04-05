@@ -1,6 +1,6 @@
 <template>
 
-    <ListeElement :elements="contrats" :cols="ContratCols"/>
+    <ListeElement :elements="contrats" :cols="ContratCols" @showContrat="showContrat"/>
 
 </template>
 <script>
@@ -18,8 +18,8 @@ export default {
         }
     },
     methods: {
-        showAppart(id) {
-            this.$router.push({ name: 'appart.show', params: { appart_id: id } })
+        showContrat(id) {
+            this.$router.push({ name: 'contrat.show', params: { contrat_id: id } })
         }
     },
     components: { ListeElement }

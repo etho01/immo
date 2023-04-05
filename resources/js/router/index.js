@@ -29,7 +29,7 @@ const routes = [
         component: AppartMenu
     },
     {
-        path: '/contrat/:id_contrat',
+        path: '/contrat/:contrat_id',
         name: 'contrat.show',
         component: ContratShow,
     },
