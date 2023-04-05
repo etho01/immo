@@ -11,7 +11,7 @@ export default function appartConst(){
                     },
                 ],
             },
-            size: 1,
+            size: 2,
             id: 'appart.adresse'
         },
         {
@@ -78,6 +78,27 @@ export default function appartConst(){
             },
             size: 1,
             id: 'appart.agence'
+        },
+        {
+            nom: '',
+            param: {
+                class: 'flex justify-end',
+                actions: [
+                    {
+                        type: 'button',
+                        event: {
+                            nomEvent: 'showAppart',
+                            data: (appart) => appart.id 
+                        },
+                        class: 'bg-gray-100 px-2 py-1 rounded-xl border-gray-200 border-2 cursor-pointer',
+                        icone: {
+                            icone: ['fas', 'arrow-up-right-from-square'],
+                        }
+                    }
+                ]
+            },
+            size: 1,
+            id: 'apprt.button'
         }
     ];
 

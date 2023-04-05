@@ -4,8 +4,7 @@
         <section class="grid grid-cols-2 sm:container mx-auto border-4 p-3 rounded bg-state-50">
 
         </section>
-
-        <ListeElement :elements="apparts" :cols="appartCols"/>
+        <ListeAppart :apparts="apparts" />
 
     </main>
 
@@ -15,16 +14,14 @@
     import ListeElement from '../utils/component/liste/ListeElement.vue';
 
     import useAppart from '../../services/appartServices.js';
-    import appartConst from '../../const/AppartConst.js';
+    import ListeAppart from '../liste/ListeAppart.vue';
 
-    const { appartCols } = appartConst();
     const { apparts, getApparts } = useAppart();
 
     export default {
         data () {
             return {
-                apparts,
-                appartCols
+                apparts
             }
         },
         mounted () {
@@ -34,6 +31,6 @@
             getApparts
         },
         
-        components: { TitlePage, ListeElement }
+        components: { TitlePage, ListeElement, ListeAppart }
     }
 </script>

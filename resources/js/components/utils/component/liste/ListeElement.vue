@@ -12,13 +12,15 @@
                 </thead>
                 <tbody class="mx-3">
                     <tr class="grid border" :class="'grid-cols-'+getAllSize" :key="element.id" v-for="element in elements">
-                        <td v-for="col in getCols" :class="getClassColonne">
+                        <td v-for="col in getCols" :class="getClassColonne(col)">
                             <span v-for="action in col.param.actions">
                                 <span v-if="action.type == 'fonc'" :class="getClassAction(action)">
                                     {{ action.fonc(element) }} 
                                 </span>
-                                <div v-else-if="action.type == 'button'" :class="getClassAction(action)" @click="$emit(action.event, element.id)">
-                                    
+                                <div v-else-if="action.type == 'button'" 
+                                :class="getClassAction(action)" 
+                                @click="$emit(action.event.nomEvent, action.event.data(element))">
+                                    <font-awesome-icon :icon="action.icone.icone" style="color: #401f51;" />
                                 </div>
                             </span>
                         </td>
