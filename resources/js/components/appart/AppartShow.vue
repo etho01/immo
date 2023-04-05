@@ -22,7 +22,7 @@
             ]" activeItemDefault="slow_appart">
 
             <AppartInfo ref-nav="slow_appart"/>
-            <ListeElement :elements="contrats" ref-nav="contrat_liste" :cols="ContratCols"/>
+            <ListeContrat :contrats="contrats" ref-nav="contrat_liste"/>
             <ListeElement :elements="etatDesLieus" ref-nav="liste_etat_des_lieu" :cols="etatDesLieuCols"/>
             </Nav>
 
@@ -41,10 +41,9 @@ import useAppart from '../../services/appartServices.js';
 import useEtatDesLieu from '../../services/etatDesLieuServices.js';
 
 import etatDesLieuConst from '../../const/EtatDesLieuConst.js';
-import contratConst from '../../const/ContratConst.js';
+import ListeContrat from '../liste/ListeContrat.vue';
 
 const { etatDesLieuCols } = etatDesLieuConst();
-const { ContratCols } = contratConst();
 
 const { getEtatDesLieus, etatDesLieus } = useEtatDesLieu();
 const { getContrats, contrats } = userContrat();
@@ -57,8 +56,7 @@ const { getAppart, appart } = useAppart();
                 etatDesLieus,
                 contrats,
                 appart,
-                etatDesLieuCols,
-                ContratCols
+                etatDesLieuCols
             }
         },
         methods: {
@@ -75,7 +73,7 @@ const { getAppart, appart } = useAppart();
                 'appart_id': this.appart_id
             });
         },
-        components : { TitlePage, Nav, AppartInfo, ListeElement }
+        components : { TitlePage, Nav, AppartInfo, ListeElement, ListeContrat }
     }
 
 </script>

@@ -18,7 +18,7 @@
                 activeItemDefault="info_loc"
             >
                 <LocataireInfo ref-nav="info_loc"/>
-                <ListeElement :elements="contrats" ref-nav="liste_contrat" :cols="ContratCols" :disabledCol="['loc.nom']"/>
+                <ListeContrat :contrats="contrats" ref-nav="liste_contrat" :disabledCol="['loc.nom']"/>
 
             </Nav>
 
@@ -30,16 +30,13 @@
 
     import useLocataire from '../../services/locataireServices.js';
     import userContrat from '../../services/contratServices.js';
-    import contratConst from '../../const/ContratConst.js';
-import TitlePage from '../utils/TitlePage.vue';
-import Nav from '../utils/component/nav/Nav.vue';
-import LocataireInfo from './LocataireInfo.vue';
-import ListeElement from '../utils/component/liste/ListeElement.vue';
+    import TitlePage from '../utils/TitlePage.vue';
+    import Nav from '../utils/component/nav/Nav.vue';
+    import LocataireInfo from './LocataireInfo.vue';
+    import ListeContrat from '../liste/ListeContrat.vue';
 
     const { locataire, getLocataire } = useLocataire();
     const { contrats, getContrats } = userContrat();
-
-    const { ContratCols } = contratConst();
     
 
     export default {
@@ -48,7 +45,6 @@ import ListeElement from '../utils/component/liste/ListeElement.vue';
             locataire_id: parseInt(this.$route.params.locataire_id),
             locataire,
             contrats,
-            ContratCols
         };
     },
     methods: {
@@ -69,7 +65,7 @@ import ListeElement from '../utils/component/liste/ListeElement.vue';
             locataire_id: this.locataire_id
         });
     },
-    components: { TitlePage, Nav, LocataireInfo, ListeElement }
+    components: { TitlePage, Nav, LocataireInfo, ListeContrat }
 }
 
 </script>

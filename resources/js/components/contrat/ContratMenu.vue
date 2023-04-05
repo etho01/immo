@@ -7,7 +7,7 @@
             <Text label="test" @change="onChangeRecherche"/>
         </section>
 
-        <ListeElement :elements="contrats" :cols="ContratCols"/>
+        <ListeContrat :contrats="contrats"/>
 
     </main>
 
@@ -20,14 +20,12 @@
     import TitlePage from '../utils/TitlePage.vue';
     import Text from '../utils/input/Text.vue';
     import Select from '../utils/input/select.vue';
-    import ListeElement from '../utils/component/liste/ListeElement.vue';
 
-    import contratConst from '../../const/ContratConst';
+    import ListeContrat from '../liste/ListeContrat.vue';
 
     const { contrats, getContrats } = userContrat();
     const { agences, getAgences } = useAgence();
 
-    const { ContratCols } = contratConst();
 
     export default {
         data() {
@@ -39,7 +37,6 @@
                         name: 'dsd',
                     }
                 ],
-                ContratCols,
 
                 agence_id: -1,
                 recherche: '',
@@ -65,6 +62,6 @@
                 })
             },
         },
-        components: { TitlePage, Text, Select, ListeElement }
+        components: { TitlePage, Text, Select, ListeContrat }
 }
 </script>
