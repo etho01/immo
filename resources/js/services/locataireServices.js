@@ -11,10 +11,16 @@ export default function useLocataire(){
         locataires.value = response.data.data;
     }
 
+    const getLocataire = async (id) => {
+        let response = await axios.get('http://immo.test/api/locataire/' + id);
+        locataire.value  = response.data.data;
+    }
+
     return {
         locataire,
         locataires,
-        getLocataires
+        getLocataires,
+        getLocataire
     }
 
 }

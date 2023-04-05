@@ -4,7 +4,8 @@ import ContratMenu from "../components/contrat/ContratMenu.vue";
 import LocataireMenu from "../components/locataire/LocataireMenu.vue";
 import AppartMenu from "../components/appart/AppartMenu.vue";
 import ContratShow from "../components/contrat/ContratShow.vue";
-import LocataireShow from '../components/locataire/LocataireShow.vue'
+import LocataireShow from '../components/locataire/LocataireShow.vue';
+import AppartShow from '../components/appart/AppartShow.vue';
 
 const routes = [
     {
@@ -33,9 +34,14 @@ const routes = [
         component: ContratShow,
     },
     {
-        path: '/locataire/:id_locataire',
+        path: '/locataire/:locataire_id',
         name: 'locataire.show',
         component: LocataireShow,
+    },
+    {
+        path: '/appartement/:appart_id',
+        name: 'appart.show',
+        component: AppartShow,
     },
 ];
 

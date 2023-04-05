@@ -1,16 +1,75 @@
 <template>
 
+    <main class="w-full m-3">
+        <TitlePage :title="getNomLoc" />
+        <section class="sm:container mx-auto border-4 p-3 rounded bg-state-50">
 
+            <Nav
+                :labels="[
+                    {
+                        nom: 'Information locataire',
+                        id: 'info_loc'
+                    },
+                    {
+                        nom: 'Liste des contrats',
+                        id : 'liste_contrat'
+                    }
+                ]" 
+                activeItemDefault="info_loc"
+            >
+                <LocataireInfo ref-nav="info_loc"/>
+                <ListeElement :elements="contrats" ref-nav="liste_contrat" :cols="ContratCols" :disabledCol="['loc.nom']"/>
+
+            </Nav>
+
+        </section>
+    </main>
 
 </template>
 <script>
 
     import useLocataire from '../../services/locataireServices.js';
     import userContrat from '../../services/contratServices.js';
+    import contratConst from '../../const/ContratConst.js';
+import TitlePage from '../utils/TitlePage.vue';
+import Nav from '../utils/component/nav/Nav.vue';
+import LocataireInfo from './LocataireInfo.vue';
+import ListeElement from '../utils/component/liste/ListeElement.vue';
 
+    const { locataire, getLocataire } = useLocataire();
+    const { contrats, getContrats } = userContrat();
+
+    const { ContratCols } = contratConst();
+    
 
     export default {
-
-    }
+    data() {
+        return {
+            locataire_id: parseInt(this.$route.params.locataire_id),
+            locataire,
+            contrats,
+            ContratCols
+        };
+    },
+    methods: {
+        getContrats,
+        getLocataire
+    },
+    computed: {
+        getNomLoc(){
+            return this.locataire.nom + ' ' + this.locataire.prenom;
+        }
+    },
+    mounted() {
+        if (isNaN(this.locataire_id)) {
+            this.$router.push({ name: "locataire.menu" });
+        }
+        this.getLocataire(this.locataire_id);
+        this.getContrats({
+            locataire_id: this.locataire_id
+        });
+    },
+    components: { TitlePage, Nav, LocataireInfo, ListeElement }
+}
 
 </script>

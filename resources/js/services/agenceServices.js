@@ -4,8 +4,8 @@ import axios from "axios";
 export default function useAgence(){
     const agences = ref([]);
 
-    const getAgences = async() => {
-        let reponse = await axios.get('http://immo.test/api/agence');
+    const getAgences = async(data) => {
+        let reponse = await axios.get('http://immo.test/api/agence', {params: data});
         agences.value = reponse.data.data;
     }
 
