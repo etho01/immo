@@ -7,7 +7,7 @@
             <Text label="test" @change="onChangeRecherche"/>
         </section>
 
-        <ListeContrat :contrats="contrats"/>
+        <ListeContrat :filtres="getFiltres"/>
 
     </main>
 
@@ -56,11 +56,16 @@
                 this.refreshContrat()
             },
             refreshContrat(){
-                getContrats({
+                getContrats()
+            },
+        },
+        computed: {
+            getFiltres() {
+                return {
                     recherche: this.recherche,
                     agence_id: this.agence_id
-                })
-            },
+                }
+            }
         },
         components: { TitlePage, Text, Select, ListeContrat }
 }

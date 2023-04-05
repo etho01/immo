@@ -6,15 +6,18 @@
 <script>
 
 import contratConst from '../../const/ContratConst.js';
+import ListeElement from '../utils/component/liste/ListeElement.vue';
+import userContrat from '../../services/contratServices.js';
+const { contrats, getContrats } = userContrat();
 
 const { ContratCols } = contratConst();
-import ListeElement from '../utils/component/liste/ListeElement.vue';
 
 export default {
-    props: ['contrats'],
+    props: ['contratsBase','filtres'],
     data() {
         return {
-            ContratCols
+            ContratCols,
+            contrats
         }
     },
     methods: {
@@ -22,6 +25,9 @@ export default {
             this.$router.push({ name: 'contrat.show', params: { contrat_id: id } })
         }
     },
+    mounted () {
+        if (this.contratsBase)
+    }
     components: { ListeElement }
 }
 
