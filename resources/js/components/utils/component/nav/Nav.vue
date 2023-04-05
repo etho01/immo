@@ -1,7 +1,7 @@
 <template>
 
     <div class="flex content-end">
-        <div class="mr-2  content-end" v-for="label in labels" :key="label.id" @click="changeShow(label.id)">
+        <div class="mr-2  content-end cursor-pointer" v-for="label in labels" :key="label.id" @click="changeShow(label.id)">
             <div class="round-nav px-3 py-1 self-end flex" :class="[label.id == activeItem ? 'bg-gray-400' : 'bg-gray-200 hover:bg-gray-300']">
                 {{ label.nom }}
             </div>
