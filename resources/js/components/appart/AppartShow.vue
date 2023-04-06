@@ -17,13 +17,13 @@
                 },
                 {
                     nom: 'Etat des lieu',
-                    id: 'liste_etat_des_lieu'
+                    id: 'etat_des_lieu'
                 }
             ]" activeItemDefault="slow_appart">
 
             <AppartInfo ref-nav="slow_appart"/>
-            <ListeContrat :filtres="{'appart_id': appart_id }" ref-nav="contrat_liste"/>
-            <ListeElement :elements="etatDesLieus" ref-nav="liste_etat_des_lieu" :cols="etatDesLieuCols"/>
+            <ListeContrat :filtres="{appart_id: appart_id }" ref-nav="contrat_liste"/>
+            <ListeEtatDesLieu :filtres="{appart_id: appart_id}" ref-nav="etat_des_lieu" />
             </Nav>
 
         </section>
@@ -42,6 +42,7 @@ import useEtatDesLieu from '../../services/etatDesLieuServices.js';
 
 import etatDesLieuConst from '../../const/EtatDesLieuConst.js';
 import ListeContrat from '../liste/ListeContrat.vue';
+import ListeEtatDesLieu from '../liste/ListeEtatDesLieu.vue';
 
 const { etatDesLieuCols } = etatDesLieuConst();
 
@@ -67,7 +68,7 @@ const { getAppart, appart } = useAppart();
                 'appart_id': this.appart_id
             });
         },
-        components : { TitlePage, Nav, AppartInfo, ListeElement, ListeContrat }
+        components : { TitlePage, Nav, AppartInfo, ListeElement, ListeContrat, ListeEtatDesLieu }
     }
 
 </script>

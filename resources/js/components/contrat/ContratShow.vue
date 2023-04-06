@@ -27,7 +27,7 @@
             <ContratInfo ref-nav="infos_contrat"/>
             <AppartInfo ref-nav="infos_appart"/>
             <LocataireInfo ref-nav="infos_loc" />
-            <ListeElement :elements="contrat.etat_des_lieu" ref-nav="etat_des_lieu" :cols="etatDesLieuCols"/>
+            <ListeEtatDesLieu :filtres="{contrat_id: this.contrat_id}" ref-nav="etat_des_lieu" />
             <ListeElement :elements="contrat.paiement" ref-nav="paiment" :cols="paiementCols"/>
         
         </Nav>
@@ -46,6 +46,7 @@
     import ContratInfo from './ContratInfo.vue';
     import AppartInfo from '../appart/AppartInfo.vue';
     import LocataireInfo from '../locataire/LocataireInfo.vue';
+import ListeEtatDesLieu from '../liste/ListeEtatDesLieu.vue';
 
     const { paiementCols } = paiementConst();
     const { etatDesLieuCols } = etatDesLieuConst();
@@ -70,7 +71,7 @@
     methods: {
         getContrat,
     },
-    components: { TitlePage, Nav, ListeElement, ContratInfo, AppartInfo, LocataireInfo }
+    components: { TitlePage, Nav, ListeElement, ContratInfo, AppartInfo, LocataireInfo, ListeEtatDesLieu }
 }
 
 </script>
