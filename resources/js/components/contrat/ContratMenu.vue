@@ -15,7 +15,6 @@
 
 <script>
 
-    import userContrat from '../../services/contratServices.js';
     import useAgence from '../../services/agenceServices.js';
     import TitlePage from '../utils/TitlePage.vue';
     import Text from '../utils/input/Text.vue';
@@ -23,14 +22,12 @@
 
     import ListeContrat from '../liste/ListeContrat.vue';
 
-    const { contrats, getContrats } = userContrat();
     const { agences, getAgences } = useAgence();
 
 
     export default {
         data() {
             return {
-                contrats,
                 agences,
                 paramsTest: [{
                         id: 1,
@@ -43,21 +40,15 @@
             }
         },
         mounted() {
-            getContrats();
             getAgences();
         },
         methods: {
             onChangeRecherche(text) {
                 this.recherche = text;
-                this.refreshContrat();
             },
             onChangeAgence(agence_id){
                 this.agence_id = agence_id;
-                this.refreshContrat()
-            },
-            refreshContrat(){
-                getContrats()
-            },
+            }
         },
         computed: {
             getFiltres() {

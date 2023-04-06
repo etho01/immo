@@ -1,6 +1,6 @@
 <template>
 
-    <ListeElement :elements="contrats" :cols="ContratCols" @showContrat="showContrat"/>
+    <ListeElement :elements="getContratLoad" :cols="ContratCols" @showContrat="showContrat"/>
 
 </template>
 <script>
@@ -23,11 +23,28 @@ export default {
     methods: {
         showContrat(id) {
             this.$router.push({ name: 'contrat.show', params: { contrat_id: id } })
+        },
+        getContrats
+    },
+    computed: {
+        getContratLoad() {
+            if (this.contratsBase == undefined) {
+                return this.contrats
+            }
+            return this.contratsBase;
         }
     },
-    mounted () {
-        if (this.contratsBase)
-    }
+    mounted() {
+        if (this.contratsBase == undefined) {
+            this.getContrats(this.filtres)
+        } else {
+            this.contrats = this.contratsBase;
+        }
+    },
+    watch: {
+        filtres: ((filtres) => {getContrats(filtres)})
+    },
+
     components: { ListeElement }
 }
 
