@@ -16,7 +16,7 @@ class PaiementController extends Controller
     {
         $eloquent = Paiement::select('*');
         if ($request->input('contrat_id', -1) != -1){
-            $request->where('contrat_id', $request->input('contrat_id'));
+            $eloquent->where('contrat_id', $request->input('contrat_id'));
         }
         return PaiementResouce::collection($eloquent->get());
     }
