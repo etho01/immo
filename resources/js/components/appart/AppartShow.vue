@@ -22,7 +22,7 @@
             ]" activeItemDefault="slow_appart">
 
             <AppartInfo ref-nav="slow_appart"/>
-            <ListeContrat :contrats="contrats" ref-nav="contrat_liste"/>
+            <ListeContrat :filtres="{'appart_id': appart_id }" ref-nav="contrat_liste"/>
             <ListeElement :elements="etatDesLieus" ref-nav="liste_etat_des_lieu" :cols="etatDesLieuCols"/>
             </Nav>
 
@@ -46,7 +46,6 @@ import ListeContrat from '../liste/ListeContrat.vue';
 const { etatDesLieuCols } = etatDesLieuConst();
 
 const { getEtatDesLieus, etatDesLieus } = useEtatDesLieu();
-const { getContrats, contrats } = userContrat();
 const { getAppart, appart } = useAppart();
 
     export default {
@@ -54,21 +53,16 @@ const { getAppart, appart } = useAppart();
             return {
                 appart_id: parseInt(this.$route.params.appart_id),
                 etatDesLieus,
-                contrats,
                 appart,
                 etatDesLieuCols
             }
         },
         methods: {
             getEtatDesLieus,
-            getContrats,
             getAppart
         },
         mounted () {
             this.getAppart(this.appart_id)
-            this.getContrats({
-                'appart_id': this.appart_id,
-            });
             this.getEtatDesLieus({
                 'appart_id': this.appart_id
             });
