@@ -5,34 +5,19 @@
 
         </section>
 
-        <ListeLocataire :elements="locataires"/>
+        <ListeLocataire />
 
     </main>
 </template>
 <script>
     import TitlePage from '../utils/TitlePage.vue';
 
-    import useLocataire from '../../services/LocataireServices.js';
-    import locataireConst from '../../const/LocataireConst.js';
     import ListeLocataire from '../liste/ListeLocataire.vue';
 
-    const { locataireCols } = locataireConst()
 
-    const { locataires, getLocataires } = useLocataire();
 
     export default {
-        data() {
-            return {
-                locataires,
-                locataireCols
-            }
-        },
-        mounted () {
-            this.getLocataires();
-        },
-        methods : {
-            getLocataires
-        },
+
         components: { TitlePage, ListeLocataire }
     }
 </script>
