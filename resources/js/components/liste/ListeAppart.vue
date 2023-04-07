@@ -1,6 +1,6 @@
 <template>
 
-    <ListeElement :elements="getAppartsLoad" :cols="appartCols" @show-appart="showAppart"/>
+    <ListeElement :elements="getAppartsLoad" :cols="appartCols" @show-appart="showAppart" @gotoPage="gotoPage" :page="page" :nbPage="nbPage"/>
 
 </template>
 <script>
@@ -8,7 +8,7 @@
 import appartConst from '../../const/AppartConst.js';
 import useAppart from '../../services/appartServices.js';
 
-const { apparts, getApparts } = useAppart();
+const { apparts, getApparts, page, gotoPage, nbPage } = useAppart();
 
 const { appartCols } = appartConst();
 import ListeElement from '../utils/component/liste/ListeElement.vue';
@@ -18,14 +18,17 @@ export default {
     data() {
         return {
             appartCols,
-            apparts
+            apparts,
+            page,
+            nbPage
         }
     },
     methods: {
         showAppart(id) {
             this.$router.push({ name: 'appart.show', params: { appart_id: id } })
         },
-        getApparts
+        getApparts,
+        gotoPage
     },
     computed: {
         getAppartsLoad() {

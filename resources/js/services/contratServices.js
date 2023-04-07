@@ -25,7 +25,6 @@ export default function userContrat(){
         let response = await axios.get('http://immo.test/api/contrat', {params: {...filtre, page: page.value}});
         contrats.value = response.data.data;
         nbPage.value = response.data.meta.last_page;
-        console.log(nbPage.value);
     }
 
     const gotoPage = async (newPage) => {
