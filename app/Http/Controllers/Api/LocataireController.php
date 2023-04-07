@@ -22,7 +22,7 @@ class LocataireController extends Controller
                 $query->where('id', $request->input('contrat_id'));
             });
         }
-        return LocataireResouce::collection($elequent->get());
+        return LocataireResouce::collection($elequent->paginate(30));
     }
 
     /**

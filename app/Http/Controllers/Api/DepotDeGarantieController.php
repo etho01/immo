@@ -18,7 +18,7 @@ class DepotDeGarantieController extends Controller
         if ($request->input('contrat_id', -1) != -1){
             $eloquent->where('contrat_id', $request->input('contrat_id'));
         }
-        return DepotDeGarantieResouce::collection($eloquent->get());
+        return DepotDeGarantieResouce::collection($eloquent->paginate(30));
     }
 
     /**

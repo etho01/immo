@@ -21,7 +21,7 @@ class EtatDesLieuController extends Controller
         if ($request->input('appart_id', -1) != -1){
             $eloquent->where('appart_id', $request->input('appart_id')); 
         }
-        return EtatDesLieuResouce::collection($eloquent->get());
+        return EtatDesLieuResouce::collection($eloquent->paginate(30));
     }
 
     /**

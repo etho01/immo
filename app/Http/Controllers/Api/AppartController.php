@@ -26,7 +26,7 @@ class AppartController extends Controller
             });
         }
 
-        return AppartResouce::collection($eloquent->get());
+        return AppartResouce::collection($eloquent->paginate(30));
     }
 
     /**
