@@ -40,7 +40,7 @@ class ContratController extends Controller
         if ($request->input('appart_id', -1) != -1){
             $eloquent->where('appart_id', $request->input('appart_id'));
         }
-        return ContratResouce::collection($eloquent->get());
+        return ContratResouce::collection($eloquent->paginate(30));
     }
 
     /**

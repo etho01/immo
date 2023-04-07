@@ -1,6 +1,6 @@
 <template>
 
-    <ListeElement :elements="getContratLoad" :cols="ContratCols" @showContrat="showContrat"/>
+    <ListeElement :elements="getContratLoad" :cols="ContratCols" @showContrat="showContrat" @gotoPage="gotoPage" :page="page" :nbPage="nbPage"/>
 
 </template>
 <script>
@@ -8,7 +8,7 @@
 import contratConst from '../../const/ContratConst.js';
 import ListeElement from '../utils/component/liste/ListeElement.vue';
 import userContrat from '../../services/contratServices.js';
-const { contrats, getContrats } = userContrat();
+const { contrats, getContrats, page, gotoPage, nbPage } = userContrat();
 
 const { ContratCols } = contratConst();
 
@@ -17,14 +17,17 @@ export default {
     data() {
         return {
             ContratCols,
-            contrats
+            contrats,
+            page,
+            nbPage
         }
     },
     methods: {
         showContrat(id) {
             this.$router.push({ name: 'contrat.show', params: { contrat_id: id } })
         },
-        getContrats
+        getContrats,
+        gotoPage
     },
     computed: {
         getContratLoad() {
