@@ -1,6 +1,6 @@
 <template>
 
-    <ListeElement :elements="getPaimentLoad" :cols="paiementCols"/>
+    <ListeElement :elements="getPaimentLoad" :cols="paiementCols" @gotoPage="gotoPage" :page="page" :nbPage="nbPage" />
 
 </template>
 <script>
@@ -10,18 +10,21 @@ import paiementConst from '../../const/PaiementConst.js';
 const { paiementCols } = paiementConst();
 
 import usePaiement from '../../services/paimentServices.js';
-const { getPaiements, paiements } = usePaiement();
+const { getPaiements, paiements, page, gotoPage, nbPage } = usePaiement();
 
 export default {
     props: ['paiementBase','filtres'],
     data (){
         return {
             paiementCols,
-            paiements
+            paiements,
+            page,
+            nbPage
         }
     },
     methods : {
-        getPaiements
+        getPaiements,
+        gotoPage
     },
     computed: {
         getPaimentLoad() {
