@@ -1,13 +1,13 @@
 <template>
 
-    <ListeElement :elements="getEtatDesLieusLoad" :cols="etatDesLieuCols" />
+    <ListeElement :elements="getEtatDesLieusLoad" :cols="etatDesLieuCols" @gotoPage="gotoPage" :page="page" :nbPage="nbPage"/>
 
 </template>
 <script>
 import ListeElement from '../utils/component/liste/ListeElement.vue';
 
 import useEtatDesLieu from '../../services/etatDesLieuServices.js';
-const { etatDesLieus, getEtatDesLieus } = useEtatDesLieu();
+const { etatDesLieus, getEtatDesLieus, page, gotoPage, nbPage } = useEtatDesLieu();
 
 import etatDesLieuConst from '../../const/EtatDesLieuConst.js';
 const { etatDesLieuCols } = etatDesLieuConst();
@@ -18,11 +18,14 @@ export default {
     data (){
         return {
             etatDesLieus,
-            etatDesLieuCols
+            etatDesLieuCols,
+            page,
+            nbPage
         }
     },
     methods : {
-        getEtatDesLieus
+        getEtatDesLieus,
+        gotoPage
     },
     computed: {
         getEtatDesLieusLoad(){
