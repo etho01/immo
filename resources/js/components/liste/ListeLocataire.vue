@@ -1,13 +1,13 @@
 <template>
 
-    <ListeElement :elements="getLocatairesLoad" :cols="locataireCols" @showLocataire="showLocataire"/>
+    <ListeElement :elements="getLocatairesLoad" :cols="locataireCols" @showLocataire="showLocataire"  @gotoPage="gotoPage" :page="page" :nbPage="nbPage" />
 
 </template>
 <script>
 
 import locataireConst from '../../const/LocataireConst.js';
-import useLocataire from '../../services/LocataireServices.js';
-const { locataires, getLocataires } = useLocataire();
+import useLocataire from '../../services/locataireServices.js';
+const { locataires, getLocataires, page, gotoPage, nbPage } = useLocataire();
 
 const { locataireCols } = locataireConst();
 import ListeElement from '../utils/component/liste/ListeElement.vue';
@@ -17,14 +17,17 @@ export default {
     data() {
         return {
             locataireCols,
-            locataires
+            locataires,
+            page,
+            nbPage
         }
     },
     methods: {
         showLocataire(id) {
             this.$router.push({ name: 'locataire.show', params: { locataire_id: id } })
         },
-        getLocataires
+        getLocataires,
+        gotoPage
     },
     computed: {
         getLocatairesLoad() {
