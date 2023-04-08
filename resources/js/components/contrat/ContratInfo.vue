@@ -12,15 +12,15 @@
             <SelectLocataire @changeValue="chnageLocataire"></SelectLocataire>
         </div>
         <div class="mt-5 flex justify-end" v-if="contrat_id != 'new'">
-            <div class="bg-gray-200 hover:bg-gray-300 px-3 py-1 rounded-md cursor-pointer" @click="updateContratClick">
+            <div class="bg-gray-200 hover:bg-gray-300 px-3 py-1 rounded-md cursor-pointer" @click="updateContrat(contrat_id, getData);">
                 Modifier
             </div>
-            <div class="bg-red-400 hover:bg-red-500 px-3 py-1 rounded-md ml-2 cursor-pointer" v-if="canDelete" @click="deleteContratClick">
+            <div class="bg-red-400 hover:bg-red-500 px-3 py-1 rounded-md ml-2 cursor-pointer" v-if="canDelete" @click="this.deleteContrat(contrat_id, $router);">
                 Supprimer
             </div>
         </div>
         <div v-else class="mt-5 flex justify-end">
-            <div class="bg-gray-200 hover:bg-gray-300 px-3 py-1 rounded-md cursor-pointer" @click="createContratClick">
+            <div class="bg-gray-200 hover:bg-gray-300 px-3 py-1 rounded-md cursor-pointer" @click="this.createContrat(getData, $router)">
                 Créer
             </div>
         </div>
@@ -65,23 +65,6 @@ import SelectLocataire from '../select/SelectLocataire.vue';
             chnageLocataire(id){
                 this.locataire_id = id
             },
-            updateContratClick(){
-                this.updateContrat(this.contrat_id, {
-                    date_debut: this.date_debut,
-                    date_fin: this.date_fin
-                });
-            },
-            deleteContratClick() {
-                this.deleteContrat(this.contrat_id, this.$router);
-            },
-            createContratClick() {
-                 this.createContrat({
-                    date_debut: this.date_debut,
-                    date_fin: this.date_fin,
-                    appart_id: this.appart_id,
-                    locataire_id: this.locataire_id
-                }, this.$router)
-            }
         },
         mounted() {
             if (this.contrat_id != 'new'){
@@ -91,6 +74,14 @@ import SelectLocataire from '../select/SelectLocataire.vue';
         computed: {
             canDelete() {
                 return this.deleteProps == "true"
+            },
+            getData() {
+                return {
+                    date_debut: this.date_debut,
+                    date_fin: this.date_fin,
+                    appart_id: this.appart_id,
+                    locataire_id: this.locataire_id
+                }
             }
         },
         components: { Title, Text, SelectAppart, SelectLocataire }
