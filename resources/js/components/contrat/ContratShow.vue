@@ -1,5 +1,5 @@
 <template>
-    <main class="w-full m-3" >
+    <main class="w-full m-3" v-if="contrat_id != 'new'" >
         <TitlePage :title="'Contrat '+contrat_id"></TitlePage>
         <section class="sm:container mx-auto border-4 p-3 rounded bg-state-50">
             <Nav :labels="[
@@ -33,6 +33,12 @@
         </Nav>
         </section>
     </main>
+    <main class="w-full m-3" v-else>
+        <TitlePage title="Nouveau contrat"></TitlePage>
+        <section class="sm:container mx-auto border-4 p-3 rounded bg-state-50">
+            <ContratInfo ref-nav="infos_contrat" :contrat_id="contrat_id" />
+        </section>
+    </main>
 </template>
 <script>
 
@@ -56,14 +62,22 @@ import ListePaiment from '../liste/ListePaiment.vue';
             contrat,
         };
     },
-    mounted() {
-        if (isNaN(this.contrat_id)) {
+    created() {
+        if (this.$route.params.contrat_id == 'new'){
+            this.contrat_id = "new"
+        } else if (isNaN(this.contrat_id)) {
             this.$router.push({ name: "contrat.menu" });
+        } else {
+            this.getContrat(this.contrat_id);
         }
-        this.getContrat(this.contrat_id);
     },
     methods: {
         getContrat,
+    },
+    updated(){
+        if (this.$route.params.contrat_id != this.contrat_id){
+            this.contrat_id = this.$route.params.contrat_id
+        }
     },
     components: { TitlePage, Nav, ListeElement, ContratInfo, AppartInfo, LocataireInfo, ListeEtatDesLieu, ListePaiment }
 }
