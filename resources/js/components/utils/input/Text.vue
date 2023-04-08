@@ -15,7 +15,7 @@
         ],
         methods: {
             appuieTouche() {
-                this.$emit("change", this.value);
+                this.$emit("changeValue", this.value);
             }
         },
     }

@@ -2,9 +2,9 @@
     <main class="w-full">
         <TitlePage title="Liste des Contrats"/>
         <section class="grid grid-cols-2 sm:container mx-auto border-4 p-3 rounded bg-state-50">
-            <Select label="Agence" :param="agences" @change="onChangeAgence"/>
+            <Select label="Agence" :param="agences" @changeValue="onChangeAgence"/>
 
-            <Text label="test" @change="onChangeRecherche"/>
+            <Text label="Recherche" placeholder="Filtre sur l'adresse et le nom" @changeValue="onChangeRecherche"/>
         </section>
 
         <ListeContrat :filtres="getFiltres"/>
@@ -29,11 +29,6 @@
         data() {
             return {
                 agences,
-                paramsTest: [{
-                        id: 1,
-                        name: 'dsd',
-                    }
-                ],
 
                 agence_id: -1,
                 recherche: '',

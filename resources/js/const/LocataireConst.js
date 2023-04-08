@@ -1,5 +1,16 @@
 export default function locataireConst(){
 
+    const genreLoc = [
+        {
+            id: 'femme',
+            nom: 'Femme'
+        },
+        {
+            id: 'homme',
+            nom: 'Homme'
+        },
+    ];
+
     const locataireCols = [
         {
             nom : 'Nom du locataire',
@@ -59,7 +70,7 @@ export default function locataireConst(){
                 actions: [
                     {
                         type: 'fonc',
-                        fonc: (locataire) => locataire.genre
+                        fonc: (locataire) =>  locataire.genre
                     }
                 ]
             },
@@ -91,5 +102,6 @@ export default function locataireConst(){
 
     return {
         locataireCols,
+        genreLoc
     }
 }

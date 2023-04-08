@@ -34,7 +34,7 @@ import Dropdown from '../component/Dropdown.vue';
     methods: {
         change(id) {
             this.value = id
-            this.$emit("change", this.value);
+            this.$emit("changeValue", this.value);
         }
     },
     computed: {

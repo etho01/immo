@@ -23,8 +23,8 @@ class AppartFactory extends Factory
             'adresse_compl' => '',
             'cp' => fake()->postcode(),
             'pays' => fake()->country(),
-            'charge' => fake()->randomFloat(2,0,50000),
-            'loyer' => fake()->randomFloat(2,0,50000),
+            'charge' => fake()->randomFloat(2,0,500),
+            'loyer' => fake()->randomFloat(2,0,500),
         ];
     }
 }
