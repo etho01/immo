@@ -24,7 +24,7 @@
                                     id : 'paiment'
                                 }                                
             ]" activeItemDefault="infos_contrat">
-            <ContratInfo ref-nav="infos_contrat"/>
+            <ContratInfo ref-nav="infos_contrat" :contrat_id="contrat_id" deleteProps="true"/>
             <AppartInfo ref-nav="infos_appart"/>
             <LocataireInfo ref-nav="infos_loc" />
             <ListeEtatDesLieu :filtres="{contrat_id: this.contrat_id}"  ref-nav="etat_des_lieu"/>

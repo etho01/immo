@@ -32,11 +32,23 @@ export default function userContrat(){
         await sendGetContratsRequest();
     }
 
+    const updateContrat = async (id, data) => {
+        let response = await axios.put('http://immo.test/api/contrat/'+ id,  {...data});
+        contrat.value = response.data.data;
+    }
+
+    const deleteContrat = async (id) => {
+        let response = await axios.delete('http://immo.test/api/contrat/'+ id);
+        console.log(response.data);
+    }
+
     return {
         contrat,
         contrats,
         getContrat,
         getContrats,
+        updateContrat,
+        deleteContrat,
         page,
         gotoPage,
         nbPage,

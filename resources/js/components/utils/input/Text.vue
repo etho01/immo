@@ -1,7 +1,7 @@
 <template>
     <div class="block mx-2 my-1">
         <label :for="label" class="ml-2" v-if="label">{{ label }}</label>
-        <input type="text" v-model="value" @keyup="appuieTouche()" :id="label"
+        <input :type="getType" v-model="value" @keyup="appuieTouche()" :id="label" @change="appuieTouche()"
             :placeholder="placeholder"
             class="border-2 rounded-lg border-gray-200 py-1 w-full mt-1">
     </div>
@@ -11,12 +11,21 @@
         props: [
             'value',
             'label',
-            'placeholder'
+            'placeholder',
+            'type'
         ],
         methods: {
             appuieTouche() {
                 this.$emit("changeValue", this.value);
             }
         },
+        computed: {
+            getType() {
+                if (this.type == undefined) {
+                    return 'text'
+                }
+                return this.type
+            }
+        }
     }
 </script>

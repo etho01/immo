@@ -69,13 +69,12 @@ class ContratController extends Controller
      */
     public function update(contratRequest $request, Contrat $contrat)
     {
-        Contrat::where('id', $contrat->id)->update([
-            'appart_id' => $request->appart_id,
-            'locataire_id' => $request->locataire_id,
-            'date_debut' => $request->date_debut,
-            'date_fin' => $request->date_fin
-        ]);
-        return new ContratResouce(Contrat::find($contrat->id));
+        $contrat->date_debut = $request->input('date_debut', $contrat->date_debut);
+        $contrat->date_fin = $request->input('date_fin', $contrat->date_fin);
+
+        $contrat->save();
+        
+        return new ContratResouce($contrat);
     }
 
     /**
