@@ -41,16 +41,11 @@
     import Nav from '../utils/component/nav/Nav.vue';
 
     import ListeElement from '../utils/component/liste/ListeElement.vue';
-    import paiementConst from '../../const/PaiementConst.js'
-    import etatDesLieuConst from '../../const/EtatDesLieuConst.js'
     import ContratInfo from './ContratInfo.vue';
     import AppartInfo from '../appart/AppartInfo.vue';
     import LocataireInfo from '../locataire/LocataireInfo.vue';
 import ListeEtatDesLieu from '../liste/ListeEtatDesLieu.vue';
 import ListePaiment from '../liste/ListePaiment.vue';
-
-    const { paiementCols } = paiementConst();
-    const { etatDesLieuCols } = etatDesLieuConst();
 
     const { contrat, getContrat } = userContrat()
 
@@ -59,8 +54,6 @@ import ListePaiment from '../liste/ListePaiment.vue';
         return {
             contrat_id: parseInt(this.$route.params.contrat_id),
             contrat,
-            paiementCols,
-            etatDesLieuCols
         };
     },
     mounted() {
