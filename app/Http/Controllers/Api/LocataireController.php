@@ -55,17 +55,18 @@ class LocataireController extends Controller
      */
     public function update(Request $request, Locataire $locataire)
     {
-        Locataire::where('id', $locataire->id)->update([
-            'nom' => $request->nom,
-            'prenom' => $request->prenom,
-            'date_naissance' => $request->date_naissance,
-            'email' => $request->email,
-            'telephone' => $request->telephone,
-            'iban' => $request->iban,
-            'bic' => $request->bic,
-            'genre' => $request->genre
-        ]);
-        return new LocataireResouce(Locataire::find($locataire->id));
+        $locataire->nom = $request->input('nom', $locataire->nom);
+        $locataire->prenom = $request->input('prenom', $locataire->prenom);
+        $locataire->date_naissance = $request->input('date_naissance', $locataire->date_naissance);
+        $locataire->email = $request->input('email', $locataire->email);
+        $locataire->telephone = $request->input('telephone', $locataire->telephone);
+        $locataire->iban = $request->input('iban', $locataire->iban);
+        $locataire->bic = $request->input('bic', $locataire->bic);
+        $locataire->genre = $request->input('genre', $locataire->genre);  
+
+        $locataire->save();
+
+        return new LocataireResouce($locataire);
     }
 
     /**
@@ -73,6 +74,6 @@ class LocataireController extends Controller
      */
     public function destroy(Locataire $locataire)
     {
-        //
+        $locataire->delete();
     }
 }

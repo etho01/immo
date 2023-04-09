@@ -4,7 +4,7 @@
         <TitlePage :title="getNomLoc" />
         <section class="sm:container mx-auto border-4 p-3 rounded bg-state-50">
 
-            <Nav
+            <Nav v-if="locataire_id != 'new'"
                 :labels="[
                     {
                         nom: 'Information locataire',
@@ -17,10 +17,12 @@
                 ]" 
                 activeItemDefault="info_loc"
             >
-                <LocataireInfo ref-nav="info_loc"/>
+                <LocataireInfo ref-nav="info_loc" :locataireBase="locataire" deleteProps="true" />
                 <ListeContrat :filtres=" {locataire_id: locataire_id } " ref-nav="liste_contrat" :disabledCol="['loc.nom']"/>
 
             </Nav>
+
+            <LocataireInfo ref-nav="info_loc" :locataire_id="locataire_id" v-else />
 
         </section>
     </main>
@@ -53,11 +55,19 @@
         }
     },
     mounted() {
-        if (isNaN(this.locataire_id)) {
-            this.$router.push({ name: "locataire.menu" });
-        }
-        this.getLocataire(this.locataire_id);
-    },
+        if (this.$route.params.locataire_id == 'new'){
+                this.locataire_id = "new"
+            } else if (isNaN(this.locataire_id)) {
+                this.$router.push({ name: "locataire.menu" });
+            } else {
+                this.getLocataire(this.locataire_id)
+            }
+        },
+        updated(){
+            if (this.$route.params.locataire_id != this.locataire_id){
+                this.locataire_id = this.$route.params.locataire_id
+            }
+        },
     components: { TitlePage, Nav, LocataireInfo, ListeContrat }
 }
 
