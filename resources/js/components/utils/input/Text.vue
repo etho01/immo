@@ -1,5 +1,5 @@
 <template>
-    <div class="block mx-2 my-1">
+    <div class="block mx-2 my-1" :class="getClassInput">
         <label :for="label" class="ml-2" v-if="label">{{ label }}</label>
         <input :type="getType" v-model="value" @keyup="appuieTouche()" :id="label" @change="appuieTouche()"
             :placeholder="placeholder"
@@ -12,7 +12,8 @@
             'value',
             'label',
             'placeholder',
-            'type'
+            'type',
+            'class'
         ],
         methods: {
             appuieTouche() {
@@ -25,6 +26,9 @@
                     return 'text'
                 }
                 return this.type
+            },
+            getClassInput() {
+                return this.class;
             }
         }
     }

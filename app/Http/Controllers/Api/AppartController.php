@@ -58,16 +58,17 @@ class AppartController extends Controller
      */
     public function update(appartRequest $request, Appart $appart)
     {
-        Appart::where('id', $appart->id)->update([
-            'agence_id' => $request->agence_id,
-            'adresse' => $request->adresse,
-            'adresse_compl' => $request->adresse_compl,
-            'cp' => $request->cp,
-            'pays' => $request->pays,
-            'charge' => $request->charge,
-            'loyer' => $request->loyer
-        ]);
-        return new AppartResouce(Appart::find($appart->id));
+        $appart->agence_id = $request->input('agence_id', $appart->agence_id);
+        $appart->adresse= $request->input('adresse', $appart->adresse);
+        $appart->adresse_compl = $request->input('adresse_compl', $appart->adresse_compl);
+        $appart->cp = $request->input('cp', $appart->cp);
+        $appart->pays = $request->input('pays', $appart->pays);
+        $appart->charge =$request->input('charge', $appart->charge);
+        $appart->loyer = $request->input('loyer', $appart->loyer);
+
+        $appart->save();
+
+        return new AppartResouce($appart);
     }
 
     /**

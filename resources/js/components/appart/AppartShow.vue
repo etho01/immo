@@ -5,7 +5,7 @@
 
         <section class="sm:container mx-auto border-4 p-3 rounded bg-state-50">
 
-            <Nav
+            <Nav v-if="appart_id != 'new'"
             :labels="[
                 {
                     nom: 'Informations appartement',
@@ -21,10 +21,11 @@
                 }
             ]" activeItemDefault="slow_appart">
 
-            <AppartInfo ref-nav="slow_appart"/>
+            <AppartInfo ref-nav="slow_appart" :appart_id="appart_id" deleteProps="true" :appartBase="appart"/>
             <ListeContrat :filtres="{appart_id: appart_id }" ref-nav="contrat_liste"/>
             <ListeEtatDesLieu :filtres="{appart_id: appart_id}" ref-nav="etat_des_lieu" />
             </Nav>
+            <AppartInfo ref-nav="slow_appart" :appart_id="appart_id" v-else/>
 
         </section>
 
@@ -63,10 +64,18 @@ const { getAppart, appart } = useAppart();
             getAppart
         },
         mounted () {
-            this.getAppart(this.appart_id)
-            this.getEtatDesLieus({
-                'appart_id': this.appart_id
-            });
+            if (this.$route.params.appart_id == 'new'){
+                this.appart_id = "new"
+            } else if (isNaN(this.appart_id)) {
+                this.$router.push({ name: "appart.menu" });
+            } else {
+                this.getAppart(this.appart_id)
+            }
+        },
+        updated(){
+            if (this.$route.params.appart_id != this.appart_id){
+                this.appart_id = this.$route.params.appart_id
+            }
         },
         components : { TitlePage, Nav, AppartInfo, ListeElement, ListeContrat, ListeEtatDesLieu }
     }
