@@ -1,6 +1,6 @@
 <template>
 
-    <ListeElement :elements="getLocatairesLoad" :cols="locataireCols" @showLocataire="showLocataire"  @gotoPage="gotoPage" :page="page" :nbPage="nbPage" />
+    <ListeElement :elements="getLocatairesLoad" :cols="locataireCols" @showLocataire="showLocataire"  @gotoPage="gotoPage" :page="page" :nbPage="nbPage" @newLocataire="newLocataire" />
 
 </template>
 <script>
@@ -25,6 +25,9 @@ export default {
     methods: {
         showLocataire(id) {
             this.$router.push({ name: 'locataire.show', params: { locataire_id: id } })
+        },
+        newLocataire(){
+            this.$router.push({ name: 'locataire.show', params: { locataire_id: 'new' } })
         },
         getLocataires,
         gotoPage

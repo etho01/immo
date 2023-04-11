@@ -1,6 +1,6 @@
 <template>
 
-    <ListeElement :elements="getContratLoad" :cols="ContratCols" @showContrat="showContrat" @gotoPage="gotoPage" :page="page" :nbPage="nbPage"/>
+    <ListeElement :elements="getContratLoad" :cols="ContratCols" @showContrat="showContrat" @gotoPage="gotoPage" :page="page" :nbPage="nbPage" @newContrat="newContrat"/>
 
 </template>
 <script>
@@ -25,6 +25,9 @@ export default {
     methods: {
         showContrat(id) {
             this.$router.push({ name: 'contrat.show', params: { contrat_id: id } })
+        },
+        newContrat(){
+            this.$router.push({ name: 'contrat.show', params: { contrat_id: 'new' } })
         },
         getContrats,
         gotoPage

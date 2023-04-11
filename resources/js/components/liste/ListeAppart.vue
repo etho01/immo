@@ -1,6 +1,6 @@
 <template>
 
-    <ListeElement :elements="getAppartsLoad" :cols="appartCols" @show-appart="showAppart" @gotoPage="gotoPage" :page="page" :nbPage="nbPage"/>
+    <ListeElement :elements="getAppartsLoad" :cols="appartCols" @show-appart="showAppart" @gotoPage="gotoPage" :page="page" :nbPage="nbPage" @newAppart="newAppart" />
 
 </template>
 <script>
@@ -26,6 +26,9 @@ export default {
     methods: {
         showAppart(id) {
             this.$router.push({ name: 'appart.show', params: { appart_id: id } })
+        },
+        newAppart(){
+            this.$router.push({ name: 'appart.show', params: { appart_id: 'new' } })
         },
         getApparts,
         gotoPage
