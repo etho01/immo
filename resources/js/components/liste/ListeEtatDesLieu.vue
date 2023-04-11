@@ -1,6 +1,11 @@
 <template>
 
-    <ListeElement :elements="getEtatDesLieusLoad" :cols="etatDesLieuCols" @gotoPage="gotoPage" :page="page" :nbPage="nbPage"/>
+<div>
+    <ListeElement :elements="getEtatDesLieusLoad" :cols="etatDesLieuCols" @gotoPage="gotoPage" :page="page" :nbPage="nbPage" @showEtaDesLieu="showEtaDesLieu"/>
+    <Modal ref="modalEtatDesLieu">
+        <EtatDesLieuInfo :EtatDesLieuBase="etatDesLieuLoad"  deleteProps="true" @refresh="refresh" />
+    </Modal>
+</div>
 
 </template>
 <script>
@@ -10,6 +15,8 @@ import useEtatDesLieu from '../../services/etatDesLieuServices.js';
 const { etatDesLieus, getEtatDesLieus, page, gotoPage, nbPage } = useEtatDesLieu();
 
 import etatDesLieuConst from '../../const/EtatDesLieuConst.js';
+import Modal from '../utils/component/modal/Modal..vue';
+import EtatDesLieuInfo from '../etatDesLieu/EtatDesLieuInfo.vue';
 const { etatDesLieuCols } = etatDesLieuConst();
 
 
@@ -20,12 +27,21 @@ export default {
             etatDesLieus,
             etatDesLieuCols,
             page,
-            nbPage
+            nbPage,
+            etatDesLieuLoad : undefined
         }
     },
     methods : {
         getEtatDesLieus,
-        gotoPage
+        gotoPage,
+        showEtaDesLieu(etatDesLieu) {
+            this.etatDesLieuLoad = etatDesLieu
+            this.$refs.modalEtatDesLieu.toogle()
+        },
+        refresh() {
+            this.getEtatDesLieus(this.filtres);
+            this.$refs.modalEtatDesLieu.toogle();
+        }
     },
     computed: {
         getEtatDesLieusLoad(){
@@ -43,7 +59,7 @@ export default {
     watch: {
         filtres: ((filtres) => {getEtatDesLieus(filtres)})
     },
-    components: { ListeElement }
+    components: { ListeElement, Modal, EtatDesLieuInfo }
 }
 
 </script>

@@ -51,21 +51,24 @@ class EtatDesLieuController extends Controller
      */
     public function update(Request $request, EtatDesLieu $etatDesLieu)
     {
-        EtatDesLieu::where('id', $etatDesLieu->id)->update([
-            'contrat_id' => $request->contrat_id,
-            'appart_id' => $request->appart_id,
-            'date' => $request->date,
-            'commentaire' => $request->commentaire,
-            'stade' => $request->stade
-        ]);
-        return new EtatDesLieuResouce(EtatDesLieu::find($etatDesLieu->id));
+        $etatDesLieu = EtatDesLieu::find($request->etatDesLieux);
+
+        $etatDesLieu->date = $request->input('date', $etatDesLieu->date);
+        $etatDesLieu->commentaire = $request->input('commentaire', $etatDesLieu->commentaire);
+        $etatDesLieu->stade = $request->input('stade', $etatDesLieu->stade);
+
+        $etatDesLieu->save();
+
+        return new EtatDesLieuResouce($etatDesLieu);
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(EtatDesLieu $etatDesLieu)
+    public function destroy(Request $request, EtatDesLieu $etatDesLieu)
     {
+        $etatDesLieu = EtatDesLieu::find($request->etatDesLieux);
+
         $etatDesLieu->delete();
     }
 }

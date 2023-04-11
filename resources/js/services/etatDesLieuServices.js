@@ -4,6 +4,7 @@ import axios from "axios";
 export default function useEtatDesLieu(){
 
     const etatDesLieus = ref([]);
+    const etatDesLieu = ref([])
 
     let page = ref(1);
     let filtre;
@@ -17,7 +18,7 @@ export default function useEtatDesLieu(){
     }
 
     const sendGetEtatDesLieusRequest = async (data) => {
-        let response = await axios.get('http://immo.test/api/EtatDesLieux', {params: {...filtre, page: page.value}});
+        let response = await axios.get('http://immo.test/api/etatDesLieux', {params: {...filtre, page: page.value}});
         etatDesLieus.value = response.data.data;
         nbPage.value = response.data.meta.last_page;
     }
@@ -27,9 +28,32 @@ export default function useEtatDesLieu(){
         await sendGetEtatDesLieusRequest();
     }
 
+    const getEtatDesLieu = async (id) => {
+        let response = await axios.get('http://immo.test/api/etatDesLieux' + id);
+        etatDesLieu = thus.response.data.data
+    }
+
+    const updateEtatDesLieu = async (id, data) => {
+        let response = await axios.put('http://immo.test/api/etatDesLieux/'+ id,  {...data});
+        etatDesLieu.value = response.data.data;
+    }
+
+    const deleteEtatDesLieu = async (id) => {
+        let response = await axios.delete('http://immo.test/api/etatDesLieux/'+ id);
+    }
+
+    const createEtatDesLieu = async (data) => {
+        let response = await axios.post('http://immo.test/api/etatDesLieux', data)
+    }
+
     return {
+        etatDesLieu,
         etatDesLieus,
         getEtatDesLieus,
+        getEtatDesLieu,
+        createEtatDesLieu,
+        deleteEtatDesLieu,
+        updateEtatDesLieu,
         page,
         gotoPage,
         nbPage,

@@ -47,13 +47,13 @@ class PaiementController extends Controller
      */
     public function update(Request $request, Paiement $paiement)
     {
-        Paiement::where('id', $paiement->id)->update([
-            'contrat_id' => $request->contrat_id,
-            'date_paiement' => $request->date_paiement,
-            'montant_paiement' => $request->montant_paiement,
-            'origine' => $request->origine
-        ]);
-        return new PaiementResouce(Paiement::find($paiement->id));
+        $paiement->date_paiement = $request->input('date_paiement', $paiement->date_paiement);
+        $paiement->montant_paiement = $request->input('montant_paiement', $paiement->montant_paiement);
+        $paiement->origine = $request->input('origine', $paiement->origine);
+
+        $paiement->save();
+
+        return new PaiementResouce($paiement);
     }
 
     /**

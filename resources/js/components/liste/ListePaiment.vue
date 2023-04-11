@@ -1,6 +1,11 @@
 <template>
 
-    <ListeElement :elements="getPaimentLoad" :cols="paiementCols" @gotoPage="gotoPage" :page="page" :nbPage="nbPage" />
+    <div>
+        <ListeElement :elements="getPaimentLoad" :cols="paiementCols" @gotoPage="gotoPage" :page="page" :nbPage="nbPage" @showPaiement="showPaiement"/>
+        <Modal ref="modalPayment">
+            <PaiementInfo deleteProps="true" @refresh="refresh" :paiementBase="paimentLoad" />
+        </Modal>
+    </div>
 
 </template>
 <script>
@@ -10,6 +15,8 @@ import paiementConst from '../../const/PaiementConst.js';
 const { paiementCols } = paiementConst();
 
 import usePaiement from '../../services/paimentServices.js';
+import Modal from '../utils/component/modal/Modal..vue';
+import PaiementInfo from '../paiement/PaiementInfo.vue';
 const { getPaiements, paiements, page, gotoPage, nbPage } = usePaiement();
 
 export default {
@@ -19,12 +26,21 @@ export default {
             paiementCols,
             paiements,
             page,
-            nbPage
+            nbPage,
+            paimentLoad : undefined
         }
     },
     methods : {
         getPaiements,
-        gotoPage
+        gotoPage,
+        showPaiement(paiement) {
+            this.paimentLoad = paiement
+            this.$refs.modalPayment.toogle()
+        },
+        refresh() {
+            this.getPaiements(this.filtres);
+            this.$refs.modalPayment.toogle();
+        }
     },
     computed: {
         getPaimentLoad() {
@@ -42,7 +58,7 @@ export default {
     watch: {
         filtres: ((filtres) => {getPaiements(filtres)})
     },
-    components: { ListeElement }
+    components: { ListeElement, Modal, PaiementInfo }
 }
 
 </script>
