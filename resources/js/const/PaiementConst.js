@@ -29,6 +29,15 @@ export default function paiementConst(){
         },
         {
             nom: '',
+            btnNom: {
+                event: {
+                    nomEvent: 'createPaiement',
+                },
+                class: 'bg-gray-100 px-2 py-1 rounded-xl border-gray-200 border-2 cursor-pointer',
+                icone: {
+                    icone: ['fas', 'arrow-up-right-from-square'],
+                }
+            },
             param: {
                 class: 'flex justify-end',
                 actions: [

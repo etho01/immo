@@ -1,9 +1,9 @@
 <template>
 
 <div>
-    <ListeElement :elements="getEtatDesLieusLoad" :cols="etatDesLieuCols" @gotoPage="gotoPage" :page="page" :nbPage="nbPage" @showEtaDesLieu="showEtaDesLieu"/>
+    <ListeElement :elements="getEtatDesLieusLoad" :cols="etatDesLieuCols" @gotoPage="gotoPage" :page="page" :nbPage="nbPage" @showEtaDesLieu="showEtaDesLieu" @createEtatDesLieu="createEtatDesLieu" />
     <Modal ref="modalEtatDesLieu">
-        <EtatDesLieuInfo :EtatDesLieuBase="etatDesLieuLoad"  deleteProps="true" @refresh="refresh" />
+        <EtatDesLieuInfo :EtatDesLieuBase="etatDesLieuLoad"  deleteProps="true" @refresh="refresh" :etartdeslieu_id="etatDesLieuIdLoad" />
     </Modal>
 </div>
 
@@ -15,7 +15,7 @@ import useEtatDesLieu from '../../services/etatDesLieuServices.js';
 const { etatDesLieus, getEtatDesLieus, page, gotoPage, nbPage } = useEtatDesLieu();
 
 import etatDesLieuConst from '../../const/EtatDesLieuConst.js';
-import Modal from '../utils/component/modal/Modal..vue';
+import Modal from '../utils/component/modal/Modal.vue';
 import EtatDesLieuInfo from '../etatDesLieu/EtatDesLieuInfo.vue';
 const { etatDesLieuCols } = etatDesLieuConst();
 
@@ -28,7 +28,8 @@ export default {
             etatDesLieuCols,
             page,
             nbPage,
-            etatDesLieuLoad : undefined
+            etatDesLieuLoad : undefined,
+            etatDesLieuIdLoad: undefined
         }
     },
     methods : {
@@ -36,6 +37,12 @@ export default {
         gotoPage,
         showEtaDesLieu(etatDesLieu) {
             this.etatDesLieuLoad = etatDesLieu
+            this.etatDesLieuIdLoad=undefined
+            this.$refs.modalEtatDesLieu.toogle()
+        },
+        createEtatDesLieu() {
+            this.etatDesLieuLoad=undefined;
+            this.etatDesLieuIdLoad='new'
             this.$refs.modalEtatDesLieu.toogle()
         },
         refresh() {
