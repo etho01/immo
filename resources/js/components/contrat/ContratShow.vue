@@ -24,7 +24,7 @@
                                     id : 'paiment'
                                 }                                
             ]" activeItemDefault="infos_contrat">
-            <ContratInfo ref-nav="infos_contrat" :contrat_id="contrat_id" deleteProps="true"/>
+            <ContratInfo ref-nav="infos_contrat" :contrat_id="contrat_id" deleteProps="true" :contrat-base="contrat" />
             <AppartInfo ref-nav="infos_appart" :appartBase="contrat.appart"/>
             <LocataireInfo ref-nav="infos_loc" :locataireBase="contrat.locataire" />
             <ListeEtatDesLieu :filtres="{contrat_id: this.contrat_id}"  ref-nav="etat_des_lieu" :contrat_id="contrat_id" :appart_id="getAppartId"/>
@@ -62,13 +62,15 @@
             contrat,
         };
     },
-    created() {
+    async created() {
         if (this.$route.params.contrat_id == 'new'){
             this.contrat_id = "new"
         } else if (isNaN(this.contrat_id)) {
             this.$router.push({ name: "contrat.menu" });
         } else {
-            this.getContrat(this.contrat_id);
+            if(! await this.getContrat(this.contrat_id)){
+                this.$router.push({ name: "contrat.menu" });
+            }
         }
     },
     methods: {

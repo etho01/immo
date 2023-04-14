@@ -11,8 +11,14 @@ export default function userContrat(){
     let nbPage = ref(0);
 
     const getContrat = async (id) => {
-        let response = await axios.get('http://immo.test/api/contrat/'+ id );
-        contrat.value = response.data.data;
+        let error = true;
+        let response = await axios.get('http://immo.test/api/contrat/'+ id ).
+            catch(function (erreur){
+                error = false;
+            });
+
+        if (error) contrat.value = response.data.data;
+        return error;
     }
 
     const getContrats = async (data) => {

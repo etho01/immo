@@ -2,8 +2,8 @@
     <div>
         <Title title="Information contrat" />
         <div class="grid grid-cols-2 mt-3">
-            <Text type="date" label="Date de debut" :value="contrat.date_debut" @changeValue="changeDateDebut"/>
-            <Text type="date" label="Date de fin" :value="contrat.date_fin" @changeValue="chnageDateFin"/>
+            <Text type="date" label="Date de debut" :value="getContratUse.date_debut" @changeValue="changeDateDebut"/>
+            <Text type="date" label="Date de fin" :value="getContratUse.date_fin" @changeValue="chnageDateFin"/>
         </div>
         <div v-if="contrat_id == 'new'" class="grid grid-cols-2 mt-3">
             <SelectAppart @changeValue="changeAppart">
@@ -37,7 +37,7 @@ import SelectLocataire from '../select/SelectLocataire.vue';
     const { getContrat, contrat, updateContrat, deleteContrat, createContrat } = userContrat();
 
     export default {
-        props: ['contrat_id', 'deleteProps'],
+        props: ['contrat_id', 'deleteProps', 'contratBase'],
         data() {
             return {
                 contrat,
@@ -72,6 +72,12 @@ import SelectLocataire from '../select/SelectLocataire.vue';
             }
         },
         computed: {
+            getContratUse() {
+                if (this.contratBase == undefined){
+                    return this.contrat
+                }
+                return this.contratBase
+            },
             canDelete() {
                 return this.deleteProps == "true"
             },
