@@ -3,7 +3,7 @@
     <div>
         <ListeElement :elements="getPaimentLoad" :cols="paiementCols" @gotoPage="gotoPage" :page="page" :nbPage="nbPage" @showPaiement="showPaiement" @createPaiement="createPaiement" />
         <Modal ref="modalPayment">
-            <PaiementInfo deleteProps="true" @refresh="refresh" :paiementBase="paimentLoad" :paiement_id="paiementIdLoad" />
+            <PaiementInfo deleteProps="true" :contrat_id="contrat_id" @refresh="refresh" :paiementBase="paimentLoad" :paiement_id="paiementIdLoad" />
         </Modal>
     </div>
 
@@ -20,7 +20,7 @@ import PaiementInfo from '../paiement/PaiementInfo.vue';
 const { getPaiements, paiements, page, gotoPage, nbPage } = usePaiement();
 
 export default {
-    props: ['paiementBase','filtres'],
+    props: ['paiementBase','filtres', 'contrat_id'],
     data (){
         return {
             paiementCols,
@@ -41,7 +41,7 @@ export default {
         },
         createPaiement(){
             this.paimentLoad = undefined;
-            this.paiementIdLoad='new';
+            this.paiementIdLoad = 'new';
             this.$refs.modalPayment.toogle()
         },
         refresh() {

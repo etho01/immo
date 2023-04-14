@@ -33,7 +33,7 @@ import usePaiement from '../../services/paimentServices';
 const { paiement, getPaiement, deletePaiement, updatePaiement, createPaiement } = usePaiement();
 
     export default {
-        props: ['paiement_id', 'deleteProps', "paiementBase"],
+        props: ['paiement_id', 'deleteProps', "paiementBase", "contrat_id"],
         data() {
             return {
                 paiement,
@@ -41,7 +41,8 @@ const { paiement, getPaiement, deletePaiement, updatePaiement, createPaiement } 
                 data: {
                     date_paiement: undefined,
                     montant_paiement: undefined,
-                    origine: undefined
+                    origine: undefined,
+                    contrat_id: this.contrat_id
                 }
             }
         },

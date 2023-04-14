@@ -28,7 +28,7 @@
             <AppartInfo ref-nav="infos_appart" :appartBase="contrat.appart"/>
             <LocataireInfo ref-nav="infos_loc" :locataireBase="contrat.locataire" />
             <ListeEtatDesLieu :filtres="{contrat_id: this.contrat_id}"  ref-nav="etat_des_lieu"/>
-            <ListePaiment :filtres="{contrat_id: this.contrat_id}"  ref-nav="paiment"/>
+            <ListePaiment :filtres="{contrat_id: this.contrat_id}" :contrat_id="contrat_id" ref-nav="paiment"/>
         
         </Nav>
         </section>
