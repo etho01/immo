@@ -27,7 +27,7 @@
             <ContratInfo ref-nav="infos_contrat" :contrat_id="contrat_id" deleteProps="true"/>
             <AppartInfo ref-nav="infos_appart" :appartBase="contrat.appart"/>
             <LocataireInfo ref-nav="infos_loc" :locataireBase="contrat.locataire" />
-            <ListeEtatDesLieu :filtres="{contrat_id: this.contrat_id}"  ref-nav="etat_des_lieu"/>
+            <ListeEtatDesLieu :filtres="{contrat_id: this.contrat_id}"  ref-nav="etat_des_lieu" :contrat_id="contrat_id" :appart_id="getAppartId"/>
             <ListePaiment :filtres="{contrat_id: this.contrat_id}" :contrat_id="contrat_id" ref-nav="paiment"/>
         
         </Nav>
@@ -50,8 +50,8 @@
     import ContratInfo from './ContratInfo.vue';
     import AppartInfo from '../appart/AppartInfo.vue';
     import LocataireInfo from '../locataire/LocataireInfo.vue';
-import ListeEtatDesLieu from '../liste/ListeEtatDesLieu.vue';
-import ListePaiment from '../liste/ListePaiment.vue';
+    import ListeEtatDesLieu from '../liste/ListeEtatDesLieu.vue';
+    import ListePaiment from '../liste/ListePaiment.vue';
 
     const { contrat, getContrat } = userContrat()
 
@@ -73,6 +73,14 @@ import ListePaiment from '../liste/ListePaiment.vue';
     },
     methods: {
         getContrat,
+    },
+    computed: {
+        getAppartId() {
+            if (this.contrat.appart != undefined){
+                return this.contrat.appart.id
+            }
+            return undefined
+        }
     },
     updated(){
         if (this.$route.params.contrat_id != this.contrat_id){

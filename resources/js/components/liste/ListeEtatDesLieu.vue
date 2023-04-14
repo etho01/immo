@@ -3,7 +3,7 @@
 <div>
     <ListeElement :elements="getEtatDesLieusLoad" :cols="etatDesLieuCols" @gotoPage="gotoPage" :page="page" :nbPage="nbPage" @showEtaDesLieu="showEtaDesLieu" @createEtatDesLieu="createEtatDesLieu" />
     <Modal ref="modalEtatDesLieu">
-        <EtatDesLieuInfo :EtatDesLieuBase="etatDesLieuLoad"  deleteProps="true" @refresh="refresh" :etartdeslieu_id="etatDesLieuIdLoad" />
+        <EtatDesLieuInfo :EtatDesLieuBase="etatDesLieuLoad"  deleteProps="true" @refresh="refresh" :etartdeslieu_id="etatDesLieuIdLoad" :appart_id="appart_id" :contrat_id="contrat_id" />
     </Modal>
 </div>
 
@@ -21,7 +21,7 @@ const { etatDesLieuCols } = etatDesLieuConst();
 
 
 export default {
-    props: ['etatDesLieuBase','filtres'],
+    props: ['etatDesLieuBase','filtres', "contrat_id", 'appart_id'],
     data (){
         return {
             etatDesLieus,
@@ -29,7 +29,7 @@ export default {
             page,
             nbPage,
             etatDesLieuLoad : undefined,
-            etatDesLieuIdLoad: undefined
+            etatDesLieuIdLoad: undefined,
         }
     },
     methods : {

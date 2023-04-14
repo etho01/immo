@@ -87,7 +87,11 @@ const { paiement, getPaiement, deletePaiement, updatePaiement, createPaiement } 
                 return this.deleteProps == "true"
             },
         },
-
+        watch: {
+            contrat_id() {
+                this.data = {...this.data, contrat_id: this.contrat_id}
+            }
+        },
         components: {Title, Text}
 
     }

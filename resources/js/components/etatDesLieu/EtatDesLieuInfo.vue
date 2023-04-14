@@ -35,7 +35,7 @@ import useEtatDesLieu from '../../services/etatDesLieuServices';
 const { etatDesLieu, getEtatDesLieu, createEtatDesLieu, deleteEtatDesLieu, updateEtatDesLieu } = useEtatDesLieu();
 
     export default {
-        props: ['etartdeslieu_id', 'deleteProps', "EtatDesLieuBase"],
+        props: ['etartdeslieu_id', 'deleteProps', "EtatDesLieuBase", "contrat_id", 'appart_id'],
         data() {
             return {
                 etatDesLieu,
@@ -43,6 +43,8 @@ const { etatDesLieu, getEtatDesLieu, createEtatDesLieu, deleteEtatDesLieu, updat
                     date: undefined,
                     stade: undefined,
                     commentaire : undefined,
+                    contrat_id: this.contrat_id,
+                    appart_id: this.appart_id
                 }
             }
         },
@@ -58,7 +60,7 @@ const { etatDesLieu, getEtatDesLieu, createEtatDesLieu, deleteEtatDesLieu, updat
                 this.data = {...this.data, stade: value}
             },
             changeCommentaire(value){
-                this.data = {...this.data, stade: value}
+                this.data = {...this.data, commentaire: value}
             },
             async createEtatDesLieuClick () {
                 await this.createEtatDesLieu(this.data)
@@ -90,6 +92,14 @@ const { etatDesLieu, getEtatDesLieu, createEtatDesLieu, deleteEtatDesLieu, updat
         mounted () {
             if (this.appart_id != 'new' && this.EtatDesLieuBase != undefined){
                 this.getEtatDesLieu(this.appart_id);
+            }
+        },
+        watch: {
+            appart_id() {
+                this.data = {...this.data, appart_id: this.appart_id}
+            },
+            contrat_id() {
+                this.data = {...this.data, contrat_id: this.contrat_id}
             }
         },
         components: { Title, Text }
