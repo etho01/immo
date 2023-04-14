@@ -29,8 +29,13 @@ export default function useAppart(){
 
 
     const getAppart = async (id) => {
-        let response = await axios.get('http://immo.test/api/appart/' + id);
-        appart.value = response.data.data;
+        let validate = true;
+        let response = await axios.get('http://immo.test/api/appart/' + id)
+            .catch(function(erreur) {
+                validate = false;
+            })
+        if ( validate ) appart.value = response.data.data;
+        return validate;
     }
 
     const updateAppart = async (id, data) => {

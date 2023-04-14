@@ -63,13 +63,15 @@ const { getAppart, appart } = useAppart();
             getEtatDesLieus,
             getAppart
         },
-        mounted () {
+        async mounted () {
             if (this.$route.params.appart_id == 'new'){
                 this.appart_id = "new"
             } else if (isNaN(this.appart_id)) {
                 this.$router.push({ name: "appart.menu" });
             } else {
-                this.getAppart(this.appart_id)
+                if (! await this.getAppart(this.appart_id)){
+                    this.$router.push({ name: "appart.menu" });
+                }
             }
         },
         updated(){

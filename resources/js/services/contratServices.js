@@ -11,14 +11,14 @@ export default function userContrat(){
     let nbPage = ref(0);
 
     const getContrat = async (id) => {
-        let error = true;
+        let validate = true;
         let response = await axios.get('http://immo.test/api/contrat/'+ id ).
             catch(function (erreur){
-                error = false;
+                validate = false;
             });
 
-        if (error) contrat.value = response.data.data;
-        return error;
+        if (validate) contrat.value = response.data.data;
+        return validate;
     }
 
     const getContrats = async (data) => {
