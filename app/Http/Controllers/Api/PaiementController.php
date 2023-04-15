@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\Http\Controllers\Controller;
-use App\Http\Resources\PaiementResouce;
 use App\Models\Paiement;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use App\Http\Requests\PaiementRequest;
+use App\Http\Resources\PaiementResouce;
 
 class PaiementController extends Controller
 {
@@ -24,7 +25,7 @@ class PaiementController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(PaiementRequest $request)
     {
         return new PaiementResouce(Paiement::create([
             'contrat_id' => $request->contrat_id,
@@ -45,7 +46,7 @@ class PaiementController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Paiement $paiement)
+    public function update(PaiementRequest $request, Paiement $paiement)
     {
         $paiement->date_paiement = $request->input('date_paiement', $paiement->date_paiement);
         $paiement->montant_paiement = $request->input('montant_paiement', $paiement->montant_paiement);

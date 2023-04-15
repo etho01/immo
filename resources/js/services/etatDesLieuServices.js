@@ -62,7 +62,6 @@ export default function useEtatDesLieu(){
     }
 
     const refreshErreur = () => {
-        console.log('refred');
         erreurTab.value = []
     };
 

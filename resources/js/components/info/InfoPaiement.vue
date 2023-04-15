@@ -1,7 +1,7 @@
 <template>
 
     <div>
-
+        <Error :erreurTab="erreurTab" />
         <Title title="Information sur le payment" />
         <div class="grid grid-cols-3 mt-3">
             <Text label="Date paiment" type="date" :value="getPaiementUse.date_paiement" @changeValue="changeDatePaiment" />
@@ -29,8 +29,9 @@
 import Text from '../utils/input/Text.vue';
 import Title from '../utils/title/Title.vue';
 import usePaiement from '../../services/paimentServices';
+import Error from '../utils/Error.vue';
 
-const { paiement, getPaiement, deletePaiement, updatePaiement, createPaiement } = usePaiement();
+const { paiement, getPaiement, deletePaiement, updatePaiement, createPaiement,erreurTab ,refreshErreur } = usePaiement();
 
     export default {
         props: ['paiement_id', 'deleteProps', "paiementBase", "contrat_id"],
@@ -43,7 +44,8 @@ const { paiement, getPaiement, deletePaiement, updatePaiement, createPaiement } 
                     montant_paiement: undefined,
                     origine: undefined,
                     contrat_id: this.contrat_id
-                }
+                },
+                erreurTab
             }
         },
         methods: {
@@ -51,6 +53,7 @@ const { paiement, getPaiement, deletePaiement, updatePaiement, createPaiement } 
             deletePaiement,
             updatePaiement,
             createPaiement,
+            refreshErreur,
             changeDatePaiment(value){
                 this.data = {...this.data, date_paiement: value}
             },
@@ -69,8 +72,9 @@ const { paiement, getPaiement, deletePaiement, updatePaiement, createPaiement } 
                 this.$emit('refresh');
             },
             async createPaiementClick() {
-                await this.createPaiement(this.data);
-                this.$emit('refresh');
+                if (await this.createPaiement(this.data) != 0){
+                    this.$emit('refresh');
+                }
             }
         },
         computed: {
@@ -90,9 +94,12 @@ const { paiement, getPaiement, deletePaiement, updatePaiement, createPaiement } 
         watch: {
             contrat_id() {
                 this.data = {...this.data, contrat_id: this.contrat_id}
+            },
+            paiementBase() {
+                this.refreshErreur();
             }
         },
-        components: {Title, Text}
+        components: { Title, Text, Error }
 
     }
 

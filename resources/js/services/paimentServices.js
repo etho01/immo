@@ -1,10 +1,14 @@
 import {ref} from "vue";
 import axios from "axios";
 
+import getErrors from './fonc.js'
+
 export default function usePaiement(){
 
     const paiements = ref([])
     const paiement = ref([])
+
+    let erreurTab = ref([])
 
     let page = ref(1);
     let filtre;
@@ -33,7 +37,11 @@ export default function usePaiement(){
     }
 
     const updatePaiement = async (id, data) => {
-        let response = await axios.put('http://immo.test/api/paiement/'+ id,  {...data});
+        erreurTab.value = []
+        let response = await axios.put('http://immo.test/api/paiement/'+ id,  {...data})
+        .catch(function (erreur){
+            erreurTab.value = getErrors(erreur.response.data.errors);
+        })
         paiement.value = response.data.data;
     }
 
@@ -42,8 +50,19 @@ export default function usePaiement(){
     }
 
     const createPaiement = async (data) => {
+        erreurTab.value = []
         let response = await axios.post('http://immo.test/api/paiement', data)
+        .catch(function (erreur){
+            erreurTab.value = getErrors(erreur.response.data.errors);
+        })
+        if (erreurTab.value != []){
+            return 0;
+        }
     }
+
+    const refreshErreur = () => {
+        erreurTab.value = []
+    };
 
     return {
         paiement,
@@ -56,6 +75,8 @@ export default function usePaiement(){
         page,
         gotoPage,
         nbPage,
+        erreurTab,
+        refreshErreur
     }
 
 }
