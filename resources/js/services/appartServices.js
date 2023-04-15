@@ -1,10 +1,14 @@
 import { ref } from 'vue';
 import axios from 'axios';
 
+import getErrors from './fonc.js';
+
 export default function useAppart(){
 
     const apparts = ref([]);
     const appart = ref([]);
+
+    let erreurTab = ref([]);
 
     let page = ref(1);
     let filtre;
@@ -39,7 +43,11 @@ export default function useAppart(){
     }
 
     const updateAppart = async (id, data) => {
-        let response = await axios.put('http://immo.test/api/appart/'+ id,  {...data});
+        erreurTab.value = [];
+        let response = await axios.put('http://immo.test/api/appart/'+ id,  {...data})
+        .catch(function (erreur){
+            erreurTab.value = getErrors(erreur.response.data.errors);
+        })
         appart.value = response.data.data;
     }
 
@@ -49,7 +57,14 @@ export default function useAppart(){
     }
 
     const createAppart = async (data) => {
+        erreurTab.value = [];
         let response = await axios.post('http://immo.test/api/appart', data)
+        .catch(function (erreur){
+            erreurTab.value = getErrors(erreur.response.data.errors);
+        })
+        if (erreurTab.value != []){
+            return 0
+        }
         return response.data.data.id
     }
 
@@ -64,6 +79,7 @@ export default function useAppart(){
         page,
         gotoPage,
         nbPage,
+        erreurTab
     }
 
 }

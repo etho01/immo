@@ -1,6 +1,7 @@
 <template>
 
     <div>
+        <Error :erreurTab="erreurTab" />
         <Title title="Adresse du bien" />
         <div class="grid grid-cols-6 mt-3">
             <Text class="col-span-3" label="Adresse du bien" :value="getAppartUse.adresse" @changeValue="changeAdresse" placeholder="Adresse"/>
@@ -41,8 +42,9 @@ import Text from '../utils/input/Text.vue';
 import Title from '../utils/title/Title.vue';
 import useAppart from '../../services/appartServices';
 import SelectAgence from '../select/SelectAgence.vue';
+import Error from '../utils/Error.vue';
 
-const { getAppart, appart, createAppart, deleteAppart, updateAppart } = useAppart();
+const { getAppart, appart, createAppart, deleteAppart, updateAppart, erreurTab } = useAppart();
 
     export default {
         props: ['appart_id', 'deleteProps', 'appartBase'],
@@ -57,7 +59,8 @@ const { getAppart, appart, createAppart, deleteAppart, updateAppart } = useAppar
                     loyer : undefined,
                     charge: undefined,
                     agence_id: undefined
-                }
+                },
+                erreurTab
             }
         },
         methods: {
@@ -125,7 +128,7 @@ const { getAppart, appart, createAppart, deleteAppart, updateAppart } = useAppar
                 this.getAppart(this.appart_id);
             }
         },
-        components: { Title, Text, SelectAgence }
+        components: { Title, Text, SelectAgence, Error }
     }
 
 </script>

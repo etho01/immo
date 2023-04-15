@@ -35,13 +35,16 @@ class appartRequest extends FormRequest
             'adresse_compl' => ['required'],
             'cp' => ['required'],
             'pays' => ['required'],
-            'charge' => ['required'],
-            'loyer' => ['required']
+            'charge' => ['required', 'decimal:0;2'],
+            'loyer' => ['required', 'decimal:0;2']
         ];
     }
 
     public function update(){
-        return [];
+        return [
+            'charge' => ['decimal:0;2'],
+            'loyer' => ['decimal:0;2']
+        ];
     }
 
     public function destroy(){
