@@ -1,10 +1,14 @@
 import {ref} from "vue";
 import axios from "axios";
 
+import getErrors from './fonc.js'
+
 export default function userContrat(){
 
     const contrat = ref([]);
     const contrats = ref([]);
+
+    let erreurTab = ref([]);
 
     let page = ref(1);
     let filtre;
@@ -39,7 +43,11 @@ export default function userContrat(){
     }
 
     const updateContrat = async (id, data) => {
-        let response = await axios.put('http://immo.test/api/contrat/'+ id,  {...data});
+        erreurTab.value = []
+        let response = await axios.put('http://immo.test/api/contrat/'+ id,  {...data})
+        .catch(function (erreur){
+            erreurTab.value = getErrors(erreur.response.data.errors);
+        })
         contrat.value = response.data.data;
     }
 
@@ -49,7 +57,14 @@ export default function userContrat(){
     }
 
     const createContrat = async (data) => {
+        erreurTab.value = []
         let response = await axios.post('http://immo.test/api/contrat', data)
+        .catch(function (erreur){
+            erreurTab.value = getErrors(erreur.response.data.errors);
+        })
+        if (erreurTab.value != []){
+            return 0;
+        }
         return response.data.data.id
     }
 
@@ -64,6 +79,7 @@ export default function userContrat(){
         page,
         gotoPage,
         nbPage,
+        erreurTab
     }
 
 }

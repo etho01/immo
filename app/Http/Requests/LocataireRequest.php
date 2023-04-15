@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class contratRequest extends FormRequest
+class LocataireRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -27,20 +27,23 @@ class contratRequest extends FormRequest
         };
     }
 
-    public function store(){
+    public function store() {
         return [
-            'appart_id' => ['required'],
-            'locataire_id' => ['required'],
-            'date_debut' => ['required', 'date'],
-            'date_fin' => ['required', 'date'],
+            'nom' => ['required'],
+            'prenom' => ['required'],
+            'date_naissance' => ['required', 'date'],
+            'email' => ['required', 'mail'],
+            'telephone' => ['required'],
+            'iban' => ['required'],
+            'bic' => ['required'],
+            'genre' => ['required'],
         ];
     }
 
-    public function update(){
+    public function update() {
         return [
-            'date_debut' => ['date'],
-            'date_fin' => ['date']
+            'date_naissance' => ['date'],
+            'email' => ['mail']
         ];
     }
-
 }

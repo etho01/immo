@@ -2,12 +2,13 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\Http\Controllers\Controller;
-use App\Http\Resources\LocataireResouce;
-use App\Models\Locataire;
-use Illuminate\Contracts\Database\Eloquent\Builder;
-use Illuminate\Http\Request;
 use Locale;
+use App\Models\Locataire;
+use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use App\Http\Requests\LocataireRequest;
+use App\Http\Resources\LocataireResouce;
+use Illuminate\Contracts\Database\Eloquent\Builder;
 
 class LocataireController extends Controller
 {
@@ -28,7 +29,7 @@ class LocataireController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(LocataireRequest $request)
     {
         return new LocataireResouce(Locataire::create([
             'nom' => $request->nom,
@@ -53,7 +54,7 @@ class LocataireController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Locataire $locataire)
+    public function update(LocataireRequest $request, Locataire $locataire)
     {
         $locataire->nom = $request->input('nom', $locataire->nom);
         $locataire->prenom = $request->input('prenom', $locataire->prenom);

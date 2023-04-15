@@ -1,6 +1,7 @@
 <template>
 
     <div>
+        <Error :erreurTab="erreurTab" />
         <Title title="Informations locataire" />
         <div class="grid grid-cols-3 mt-3">
             <Text label="Prenom du locataire" :value="getLocataireUse.prenom" @changeValue="changePrenom" placeholder="Prenom du locataire" />
@@ -38,8 +39,9 @@ import LocataireConst from '../../const/LocataireConst.js';
 import Select from '../utils/input/select.vue';
 
 import useLocataire from '../../services/locataireServices';
+import Error from '../utils/Error.vue';
 
-const { getLocataire, locataire, updateLocataire, deleteLocataire, createLocataire } = useLocataire()
+const { getLocataire, locataire, updateLocataire, deleteLocataire, createLocataire, erreurTab } = useLocataire()
 
 const { genreLoc } = LocataireConst();
 
@@ -59,7 +61,8 @@ const { genreLoc } = LocataireConst();
                     iban: undefined,
                     bic: undefined,
                     genre: undefined
-                }
+                },
+                erreurTab
             }
         },
         methods: {
@@ -122,7 +125,7 @@ const { genreLoc } = LocataireConst();
                 this.getLocataire(this.locataire_id)
             }
         },
-        components: { Title, Text, Select }
+        components: { Title, Text, Select, Error }
 }
 
 </script>

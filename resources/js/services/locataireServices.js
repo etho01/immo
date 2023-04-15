@@ -1,10 +1,14 @@
 import {ref} from "vue";
 import axios from "axios";
 
+import getErrors from './fonc.js'
+
 export default function useLocataire(){
 
     const locataires = ref([]);
     const locataire = ref([]);
+
+    let erreurTab = ref([])
 
     let page = ref(1);
     let filtre;
@@ -38,7 +42,11 @@ export default function useLocataire(){
     }
 
     const updateLocataire = async (id, data) => {
-        let response = await axios.put('http://immo.test/api/locataire/'+ id,  {...data});
+        erreurTab.value = []
+        let response = await axios.put('http://immo.test/api/locataire/'+ id,  {...data})
+        .catch(function (erreur){
+            erreurTab.value = getErrors(erreur.response.data.errors);
+        })
         locataire.value = response.data.data;
     }
 
@@ -48,7 +56,14 @@ export default function useLocataire(){
     }
 
     const createLocataire = async (data) => {
+        erreurTab.value = []
         let response = await axios.post('http://immo.test/api/locataire', data)
+        .catch(function (erreur){
+            erreurTab.value = getErrors(erreur.response.data.errors);
+        })
+        if (erreurTab.value != []){
+            return 0;
+        }
         return response.data.data.id;
     }
 
@@ -63,6 +78,7 @@ export default function useLocataire(){
         page,
         gotoPage,
         nbPage,
+        erreurTab
     }
 
 }

@@ -1,5 +1,6 @@
 <template>
     <div>
+        <Error :erreurTab="erreurTab" />
         <Title title="Information contrat" />
         <div class="grid grid-cols-2 mt-3">
             <Text type="date" label="Date de debut" :value="getContratUse.date_debut" @changeValue="changeDateDebut"/>
@@ -34,7 +35,8 @@ import userContrat from '../../services/contratServices';
     import Title from '../utils/title/Title.vue';
 import SelectAppart from '../select/SelectAppart.vue';
 import SelectLocataire from '../select/SelectLocataire.vue';
-    const { getContrat, contrat, updateContrat, deleteContrat, createContrat } = userContrat();
+import Error from '../utils/Error.vue';
+    const { getContrat, contrat, updateContrat, deleteContrat, createContrat, erreurTab } = userContrat();
 
     export default {
         props: ['contrat_id', 'deleteProps', 'contratBase'],
@@ -45,7 +47,9 @@ import SelectLocataire from '../select/SelectLocataire.vue';
                 date_debut: contrat.date_debut,
                 date_fin: contrat.date_fin,
                 appart_id: undefined,
-                locataire_id: undefined
+                locataire_id: undefined,
+
+                erreurTab
             }
         },
         methods : {
@@ -104,7 +108,7 @@ import SelectLocataire from '../select/SelectLocataire.vue';
                 }
             }
         },
-        components: { Title, Text, SelectAppart, SelectLocataire }
+        components: { Title, Text, SelectAppart, SelectLocataire, Error }
 
     }
 
