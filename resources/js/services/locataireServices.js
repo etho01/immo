@@ -11,8 +11,13 @@ export default function useLocataire(){
     let nbPage = ref(0);
 
     const getLocataire = async (id) => {
-        let response = await axios.get('http://immo.test/api/locataire/' + id);
-        locataire.value  = response.data.data;
+        let validate = true;
+        let response = await axios.get('http://immo.test/api/locataire/' + id).
+            catch(function (erreur){
+                validate = false;
+            });
+        if (validate) locataire.value  = response.data.data;
+        return validate
     }
 
     const getLocataires = async (data) => {

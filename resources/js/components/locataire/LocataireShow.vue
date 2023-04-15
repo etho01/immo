@@ -54,13 +54,15 @@
             return this.locataire.nom + ' ' + this.locataire.prenom;
         }
     },
-    mounted() {
+    async mounted() {
         if (this.$route.params.locataire_id == 'new'){
                 this.locataire_id = "new"
             } else if (isNaN(this.locataire_id)) {
                 this.$router.push({ name: "locataire.menu" });
             } else {
-                this.getLocataire(this.locataire_id)
+                if (!await this.getLocataire(this.locataire_id)){
+                    this.$router.push({ name: "locataire.menu" });
+                }
             }
         },
         updated(){
