@@ -1,10 +1,14 @@
 import {ref} from "vue";
 import axios from "axios";
 
+import getErrors from './fonc.js'
+
 export default function useEtatDesLieu(){
 
     const etatDesLieus = ref([]);
-    const etatDesLieu = ref([])
+    const etatDesLieu = ref([]);
+
+    let erreurTab = ref([])
 
     let page = ref(1);
     let filtre;
@@ -34,7 +38,11 @@ export default function useEtatDesLieu(){
     }
 
     const updateEtatDesLieu = async (id, data) => {
-        let response = await axios.put('http://immo.test/api/etatDesLieux/'+ id,  {...data});
+        erreurTab.value = []
+        let response = await axios.put('http://immo.test/api/etatDesLieux/'+ id,  {...data})
+        .catch(function (erreur){
+            erreurTab.value = getErrors(erreur.response.data.errors);
+        })
         etatDesLieu.value = response.data.data;
     }
 
@@ -43,8 +51,20 @@ export default function useEtatDesLieu(){
     }
 
     const createEtatDesLieu = async (data) => {
+        erreurTab.value = []
         let response = await axios.post('http://immo.test/api/etatDesLieux', data)
+        .catch(function (erreur){
+            erreurTab.value = getErrors(erreur.response.data.errors);
+        })
+        if (erreurTab.value != []){
+            return 0;
+        }
     }
+
+    const refreshErreur = () => {
+        console.log('refred');
+        erreurTab.value = []
+    };
 
     return {
         etatDesLieu,
@@ -57,6 +77,8 @@ export default function useEtatDesLieu(){
         page,
         gotoPage,
         nbPage,
+        erreurTab,
+        refreshErreur
     }
 
 }

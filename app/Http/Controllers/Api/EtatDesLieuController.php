@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\Http\Controllers\Controller;
-use App\Http\Resources\EtatDesLieuResouce;
 use App\Models\EtatDesLieu;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use App\Http\Requests\EtatDesLieuRequest;
+use App\Http\Resources\EtatDesLieuResouce;
 
 class EtatDesLieuController extends Controller
 {
@@ -27,7 +28,7 @@ class EtatDesLieuController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(EtatDesLieuRequest $request)
     {
         return new EtatDesLieuResouce(EtatDesLieu::create([
             'contrat_id' => $request->contrat_id,
@@ -49,7 +50,7 @@ class EtatDesLieuController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, EtatDesLieu $etatDesLieu)
+    public function update(EtatDesLieuRequest $request, EtatDesLieu $etatDesLieu)
     {
         $etatDesLieu = EtatDesLieu::find($request->etatDesLieux);
 

@@ -1,7 +1,7 @@
 <template>
 
     <div>
-
+        <Error :erreurTab="erreurTab" />
         <Title title="Information etat des lieu" />
         <div class="grid grid-cols-2 mt-3">
             <Text label="Date de l'etat des lieu" @changeValue="changeDate" :value="getEtatDesLieuUse.date" type="date" />
@@ -31,8 +31,9 @@
 import Text from '../utils/input/Text.vue';
 import Title from '../utils/title/Title.vue';
 import useEtatDesLieu from '../../services/etatDesLieuServices';
+import Error from '../utils/Error.vue';
 
-const { etatDesLieu, getEtatDesLieu, createEtatDesLieu, deleteEtatDesLieu, updateEtatDesLieu } = useEtatDesLieu();
+const { etatDesLieu, getEtatDesLieu, createEtatDesLieu, deleteEtatDesLieu, updateEtatDesLieu, erreurTab, refreshErreur } = useEtatDesLieu();
 
     export default {
         props: ['etartdeslieu_id', 'deleteProps', "EtatDesLieuBase", "contrat_id", 'appart_id'],
@@ -45,7 +46,8 @@ const { etatDesLieu, getEtatDesLieu, createEtatDesLieu, deleteEtatDesLieu, updat
                     commentaire : undefined,
                     contrat_id: this.contrat_id,
                     appart_id: this.appart_id
-                }
+                },
+                erreurTab
             }
         },
         methods: {
@@ -53,6 +55,7 @@ const { etatDesLieu, getEtatDesLieu, createEtatDesLieu, deleteEtatDesLieu, updat
             createEtatDesLieu,
             deleteEtatDesLieu,
             updateEtatDesLieu,
+            refreshErreur,
             changeDate(value){
                 this.data = {...this.data, date: value}
             },
@@ -63,8 +66,9 @@ const { etatDesLieu, getEtatDesLieu, createEtatDesLieu, deleteEtatDesLieu, updat
                 this.data = {...this.data, commentaire: value}
             },
             async createEtatDesLieuClick () {
-                await this.createEtatDesLieu(this.data)
-                this.$emit('refresh');
+                if (await this.createEtatDesLieu(this.data) != 0){
+                    this.$emit('refresh');
+                }
             },
             async updateEtatDesLieuClick (){
                 await this.updateEtatDesLieu(this.getEtatDesLieuUse.id, this.data);
@@ -100,9 +104,12 @@ const { etatDesLieu, getEtatDesLieu, createEtatDesLieu, deleteEtatDesLieu, updat
             },
             contrat_id() {
                 this.data = {...this.data, contrat_id: this.contrat_id}
+            },
+            EtatDesLieuBase() {
+                this.refreshErreur();
             }
         },
-        components: { Title, Text }
+        components: { Title, Text, Error }
     }
 
 </script>
