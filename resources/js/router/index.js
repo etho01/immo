@@ -1,47 +1,48 @@
 import { createRouter, createWebHistory } from "vue-router";
 
-import ContratMenu from "../components/contrat/ContratMenu.vue";
-import LocataireMenu from "../components/locataire/LocataireMenu.vue";
-import AppartMenu from "../components/appart/AppartMenu.vue";
-import ContratShow from "../components/contrat/ContratShow.vue";
-import LocataireShow from '../components/locataire/LocataireShow.vue';
-import AppartShow from '../components/appart/AppartShow.vue';
+import ShowAppart from '../components/show/ShowAppart.vue';
+import ShowContrat from '../components/show/ShowContrat.vue';
+import ShowLocataire from '../components/show/ShowLocataire.vue';
+
+import MenuContrat from "../components/menu/MenuContrat.vue";
+import MenuAppart from "../components/menu/MenuAppart.vue";
+import MenuLocataire from "../components/menu/MenuLocataire.vue";
 
 const routes = [
     {
         path: '/dashboard',
         name: 'dashboard',
-        component: ContratMenu
+        component: MenuContrat
     },
     {
         path: '/contrat',
         name: 'contrat.menu',
-        component: ContratMenu,
+        component: MenuContrat,
     },
     {
         path: '/locataire',
         name: 'locataire.menu',
-        component: LocataireMenu
+        component: MenuLocataire
     },
     {
         path: '/appartement',
         name: 'appart.menu',
-        component: AppartMenu
+        component: MenuAppart
     },
     {
         path: '/contrat/:contrat_id',
         name: 'contrat.show',
-        component: ContratShow,
+        component: ShowContrat,
     },
     {
         path: '/locataire/:locataire_id',
         name: 'locataire.show',
-        component: LocataireShow,
+        component: ShowLocataire,
     },
     {
         path: '/appartement/:appart_id',
         name: 'appart.show',
-        component: AppartShow,
+        component: ShowAppart,
     },
 ];
 

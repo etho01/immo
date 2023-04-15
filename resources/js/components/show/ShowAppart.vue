@@ -35,7 +35,7 @@
 <script>
 import TitlePage from '../utils/TitlePage.vue';
 import Nav from '../utils/component/nav/Nav.vue';
-import AppartInfo from './AppartInfo.vue';
+import AppartInfo from '../info/InfoAppart.vue';
 import ListeElement from '../utils/component/liste/ListeElement.vue';
 import userContrat from '../../services/contratServices.js';
 import useAppart from '../../services/appartServices.js';

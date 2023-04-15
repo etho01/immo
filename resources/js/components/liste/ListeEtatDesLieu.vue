@@ -3,7 +3,7 @@
 <div>
     <ListeElement :elements="getEtatDesLieusLoad" :cols="etatDesLieuCols" @gotoPage="gotoPage" :page="page" :nbPage="nbPage" @showEtaDesLieu="showEtaDesLieu" @createEtatDesLieu="createEtatDesLieu" />
     <Modal ref="modalEtatDesLieu">
-        <EtatDesLieuInfo :EtatDesLieuBase="etatDesLieuLoad"  deleteProps="true" @refresh="refresh" :etartdeslieu_id="etatDesLieuIdLoad" :appart_id="appart_id" :contrat_id="contrat_id" />
+        <InfoEtatDesLieu :EtatDesLieuBase="etatDesLieuLoad"  deleteProps="true" @refresh="refresh" :etartdeslieu_id="etatDesLieuIdLoad" :appart_id="appart_id" :contrat_id="contrat_id" />
     </Modal>
 </div>
 
@@ -16,7 +16,7 @@ const { etatDesLieus, getEtatDesLieus, page, gotoPage, nbPage } = useEtatDesLieu
 
 import etatDesLieuConst from '../../const/EtatDesLieuConst.js';
 import Modal from '../utils/component/modal/Modal.vue';
-import EtatDesLieuInfo from '../etatDesLieu/EtatDesLieuInfo.vue';
+import InfoEtatDesLieu from '../info/InfoEtatDesLieu.vue';
 const { etatDesLieuCols } = etatDesLieuConst();
 
 
@@ -66,7 +66,7 @@ export default {
     watch: {
         filtres: ((filtres) => {getEtatDesLieus(filtres)})
     },
-    components: { ListeElement, Modal, EtatDesLieuInfo }
+    components: { ListeElement, Modal, InfoEtatDesLieu }
 }
 
 </script>

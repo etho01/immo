@@ -24,9 +24,9 @@
                                     id : 'paiment'
                                 }                                
             ]" activeItemDefault="infos_contrat">
-            <ContratInfo ref-nav="infos_contrat" :contrat_id="contrat_id" deleteProps="true" :contrat-base="contrat" />
-            <AppartInfo ref-nav="infos_appart" :appartBase="contrat.appart"/>
-            <LocataireInfo ref-nav="infos_loc" :locataireBase="contrat.locataire" />
+            <InfoContrat ref-nav="infos_contrat" :contrat_id="contrat_id" deleteProps="true" :contrat-base="contrat" />
+            <InfoAppart ref-nav="infos_appart" :appartBase="contrat.appart"/>
+            <InfoLocataire ref-nav="infos_loc" :locataireBase="contrat.locataire" />
             <ListeEtatDesLieu :filtres="{contrat_id: this.contrat_id}"  ref-nav="etat_des_lieu" :contrat_id="contrat_id" :appart_id="getAppartId"/>
             <ListePaiment :filtres="{contrat_id: this.contrat_id}" :contrat_id="contrat_id" ref-nav="paiment"/>
         
@@ -36,7 +36,7 @@
     <main class="w-full m-3" v-else>
         <TitlePage title="Nouveau contrat"></TitlePage>
         <section class="sm:container mx-auto border-4 p-3 rounded bg-state-50">
-            <ContratInfo ref-nav="infos_contrat" :contrat_id="contrat_id" />
+            <InfoContrat ref-nav="infos_contrat" :contrat_id="contrat_id" />
         </section>
     </main>
 </template>
@@ -47,9 +47,9 @@
     import Nav from '../utils/component/nav/Nav.vue';
 
     import ListeElement from '../utils/component/liste/ListeElement.vue';
-    import ContratInfo from './ContratInfo.vue';
-    import AppartInfo from '../appart/AppartInfo.vue';
-    import LocataireInfo from '../locataire/LocataireInfo.vue';
+    import InfoContrat from '../info/InfoContrat.vue';
+    import InfoAppart from '../info/InfoAppart.vue';
+    import InfoLocataire from '../info/InfoLocataire.vue';
     import ListeEtatDesLieu from '../liste/ListeEtatDesLieu.vue';
     import ListePaiment from '../liste/ListePaiment.vue';
 
@@ -89,7 +89,7 @@
             this.contrat_id = this.$route.params.contrat_id
         }
     },
-    components: { TitlePage, Nav, ListeElement, ContratInfo, AppartInfo, LocataireInfo, ListeEtatDesLieu, ListePaiment }
+    components: { TitlePage, Nav, ListeElement, InfoContrat, InfoAppart, InfoLocataire, ListeEtatDesLieu, ListePaiment }
 }
 
 </script>

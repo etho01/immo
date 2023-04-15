@@ -17,12 +17,12 @@
                 ]" 
                 activeItemDefault="info_loc"
             >
-                <LocataireInfo ref-nav="info_loc" :locataireBase="locataire" deleteProps="true" />
+                <InfoLocataire ref-nav="info_loc" :locataireBase="locataire" deleteProps="true" />
                 <ListeContrat :filtres=" {locataire_id: locataire_id } " ref-nav="liste_contrat" :disabledCol="['loc.nom']"/>
 
             </Nav>
 
-            <LocataireInfo ref-nav="info_loc" :locataire_id="locataire_id" v-else />
+            <InfoLocataire ref-nav="info_loc" :locataire_id="locataire_id" v-else />
 
         </section>
     </main>
@@ -33,7 +33,7 @@
     import useLocataire from '../../services/locataireServices.js';
     import TitlePage from '../utils/TitlePage.vue';
     import Nav from '../utils/component/nav/Nav.vue';
-    import LocataireInfo from './LocataireInfo.vue';
+    import InfoLocataire from '../info/InfoLocataire.vue';
     import ListeContrat from '../liste/ListeContrat.vue';
 
     const { locataire, getLocataire } = useLocataire();
@@ -70,7 +70,7 @@
                 this.locataire_id = this.$route.params.locataire_id
             }
         },
-    components: { TitlePage, Nav, LocataireInfo, ListeContrat }
+    components: { TitlePage, Nav, InfoLocataire, ListeContrat }
 }
 
 </script>

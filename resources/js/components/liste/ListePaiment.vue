@@ -3,7 +3,7 @@
     <div>
         <ListeElement :elements="getPaimentLoad" :cols="paiementCols" @gotoPage="gotoPage" :page="page" :nbPage="nbPage" @showPaiement="showPaiement" @createPaiement="createPaiement" />
         <Modal ref="modalPayment">
-            <PaiementInfo deleteProps="true" :contrat_id="contrat_id" @refresh="refresh" :paiementBase="paimentLoad" :paiement_id="paiementIdLoad" />
+            <InfoPaiement deleteProps="true" :contrat_id="contrat_id" @refresh="refresh" :paiementBase="paimentLoad" :paiement_id="paiementIdLoad" />
         </Modal>
     </div>
 
@@ -16,7 +16,7 @@ const { paiementCols } = paiementConst();
 
 import usePaiement from '../../services/paimentServices.js';
 import Modal from '../utils/component/modal/Modal.vue';
-import PaiementInfo from '../paiement/PaiementInfo.vue';
+import InfoPaiement from '../info/InfoPaiement.vue';
 const { getPaiements, paiements, page, gotoPage, nbPage } = usePaiement();
 
 export default {
@@ -65,7 +65,7 @@ export default {
     watch: {
         filtres: ((filtres) => {getPaiements(filtres)})
     },
-    components: { ListeElement, Modal, PaiementInfo }
+    components: { ListeElement, Modal, InfoPaiement }
 }
 
 </script>
