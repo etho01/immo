@@ -81,7 +81,7 @@ import SelectLocataire from '../select/SelectLocataire.vue';
             },
         },
         mounted() {
-            if (this.contrat_id != 'new'){
+            if (this.contrat_id != 'new' && this.contratBase == undefined){
                 this.getContrat(this.contrat_id);
             }
         },

@@ -121,7 +121,7 @@ const { getAppart, appart, createAppart, deleteAppart, updateAppart } = useAppar
             },
         },
         mounted() {
-            if (this.appart_id != 'new'){
+            if (this.appart_id != 'new' && this.appartBase == undefined){
                 this.getAppart(this.appart_id);
             }
         },

@@ -118,7 +118,7 @@ const { genreLoc } = LocataireConst();
             },
         },
         mounted(){
-            if (this.locataire_id != 'new'){
+            if (this.locataire_id != 'new' && this.locataireBase == undefined){
                 this.getLocataire(this.locataire_id)
             }
         },
