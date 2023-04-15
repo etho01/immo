@@ -68,6 +68,7 @@
         updated(){
             if (this.$route.params.locataire_id != this.locataire_id){
                 this.locataire_id = this.$route.params.locataire_id
+                this.getLocataire(this.locataire_id)
             }
         },
     components: { TitlePage, Nav, InfoLocataire, ListeContrat }

@@ -77,6 +77,7 @@ const { getAppart, appart } = useAppart();
         updated(){
             if (this.$route.params.appart_id != this.appart_id){
                 this.appart_id = this.$route.params.appart_id
+                this.getAppart(this.appart_id);
             }
         },
         components : { TitlePage, Nav, AppartInfo, ListeElement, ListeContrat, ListeEtatDesLieu }

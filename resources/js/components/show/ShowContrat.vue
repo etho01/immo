@@ -87,6 +87,7 @@
     updated(){
         if (this.$route.params.contrat_id != this.contrat_id){
             this.contrat_id = this.$route.params.contrat_id
+            this.getContrat(this.contrat_id);
         }
     },
     components: { TitlePage, Nav, ListeElement, InfoContrat, InfoAppart, InfoLocataire, ListeEtatDesLieu, ListePaiment }
