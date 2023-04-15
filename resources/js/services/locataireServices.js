@@ -42,14 +42,14 @@ export default function useLocataire(){
         locataire.value = response.data.data;
     }
 
-    const deleteLocataire = async (id, router) => {
+    const deleteLocataire = async (id) => {
         let response = await axios.delete('http://immo.test/api/locataire/'+ id);
-        router.push({ name: 'locataire.menu'})
+        return true;
     }
 
-    const createLocataire = async (data, router) => {
+    const createLocataire = async (data) => {
         let response = await axios.post('http://immo.test/api/locataire', data)
-        router.push({ name: 'locataire.show', params: { locataire_id: response.data.data.id } })
+        return response.data.data.id;
     }
 
     return {

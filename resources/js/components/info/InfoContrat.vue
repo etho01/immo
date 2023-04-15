@@ -12,15 +12,15 @@
             <SelectLocataire @changeValue="chnageLocataire"></SelectLocataire>
         </div>
         <div class="mt-5 flex justify-end" v-if="contrat_id != 'new'">
-            <div class="bg-gray-200 hover:bg-gray-300 px-3 py-1 rounded-md cursor-pointer" @click="updateContrat(contrat_id, getData);">
+            <div class="bg-gray-200 hover:bg-gray-300 px-3 py-1 rounded-md cursor-pointer" @click="updateContratClick">
                 Modifier
             </div>
-            <div class="bg-red-400 hover:bg-red-500 px-3 py-1 rounded-md ml-2 cursor-pointer" v-if="canDelete" @click="this.deleteContrat(contrat_id, $router);">
+            <div class="bg-red-400 hover:bg-red-500 px-3 py-1 rounded-md ml-2 cursor-pointer" v-if="canDelete" @click="deleteContratClick">
                 Supprimer
             </div>
         </div>
         <div v-else class="mt-5 flex justify-end">
-            <div class="bg-gray-200 hover:bg-gray-300 px-3 py-1 rounded-md cursor-pointer" @click="this.createContrat(getData, $router)">
+            <div class="bg-gray-200 hover:bg-gray-300 px-3 py-1 rounded-md cursor-pointer" @click="createContratClick">
                 Créer
             </div>
         </div>
@@ -53,6 +53,20 @@ import SelectLocataire from '../select/SelectLocataire.vue';
             updateContrat,
             deleteContrat,
             createContrat, 
+            updateContratClick() {
+                this.updateContrat(this.contrat_id, this.getData)
+            },
+            async deleteContratClick(){
+                if (await this.deleteContrat(this.contrat_id)){
+                    this.$router.push({ name: 'contrat.menu'})
+                }
+            },
+            async createContratClick(){
+                let idNewIdContrat = await this.createContrat(this.getData);
+                if (idNewIdContrat != 0){
+                    this.$router.push({ name: 'contrat.show', params: { contrat_id: idNewIdContrat } })
+                }
+            },
             changeDateDebut(newDateDebut){
                 this.date_debut = newDateDebut;
             },

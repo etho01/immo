@@ -43,14 +43,14 @@ export default function useAppart(){
         appart.value = response.data.data;
     }
 
-    const deleteAppart = async (id, router) => {
+    const deleteAppart = async (id) => {
         let response = await axios.delete('http://immo.test/api/appart/'+ id);
-        router.push({ name: 'appart.menu'})
+        return true;
     }
 
-    const createAppart = async (data, router) => {
+    const createAppart = async (data) => {
         let response = await axios.post('http://immo.test/api/appart', data)
-        router.push({ name: 'appart.show', params: { appart_id: response.data.data.id } })
+        return response.data.data.id
     }
 
     return {

@@ -43,14 +43,14 @@ export default function userContrat(){
         contrat.value = response.data.data;
     }
 
-    const deleteContrat = async (id, router) => {
+    const deleteContrat = async (id) => {
         let response = await axios.delete('http://immo.test/api/contrat/'+ id);
-        router.push({ name: 'contrat.menu'})
+        return true;
     }
 
-    const createContrat = async (data, router) => {
+    const createContrat = async (data) => {
         let response = await axios.post('http://immo.test/api/contrat', data)
-        router.push({ name: 'contrat.show', params: { contrat_id: response.data.data.id } })
+        return response.data.data.id
     }
 
     return {

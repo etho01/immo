@@ -30,13 +30,13 @@ class appartRequest extends FormRequest
 
     public function store(){
         return [
-      /*      'agence_id' => ['required'],
+           'agence_id' => ['required'],
             'adresse' => ['required'],
             'adresse_compl' => ['required'],
             'cp' => ['required'],
             'pays' => ['required'],
             'charge' => ['required'],
-            'loyer' => ['required']*/
+            'loyer' => ['required']
         ];
     }
 

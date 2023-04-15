@@ -21,15 +21,15 @@
             <SelectAgence @changeValue="changeAgence" :valueDefault="getIdAgence" />
         </div>
         <div class="mt-5 flex justify-end" v-if="appart_id != 'new'">
-            <div class="bg-gray-200 hover:bg-gray-300 px-3 py-1 rounded-md cursor-pointer" @click="updateAppart(getAppartUse.id, getData);">
+            <div class="bg-gray-200 hover:bg-gray-300 px-3 py-1 rounded-md cursor-pointer" @click="updateAppartClick">
                 Modifier
             </div>
-            <div class="bg-red-400 hover:bg-red-500 px-3 py-1 rounded-md ml-2 cursor-pointer" v-if="canDelete" @click="this.deleteAppart(getAppartUse.id, $router);">
+            <div class="bg-red-400 hover:bg-red-500 px-3 py-1 rounded-md ml-2 cursor-pointer" v-if="canDelete" @click="deleteAppartClick">
                 Supprimer
             </div>
         </div>
         <div v-else class="mt-5 flex justify-end">
-            <div class="bg-gray-200 hover:bg-gray-300 px-3 py-1 rounded-md cursor-pointer" @click="this.createAppart(getData, $router)">
+            <div class="bg-gray-200 hover:bg-gray-300 px-3 py-1 rounded-md cursor-pointer" @click="createAppartClick">
                 Créer
             </div>
         </div>
@@ -65,6 +65,20 @@ const { getAppart, appart, createAppart, deleteAppart, updateAppart } = useAppar
             updateAppart,
             deleteAppart,
             createAppart,
+            updateAppartClick() {
+                this.updateAppart(this.getAppartUse.id, this.getData);
+            },
+            async deleteAppartClick() {
+                if (await this.deleteAppart(this.getAppartUse.id)){
+                    this.$router.push({ name: 'appart.menu'})
+                }
+            },
+            async createAppartClick() {
+                let idNewAppart = await this.createAppart(this.getData);
+                if (idNewAppart != 0){
+                    this.$router.push({ name: 'appart.show', params: { appart_id: idNewAppart } })
+                }
+            },
             changeCharge(value) {
                 this.data = {...this.data, charge: value}
             },

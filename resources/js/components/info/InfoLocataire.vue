@@ -16,15 +16,15 @@
             <Text label="Bic" placeholder="Bic" @changeValue="changeBic" :value="getLocataireUse.bic" />
         </div>
         <div class="mt-5 flex justify-end" v-if="locataire_id != 'new'">
-            <div class="bg-gray-200 hover:bg-gray-300 px-3 py-1 rounded-md cursor-pointer" @click="updateLocataire(getLocataireUse.id, data);">
+            <div class="bg-gray-200 hover:bg-gray-300 px-3 py-1 rounded-md cursor-pointer" @click="updateLocataireClick">
                 Modifier
             </div>
-            <div class="bg-red-400 hover:bg-red-500 px-3 py-1 rounded-md ml-2 cursor-pointer" v-if="canDelete" @click="this.deleteLocataire(getLocataireUse.id, $router);">
+            <div class="bg-red-400 hover:bg-red-500 px-3 py-1 rounded-md ml-2 cursor-pointer" v-if="canDelete" @click="deleteLocataireClick">
                 Supprimer
             </div>
         </div>
         <div v-else class="mt-5 flex justify-end">
-            <div class="bg-gray-200 hover:bg-gray-300 px-3 py-1 rounded-md cursor-pointer" @click="this.createLocataire(data, $router)">
+            <div class="bg-gray-200 hover:bg-gray-300 px-3 py-1 rounded-md cursor-pointer" @click="createLocataireClick">
                 Créer
             </div>
         </div>
@@ -67,6 +67,20 @@ const { genreLoc } = LocataireConst();
             updateLocataire,
             deleteLocataire,
             createLocataire,
+            updateLocataireClick() {
+                this.updateLocataire(this.getLocataireUse.id, this.data)
+            },
+            async deleteLocataireClick() {
+                if (await this.deleteLocataire(this.getLocataireUse.id)){
+                    this.$router.push({ name: 'locataire.menu'})
+                }
+            },
+            async createLocataireClick(){
+                let idNewIdLocataire = await this.createLocataire(this.data)
+                if (idNewIdLocataire != 0){
+                    this.$router.push({ name: 'locataire.show', params: { locataire_id: idNewIdLocataire } })
+                } 
+            },
             changeNom(value){
                 this.data = {...this.data, nom: value}
             },
