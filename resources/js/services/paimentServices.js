@@ -22,7 +22,7 @@ export default function usePaiement(){
 
     const getPaiement = async (id) => {
         let response = await axios.get('http://immo.test/api/paiement/' + id);
-        paiement = response.data.data
+        paiement.value = response.data.data
     }
 
     const sendPaiementsRequest = async (data) => {

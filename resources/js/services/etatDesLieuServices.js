@@ -34,7 +34,7 @@ export default function useEtatDesLieu(){
 
     const getEtatDesLieu = async (id) => {
         let response = await axios.get('http://immo.test/api/etatDesLieux' + id);
-        etatDesLieu = thus.response.data.data
+        etatDesLieu.value = response.data.data
     }
 
     const updateEtatDesLieu = async (id, data) => {
