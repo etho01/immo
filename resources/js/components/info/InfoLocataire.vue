@@ -9,7 +9,7 @@
             <Text label="Date de naissance" :value="getLocataireUse.date_naissance" @changeValue="changeDateNaissance" type="date" />
             <Text label="Email" :value="getLocataireUse.email" @changeValue="changeEmail" placeholder="Email du locataire" />
             <Text label="Telephone" :value="getLocataireUse.telephone" @changeValue="changeTelephone" placeholder="Telephone" />
-            <Select :param="genreLoc" label="Genre du locataire" @changeValue="changeGenre" :value="getLocataireUse.genre" />
+            <Select :param="genreLoc" label="Genre du locataire" @changeValue="changeGenre" :valueDefault="getLocataireUse.genre" />
         </div>
         <Title title="Informations bancaires locataire" />
         <div class="grid grid-cols-2 mt-3">

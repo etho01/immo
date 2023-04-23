@@ -69,6 +69,11 @@ import Dropdown from '../component/Dropdown.vue';
             this.value = -1;
         }
     },
+    watch: {
+        valueDefault(newValue) {
+            this.value = newValue;
+        },
+    },
     components: { Dropdown }
 }
 </script>

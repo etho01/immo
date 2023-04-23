@@ -35,6 +35,11 @@
             getClassInput() {
                 return this.class;
             }
+        },
+        watch: {
+            value(newValue) {
+                this.valueInput = newValue;
+            },
         }
     }
 </script>
