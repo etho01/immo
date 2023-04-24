@@ -9,7 +9,7 @@
                     <div  class="hover:bg-slate-200 w-full px-2 cursor-pointer" @click="change(-1)">
                         --
                     </div>
-                    <div :key="param.id" v-for="param in getParams" class="hover:bg-slate-200 w-full px-2 cursor-pointer" @click="change(param.id)">
+                    <div :key="param.id" v-for="param in getParams" class="hover:bg-slate-300 w-full px-2 cursor-pointer" :class="{ 'bg-slate-200': param.id == value }" @click="change(param.id)">
                         {{ fonc(param) }}
                     </div>
                 </div>

@@ -72,7 +72,23 @@ export default function etatDesLieuConst(){
         }
     ];
 
+    const stadeEtatDesLieu = [
+        {
+            id: 1,
+            nom: "Debut de la location"
+        },
+        {
+            id: 2,
+            nom: "Fin de la location"
+        },
+        {
+            id: 3,
+            nom: "Mise sur le marché"
+        }
+    ];
+
     return {
         etatDesLieuCols,
+        stadeEtatDesLieu
     }
 }

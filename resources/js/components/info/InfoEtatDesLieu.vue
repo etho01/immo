@@ -5,7 +5,7 @@
         <Title title="Information etat des lieu" />
         <div class="grid grid-cols-2 mt-3">
             <Text label="Date de l'etat des lieu" @changeValue="changeDate" :value="getEtatDesLieuUse.date" type="date" />
-            <Text label="Stade de l'etat des lieu" :value="getEtatDesLieuUse.stade" @changeValue="changeStade" />
+            <Select :param="stadeEtatDesLieu" label="Stade de l'etat des lieu" @changeValue="changeStade" :valueDefault="getEtatDesLieuUse.stade" />
         </div>
         <div class="mt-3">
             <Text label="commentaire" :value="getEtatDesLieuUse.commentaire" @changeValue="changeCommentaire" />
@@ -33,6 +33,11 @@ import Title from '../utils/title/Title.vue';
 import useEtatDesLieu from '../../services/etatDesLieuServices';
 import Error from '../utils/Error.vue';
 
+import Select from '../utils/input/select.vue';
+import etatDesLieuConst from "../../const/EtatDesLieuConst.js";
+
+const { stadeEtatDesLieu } = etatDesLieuConst();
+
 const { etatDesLieu, getEtatDesLieu, createEtatDesLieu, deleteEtatDesLieu, updateEtatDesLieu, erreurTab, refreshErreur } = useEtatDesLieu();
 
     export default {
@@ -47,7 +52,8 @@ const { etatDesLieu, getEtatDesLieu, createEtatDesLieu, deleteEtatDesLieu, updat
                     contrat_id: this.contrat_id,
                     appart_id: this.appart_id
                 },
-                erreurTab
+                erreurTab,
+                stadeEtatDesLieu
             }
         },
         methods: {
@@ -109,7 +115,7 @@ const { etatDesLieu, getEtatDesLieu, createEtatDesLieu, deleteEtatDesLieu, updat
                 this.refreshErreur();
             }
         },
-        components: { Title, Text, Error }
+        components: { Title, Text, Error, Select }
     }
 
 </script>

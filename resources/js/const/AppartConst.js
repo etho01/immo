@@ -2,7 +2,7 @@ export default function appartConst(){
 
     const appartCols = [
         {
-            nom : 'Adresse de l\'appart',
+            nom : 'Adresse de l\'appartement',
             param: {
                 actions : [
                     {
@@ -15,7 +15,7 @@ export default function appartConst(){
             id: 'appart.adresse'
         },
         {
-            nom : 'Code postal de l\'appart',
+            nom : 'Code postal de l\'appartement',
             param: {
                 actions : [
                     {
@@ -28,7 +28,7 @@ export default function appartConst(){
             id: 'appart.cp'
         },
         {
-            nom : 'Pays de l\'appart',
+            nom : 'Pays de l\'appartement',
             param: {
                 actions : [
                     {
@@ -41,7 +41,7 @@ export default function appartConst(){
             id: 'appart.pays'
         },
         {
-            nom : 'Charge de l\'appart',
+            nom : 'Charge de l\'appartement',
             param: {
                 actions : [
                     {
@@ -54,7 +54,7 @@ export default function appartConst(){
             id: 'appart.charge'
         },
         {
-            nom : 'Loyer de l\'appart',
+            nom : 'Loyer de l\'appartement',
             param: {
                 actions: [
                     {
@@ -67,7 +67,7 @@ export default function appartConst(){
             id: 'appart.loyer'
         },
         {
-            nom : 'Agence de l\'appart',
+            nom : 'Agence de l\'appartement',
             param: {
                 actions: [
                     {

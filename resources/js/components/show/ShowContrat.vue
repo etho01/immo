@@ -8,7 +8,7 @@
                                     id : 'infos_contrat'
                                 },
                                 {
-                                    nom : 'Infos sur l\'appart louer',
+                                    nom : 'Infos sur l\'appartement à louer',
                                     id : 'infos_appart'
                                 },
                                 {
@@ -20,7 +20,7 @@
                                     id : 'etat_des_lieu'
                                 },
                                 {
-                                    nom : 'Paiments',
+                                    nom : 'Paiements',
                                     id : 'paiment'
                                 }                                
             ]" activeItemDefault="infos_contrat">
