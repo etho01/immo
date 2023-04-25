@@ -2,7 +2,7 @@
 
     <div>
         <ListeElement :elements="getPaimentLoad" :cols="paiementCols" @gotoPage="gotoPage" :page="page" :nbPage="nbPage" @showPaiement="showPaiement" @createPaiement="createPaiement" />
-        <Modal ref="modalPayment">
+        <Modal ref="modalPayment" :title="getTitleModal">
             <InfoPaiement deleteProps="true" :contrat_id="contrat_id" @refresh="refresh" :paiementBase="paimentLoad" :paiement_id="paiementIdLoad" />
         </Modal>
     </div>
@@ -55,6 +55,12 @@ export default {
                 return this.paiements
             }
             return this.paiementBase
+        },
+        getTitleModal() {
+            if (this.paiementIdLoad == "new"){
+                return "Nouveau paiement"
+            }
+            return 'Paiement'
         }
     },
     mounted() {

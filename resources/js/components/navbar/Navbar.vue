@@ -6,7 +6,9 @@
             Immo
         </div>
         <div>
-            <button @click="changeVisibility" class="bg-slate-600 border-slate-500 rounded-xl border-2 aspect-square px-3 py-2">ds</button>
+            <button @click="changeVisibility" class="bg-slate-600 border-slate-500 rounded-xl border-2 aspect-square px-3 py-2">
+                <font-awesome-icon :icon="['fas', 'bars']" />
+            </button>
         </div>
     </div>
     <div class="my-4 grid px-4">
@@ -15,7 +17,9 @@
 </div>
 <div v-else class="bg-neutral-900 h-screen justify-items-stretch">
     <div class="px-2 pt-2">
-        <button @click="changeVisibility" class="bg-slate-600 border-slate-500 rounded-xl border-2 aspect-square px-3 py-2">ds</button>
+        <button @click="changeVisibility" class="bg-slate-600 border-slate-500 rounded-xl border-2 aspect-square px-3 py-2">
+            <font-awesome-icon :icon="['fas', 'bars']" />
+        </button>
     </div>
     <div class="px-2 pt-4">
         <div v-for="page in pages" @mouseover="showMouseHover" class="my-3 px-3 py-3 border-slate-500 rounded-xl border-2"></div>

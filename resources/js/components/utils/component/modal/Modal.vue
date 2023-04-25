@@ -5,7 +5,7 @@
     <div class="sm:container bg-white border-2 rounded p-2 z-30">
         <div class="flex justify-between text-3xl">
             <span>
-                
+                {{ title }}
             </span>
             <div class="flex align-middle px-3 py-1 rounded-md cursor-pointer" @click="toogle">
                 <font-awesome-icon :icon="['fas', 'xmark']"  size="xl"/>
@@ -22,6 +22,7 @@
 <script>
 
 export default {
+    props: ['title'],
     data() {
         return {
             isShow: false

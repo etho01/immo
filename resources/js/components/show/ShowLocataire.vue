@@ -2,7 +2,7 @@
 
     <main class="w-full m-3">
         <TitlePage :title="getTitreLocataire" />
-        <section class="sm:container mx-auto border-4 p-3 rounded bg-state-50">
+        <section class="sm:container mx-auto p-3 bg-state-50">
 
             <Nav v-if="locataire_id != 'new'"
                 :labels="[

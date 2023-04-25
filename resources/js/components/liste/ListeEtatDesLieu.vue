@@ -2,7 +2,7 @@
 
 <div>
     <ListeElement :elements="getEtatDesLieusLoad" :cols="etatDesLieuCols" @gotoPage="gotoPage" :page="page" :nbPage="nbPage" @showEtaDesLieu="showEtaDesLieu" @createEtatDesLieu="createEtatDesLieu" />
-    <Modal ref="modalEtatDesLieu">
+    <Modal ref="modalEtatDesLieu" :title="getTitleModal">
         <InfoEtatDesLieu :EtatDesLieuBase="etatDesLieuLoad"  deleteProps="true" @refresh="refresh" :etartdeslieu_id="etatDesLieuIdLoad" :appart_id="appart_id" :contrat_id="contrat_id" />
     </Modal>
 </div>
@@ -56,6 +56,12 @@ export default {
                 return this.etatDesLieus;
             }
             return this.etatDesLieuBase;
+        },
+        getTitleModal() {
+            if (this.etatDesLieuIdLoad == "new"){
+                return "Nouvel état des lieux"
+            }
+            return 'Etat des lieux'
         }
     },
     mounted() {

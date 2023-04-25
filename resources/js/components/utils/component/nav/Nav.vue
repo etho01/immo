@@ -9,7 +9,7 @@
         </div>
           
     </div>
-    <div class="px-3 py-2 rounded border-2">
+    <div class="px-3 py-2 rounded border-4">
         <slot></slot>
     </div>
 

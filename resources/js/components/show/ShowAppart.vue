@@ -3,7 +3,7 @@
     <main class="w-full m-3">
         <TitlePage :title="getTitreAppart" />
 
-        <section class="sm:container mx-auto border-4 p-3 rounded bg-state-50">
+        <section class="sm:container mx-auto p-3 bg-state-50">
 
             <Nav v-if="appart_id != 'new'"
             :labels="[

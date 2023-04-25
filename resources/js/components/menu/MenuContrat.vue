@@ -1,7 +1,7 @@
 <template>
     <main class="w-full">
         <TitlePage title="Liste des contrats"/>
-        <section class="grid grid-cols-2 sm:container mx-auto border-4 p-3 rounded bg-state-50">
+        <section class="grid grid-cols-2 sm:container mx-auto p-3 bg-state-50">
             <SelectAgence @changeValue="onChangeAgence" />
 
             <Text label="Recherche" placeholder="Filtre sur l'adresse de l'appartement et le nom du locataire" @changeValue="onChangeRecherche"/>
