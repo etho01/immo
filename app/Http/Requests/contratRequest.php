@@ -29,8 +29,8 @@ class contratRequest extends FormRequest
 
     public function store(){
         return [
-            'appart_id' => ['required'],
-            'locataire_id' => ['required'],
+            'appart_id' => ['required', 'exists:apparts,id'],
+            'locataire_id' => ['required', 'exists:locataires,id'],
             'date_debut' => ['required', 'date'],
             'date_fin' => ['required', 'date'],
         ];
@@ -39,7 +39,9 @@ class contratRequest extends FormRequest
     public function update(){
         return [
             'date_debut' => ['date'],
-            'date_fin' => ['date']
+            'date_fin' => ['date'],
+            'appart_id' => ['exists:apparts,id'],
+            'locataire_id' => ['exists:locataires,id'],
         ];
     }
 

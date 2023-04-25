@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests;
 
+use Illuminate\Validation\Rule;
 use Illuminate\Foundation\Http\FormRequest;
 
 class LocataireRequest extends FormRequest
@@ -29,21 +30,27 @@ class LocataireRequest extends FormRequest
 
     public function store() {
         return [
-            'nom' => ['required'],
-            'prenom' => ['required'],
+            'nom' => ['required', 'max:255'],
+            'prenom' => ['required', 'max:255'],
             'date_naissance' => ['required', 'date'],
-            'email' => ['required', 'mail'],
-            'telephone' => ['required'],
-            'iban' => ['required'],
-            'bic' => ['required'],
-            'genre' => ['required'],
+            'email' => ['required', 'mail', 'max:255'],
+            'telephone' => ['required', 'max:255'],
+            'iban' => ['required', 'max:255'],
+            'bic' => ['required', 'max:255'],
+            'genre' => ['required', Rule::in(array_keys(config('constant.SEXE')))],
         ];
     }
 
     public function update() {
         return [
+            'nom' => ['max:255'],
+            'prenom' => ['max:255'],
             'date_naissance' => ['date'],
-            'email' => ['mail']
+            'email' => ['mail', 'max:255'],
+            'telephone' => ['max:255'],
+            'iban' => ['max:255'],
+            'bic' => ['max:255'],
+            'genre' => [Rule::in(array_keys(config('constant.SEXE')))],
         ];
     }
 }

@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests;
 
+use Illuminate\Validation\Rule;
 use Illuminate\Foundation\Http\FormRequest;
 
 class EtatDesLieuRequest extends FormRequest
@@ -29,17 +30,20 @@ class EtatDesLieuRequest extends FormRequest
 
     public function store() {
         return [
-            'contrat_id' => ['required'],
-            'appart_id' => ['required'],
+            'contrat_id' => ['required', 'exists:contrats,id'],
+            'appart_id' => ['required', 'exists:apparts,id'],
             'date' => ['required', 'date'],
             'commentaire' => ['required'],
-            'stade' => ['required']
+            'stade' => ['required', Rule::in(array_keys(config('constant.ETAT_DES_LIEU.STADE')))]
         ];
     }
 
     public function update() {
         return [
-            'date' => ['date']
+            'date' => ['date'],
+            'appart_id' => ['exists:apparts,id'],
+            'contrat_id' => ['exists:contrats,id'],
+            'stade' => [Rule::in(array_keys(config('constant.ETAT_DES_LIEU.STADE')))]
         ];
     }
 }

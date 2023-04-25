@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests;
 
+use Illuminate\Validation\Rule;
 use Illuminate\Foundation\Http\FormRequest;
 
 class PaiementRequest extends FormRequest
@@ -29,10 +30,10 @@ class PaiementRequest extends FormRequest
 
     public function store() {
         return [
-            'contrat_id' => ['required'],
+            'contrat_id' => ['required', 'exists:contrats,id'],
             'date_paiement' => ['required', 'date'],
             'montant_paiement' => ['required', 'decimal:0;2'],
-            'origine' => ['required']
+            'origine' => ['required', Rule::in(array_keys(config('constant.PAIEMENT.ORIGINE')))]
         ];
     }
 
@@ -40,6 +41,8 @@ class PaiementRequest extends FormRequest
         return [
             'date_paiement' => ['date'],
             'montant_paiement' => ['decimal:0;2'],
+            'contrat_id' => ['exists:contrats,id'],
+            'origine' => [Rule::in(array_keys(config('constant.PAIEMENT.ORIGINE')))]
         ];
     }
 }

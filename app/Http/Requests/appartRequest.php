@@ -30,11 +30,12 @@ class appartRequest extends FormRequest
 
     public function store(){
         return [
-           'agence_id' => ['required'],
-            'adresse' => ['required'],
-            'adresse_compl' => ['required'],
-            'cp' => ['required'],
-            'pays' => ['required'],
+           'agence_id' => ['required', 'exists:agences,id'],
+            'adresse' => ['required', 'max:255'],
+            'adresse_compl' => ['required', 'max:255'],
+            'departement' => ['required', 'max:255'],
+            'cp' => ['required', 'max:255'],
+            'pays' => ['required', 'max:255'],
             'charge' => ['required', 'decimal:0;2'],
             'loyer' => ['required', 'decimal:0;2']
         ];
@@ -43,7 +44,13 @@ class appartRequest extends FormRequest
     public function update(){
         return [
             'charge' => ['decimal:0;2'],
-            'loyer' => ['decimal:0;2']
+            'loyer' => ['decimal:0;2'],
+            'adresse_compl' => ['max:255'],
+            'departement' => ['max:255'],
+            'cp' => ['max:255'],
+            'pays' => ['max:255'],
+            'adresse' => ['max:255'],
+            'agence_id' => ['exists:agences,id']
         ];
     }
 
