@@ -4,9 +4,11 @@
     <div class="overlay"></div>
     <div class="sm:container bg-white border-2 rounded p-2 z-30">
         <div class="flex justify-between text-3xl">
-            Test
-            <div class="bg-red-400 text-sm flex align-middle hover:bg-red-500 px-3 py-1 rounded-md cursor-pointer" @click="toogle">
-                Close
+            <span>
+                
+            </span>
+            <div class="flex align-middle px-3 py-1 rounded-md cursor-pointer" @click="toogle">
+                <font-awesome-icon :icon="['fas', 'xmark']"  size="xl"/>
             </div>
         </div>
 
