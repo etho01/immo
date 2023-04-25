@@ -6,7 +6,7 @@
         <div class="grid grid-cols-3 mt-3">
             <Text label="Date paiment" type="date" :value="getPaiementUse.date_paiement" @changeValue="changeDatePaiment" />
             <Text label="Montant paiment" :value="getPaiementUse.montant_paiement" @changeValue="changeMontantPaiment" />
-            <Text label="Origine paiment" :value="getPaiementUse.origine" @changeValue="changeOrigine" />
+            <Select :valueDefault="getPaiementUse.origine" @changeValue="changeOrigine" :param="originePaiement" label="Origine paiment" />
         </div>
         <div class="mt-5 flex justify-end" v-if="paiement_id != 'new'">
             <div class="bg-gray-200 hover:bg-gray-300 px-3 py-1 rounded-md cursor-pointer" @click="updatePaiementClick">
@@ -30,6 +30,11 @@ import Text from '../utils/input/Text.vue';
 import Title from '../utils/title/Title.vue';
 import usePaiement from '../../services/paimentServices';
 import Error from '../utils/Error.vue';
+import Select from '../utils/input/select.vue';
+
+import paiementConst from '../../const/PaiementConst.js';
+
+const { originePaiement } = paiementConst();
 
 const { paiement, getPaiement, deletePaiement, updatePaiement, createPaiement,erreurTab ,refreshErreur } = usePaiement();
 
@@ -45,7 +50,8 @@ const { paiement, getPaiement, deletePaiement, updatePaiement, createPaiement,er
                     origine: undefined,
                     contrat_id: this.contrat_id
                 },
-                erreurTab
+                erreurTab,
+                originePaiement
             }
         },
         methods: {
@@ -99,7 +105,7 @@ const { paiement, getPaiement, deletePaiement, updatePaiement, createPaiement,er
                 this.refreshErreur();
             }
         },
-        components: { Title, Text, Error }
+        components: { Title, Text, Error, Select }
 
     }
 

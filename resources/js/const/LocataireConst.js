@@ -1,3 +1,7 @@
+import foncConst from "./fonctConst";
+
+const { getValueList } = foncConst();
+
 export default function locataireConst(){
 
     const genreLoc = [
@@ -70,7 +74,7 @@ export default function locataireConst(){
                 actions: [
                     {
                         type: 'fonc',
-                        fonc: (locataire) =>  locataire.genre
+                        fonc: (locataire) =>  getValueList(locataire.genre, genreLoc)
                     }
                 ]
             },

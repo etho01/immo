@@ -59,7 +59,27 @@ export default function paiementConst(){
         }
     ];
 
+    const originePaiement = [
+        {
+            id: 1,
+            nom: "Virement bancaire"
+        },
+        {
+            id: 2,
+            nom: "Virement bancaire automatique"
+        },
+        {
+            id: 3,
+            nom: "Virement par cheque"
+        },
+        {
+            id: 4,
+            nom: "Virement par espece"
+        },
+    ];
+
     return {
         paiementCols,
+        originePaiement
     }
 }

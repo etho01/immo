@@ -1,3 +1,7 @@
+import foncConst from "./fonctConst";
+
+const { getValueList } = foncConst();
+
 export default function etatDesLieuConst(){
 
     const etatDesLieuCols = [
@@ -33,7 +37,7 @@ export default function etatDesLieuConst(){
                 actions : [
                     {
                         type: 'fonc',
-                        fonc: (etatDesLieu) => etatDesLieu.stade,
+                        fonc: (etatDesLieu) => getValueList(etatDesLieu.stade, stadeEtatDesLieu),
                     }
                 ],
             },
