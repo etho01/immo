@@ -16,7 +16,7 @@
                                     id : 'infos_loc'
                                 },                                
                                 {
-                                    nom : 'Etat des lieu',
+                                    nom : 'Etat des lieux',
                                     id : 'etat_des_lieu'
                                 },
                                 {
@@ -82,6 +82,12 @@
                 return this.contrat.appart.id
             }
             return undefined
+        },
+        getContratTitre() {
+            if (this.appart_id == "new"){
+                return "Nouveau contrat"
+            }
+            return "contrat " + this.contrat.id
         }
     },
     updated(){

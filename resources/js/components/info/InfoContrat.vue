@@ -3,7 +3,7 @@
         <Error :erreurTab="erreurTab" />
         <Title title="Information contrat" />
         <div class="grid grid-cols-2 mt-3">
-            <Text type="date" label="Date de debut" :value="getContratUse.date_debut" @changeValue="changeDateDebut"/>
+            <Text type="date" label="Date de début" :value="getContratUse.date_debut" @changeValue="changeDateDebut"/>
             <Text type="date" label="Date de fin" :value="getContratUse.date_fin" @changeValue="chnageDateFin"/>
         </div>
         <div v-if="contrat_id == 'new'" class="grid grid-cols-2 mt-3">

@@ -2,11 +2,11 @@
 
     <div>
         <Error :erreurTab="erreurTab" />
-        <Title title="Information sur le payment" />
+        <Title title="Informations sur le paiement" />
         <div class="grid grid-cols-3 mt-3">
-            <Text label="Date paiment" type="date" :value="getPaiementUse.date_paiement" @changeValue="changeDatePaiment" />
-            <Text label="Montant paiment" :value="getPaiementUse.montant_paiement" @changeValue="changeMontantPaiment" />
-            <Select :valueDefault="getPaiementUse.origine" @changeValue="changeOrigine" :param="originePaiement" label="Origine paiment" />
+            <Text label="Date paiement" type="date" :value="getPaiementUse.date_paiement" @changeValue="changeDatePaiment" />
+            <Text label="Montant du paiement" :value="getPaiementUse.montant_paiement" @changeValue="changeMontantPaiment" />
+            <Select :valueDefault="getPaiementUse.origine" @changeValue="changeOrigine" :param="originePaiement" label="Origine du paiement" />
         </div>
         <div class="mt-5 flex justify-end" v-if="paiement_id != 'new'">
             <div class="bg-gray-200 hover:bg-gray-300 px-3 py-1 rounded-md cursor-pointer" @click="updatePaiementClick">

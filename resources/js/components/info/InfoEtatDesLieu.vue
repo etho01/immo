@@ -2,13 +2,13 @@
 
     <div>
         <Error :erreurTab="erreurTab" />
-        <Title title="Information etat des lieu" />
+        <Title title="Informations sur l'état des lieux" />
         <div class="grid grid-cols-2 mt-3">
-            <Text label="Date de l'etat des lieu" @changeValue="changeDate" :value="getEtatDesLieuUse.date" type="date" />
-            <Select :param="stadeEtatDesLieu" label="Stade de l'etat des lieu" @changeValue="changeStade" :valueDefault="getEtatDesLieuUse.stade" />
+            <Text label="Date de l'état des lieux" @changeValue="changeDate" :value="getEtatDesLieuUse.date" type="date" />
+            <Select :param="stadeEtatDesLieu" label="Stade de l'état des lieux" @changeValue="changeStade" :valueDefault="getEtatDesLieuUse.stade" />
         </div>
         <div class="mt-3">
-            <Text label="commentaire" :value="getEtatDesLieuUse.commentaire" @changeValue="changeCommentaire" />
+            <Text label="Commentaire" :value="getEtatDesLieuUse.commentaire" @changeValue="changeCommentaire" />
         </div>
         <div class="mt-5 flex justify-end" v-if="etartdeslieu_id != 'new'">
             <div class="bg-gray-200 hover:bg-gray-300 px-3 py-1 rounded-md cursor-pointer" @click="updateEtatDesLieuClick">

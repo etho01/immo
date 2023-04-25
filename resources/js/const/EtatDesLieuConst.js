@@ -6,7 +6,7 @@ export default function etatDesLieuConst(){
 
     const etatDesLieuCols = [
         {
-            nom : 'Date de l\'etat des lieux',
+            nom : 'Date de l\'état des lieux',
             param: {
                 actions : [
                     {

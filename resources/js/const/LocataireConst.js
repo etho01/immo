@@ -56,7 +56,7 @@ export default function locataireConst(){
             id: 'loc.mail'
         },
         {
-            nom : 'Telephone du locataire',
+            nom : 'Télèphone du locataire',
             param: {
                 actions : [
                     {

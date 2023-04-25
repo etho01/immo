@@ -1,13 +1,13 @@
 <template>
 
     <main class="w-full m-3">
-        <TitlePage :title="getNomLoc" />
+        <TitlePage :title="getTitreLocataire" />
         <section class="sm:container mx-auto border-4 p-3 rounded bg-state-50">
 
             <Nav v-if="locataire_id != 'new'"
                 :labels="[
                     {
-                        nom: 'Information locataire',
+                        nom: 'Informations locataire',
                         id: 'info_loc'
                     },
                     {
@@ -52,6 +52,12 @@
     computed: {
         getNomLoc(){
             return this.locataire.nom + ' ' + this.locataire.prenom;
+        },
+        getTitreLocataire() {
+            if (this.locataire_id == "new") {
+                return "Nouveau locataire"
+            }
+            return this.getNomLoc
         }
     },
     async mounted() {

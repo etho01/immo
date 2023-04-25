@@ -4,11 +4,11 @@
         <Error :erreurTab="erreurTab" />
         <Title title="Informations locataire" />
         <div class="grid grid-cols-3 mt-3">
-            <Text label="Prenom du locataire" :value="getLocataireUse.prenom" @changeValue="changePrenom" placeholder="Prenom du locataire" />
+            <Text label="Prénom du locataire" :value="getLocataireUse.prenom" @changeValue="changePrenom" placeholder="Prénom du locataire" />
             <Text label="Nom du locataire " :value="getLocataireUse.nom" @changeValue="changeNom" placeholder="Nom du locataire"/>
             <Text label="Date de naissance" :value="getLocataireUse.date_naissance" @changeValue="changeDateNaissance" type="date" />
             <Text label="Email" :value="getLocataireUse.email" @changeValue="changeEmail" placeholder="Email du locataire" />
-            <Text label="Telephone" :value="getLocataireUse.telephone" @changeValue="changeTelephone" placeholder="Telephone" />
+            <Text label="Télèphone" :value="getLocataireUse.telephone" @changeValue="changeTelephone" placeholder="Télèphone" />
             <Select :param="genreLoc" label="Genre du locataire" @changeValue="changeGenre" :valueDefault="getLocataireUse.genre" />
         </div>
         <Title title="Informations bancaires locataire" />

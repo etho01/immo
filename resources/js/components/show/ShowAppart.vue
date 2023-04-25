@@ -1,7 +1,7 @@
 <template>
 
     <main class="w-full m-3">
-        <TitlePage title="Appart" />
+        <TitlePage :title="getTitreAppart" />
 
         <section class="sm:container mx-auto border-4 p-3 rounded bg-state-50">
 
@@ -16,7 +16,7 @@
                     id: 'contrat_liste'
                 },
                 {
-                    nom: 'Etat des lieu',
+                    nom: 'Etat des lieux',
                     id: 'etat_des_lieu'
                 }
             ]" activeItemDefault="slow_appart">
@@ -62,6 +62,15 @@ const { getAppart, appart } = useAppart();
         methods: {
             getEtatDesLieus,
             getAppart
+        },
+        computed: {
+            getTitreAppart() {
+                if (this.appart_id == "new"){
+                    return "Nouvel appartement"
+                } else {
+                    return this.appart.adresse
+                }
+            }
         },
         async mounted () {
             if (this.$route.params.appart_id == 'new'){

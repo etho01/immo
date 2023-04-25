@@ -1,10 +1,10 @@
 <template>
     <main class="w-full">
-        <TitlePage title="Liste des Contrats"/>
+        <TitlePage title="Liste des contrats"/>
         <section class="grid grid-cols-2 sm:container mx-auto border-4 p-3 rounded bg-state-50">
             <SelectAgence @changeValue="onChangeAgence" />
 
-            <Text label="Recherche" placeholder="Filtre sur l'adresse et le nom" @changeValue="onChangeRecherche"/>
+            <Text label="Recherche" placeholder="Filtre sur l'adresse de l'appartement et le nom du locataire" @changeValue="onChangeRecherche"/>
         </section>
 
         <ListeContrat :filtres="getFiltres"/>

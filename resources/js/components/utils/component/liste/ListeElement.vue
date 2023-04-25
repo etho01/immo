@@ -43,7 +43,7 @@
                         <path d="M1.1665 4L4.49984 7.33333" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"/>
                         <path d="M1.1665 4.00002L4.49984 0.666687" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"/>
                         </svg>
-                    <p class="text-sm ml-3 font-medium leading-none ">Precedant</p>                    
+                    <p class="text-sm ml-3 font-medium leading-none ">Précédent</p>                    
                 </div>
                 <div class="sm:flex hidden">
                     <p 
