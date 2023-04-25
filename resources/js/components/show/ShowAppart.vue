@@ -1,6 +1,6 @@
 <template>
 
-    <main class="w-full m-3">
+    <main class="w-full">
         <TitlePage :title="getTitreAppart" />
 
         <section class="sm:container mx-auto p-3 bg-state-50">

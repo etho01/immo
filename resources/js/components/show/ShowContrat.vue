@@ -1,5 +1,5 @@
 <template>
-    <main class="w-full m-3" v-if="contrat_id != 'new'" >
+    <main class="w-full" v-if="contrat_id != 'new'" >
         <TitlePage :title="'Contrat '+contrat_id"></TitlePage>
         <section class="sm:container mx-auto p-3 bg-state-50">
             <Nav :labels="[
