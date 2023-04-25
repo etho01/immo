@@ -21,6 +21,7 @@ class AppartResouce extends JsonResource
             'agence' => new AgenceResouce($this->agence),
             'adresse' => $this->adresse,
             'adresse_compl' => $this->adresse_compl,
+            'departement' => $this->departement,
             'cp' => $this->cp,
             'pays' => $this->pays,
             'charge' => $this->charge,

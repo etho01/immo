@@ -15,6 +15,7 @@ class Appart extends Model
         'adresse',
         'adresse_compl',
         'cp',
+        'departement',
         'pays',
         'charge',
         'loyer',

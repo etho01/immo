@@ -22,6 +22,7 @@ class AppartFactory extends Factory
             'adresse' => fake()->streetAddress(),
             'adresse_compl' => '',
             'cp' => fake()->postcode(),
+            'departement' => fake()->state(),
             'pays' => fake()->country(),
             'charge' => fake()->randomFloat(2,0,500),
             'loyer' => fake()->randomFloat(2,0,500),

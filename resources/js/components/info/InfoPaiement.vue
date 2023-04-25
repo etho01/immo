@@ -103,6 +103,9 @@ const { paiement, getPaiement, deletePaiement, updatePaiement, createPaiement,er
             },
             paiementBase() {
                 this.refreshErreur();
+            },
+            paiement_id() {
+                this.refreshErreur();
             }
         },
         components: { Title, Text, Error, Select }

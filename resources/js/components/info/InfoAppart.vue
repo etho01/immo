@@ -8,7 +8,7 @@
             <Text class="col-span-3" label="Adresse compementaire du bien" :value="getAppartUse.adresse_compl" @changeValue="changeComp" placeholder="Adresse complementaire"/>
 
             <Text class="col-span-2" label="Code postal" placeholder="Code postal" :value="getAppartUse.cp" @changeValue="changeCp" />
-            <Text class="col-span-2" label="Departement" placeholder="Departement"/>
+            <Text class="col-span-2" label="Departement" placeholder="Departement" :value="getAppartUse.departement" @changeValue="changeDep"/>
             <Text class="col-span-2" label="Pays du bien" placeholder="Pays" :value="getAppartUse.pays" @changeValue="changePays" />
 
         </div>
@@ -56,6 +56,7 @@ const { getAppart, appart, createAppart, deleteAppart, updateAppart, erreurTab }
                     adresse_compl: undefined,
                     cp : undefined,
                     pays: undefined,
+                    departement: undefined,
                     loyer : undefined,
                     charge: undefined,
                     agence_id: undefined
@@ -102,6 +103,9 @@ const { getAppart, appart, createAppart, deleteAppart, updateAppart, erreurTab }
             },
             changeAgence(value){
                 this.data = {...this.data, agence_id: value}
+            },
+            changeDep(value) {
+                this.data = {...this.data, departement: value}
             }
         },
         computed: {

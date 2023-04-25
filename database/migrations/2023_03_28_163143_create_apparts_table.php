@@ -16,8 +16,9 @@ return new class extends Migration
             $table->id();
             $table->foreignIdFor(Agence::class)->constrained();
             $table->string('adresse');
-            $table->string('adresse_compl');
+            $table->string('adresse_compl')->nullable();
             $table->string('cp');
+            $table->string('departement');
             $table->string('pays');
             $table->decimal('charge');
             $table->decimal('loyer');

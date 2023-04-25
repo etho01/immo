@@ -113,6 +113,9 @@ const { etatDesLieu, getEtatDesLieu, createEtatDesLieu, deleteEtatDesLieu, updat
             },
             EtatDesLieuBase() {
                 this.refreshErreur();
+            },
+            etartdeslieu_id() {
+                this.refreshErreur();
             }
         },
         components: { Title, Text, Error, Select }
