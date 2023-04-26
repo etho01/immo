@@ -1,15 +1,16 @@
 <?php
 
-use App\Http\Controllers\Api\AgenceController;
-use App\Http\Controllers\Api\AppartController;
-use App\Http\Controllers\Api\ContratController;
-use App\Http\Controllers\Api\DepotDeGarantieController;
-use App\Http\Controllers\Api\EtatDesLieuController;
-use App\Http\Controllers\Api\LocataireController;
-use App\Http\Controllers\Api\PaiementController;
 use App\Models\Locataire;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\api\UserController;
+use App\Http\Controllers\Api\AgenceController;
+use App\Http\Controllers\Api\AppartController;
+use App\Http\Controllers\Api\ContratController;
+use App\Http\Controllers\Api\PaiementController;
+use App\Http\Controllers\Api\LocataireController;
+use App\Http\Controllers\Api\EtatDesLieuController;
+use App\Http\Controllers\Api\DepotDeGarantieController;
 
 /*
 |--------------------------------------------------------------------------
@@ -21,6 +22,11 @@ use Illuminate\Support\Facades\Route;
 | be assigned to the "api" middleware group. Make something great!
 |
 */
+
+Route::get('login', [UserController::class, 'connect']);
+Route::get('register', [UserController::class, 'register']);
+
+
 //Route::middleware('auth')->group(function() {
     Route::apiResource('agence', AgenceController::class);
     Route::apiResource('appart', AppartController::class);
