@@ -16,7 +16,7 @@ export default function useLocataire(){
 
     const getLocataire = async (id) => {
         let validate = true;
-        let response = await axios.get('http://immo.test/api/locataire/' + id).
+        let response = await axios.get('/api/locataire/' + id).
             catch(function (erreur){
                 validate = false;
             });
@@ -31,7 +31,7 @@ export default function useLocataire(){
     }
 
     const sendLocatairesRequest = async (data) => {
-        let response = await axios.get('http://immo.test/api/locataire', {params: {...filtre, page: page.value}});
+        let response = await axios.get('/api/locataire', {params: {...filtre, page: page.value}});
         locataires.value = response.data.data;
         nbPage.value = response.data.meta.last_page;
     }
@@ -43,7 +43,7 @@ export default function useLocataire(){
 
     const updateLocataire = async (id, data) => {
         erreurTab.value = []
-        let response = await axios.put('http://immo.test/api/locataire/'+ id,  {...data})
+        let response = await axios.put('/api/locataire/'+ id,  {...data})
         .catch(function (erreur){
             erreurTab.value = getErrors(erreur.response.data.errors);
         })
@@ -51,13 +51,13 @@ export default function useLocataire(){
     }
 
     const deleteLocataire = async (id) => {
-        let response = await axios.delete('http://immo.test/api/locataire/'+ id);
+        let response = await axios.delete('/api/locataire/'+ id);
         return true;
     }
 
     const createLocataire = async (data) => {
         erreurTab.value = []
-        let response = await axios.post('http://immo.test/api/locataire', data)
+        let response = await axios.post('/api/locataire', data)
         .catch(function (erreur){
             erreurTab.value = getErrors(erreur.response.data.errors);
         })

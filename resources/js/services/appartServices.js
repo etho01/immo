@@ -21,7 +21,7 @@ export default function useAppart(){
     }
 
     const sendGetAppartsRequest = async (data) => {
-        let response = await axios.get('http://immo.test/api/appart', {params: {...filtre, page: page.value}});
+        let response = await axios.get('/api/appart', {params: {...filtre, page: page.value}});
         apparts.value = response.data.data;
         nbPage.value = response.data.meta.last_page;
     }
@@ -34,7 +34,7 @@ export default function useAppart(){
 
     const getAppart = async (id) => {
         let validate = true;
-        let response = await axios.get('http://immo.test/api/appart/' + id)
+        let response = await axios.get('/api/appart/' + id)
             .catch(function(erreur) {
                 validate = false;
             })
@@ -44,7 +44,7 @@ export default function useAppart(){
 
     const updateAppart = async (id, data) => {
         erreurTab.value = [];
-        let response = await axios.put('http://immo.test/api/appart/'+ id,  {...data})
+        let response = await axios.put('/api/appart/'+ id,  {...data})
         .catch(function (erreur){
             erreurTab.value = getErrors(erreur.response.data.errors);
         })
@@ -52,13 +52,13 @@ export default function useAppart(){
     }
 
     const deleteAppart = async (id) => {
-        let response = await axios.delete('http://immo.test/api/appart/'+ id);
+        let response = await axios.delete('/api/appart/'+ id);
         return true;
     }
 
     const createAppart = async (data) => {
         erreurTab.value = [];
-        let response = await axios.post('http://immo.test/api/appart', data)
+        let response = await axios.post('/api/appart', data)
         .catch(function (erreur){
             erreurTab.value = getErrors(erreur.response.data.errors);
         })

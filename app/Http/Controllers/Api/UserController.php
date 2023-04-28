@@ -6,6 +6,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use App\Http\Requests\UserRequest;
 use App\Http\Controllers\Controller;
+use App\Http\Resources\UserLoginResources;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
@@ -19,8 +20,7 @@ class UserController extends Controller
  
         if (Auth::attempt($credentials)) {
            $token = $request->user()->createToken('auth2');
-
-           return ['token' => $token->plainTextToken];
+           return new UserLoginResources(Auth::user());
         }
     }
 

@@ -16,7 +16,7 @@ export default function userContrat(){
 
     const getContrat = async (id) => {
         let validate = true;
-        let response = await axios.get('http://immo.test/api/contrat/'+ id ).
+        let response = await axios.get('/api/contrat/'+ id ).
             catch(function (erreur){
                 validate = false;
             });
@@ -32,7 +32,7 @@ export default function userContrat(){
     }
 
     const sendGetContratsRequest = async (data) => {
-        let response = await axios.get('http://immo.test/api/contrat', {params: {...filtre, page: page.value}});
+        let response = await axios.get('/api/contrat', {params: {...filtre, page: page.value}});
         contrats.value = response.data.data;
         nbPage.value = response.data.meta.last_page;
     }
@@ -44,7 +44,7 @@ export default function userContrat(){
 
     const updateContrat = async (id, data) => {
         erreurTab.value = []
-        let response = await axios.put('http://immo.test/api/contrat/'+ id,  {...data})
+        let response = await axios.put('/api/contrat/'+ id,  {...data})
         .catch(function (erreur){
             erreurTab.value = getErrors(erreur.response.data.errors);
         })
@@ -52,13 +52,13 @@ export default function userContrat(){
     }
 
     const deleteContrat = async (id) => {
-        let response = await axios.delete('http://immo.test/api/contrat/'+ id);
+        let response = await axios.delete('/api/contrat/'+ id);
         return true;
     }
 
     const createContrat = async (data) => {
         erreurTab.value = []
-        let response = await axios.post('http://immo.test/api/contrat', data)
+        let response = await axios.post('/api/contrat', data)
         .catch(function (erreur){
             erreurTab.value = getErrors(erreur.response.data.errors);
         })

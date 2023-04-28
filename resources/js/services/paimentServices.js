@@ -21,12 +21,12 @@ export default function usePaiement(){
     }
 
     const getPaiement = async (id) => {
-        let response = await axios.get('http://immo.test/api/paiement/' + id);
+        let response = await axios.get('/api/paiement/' + id);
         paiement.value = response.data.data
     }
 
     const sendPaiementsRequest = async (data) => {
-        let response = await axios.get('http://immo.test/api/paiement', {params: {...filtre, page: page.value}});
+        let response = await axios.get('/api/paiement', {params: {...filtre, page: page.value}});
         paiements.value = response.data.data;
         nbPage.value = response.data.meta.last_page;
     }
@@ -38,7 +38,7 @@ export default function usePaiement(){
 
     const updatePaiement = async (id, data) => {
         erreurTab.value = []
-        let response = await axios.put('http://immo.test/api/paiement/'+ id,  {...data})
+        let response = await axios.put('/api/paiement/'+ id,  {...data})
         .catch(function (erreur){
             erreurTab.value = getErrors(erreur.response.data.errors);
         })
@@ -46,12 +46,12 @@ export default function usePaiement(){
     }
 
     const deletePaiement = async (id) => {
-        let response = await axios.delete('http://immo.test/api/paiement/'+ id);
+        let response = await axios.delete('/api/paiement/'+ id);
     }
 
     const createPaiement = async (data) => {
         erreurTab.value = []
-        let response = await axios.post('http://immo.test/api/paiement', data)
+        let response = await axios.post('/api/paiement', data)
         .catch(function (erreur){
             erreurTab.value = getErrors(erreur.response.data.errors);
         })
