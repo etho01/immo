@@ -1,7 +1,7 @@
 import {ref} from "vue";
 import axios from "./axios.js";
 
-import getErrors from './fonc.js'
+import { getErrors, checkIsLog} from './fonc.js';
 import userStore from "../store/userStore.js";
 
 export default function userContrat(){
@@ -17,8 +17,10 @@ export default function userContrat(){
 
     const getContrat = async (id) => {
         let validate = true;
-        let response = await axios.get('/api/contrat/'+ id, {params: { ...userStore.getInfosCallApi}} ).
+        let response = await axios.get('/api/contrat/'+ id, {params: { ...userStore.getInfosCallApi},
+        ...userStore.getHeaderRequest} ).
             catch(function (erreur){
+                checkIsLog(erreur)
                 validate = false;
             });
 
@@ -33,7 +35,11 @@ export default function userContrat(){
     }
 
     const sendGetContratsRequest = async (data) => {
-        let response = await axios.get('/api/contrat', {params: {...filtre, ...userStore.getInfosCallApi, page: page.value}});
+        let response = await axios.get('/api/contrat', {params: {...filtre, ...userStore.getInfosCallApi, page: page.value},
+        ...userStore.getHeaderRequest})
+            .catch(function (erreur){
+                checkIsLog(erreur)
+            });
         contrats.value = response.data.data;
         nbPage.value = response.data.meta.last_page;
     }
@@ -45,22 +51,30 @@ export default function userContrat(){
 
     const updateContrat = async (id, data) => {
         erreurTab.value = []
-        let response = await axios.put('/api/contrat/'+ id,  {...data, ...userStore.getInfosCallApi})
+        let response = await axios.put('/api/contrat/'+ id,  {...data, ...userStore.getInfosCallApi},
+        userStore.getHeaderRequest)
         .catch(function (erreur){
+            checkIsLog(erreur)
             erreurTab.value = getErrors(erreur.response.data.errors);
         })
         contrat.value = response.data.data;
     }
 
     const deleteContrat = async (id) => {
-        let response = await axios.delete('/api/contrat/'+ id, { ...userStore.getInfosCallApi});
+        let response = await axios.delete('/api/contrat/'+ id, { ...userStore.getInfosCallApi},
+        userStore.getHeaderRequest)
+            .catch(function (erreur){
+                checkIsLog(erreur)
+            });
         return true;
     }
 
     const createContrat = async (data) => {
         erreurTab.value = []
-        let response = await axios.post('/api/contrat', {data,...userStore.getInfosCallApi})
+        let response = await axios.post('/api/contrat', {data,...userStore.getInfosCallApi},
+        userStore.getHeaderRequest)
         .catch(function (erreur){
+            checkIsLog(erreur)
             erreurTab.value = getErrors(erreur.response.data.errors);
         })
         if (erreurTab.value != []){

@@ -17,6 +17,7 @@
     import TitlePage from '../utils/TitlePage.vue';
     import Text from '../utils/input/Text.vue';
     import Select from '../utils/input/select.vue';
+    import userStore from '../../store/userStore';
 
     import ListeContrat from '../liste/ListeContrat.vue';
     import SelectAgence from '../select/SelectAgence.vue';
@@ -27,6 +28,7 @@
             return {
                 agence_id: -1,
                 recherche: '',
+                userStore
             }
         },
         methods: {

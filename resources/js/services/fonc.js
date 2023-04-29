@@ -1,6 +1,8 @@
+import router from "../router";
+import userStore from "../store/userStore.js";
+
 const getErrors = function(erreur) {
     let erreurTab = new Array();
-    console.log(erreur);
     Object.keys(erreur).forEach(element => {
         erreur[element].forEach(element2=> {
             erreurTab.push(element2)
@@ -9,4 +11,13 @@ const getErrors = function(erreur) {
     return erreurTab;
 }
 
-export default getErrors
+const checkIsLog = function(erreur) {
+    if (erreur.response.status == 401){
+        userStore.disconect()
+    }
+}
+
+export {
+    getErrors,
+    checkIsLog
+}

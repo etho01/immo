@@ -35,7 +35,6 @@ createApp(App)
 import  userStore from './store/userStore.js';
 
 router.beforeEach(async  (to) => {
-    console.log(to)
     if (!userStore.getIsLog && to.name !== 'login' && isProd) {
         return { name: 'login' }
     }

@@ -1,7 +1,7 @@
 import {ref} from "vue";
 import axios from "axios";
 
-import getErrors from './fonc.js'
+import { getErrors, checkIsLog} from './fonc.js';
 
 export default function useUser() {
 

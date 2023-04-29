@@ -1,6 +1,9 @@
 import piniaUse from "./pinia";
 import { defineStore } from 'pinia'
 
+import router from "../router";
+import axios from "../services/axios.js";
+
 const useUserStore = defineStore('user',{
     state: () => ({
         infosUser: {},
@@ -14,6 +17,7 @@ const useUserStore = defineStore('user',{
         disconect() {
             this.infosUser = {}
             this.isLog = false
+            router.push({name: 'login'})
         },
     },
     getters: {
@@ -26,8 +30,12 @@ const useUserStore = defineStore('user',{
                 }
             }
         },
-        getToken() {
-            return this.infosUser['token']+'d';
+        getHeaderRequest() {
+            return {
+                headers: { 
+                    'Authorization': `Bearer ${this.infosUser['token']}`
+                  }
+            }
         }
     }
 })

@@ -43,8 +43,8 @@ import  userStore  from './../store/userStore.js';
     export default {
     data() {
         return {
-            email: undefined,
-            password: undefined,
+            email: 'test@test.fr',
+            password: 'testtest',
             erreurTab,
             userStore
         };
