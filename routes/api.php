@@ -28,6 +28,11 @@ use App\Http\Controllers\Api\DepotDeGarantieController;
 Route::get('login', [UserController::class, 'connect']);
 Route::get('register', [UserController::class, 'register']);
 
+Route::get('/login/error', function () {
+    return response()->json([
+        'message' => 'Not authenticated'
+       ],401);
+})->name('login');
 
 Route::middleware('auth:sanctum')->group(function() {
     Route::apiResource('agence', AgenceController::class);
