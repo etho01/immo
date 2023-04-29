@@ -8,6 +8,8 @@ import MenuContrat from "../components/menu/MenuContrat.vue";
 import MenuAppart from "../components/menu/MenuAppart.vue";
 import MenuLocataire from "../components/menu/MenuLocataire.vue";
 
+import Login from '../components/Login.vue';
+
 const routes = [
     {
         path: '/dashboard',
@@ -44,6 +46,11 @@ const routes = [
         name: 'appart.show',
         component: ShowAppart,
     },
+    {
+        path: '/login',
+        name: 'login',
+        component: Login,
+    }
 ];
 
 export default createRouter({

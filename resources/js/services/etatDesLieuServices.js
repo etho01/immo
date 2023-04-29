@@ -1,7 +1,8 @@
 import {ref} from "vue";
-import axios from "axios";
+import axios from "./axios.js";
 
 import getErrors from './fonc.js'
+import userStore from "../store/userStore.js";
 
 export default function useEtatDesLieu(){
 
@@ -22,7 +23,7 @@ export default function useEtatDesLieu(){
     }
 
     const sendGetEtatDesLieusRequest = async (data) => {
-        let response = await axios.get('http://immo.test/api/etatDesLieux', {params: {...filtre, page: page.value}});
+        let response = await axios.get('/api/etatDesLieux', {params: {...filtre, ...userStore.getInfosCallApi, page: page.value}});
         etatDesLieus.value = response.data.data;
         nbPage.value = response.data.meta.last_page;
     }
@@ -33,13 +34,13 @@ export default function useEtatDesLieu(){
     }
 
     const getEtatDesLieu = async (id) => {
-        let response = await axios.get('http://immo.test/api/etatDesLieux' + id);
+        let response = await axios.get('/api/etatDesLieux' + id, {params: {...userStore.getInfosCallApi}});
         etatDesLieu.value = response.data.data
     }
 
     const updateEtatDesLieu = async (id, data) => {
         erreurTab.value = []
-        let response = await axios.put('http://immo.test/api/etatDesLieux/'+ id,  {...data})
+        let response = await axios.put('/api/etatDesLieux/'+ id,  {...data, ...userStore.getInfosCallApi})
         .catch(function (erreur){
             erreurTab.value = getErrors(erreur.response.data.errors);
         })
@@ -47,12 +48,12 @@ export default function useEtatDesLieu(){
     }
 
     const deleteEtatDesLieu = async (id) => {
-        let response = await axios.delete('http://immo.test/api/etatDesLieux/'+ id);
+        let response = await axios.delete('/api/etatDesLieux/'+ id, {...userStore.getInfosCallApi});
     }
 
     const createEtatDesLieu = async (data) => {
         erreurTab.value = []
-        let response = await axios.post('http://immo.test/api/etatDesLieux', data)
+        let response = await axios.post('/api/etatDesLieux', {data, ...userStore.getInfosCallApi})
         .catch(function (erreur){
             erreurTab.value = getErrors(erreur.response.data.errors);
         })
