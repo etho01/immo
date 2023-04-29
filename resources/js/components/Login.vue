@@ -36,7 +36,7 @@
 <script>
     import useUser from '../services/useServices';
 import Error from './utils/Error.vue';
-import { useUserStore } from './../store/userStore.js';
+import  userStore  from './../store/userStore.js';
 
     const { logInApi, erreurTab } = useUser();
 
@@ -46,13 +46,14 @@ import { useUserStore } from './../store/userStore.js';
             email: undefined,
             password: undefined,
             erreurTab,
-            userStore : useUserStore(this.$pinia)
+            userStore
         };
     },
     methods: {
         logInApi,
         async logInApiClick() {
             let user = await this.logInApi(this.email, this.password);
+            console.log(this.userStore)
             if (user != undefined && user.token != "") {
                 this.userStore.login(user);
                 this.$router.push({ name: "dashboard" });

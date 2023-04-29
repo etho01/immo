@@ -1,6 +1,7 @@
+import piniaUse from "./pinia";
 import { defineStore } from 'pinia'
 
-export const useUserStore = defineStore('user',{
+const useUserStore = defineStore('user',{
     state: () => ({
         infosUser: {},
         isLog: false
@@ -8,7 +9,6 @@ export const useUserStore = defineStore('user',{
     actions: {
         login(infosUser) {
             this.infosUser = infosUser;
-            console.log(this.infosUser);
             this.isLog = true;
         },
         disconect() {
@@ -19,6 +19,17 @@ export const useUserStore = defineStore('user',{
     getters: {
         getIsLog() {
             return this.$state.isLog;
+        },
+        getInfosCallApi() {
+            if (this.isLog == true) {
+                return {
+                }
+            }
+        },
+        getToken() {
+            return this.infosUser['token']+'d';
         }
     }
 })
+let userStore = useUserStore(piniaUse);
+export default userStore

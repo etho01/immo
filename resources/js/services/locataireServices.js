@@ -1,7 +1,8 @@
 import {ref} from "vue";
-import axios from "axios";
+import axios from "./axios.js";
 
 import getErrors from './fonc.js'
+import userStore from "../store/userStore.js";
 
 export default function useLocataire(){
 
@@ -16,7 +17,7 @@ export default function useLocataire(){
 
     const getLocataire = async (id) => {
         let validate = true;
-        let response = await axios.get('/api/locataire/' + id).
+        let response = await axios.get('/api/locataire/' + id, {params: {...userStore.getInfosCallApi}}).
             catch(function (erreur){
                 validate = false;
             });
@@ -31,7 +32,7 @@ export default function useLocataire(){
     }
 
     const sendLocatairesRequest = async (data) => {
-        let response = await axios.get('/api/locataire', {params: {...filtre, page: page.value}});
+        let response = await axios.get('/api/locataire', {params: {...filtre, ...userStore.getInfosCallApi, page: page.value}});
         locataires.value = response.data.data;
         nbPage.value = response.data.meta.last_page;
     }
@@ -43,7 +44,7 @@ export default function useLocataire(){
 
     const updateLocataire = async (id, data) => {
         erreurTab.value = []
-        let response = await axios.put('/api/locataire/'+ id,  {...data})
+        let response = await axios.put('/api/locataire/'+ id,  {...data, ...userStore.getInfosCallApi})
         .catch(function (erreur){
             erreurTab.value = getErrors(erreur.response.data.errors);
         })
@@ -51,13 +52,13 @@ export default function useLocataire(){
     }
 
     const deleteLocataire = async (id) => {
-        let response = await axios.delete('/api/locataire/'+ id);
+        let response = await axios.delete('/api/locataire/'+ id, { ...userStore.getInfosCallApi});
         return true;
     }
 
     const createLocataire = async (data) => {
         erreurTab.value = []
-        let response = await axios.post('/api/locataire', data)
+        let response = await axios.post('/api/locataire', {data, ...userStore.getInfosCallApi})
         .catch(function (erreur){
             erreurTab.value = getErrors(erreur.response.data.errors);
         })

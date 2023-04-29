@@ -1,5 +1,5 @@
 //import './bootstrap';
-const isProd = false;
+const isProd = true;
 
 /* import the fontawesome core */
 import { library } from '@fortawesome/fontawesome-svg-core'
@@ -17,9 +17,7 @@ library.add(faXmark)
 library.add(faPlus)
 library.add(faBars);
 
-import { createPinia } from 'pinia';
-const pinia = createPinia()
-import { useUserStore } from './store/userStore.js';
+import piniaUse  from './store/pinia.js';
 
 import { createApp } from 'vue';
 
@@ -29,12 +27,12 @@ import App from './App.vue'
 
 
 createApp(App)
-.use(pinia)
+.use(piniaUse)
 .use(router) 
 .component('font-awesome-icon', FontAwesomeIcon)
 .mount('#app');
 
-const userStore = useUserStore(pinia)
+import  userStore from './store/userStore.js';
 
 router.beforeEach(async  (to) => {
     console.log(to)

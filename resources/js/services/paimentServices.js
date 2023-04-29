@@ -1,7 +1,8 @@
 import {ref} from "vue";
-import axios from "axios";
+import axios from "./axios.js";
 
 import getErrors from './fonc.js'
+import userStore from "../store/userStore.js";
 
 export default function usePaiement(){
 
@@ -21,12 +22,12 @@ export default function usePaiement(){
     }
 
     const getPaiement = async (id) => {
-        let response = await axios.get('/api/paiement/' + id);
+        let response = await axios.get('/api/paiement/' + id, {params: {...userStore.getInfosCallApi}});
         paiement.value = response.data.data
     }
 
     const sendPaiementsRequest = async (data) => {
-        let response = await axios.get('/api/paiement', {params: {...filtre, page: page.value}});
+        let response = await axios.get('/api/paiement', {params: {...filtre, ...userStore.getInfosCallApi, page: page.value}});
         paiements.value = response.data.data;
         nbPage.value = response.data.meta.last_page;
     }
@@ -38,7 +39,7 @@ export default function usePaiement(){
 
     const updatePaiement = async (id, data) => {
         erreurTab.value = []
-        let response = await axios.put('/api/paiement/'+ id,  {...data})
+        let response = await axios.put('/api/paiement/'+ id,  {...data, ...userStore.getInfosCallApi})
         .catch(function (erreur){
             erreurTab.value = getErrors(erreur.response.data.errors);
         })
@@ -46,12 +47,12 @@ export default function usePaiement(){
     }
 
     const deletePaiement = async (id) => {
-        let response = await axios.delete('/api/paiement/'+ id);
+        let response = await axios.delete('/api/paiement/'+ id, {...userStore.getInfosCallApi});
     }
 
     const createPaiement = async (data) => {
         erreurTab.value = []
-        let response = await axios.post('/api/paiement', data)
+        let response = await axios.post('/api/paiement', {data, ...userStore.getInfosCallApi})
         .catch(function (erreur){
             erreurTab.value = getErrors(erreur.response.data.errors);
         })

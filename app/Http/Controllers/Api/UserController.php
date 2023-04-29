@@ -19,7 +19,6 @@ class UserController extends Controller
         ]);
  
         if (Auth::attempt($credentials)) {
-           $token = $request->user()->createToken('auth2');
            return new UserLoginResources(Auth::user());
         }
     }
