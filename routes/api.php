@@ -44,4 +44,5 @@ Route::middleware('auth:sanctum')->group(function() {
     Route::apiResource('locataire' , LocataireController::class);
     Route::apiResource('paiement', PaiementController::class);
     Route::apiResource('proprietaire', PropietaireController::class);
+    Route::apiResource('user', UserController::class);
 });

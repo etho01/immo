@@ -11,7 +11,7 @@ export default function agenceConst() {
                     },
                 ],
             },
-            size: 1,
+            size: 3,
             id: 'agence.nom'
         },
         {

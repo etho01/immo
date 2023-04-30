@@ -6,11 +6,13 @@
                 <thead class="bg-gray-200">
                     <tr class="grid my-3" :class="'grid-cols-'+getAllSize">
                         <th v-for="col in getCols" :key="col.id" :class="'col-span-'+col.size">
-                            {{ col.nom }}
-                            <div v-if="col.btnNom" :class="col.btnNom.class"
-                            @click="$emit(col.btnNom.event.nomEvent)">
-                                <font-awesome-icon :icon="col.btnNom.icone.icone" style="color: #401f51;" />
-                            </div>
+                            <span>
+                                {{ col.nom }}
+                                <div v-if="col.btnNom" :class="col.btnNom.class"
+                                @click="$emit(col.btnNom.event.nomEvent)">
+                                    <font-awesome-icon :icon="col.btnNom.icone.icone" style="color: #401f51;" />
+                                </div>
+                            </span>
                         </th>
                     </tr>
                 </thead>

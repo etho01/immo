@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests\UserRequest;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\UserLoginResources;
+use App\Http\Resources\UserResource;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
@@ -29,5 +30,35 @@ class UserController extends Controller
             'password' => Hash::make('testtest'),
             'name' => 'test',
         ]);
+    }
+
+    public function index(Request $request) {
+        return UserResource::collection(User::all());
+    }
+
+    public function store(UserRequest $request){
+        return new UserResource(User::create([
+            'email' => $request->email,
+            'password' => Hash::make($request->password),
+            'name' => $request->name
+        ]));
+    }
+
+    public function show(User $user) {
+        return new UserResource($user);
+    }
+
+    public function update (UserRequest $request, User $user){
+        $user->name = $request->input('name', $request->name);
+        if ($request->input('password', '') != ''){
+            $user->password = Hash::make($request->input('password'));
+        }
+        $user->email = $request->input('email', $request->email);
+
+        $user->save();
+    }
+
+    public function destroy(User $user){
+        $user->delete();
     }
 }

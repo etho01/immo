@@ -21,8 +21,25 @@ class UserRequest extends FormRequest
      */
     public function rules(): array
     {
+        return match($this->method()){
+            'POST' => $this->store(),
+            'PUT', 'PATCH' => $this->update(),
+        };
+    }
+
+    public function store() {
         return [
-            //
+            'password' => ['password', 'required'],
+            'name' => ['max:255', 'required'],
+            'email' => ['max:255', 'required', 'email']
         ];
+    }
+
+    public function update() {
+        return [
+            'password' => ['password'],
+            'name' => ['max:255'],
+            'email' => ['max:255', 'email']
+        ]
     }
 }
