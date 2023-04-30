@@ -36,6 +36,12 @@ const useUserStore = defineStore('user',{
                     'Authorization': `Bearer ${this.infosUser['token']}`
                   }
             }
+        },
+        getNom() {
+            return this.infosUser['name']
+        },
+        getUserLog() {
+            return this.infosUser;
         }
     }
 })

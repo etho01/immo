@@ -10,6 +10,8 @@ import MenuAppart from "../components/menu/MenuAppart.vue";
 import MenuLocataire from "../components/menu/MenuLocataire.vue";
 import MenuProprio from "../components/menu/MenuPropio.vue"
 
+import ShowUser from '../components/show/ShowUser.vue';
+
 import Login from '../components/Login.vue';
 
 const routes = [
@@ -57,6 +59,11 @@ const routes = [
         path: '/proprietaire/:proprio_id',
         name: 'proprio.show',
         component: ShowProprio
+    },
+    {
+        path: '/me',
+        name: 'me',
+        component: ShowUser
     },
     {
         path: '/login',
