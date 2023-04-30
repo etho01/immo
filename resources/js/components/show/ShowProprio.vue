@@ -18,7 +18,7 @@
                 activeItemDefault="info_proprio"
             >
                 <InfoPropio ref-nav="info_proprio" :proprietaireBase="proprietaire" deleteProps="true"/>
-                <ListeAppart ref-nav="liste_apparts" />
+                <ListeAppart ref-nav="liste_apparts" :filtres="{proprietaire_id: proprio_id}"/>
             </Nav>
 
             <InfoPropio ref-nav="info_loc" :proprietaire_id="proprio_id" v-else />

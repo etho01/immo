@@ -25,6 +25,9 @@ class AppartController extends Controller
                 $query->where('id', $request->input('contrat_id'));
             });
         }
+        if ($request->input('proprietaire_id' , -1) != -1){
+            $eloquent->where('proprietaire_id', $request->input('proprietaire_id'));
+        }
 
         return AppartResouce::collection($eloquent->paginate(30));
     }

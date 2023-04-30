@@ -12,6 +12,10 @@
                     id: 'slow_appart'
                 },
                 {
+                    nom: 'informations proprietaire',
+                    id: 'show_proprio'
+                },
+                {
                     nom: 'Liste des contrats',
                     id: 'contrat_liste'
                 },
@@ -22,6 +26,7 @@
             ]" activeItemDefault="slow_appart">
 
             <AppartInfo ref-nav="slow_appart" :appart_id="appart_id" deleteProps="true" :appartBase="appart"/>
+            <InfoPropio :proprietaireBase="appart.proprietaire" ref-nav="show_proprio" />
             <ListeContrat :filtres="{appart_id: appart_id }" ref-nav="contrat_liste"/>
             <ListeEtatDesLieu :filtres="{appart_id: appart_id}" ref-nav="etat_des_lieu" :appart_id="appart_id" />
             </Nav>
@@ -44,6 +49,7 @@ import useEtatDesLieu from '../../services/etatDesLieuServices.js';
 import etatDesLieuConst from '../../const/EtatDesLieuConst.js';
 import ListeContrat from '../liste/ListeContrat.vue';
 import ListeEtatDesLieu from '../liste/ListeEtatDesLieu.vue';
+import InfoPropio from '../info/InfoPropio.vue';
 
 const { etatDesLieuCols } = etatDesLieuConst();
 
@@ -89,7 +95,7 @@ const { getAppart, appart } = useAppart();
                 this.getAppart(this.appart_id);
             }
         },
-        components : { TitlePage, Nav, AppartInfo, ListeElement, ListeContrat, ListeEtatDesLieu }
+        components : { TitlePage, Nav, AppartInfo, ListeElement, ListeContrat, ListeEtatDesLieu, InfoPropio }
     }
 
 </script>

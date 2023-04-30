@@ -12,6 +12,10 @@
                                     id : 'infos_appart'
                                 },
                                 {
+                                    nom : 'Infos sur le proprietaire',
+                                    id : 'infos_proprio'
+                                },
+                                {
                                     nom : 'Infos sur le locataire',
                                     id : 'infos_loc'
                                 },                                
@@ -27,6 +31,7 @@
             <InfoContrat ref-nav="infos_contrat" :contrat_id="contrat_id" deleteProps="true" :contrat-base="contrat" />
             <InfoAppart ref-nav="infos_appart" :appartBase="contrat.appart"/>
             <InfoLocataire ref-nav="infos_loc" :locataireBase="contrat.locataire" />
+            <InfoPropio ref-nav="infos_proprio" :proprietaireBase="getProprietaire" />
             <ListeEtatDesLieu :filtres="{contrat_id: this.contrat_id}"  ref-nav="etat_des_lieu" :contrat_id="contrat_id" :appart_id="getAppartId"/>
             <ListePaiment :filtres="{contrat_id: this.contrat_id}" :contrat_id="contrat_id" ref-nav="paiment"/>
         
@@ -52,6 +57,7 @@
     import InfoLocataire from '../info/InfoLocataire.vue';
     import ListeEtatDesLieu from '../liste/ListeEtatDesLieu.vue';
     import ListePaiment from '../liste/ListePaiment.vue';
+import InfoPropio from '../info/InfoPropio.vue';
 
     const { contrat, getContrat } = userContrat()
 
@@ -88,6 +94,11 @@
                 return "Nouveau contrat"
             }
             return "contrat " + this.contrat.id
+        },
+        getProprietaire() {
+            if (this.contrat.appart != undefined){
+                return this.contrat.appart.proprietaire
+            }
         }
     },
     updated(){
@@ -96,7 +107,7 @@
             this.getContrat(this.contrat_id);
         }
     },
-    components: { TitlePage, Nav, ListeElement, InfoContrat, InfoAppart, InfoLocataire, ListeEtatDesLieu, ListePaiment }
+    components: { TitlePage, Nav, ListeElement, InfoContrat, InfoAppart, InfoLocataire, ListeEtatDesLieu, ListePaiment, InfoPropio }
 }
 
 </script>
