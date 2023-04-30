@@ -65,6 +65,10 @@ import Dropdown from '../utils/component/Dropdown.vue';
                 {
                     nom: "Proprietaire",
                     name: "proprio.menu"
+                },
+                {
+                    nom: "Agence",
+                    name: 'agence.menu'
                 }
             ],
             show: true,

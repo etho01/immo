@@ -53,7 +53,6 @@ import  userStore  from './../store/userStore.js';
         logInApi,
         async logInApiClick() {
             let user = await this.logInApi(this.email, this.password);
-            console.log(this.userStore)
             if (user != undefined && user.token != "") {
                 this.userStore.login(user);
                 this.$router.push({ name: "dashboard" });

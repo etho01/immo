@@ -5,10 +5,13 @@ import ShowContrat from '../components/show/ShowContrat.vue';
 import ShowLocataire from '../components/show/ShowLocataire.vue';
 import ShowProprio from "../components/show/ShowProprio.vue";
 
+import ShowAgence from '../components/show/ShowAgence.vue'
+
 import MenuContrat from "../components/menu/MenuContrat.vue";
 import MenuAppart from "../components/menu/MenuAppart.vue";
 import MenuLocataire from "../components/menu/MenuLocataire.vue";
 import MenuProprio from "../components/menu/MenuPropio.vue"
+import MenuAgence from "../components/menu/MenuAgence.vue";
 
 import ShowUser from '../components/show/ShowUser.vue';
 
@@ -41,6 +44,11 @@ const routes = [
         component: MenuProprio
     },
     {
+        path: '/agence',
+        name: 'agence.menu',
+        component: MenuAgence
+    },
+    {
         path: '/contrat/:contrat_id',
         name: 'contrat.show',
         component: ShowContrat,
@@ -59,6 +67,11 @@ const routes = [
         path: '/proprietaire/:proprio_id',
         name: 'proprio.show',
         component: ShowProprio
+    },
+    {
+        path: '/agence/:agence_id',
+        name: 'agence.show',
+        component: ShowAgence
     },
     {
         path: '/me',

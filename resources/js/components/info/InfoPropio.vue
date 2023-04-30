@@ -82,9 +82,7 @@ const { genreProprio } = proprietaireConst()
             },
             async createProprietaireClick(){
                 let idNewIdProprietaire = await this.createProprietaire(this.data)
-                console.log(idNewIdProprietaire);
                 if (idNewIdProprietaire != 0){
-                    console.log(idNewIdProprietaire);
                     this.$router.push({ name: 'proprio.show', params: { proprio_id: idNewIdProprietaire } })
                 } 
             },
