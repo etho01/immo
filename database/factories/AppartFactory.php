@@ -3,6 +3,7 @@
 namespace Database\Factories;
 
 use App\Models\Agence;
+use App\Models\Proprietaire;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -26,6 +27,7 @@ class AppartFactory extends Factory
             'pays' => fake()->country(),
             'charge' => fake()->randomFloat(2,0,500),
             'loyer' => fake()->randomFloat(2,0,500),
+            'proprietaire_id' => Proprietaire::all()->random()->id
         ];
     }
 }

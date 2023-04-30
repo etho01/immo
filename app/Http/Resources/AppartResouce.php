@@ -4,6 +4,7 @@ namespace App\Http\Resources;
 
 use App\Models\User;
 use App\Models\Agence;
+use App\Models\Proprietaire;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
@@ -25,7 +26,8 @@ class AppartResouce extends JsonResource
             'cp' => $this->cp,
             'pays' => $this->pays,
             'charge' => $this->charge,
-            'loyer' => $this->loyer
+            'loyer' => $this->loyer,
+            'proprietaire' => new ProprietaireResource($this->proprietaire)
         ];
     }
 }

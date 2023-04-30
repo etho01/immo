@@ -13,6 +13,7 @@ use App\Http\Controllers\Api\PaiementController;
 use App\Http\Controllers\Api\LocataireController;
 use App\Http\Controllers\Api\EtatDesLieuController;
 use App\Http\Controllers\Api\DepotDeGarantieController;
+use App\Http\Controllers\api\PropietaireController;
 
 /*
 |--------------------------------------------------------------------------
@@ -42,4 +43,5 @@ Route::middleware('auth:sanctum')->group(function() {
     Route::apiResource('etatDesLieux', EtatDesLieuController::class);
     Route::apiResource('locataire' , LocataireController::class);
     Route::apiResource('paiement', PaiementController::class);
+    Route::apiResource('proprietaire', PropietaireController::class);
 });

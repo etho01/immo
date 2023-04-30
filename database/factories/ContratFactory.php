@@ -4,6 +4,7 @@ namespace Database\Factories;
 
 use App\Models\Appart;
 use App\Models\Locataire;
+use App\Models\Proprietaire;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -22,7 +23,7 @@ class ContratFactory extends Factory
             'appart_id' => Appart::all()->random()->id,
             'locataire_id' => Locataire::all()->random()->id,
             'date_debut' => fake()->date(),
-            'date_fin' => fake()->date()
+            'date_fin' => fake()->date(),
         ];
     }
 }

@@ -19,6 +19,7 @@ class Appart extends Model
         'pays',
         'charge',
         'loyer',
+        'proprietaire_id',
         'created_at',
         'updated_at'
     ];
@@ -41,6 +42,10 @@ class Appart extends Model
 
     public static function filtreAgence($rq, $agence_id){
         return $rq->where('agence_id', $agence_id);
+    }
+
+    public function proprietaire(){
+        return $this->belongsTo(Proprietaire::class);
     }
 
 }

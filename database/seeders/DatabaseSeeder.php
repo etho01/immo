@@ -11,6 +11,7 @@ use App\Models\DepotDeGarantie;
 use App\Models\EtatDesLieu;
 use App\Models\Locataire;
 use App\Models\Paiement;
+use App\Models\Proprietaire;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -22,6 +23,7 @@ class DatabaseSeeder extends Seeder
     {
         // \App\Models\User::factory(10)->create();
         Agence::factory(1)->create();
+        Proprietaire::factory(35)->create();
         Appart::factory(50)->create();
         Locataire::factory(35)->create();
         Contrat::factory(40)->create();

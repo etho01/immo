@@ -37,7 +37,8 @@ class appartRequest extends FormRequest
             'cp' => ['required', 'max:255'],
             'pays' => ['required', 'max:255'],
             'charge' => ['required', 'decimal:0;2'],
-            'loyer' => ['required', 'decimal:0;2']
+            'loyer' => ['required', 'decimal:0;2'],
+            'proprietaire_id' => ['required', 'exists:proprietaires,id']
         ];
     }
 
@@ -50,7 +51,8 @@ class appartRequest extends FormRequest
             'cp' => ['max:255'],
             'pays' => ['max:255'],
             'adresse' => ['max:255'],
-            'agence_id' => ['exists:agences,id']
+            'agence_id' => ['exists:agences,id'],
+            'proprietaire_id' => ['exists:proprietaires,id']
         ];
     }
 
