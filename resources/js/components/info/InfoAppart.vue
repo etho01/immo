@@ -19,6 +19,7 @@
         </div>
         <Title title="Agence du bien" />
         <div class="grid grid-cols-1 mt-3">
+            <SelectProprio @changeValue="changeProprio" :valueDefault="getidProprio"/>
             <SelectAgence @changeValue="changeAgence" :valueDefault="getIdAgence" />
         </div>
         <div class="mt-5 flex justify-end" v-if="appart_id != 'new'">
@@ -43,6 +44,7 @@ import Title from '../utils/title/Title.vue';
 import useAppart from '../../services/appartServices';
 import SelectAgence from '../select/SelectAgence.vue';
 import Error from '../utils/Error.vue';
+import SelectProprio from '../select/SelectProprio.vue';
 
 const { getAppart, appart, createAppart, deleteAppart, updateAppart, erreurTab } = useAppart();
 
@@ -106,6 +108,9 @@ const { getAppart, appart, createAppart, deleteAppart, updateAppart, erreurTab }
             },
             changeDep(value) {
                 this.data = {...this.data, departement: value}
+            },
+            changeProprio (value) {
+                this.data = {...this.data, proprietaire_id: value}
             }
         },
         computed: {
@@ -120,6 +125,11 @@ const { getAppart, appart, createAppart, deleteAppart, updateAppart, erreurTab }
                     return this.getAppartUse.agence.id;
                 }
             },
+            getidProprio(){
+                if (this.getAppartUse.proprietaire != undefined){
+                    return this.getAppartUse.proprietaire.id;
+                }
+            },
             getData() {
                 return this.data
             },
@@ -132,7 +142,7 @@ const { getAppart, appart, createAppart, deleteAppart, updateAppart, erreurTab }
                 this.getAppart(this.appart_id);
             }
         },
-        components: { Title, Text, SelectAgence, Error }
+        components: { Title, Text, SelectAgence, Error, SelectProprio }
     }
 
 </script>

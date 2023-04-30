@@ -43,7 +43,8 @@
         computed: {
             getFiltre() {
                 return {
-                    genre: this.genreLocFiltre
+                    genre: this.genreLocFiltre,
+                    recherche
                 }
             }
         },

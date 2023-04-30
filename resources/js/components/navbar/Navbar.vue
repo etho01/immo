@@ -40,9 +40,14 @@
                     {
                         nom: 'Locataire',
                         name: 'locataire.menu'
-                    },{
+                    },
+                    {
                         nom: 'Appartement',
                         name: 'appart.menu'
+                    },
+                    {
+                        nom: 'Proprietaire',
+                        name: 'proprio.menu'
                     }
                 ],
                 show: true,
