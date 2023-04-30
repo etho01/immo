@@ -67,13 +67,15 @@ export default function useProprietaire(){
 
     const createProprietaire = async (data) => {
         erreurTab.value = []
-        let response = await axios.post('/api/proprietaire', {data, ...userStore.getInfosCallApi},
+        let haveError = false;
+        let response = await axios.post('/api/proprietaire', {...data, ...userStore.getInfosCallApi},
         userStore.getHeaderRequest)
         .catch(function (erreur){
             checkIsLog(erreur)
+            haveError = true
             erreurTab.value = getErrors(erreur.response.data.errors);
         })
-        if (erreurTab.value != []){
+        if (haveError){
             return 0;
         }
         return response.data.data.id;

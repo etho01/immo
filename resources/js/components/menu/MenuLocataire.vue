@@ -44,7 +44,7 @@
             getFiltre() {
                 return {
                     genre: this.genreLocFiltre,
-                    recherche
+                    recherche: this.recherche
                 }
             }
         },

@@ -48,7 +48,8 @@ export default function useLocataire(){
         await sendLocatairesRequest();
     }
 
-    const updateLocataire = async (id, data) => {
+    const updateLocataire = async (id, data) => 
+    {
         erreurTab.value = []
         let response = await axios.put('/api/locataire/'+ id,  {...data, ...userStore.getInfosCallApi},
         userStore.getHeaderRequest)
@@ -67,7 +68,7 @@ export default function useLocataire(){
 
     const createLocataire = async (data) => {
         erreurTab.value = []
-        let response = await axios.post('/api/locataire', {data, ...userStore.getInfosCallApi},
+        let response = await axios.post('/api/locataire', {...data, ...userStore.getInfosCallApi},
         userStore.getHeaderRequest)
         .catch(function (erreur){
             checkIsLog(erreur)

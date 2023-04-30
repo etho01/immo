@@ -71,7 +71,7 @@ export default function userContrat(){
 
     const createContrat = async (data) => {
         erreurTab.value = []
-        let response = await axios.post('/api/contrat', {data,...userStore.getInfosCallApi},
+        let response = await axios.post('/api/contrat', {...data,...userStore.getInfosCallApi},
         userStore.getHeaderRequest)
         .catch(function (erreur){
             checkIsLog(erreur)

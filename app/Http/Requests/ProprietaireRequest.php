@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests;
 
+use Illuminate\Validation\Rule;
 use Illuminate\Foundation\Http\FormRequest;
 
 class ProprietaireRequest extends FormRequest
@@ -32,7 +33,7 @@ class ProprietaireRequest extends FormRequest
             'nom' => ['required', 'max:255'],
             'prenom' => ['required', 'max:255'],
             'date_naissance' => ['required', 'date'],
-            'email' => ['required', 'mail', 'max:255'],
+            'email' => ['required', 'email', 'max:255'],
             'telephone' => ['required', 'max:255'],
             'iban' => ['required', 'max:255'],
             'bic' => ['required', 'max:255'],

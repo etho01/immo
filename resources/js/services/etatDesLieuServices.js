@@ -67,7 +67,7 @@ export default function useEtatDesLieu(){
 
     const createEtatDesLieu = async (data) => {
         erreurTab.value = []
-        let response = await axios.post('/api/etatDesLieux', {data, ...userStore.getInfosCallApi},
+        let response = await axios.post('/api/etatDesLieux', {...data, ...userStore.getInfosCallApi},
         userStore.getHeaderRequest)
         .catch(function (erreur){
             checkIsLog(erreur)

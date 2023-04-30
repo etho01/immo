@@ -66,7 +66,7 @@ export default function usePaiement(){
 
     const createPaiement = async (data) => {
         erreurTab.value = []
-        let response = await axios.post('/api/paiement', {data, ...userStore.getInfosCallApi},
+        let response = await axios.post('/api/paiement', {...data, ...userStore.getInfosCallApi},
         userStore.getHeaderRequest)
         .catch(function (erreur){
             checkIsLog(erreur)
