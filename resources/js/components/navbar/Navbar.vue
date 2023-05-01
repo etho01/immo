@@ -20,6 +20,7 @@
             :textBotton="userStore.getNom" 
             btnClass="text-xl text-neutral-400 my-2 px-1 hover:bg-neutral-700 border-slate-500  rounded-xl border-2 w-full cursor-pointer"
             dropClass="border-2 rounded-lg border-neutral-700 absolute bg-neutral-900 mt-2 z-50 flex flex-wrap w-40"
+            dataPlacement="top"
         > 
             <router-link :to="{name: 'me'}" class="text-xl text-neutral-400 hover:bg-neutral-700 border-slate-500  rounded-xl border-2 w-full px-4 my-4" >Profil</router-link>
             <div class="text-xl text-neutral-400 my-2 px-1 hover:bg-neutral-700 border-slate-500  rounded-xl border-2 w-full cursor-pointer" @click="disconect">

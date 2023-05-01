@@ -1,9 +1,9 @@
 <template>
 
-    <div :class="getClassBtn" @click="toogle">
+    <div :class="getClassBtn" @click="toogle" ref="btn">
         {{ textBotton }}
     </div>
-    <div v-show="show" :class="getClassDrop">
+    <div v-show="isShow" :class="getClassDrop" :style="getStyle" ref="element">
         <slot></slot>
     </div>
 
@@ -15,11 +15,14 @@ import { faThumbsDown } from '@fortawesome/free-regular-svg-icons';
         props: [
             "textBotton",
             "btnClass",
-            'dropClass'
+            'dropClass',
+            'dataPlacement'
         ],
         data () {
             return {
-                show: false
+                show: false,
+                size: 0,
+                sizeBtn: 0
             }
         },
         methods: {
@@ -39,7 +42,24 @@ import { faThumbsDown } from '@fortawesome/free-regular-svg-icons';
                     return "border-2 rounded-lg border-gray-200 absolute bg-white mt-2 z-50"
                 }
                 return "absolute "+this.dropClass
+            },
+            getStyle() {
+                if (this.show) {
+                    if (this.dataPlacement == "top"){
+                        return {marginTop: '-' + (this.size + this.sizeBtn + 30) + "px"}
+                    }
+                }
+            },
+            
+            isShow() {
+                return this.show
             }
-        }
+        },
+        updated() {
+            if (this.$refs.element != undefined && this.isShow){
+                this.size = this.$refs.element.offsetHeight
+                this.sizeBtn = this.$refs.btn.offsetHeight;
+            }
+        },
     }
 </script>
