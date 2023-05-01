@@ -10,8 +10,9 @@ import ShowAgence from '../components/show/ShowAgence.vue'
 import MenuContrat from "../components/menu/MenuContrat.vue";
 import MenuAppart from "../components/menu/MenuAppart.vue";
 import MenuLocataire from "../components/menu/MenuLocataire.vue";
-import MenuProprio from "../components/menu/MenuPropio.vue"
+import MenuProprio from "../components/menu/MenuPropio.vue";
 import MenuAgence from "../components/menu/MenuAgence.vue";
+import MenuUser from "../components/menu/MenuUser.vue";
 
 import ShowUser from '../components/show/ShowUser.vue';
 
@@ -49,6 +50,11 @@ const routes = [
         component: MenuAgence
     },
     {
+        path: '/user',
+        name: 'user.menu',
+        component: MenuUser
+    },
+    {
         path: '/contrat/:contrat_id',
         name: 'contrat.show',
         component: ShowContrat,
@@ -72,6 +78,11 @@ const routes = [
         path: '/agence/:agence_id',
         name: 'agence.show',
         component: ShowAgence
+    },
+    {
+        path: '/user/:user_id',
+        name: 'user.show',
+        component: ShowUser
     },
     {
         path: '/me',

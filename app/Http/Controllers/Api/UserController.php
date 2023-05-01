@@ -33,7 +33,7 @@ class UserController extends Controller
     }
 
     public function index(Request $request) {
-        return UserResource::collection(User::all());
+        return UserResource::collection(User::paginate(30));
     }
 
     public function store(UserRequest $request){
@@ -49,11 +49,11 @@ class UserController extends Controller
     }
 
     public function update (UserRequest $request, User $user){
-        $user->name = $request->input('name', $request->name);
+        $user->name = $request->input('name', $user->name);
         if ($request->input('password', '') != ''){
             $user->password = Hash::make($request->input('password'));
         }
-        $user->email = $request->input('email', $request->email);
+        $user->email = $request->input('email', $user->email);
 
         $user->save();
     }

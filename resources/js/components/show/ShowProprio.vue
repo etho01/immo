@@ -52,11 +52,11 @@ const { proprietaire, getProprietaire } = useProprietaire();
                 return this.proprietaire.nom + ' ' + this.proprietaire.prenom;
             },
             getTitreProprio() {
-            if (this.proprio_id == "new") {
-                return "Nouveau locataire"
+                if (this.proprio_id == "new") {
+                    return "Nouveau locataire"
+                }
+                return this.getNomProprio
             }
-            return this.getNomProprio
-        }
         },
         async mounted() {
             if (this.$route.params.proprio_id == 'new'){

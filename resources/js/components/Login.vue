@@ -34,11 +34,11 @@
 
 </template>
 <script>
-    import useUser from '../services/useServices';
+    import userUser from '../services/userServices';
 import Error from './utils/Error.vue';
 import  userStore  from './../store/userStore.js';
 
-    const { logInApi, erreurTab } = useUser();
+    const { logInApi, erreurTab } = userUser();
 
     export default {
     data() {

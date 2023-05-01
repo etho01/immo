@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests;
 
+use Illuminate\Validation\Rules\Password;
 use Illuminate\Foundation\Http\FormRequest;
 
 class UserRequest extends FormRequest
@@ -29,7 +30,7 @@ class UserRequest extends FormRequest
 
     public function store() {
         return [
-            'password' => ['password', 'required'],
+            'password' => ['required', Password::min(3)],
             'name' => ['max:255', 'required'],
             'email' => ['max:255', 'required', 'email']
         ];
@@ -37,9 +38,9 @@ class UserRequest extends FormRequest
 
     public function update() {
         return [
-            'password' => ['password'],
+            'password' => [Password::min(3)],
             'name' => ['max:255'],
             'email' => ['max:255', 'email']
-        ]
+        ];
     }
 }

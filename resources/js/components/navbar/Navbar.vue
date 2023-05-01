@@ -14,7 +14,7 @@
     <div class="my-4 grid px-4">
         <router-link v-for="page in pages" :to="{name: page.name}" class="text-xl text-neutral-400 my-2 px-1 hover:bg-neutral-700 border-slate-500  rounded-xl border-2 w-full">{{ page.nom }}</router-link>
     </div>
-    <div class="mb-auto my-4 px-4">
+    <div class="mt-auto my-4 px-4">
 
         <Dropdown 
             :textBotton="userStore.getNom" 
@@ -69,6 +69,10 @@ import Dropdown from '../utils/component/Dropdown.vue';
                 {
                     nom: "Agence",
                     name: 'agence.menu'
+                },
+                {
+                    nom: "User",
+                    name: 'user.menu'
                 }
             ],
             show: true,
