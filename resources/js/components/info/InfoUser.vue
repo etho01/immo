@@ -8,7 +8,7 @@
             <Text label="Email" :value="userBase.getData('email')" @changeValue="changeEmail" />
         </div>
 
-        <div v-if="update" class="flex flex-col justify-center">
+        <div v-if="updatePassword" class="flex flex-col justify-center">
             <Title title="Changer le mot de passe" />
             <div class="grid grid-cols-1 w-1/2 self-center">
                 <Text label="Mot de passe" @changeValue="changePassword" />
@@ -47,7 +47,7 @@ import User from '../../classes/user/User.js';
         ],
         data() {
             return {
-                erreurTab: "",
+                erreurTab: [],
             }
         },
         methods: {
@@ -58,7 +58,10 @@ import User from '../../classes/user/User.js';
                 }
             },
             updateUserClick(){
-                this.updateUser(this.getUserUse.id, this.data);
+                let resp = this.userBase.sendUpdate()
+                if (resp !== true){
+                    this.erreurTab = resp
+                }
             },
             async deleteUserClick(){
                 if (await this.deleteUser(this.getUserUse.id)){
@@ -82,6 +85,9 @@ import User from '../../classes/user/User.js';
             },
             canDelete() {
                 return this.deleteProps == "true" && this.userBase.canDelete()
+            },
+            updatePassword() {
+                return this.userBase.updatePassword()
             }
         },
         watch: {

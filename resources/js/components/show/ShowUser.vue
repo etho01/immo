@@ -32,6 +32,7 @@ import  User  from '../../classes/user/User';
                 this.$router.push({ name: "proprio.menu" });
             } else {
                 this.user = await User.getById(this.user_id)
+                console.log(this.user)
                 if (!this.user instanceof User){
                     this.$router.push({ name: "proprio.menu" });
                 }
@@ -39,8 +40,10 @@ import  User  from '../../classes/user/User';
         },
         async updated(){
             if (this.$route.params.user_id != this.user_id){
-                this.user_id = this.$route.params.user_id
-                this.user = await User.getById(this.user_id)
+                if (this.$route.name != "me"){
+                    this.user_id = this.$route.params.user_id
+                    this.user = await User.getById(this.user_id)
+                }
             }
         },
         components: { TitlePage, InfoUser }

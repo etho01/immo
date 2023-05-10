@@ -28,7 +28,7 @@ class User {
     }
 
     async sendUpdate() {
-        let response = await updateElement(this.getId, this.dataTemp);
+        let response = await updateElement(this.getData('id'), this.dataTemp);
         if (response.haveError()) {
             return response.getError()
         }
@@ -37,7 +37,7 @@ class User {
     }
 
     async delete() {
-        let response = await deleteElement(this.getId);
+        let response = await deleteElement(this.getData('id'));
         if (response.haveError()) {
             return response.getError()
         }
@@ -49,6 +49,7 @@ class User {
         if (response.haveError()){
             response.getError()
         }
+        return new User(response.getSucces())
     }
 
     isNew() {
@@ -60,11 +61,15 @@ class User {
     }
 
     canDelete() {
-        return this.isMeLog()
+        return !this.isMeLog()
     }
 
     canUpdate() {
         return this.isNew() || this.isMeLog()
+    }
+
+    updatePassword() {
+        return this.canUpdate && ( this.isNew() || this.isMeLog )
     }
 }
 
