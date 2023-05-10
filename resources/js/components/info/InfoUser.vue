@@ -4,8 +4,8 @@
         <Error :erreurTab="erreurTab" />
         <Title title="Informations" />
         <div class="grid grid-cols-1 mt-3">
-            <Text label="Nom" :value="userBase.getData('name')" @changeValue="changeName"/>
-            <Text label="Email" :value="userBase.getData('email')" @changeValue="changeEmail" />
+            <Text label="Nom" :value="user.getData('name')" @changeValue="changeName"/>
+            <Text label="Email" :value="user.getData('email')" @changeValue="changeEmail" />
         </div>
 
         <div v-if="updatePassword" class="flex flex-col justify-center">
@@ -48,20 +48,23 @@ import User from '../../classes/user/User.js';
         data() {
             return {
                 erreurTab: [],
+                user: this.userBase
             }
         },
         methods: {
             async createUserClick(){
-                let newUser = await this.userBase.create();
+                let newUser = await this.user.create();
                 if (!newUser instanceof User){
                     this.$router.push({name: 'user.show', params: { user_id: newUser.getData('id') }})
                 }
+                this.$forceUpdate();
             },
-            updateUserClick(){
-                let resp = this.userBase.sendUpdate()
+            async updateUserClick(){
+                let resp =  await this.user.sendUpdate()
                 if (resp !== true){
                     this.erreurTab = resp
                 }
+                this.$forceUpdate();
             },
             async deleteUserClick(){
                 if (await this.deleteUser(this.getUserUse.id)){
@@ -69,30 +72,30 @@ import User from '../../classes/user/User.js';
                 }
             },
             changeName(value) {
-                this.userBase.updateData('name', value)
+                this.user.updateData('name', value)
             },
             changePassword(value) {
-                this.userBase.updateData('password', value)
+                this.user.updateData('password', value)
 
             },
             changeEmail(value) {
-                this.userBase.updateData('email', value)
+                this.user.updateData('email', value)
             }
         },
         computed: {
             update() {
-                return this.userBase.canUpdate()
+                return this.user.canUpdate()
             },
             canDelete() {
-                return this.deleteProps == "true" && this.userBase.canDelete()
+                return this.deleteProps == "true" && this.user.canDelete()
             },
             updatePassword() {
-                return this.userBase.updatePassword()
+                return this.user.updatePassword()
             }
         },
         watch: {
-            userBase() {
-
+            userBase(newUser) {
+                this.user = newUser
             }
         },
         components: { Title, Text, Error }

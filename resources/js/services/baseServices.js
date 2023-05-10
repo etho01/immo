@@ -49,7 +49,7 @@ export default function useServices (paramApi) {
 
     const createElement = async (data) => {
         let response = new Response()
-        let resp = await axios.post('/api/contrat', {...data,...userStore.getInfosCallApi},
+        let resp = await axios.post('/api/'+ paramApi +'', {...data,...userStore.getInfosCallApi},
         userStore.getHeaderRequest)
         .catch(function (erreur){
             if (checkIsLog(erreur)) {

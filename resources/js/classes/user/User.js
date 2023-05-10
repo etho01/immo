@@ -69,7 +69,7 @@ class User {
     }
 
     updatePassword() {
-        return this.canUpdate && ( this.isNew() || this.isMeLog )
+        return this.canUpdate() && ( this.isNew() || this.isMeLog() )
     }
 }
 
