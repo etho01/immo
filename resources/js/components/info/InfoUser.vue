@@ -4,11 +4,11 @@
         <Error :erreurTab="erreurTab" />
         <Title title="Informations" />
         <div class="grid grid-cols-1 mt-3">
-            <Text label="Nom" :value="getUserUse.name" @changeValue="changeName"/>
-            <Text label="Email" :value="getUserUse.email" @changeValue="changeEmail" />
+            <Text label="Nom" :value="userBase.getData('name')" @changeValue="changeName"/>
+            <Text label="Email" :value="userBase.getData('email')" @changeValue="changeEmail" />
         </div>
 
-        <div v-if="canUpdatePassword" class="flex flex-col justify-center">
+        <div v-if="update" class="flex flex-col justify-center">
             <Title title="Changer le mot de passe" />
             <div class="grid grid-cols-1 w-1/2 self-center">
                 <Text label="Mot de passe" @changeValue="changePassword" />
@@ -38,33 +38,23 @@ import useUser from '../../services/userServices.js'
 import Error from '../utils/Error.vue';
 
 import userStore from '../../store/userStore';
+import User from '../../classes/user/User.js';
 
-const { user, getUser, createUser, updateUser, deleteUser, erreurTab } = useUser()
     export default {
         props: [
             'userBase',
-            'updatePassword',
-            'user_id',
             'deleteProps'
         ],
         data() {
             return {
-                erreurTab,
-                data: {
-                    password: undefined,
-                    name: undefined,
-                    email: undefined
-                }
+                erreurTab: "",
             }
         },
         methods: {
-            createUser,
-            updateUser,
-            deleteUser,
             async createUserClick(){
-                let idNewIdUser = await this.createUser(this.data)
-                if (idNewIdUser != 0) {
-                    this.$router.push({name: 'user.show', params: { user_id: idNewIdUser }})
+                let newUser = await this.userBase.create();
+                if (!newUser instanceof User){
+                    this.$router.push({name: 'user.show', params: { user_id: newUser.getData('id') }})
                 }
             },
             updateUserClick(){
@@ -76,37 +66,22 @@ const { user, getUser, createUser, updateUser, deleteUser, erreurTab } = useUser
                 }
             },
             changeName(value) {
-                this.data = {...this.data, name: value}
+                this.userBase.updateData('name', value)
             },
             changePassword(value) {
-                this.data = {...this.data, password: value}
+                this.userBase.updateData('password', value)
+
             },
             changeEmail(value) {
-                this.data = {...this.data, email: value}
+                this.userBase.updateData('email', value)
             }
         },
         computed: {
-            getUserUse() {
-                if (this.user_id == 'new'){
-                    return {}
-                } else if (this.$route.name == "me"){
-                    return this.userBase
-                }
-                return this.userBase.value
-            },
-            canUpdatePassword() {
-                if (this.updatePassword == true ||this.user_id == 'new' || userStore.getUserLog.id == this.getUserUse.id){
-                    return true
-                }
-                return false
-            },
             update() {
-                if (this.user_id != "new" || this.$route.name == "me"){
-                    return true;
-                }
+                return this.userBase.canUpdate()
             },
             canDelete() {
-                return this.deleteProps == "true" && userStore.getUserLog.id != this.getUserUse.id
+                return this.deleteProps == "true" && this.userBase.canDelete()
             }
         },
         watch: {

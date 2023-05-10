@@ -14,7 +14,9 @@ const getErrors = function(erreur) {
 const checkIsLog = function(erreur) {
     if (erreur.response.status == 401){
         userStore.disconect()
+        return false
     }
+    return true
 }
 
 export {
