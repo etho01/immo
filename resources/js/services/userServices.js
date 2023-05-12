@@ -18,7 +18,9 @@ const {
     elements,
     page,
     nbPage,
-    erreurTab
+    erreurTab,
+    setElement,
+    setElements
 } = useServices('user');
 
 export default function useUser() {
@@ -58,7 +60,9 @@ export default function useUser() {
         gotoPage,
         nbPage,
         erreurTab,
-        logInApi
+        logInApi,
+        setUser: setElement,
+        setUsers: setElements
     }
 
 }

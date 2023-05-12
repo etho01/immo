@@ -19,7 +19,9 @@ const {
     page,
     nbPage,
     erreurTab,
-    refreshErreur
+    refreshErreur,
+    setElement,
+    setElements
 } = useServices('paiement');
 
 export default function usePaiement(){
@@ -36,7 +38,9 @@ export default function usePaiement(){
         gotoPage,
         nbPage,
         erreurTab,
-        refreshErreur
+        refreshErreur,
+        setPaiement: setElement,
+        setPaiements: setElements
     }
 
 }

@@ -18,7 +18,9 @@ const {
     elements,
     page,
     nbPage,
-    erreurTab
+    erreurTab,
+    setElement,
+    setElements
 } = useServices('appart');
 
 export default function useAppart(){
@@ -34,7 +36,9 @@ export default function useAppart(){
         page,
         gotoPage,
         nbPage,
-        erreurTab
+        erreurTab,
+        setAppart: setElement,
+        setApparts: setElements
     }
 
 }

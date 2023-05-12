@@ -91,6 +91,14 @@ export default function useServices(nomRoute) {
         setError([]);
     };
 
+    const setElement = (newElement) => {
+        element.value = element
+    };
+
+     const setElements = (newElements) => {
+        elements.value = newElements
+     }
+
     return {
         gotoPage,
         getElements,
@@ -104,6 +112,8 @@ export default function useServices(nomRoute) {
         page,
         nbPage,
         erreurTab,
-        refreshErreur
+        refreshErreur,
+        setElement,
+        setElements
     }
 }

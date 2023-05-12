@@ -19,7 +19,9 @@ const {
     page,
     nbPage,
     erreurTab,
-    refreshErreur
+    refreshErreur,
+    setElement,
+    setElements
 } = useServices('locataire');
 
 export default function useLocataire(){
@@ -35,7 +37,9 @@ export default function useLocataire(){
         page,
         gotoPage,
         nbPage,
-        erreurTab
+        erreurTab,
+        setLocataire: setElement,
+        setLocataires: setElements
     }
 
 }

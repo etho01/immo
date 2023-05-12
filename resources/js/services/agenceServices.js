@@ -18,7 +18,9 @@ const {
     elements,
     page,
     nbPage,
-    erreurTab
+    erreurTab,
+    setElement,
+    setElements
 } = useServices('agence');
 
 export default function useAgence(){
@@ -34,7 +36,9 @@ export default function useAgence(){
         page,
         gotoPage,
         nbPage,
-        erreurTab
+        erreurTab,
+        setAgence: setElement,
+        setAgences: setElements
     }
 
 }

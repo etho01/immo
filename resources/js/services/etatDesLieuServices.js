@@ -19,7 +19,9 @@ const {
     page,
     nbPage,
     erreurTab,
-    refreshErreur
+    refreshErreur,
+    setElement,
+    setElements
 } = useServices('etatDesLieux');
 
 export default function useEtatDesLieu(){
@@ -36,7 +38,9 @@ export default function useEtatDesLieu(){
         gotoPage,
         nbPage,
         erreurTab,
-        refreshErreur
+        refreshErreur,
+        setEtatDesLieu: setElement,
+        setEtatDesLieus: setElements
     }
 
 }

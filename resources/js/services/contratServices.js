@@ -18,7 +18,9 @@ const {
     elements,
     page,
     nbPage,
-    erreurTab
+    erreurTab,
+    setElement,
+    setElements
 } = useServices('contrat');
 
 export default function userContrat(){
@@ -35,7 +37,9 @@ export default function userContrat(){
         page,
         gotoPage,
         nbPage,
-        erreurTab
+        erreurTab,
+        setContrat: setElement,
+        setContrats: setElements
     }
 
 }
