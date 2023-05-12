@@ -51,6 +51,10 @@ const { users, getUsers, page, gotoPage, nbPage } = userServices();
                 this.getUsers(this.filtres)
             }
         },
+        watch: {
+            filtres: ((filtres) => {getUsers(filtres)})
+        },
+
         components: { ListeElement }
     }
 

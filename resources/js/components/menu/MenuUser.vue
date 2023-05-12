@@ -3,7 +3,7 @@
     <main class="w-full" >
         <TitlePage title="Liste des utilisateurs" />
         <section class="grid grid-cols-2 sm:container mx-auto p-3 bg-state-50">
-            <Text label="Recherche" />
+            <Text label="Recherche" @changeValue="onChangeRecherche" />
         </section>
         <ListeUser :filtres="getFiltre" />
 

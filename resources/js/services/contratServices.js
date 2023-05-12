@@ -1,96 +1,37 @@
-import {ref} from "vue";
+import {ref, computed} from "vue";
 import axios from "./axios.js";
 
 import { getErrors, checkIsLog} from './fonc.js';
 import userStore from "../store/userStore.js";
 
+import  useServices from './baseServices.js'
+
+const {
+    gotoPage,
+    getElements,
+    getElement,
+    updateElement,
+    deleteElement,
+    createElement,
+    setError,
+    element,
+    elements,
+    page,
+    nbPage,
+    erreurTab
+} = useServices('contrat');
+
 export default function userContrat(){
 
-    const contrat = ref([]);
-    const contrats = ref([]);
-
-    let erreurTab = ref([]);
-
-    let page = ref(1);
-    let filtre;
-    let nbPage = ref(0);
-
-    const getContrat = async (id) => {
-        let validate = true;
-        let response = await axios.get('/api/contrat/'+ id, {params: { ...userStore.getInfosCallApi},
-        ...userStore.getHeaderRequest} ).
-            catch(function (erreur){
-                checkIsLog(erreur)
-                validate = false;
-            });
-
-        if (validate) contrat.value = response.data.data;
-        return validate;
-    }
-
-    const getContrats = async (data) => {
-        filtre = data
-        page.value = 1;
-        await sendGetContratsRequest()
-    }
-
-    const sendGetContratsRequest = async (data) => {
-        let response = await axios.get('/api/contrat', {params: {...filtre, ...userStore.getInfosCallApi, page: page.value},
-        ...userStore.getHeaderRequest})
-            .catch(function (erreur){
-                checkIsLog(erreur)
-            });
-        contrats.value = response.data.data;
-        nbPage.value = response.data.meta.last_page;
-    }
-
-    const gotoPage = async (newPage) => {
-        page.value = newPage;
-        await sendGetContratsRequest();
-    }
-
-    const updateContrat = async (id, data) => {
-        erreurTab.value = []
-        let response = await axios.put('/api/contrat/'+ id,  {...data, ...userStore.getInfosCallApi},
-        userStore.getHeaderRequest)
-        .catch(function (erreur){
-            checkIsLog(erreur)
-            erreurTab.value = getErrors(erreur.response.data.errors);
-        })
-        contrat.value = response.data.data;
-    }
-
-    const deleteContrat = async (id) => {
-        let response = await axios.delete('/api/contrat/'+ id, { ...userStore.getInfosCallApi},
-        userStore.getHeaderRequest)
-            .catch(function (erreur){
-                checkIsLog(erreur)
-            });
-        return true;
-    }
-
-    const createContrat = async (data) => {
-        erreurTab.value = []
-        let response = await axios.post('/api/contrat', {...data,...userStore.getInfosCallApi},
-        userStore.getHeaderRequest)
-        .catch(function (erreur){
-            checkIsLog(erreur)
-            erreurTab.value = getErrors(erreur.response.data.errors);
-        })
-        if (erreurTab.value != []){
-            return 0;
-        }
-        return response.data.data.id
-    }
 
     return {
-        contrat,
-        contrats,
-        getContrat,
-        getContrats,
-        updateContrat,
-        deleteContrat,
-        createContrat,
+        contrat: element,
+        contrats: elements,
+        getContrat: getElement,
+        getContrats: getElements,
+        updateContrat: updateElement,
+        deleteContrat: deleteElement,
+        createContrat: createElement,
         page,
         gotoPage,
         nbPage,
