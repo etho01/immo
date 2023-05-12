@@ -1,6 +1,14 @@
 <template>
 
-    <ListeElement :elements="getContratLoad" :cols="ContratCols" @showContrat="showContrat" @gotoPage="gotoPage" :page="page" :nbPage="nbPage" @newContrat="newContrat"/>
+    <ListeElement 
+        :elements="contrat.getContrats" 
+        :cols="ContratCols" 
+        @showContrat="showContrat" 
+        @gotoPage="contrat.gotoPage" 
+        :page="contrat.page"
+        :nbPage="contrat.nbPage"
+        @newContrat="newContrat"
+    />
 
 </template>
 <script>
@@ -13,13 +21,11 @@ const { contrats, getContrats, page, gotoPage, nbPage } = userContrat();
 const { ContratCols } = contratConst();
 
 export default {
-    props: ['contratsBase','filtres'],
+    props: ['contrat'],
     data() {
         return {
             ContratCols,
             contrats,
-            page,
-            nbPage
         }
     },
     methods: {
@@ -29,26 +35,7 @@ export default {
         newContrat(){
             this.$router.push({ name: 'contrat.show', params: { contrat_id: 'new' } })
         },
-        getContrats,
         gotoPage
-    },
-    computed: {
-        getContratLoad() {
-            if (this.contratsBase == undefined) {
-                return this.contrats
-            }
-            return this.contratsBase;
-        }
-    },
-    mounted() {
-        if (this.contratsBase == undefined) {
-            this.getContrats(this.filtres)
-        } else {
-            this.contrats = this.contratsBase;
-        }
-    },
-    watch: {
-        filtres: ((filtres) => {getContrats(filtres)})
     },
 
     components: { ListeElement }

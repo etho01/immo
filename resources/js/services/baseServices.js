@@ -65,22 +65,25 @@ export default function useServices(nomRoute) {
     const getElements = async (data) => {
         filtre = data
         page.value = 1;
-        await sendGetElementsRequest()
+        return await sendGetElementsRequest()
     }
 
     const sendGetElementsRequest = async (data) => {
+        let validate = true;
         let response = await axios.get('/api/' + nomRoute, {params: {...filtre, ...userStore.getInfosCallApi, page: page.value},
         ...userStore.getHeaderRequest})
             .catch(function (erreur){
                 checkIsLog(erreur)
+                validate = false
             });
         elements.value = response.data.data;
         nbPage.value = response.data.meta.last_page;
+        return validate
     }
 
     const gotoPage = async (newPage) => {
         page.value = newPage;
-        await sendGetElementsRequest();
+        return await sendGetElementsRequest();
     }
 
     const setError = (error) => {

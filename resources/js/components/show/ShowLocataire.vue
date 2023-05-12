@@ -18,7 +18,7 @@
                 activeItemDefault="info_loc"
             >
                 <InfoLocataire ref-nav="info_loc" :locataireBase="locataire" deleteProps="true" />
-                <ListeContrat :filtres=" {locataire_id: locataire_id } " ref-nav="liste_contrat" :disabledCol="['loc.nom']"/>
+              <!--  <ListeContrat :filtres=" {locataire_id: locataire_id } " ref-nav="liste_contrat" :disabledCol="['loc.nom']"/>-->
 
             </Nav>
 

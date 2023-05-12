@@ -27,7 +27,7 @@
 
             <AppartInfo ref-nav="slow_appart" :appart_id="appart_id" deleteProps="true" :appartBase="appart"/>
             <InfoPropio :proprietaireBase="appart.proprietaire" ref-nav="show_proprio" />
-            <ListeContrat :filtres="{appart_id: appart_id }" ref-nav="contrat_liste"/>
+          <!--  <ListeContrat :filtres="{appart_id: appart_id }" ref-nav="contrat_liste"/>-->
             <ListeEtatDesLieu :filtres="{appart_id: appart_id}" ref-nav="etat_des_lieu" :appart_id="appart_id" />
             </Nav>
             <AppartInfo ref-nav="slow_appart" :appart_id="appart_id" v-else/>

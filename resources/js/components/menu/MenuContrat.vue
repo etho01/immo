@@ -7,7 +7,7 @@
             <Text label="Recherche" placeholder="Filtre sur l'adresse de l'appartement et le nom du locataire" @changeValue="onChangeRecherche"/>
         </section>
 
-        <ListeContrat :filtres="getFiltres"/>
+        <ListeContrat :contrat="contrat"/>
 
     </main>
 
@@ -22,21 +22,26 @@
     import ListeContrat from '../liste/ListeContrat.vue';
     import SelectAgence from '../select/SelectAgence.vue';
 
+    import { useContratStore } from '../../store/contratStore';
+    const contrat = useContratStore()
 
     export default {
         data() {
             return {
                 agence_id: -1,
                 recherche: '',
-                userStore
+                userStore,
+                contrat
             }
         },
         methods: {
             onChangeRecherche(text) {
                 this.recherche = text;
+                this.contrat.getContratsByFiltre(this.getFiltres)
             },
             onChangeAgence(agence_id){
                 this.agence_id = agence_id;
+                this.contrat.getContratsByFiltre(this.getFiltres)
             }
         },
         computed: {
@@ -46,6 +51,9 @@
                     agence_id: this.agence_id
                 }
             }
+        },
+        mounted() {
+            this.contrat.getContratsByFiltre(this.getFiltres)
         },
         components: { TitlePage, Text, Select, ListeContrat, SelectAgence }
 }
