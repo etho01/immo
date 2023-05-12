@@ -16,7 +16,7 @@ use App\Http\Controllers\api\UserController;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return route('dashboard');
 });
 
 Route::get('/dashboard', function () {
