@@ -14,7 +14,7 @@ export default function contratConst(){
             size: 1,
             id: 'loc.nom'
         },
-        {
+    /*    {
             nom : 'Adresse du bien',
             param: {
                 actions : [
@@ -52,7 +52,7 @@ export default function contratConst(){
             },
             size: 1,
             id: 'appart.charge'
-        },
+        },*/
         {
             nom: '',
             btnNom: {

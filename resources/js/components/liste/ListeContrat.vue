@@ -15,8 +15,6 @@
 
 import contratConst from '../../const/ContratConst.js';
 import ListeElement from '../utils/component/liste/ListeElement.vue';
-import userContrat from '../../services/contratServices.js';
-const { contrats, getContrats, page, gotoPage, nbPage } = userContrat();
 
 const { ContratCols } = contratConst();
 
@@ -25,7 +23,6 @@ export default {
     data() {
         return {
             ContratCols,
-            contrats,
         }
     },
     methods: {
@@ -35,7 +32,6 @@ export default {
         newContrat(){
             this.$router.push({ name: 'contrat.show', params: { contrat_id: 'new' } })
         },
-        gotoPage
     },
 
     components: { ListeElement }

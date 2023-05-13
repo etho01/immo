@@ -7,7 +7,7 @@
             <Text label="Recherche" placeholder="Filtre le nom, email, telephone du locataire" @changeValue="onChangeRecherche"/>
         </section>
 
-        <ListeLocataire :filtres="getFiltre"/>
+        <ListeLocataire :locataire="locataire"/>
 
     </main>
 </template>
@@ -23,6 +23,10 @@
 
     const { genreLoc } = locataireConst();
 
+    import { useLocataireStore } from '../../store/locataireStore';
+
+    const locataire = useLocataireStore()
+
     export default {
         data() {
             return {
@@ -30,14 +34,18 @@
 
                 genreLocFiltre: '',
                 recherche: '',
+
+                locataire
             }
         },
         methods: {
             changeGenreLoc(value) {
                 this.genreLocFiltre = value
+                this.locataire.getLocatairesByFiltre(this.getFiltre)
             },
             onChangeRecherche(text) {
                 this.recherche = text;
+                this.locataire.getLocatairesByFiltre(this.getFiltre)
             },
         },
         computed: {
@@ -47,6 +55,9 @@
                     recherche: this.recherche
                 }
             }
+        },
+        mounted() {
+            this.locataire.getLocatairesByFiltre(this.getFiltre)
         },
         components: { TitlePage, ListeLocataire, Select, Text }
     }

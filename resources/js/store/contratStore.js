@@ -15,7 +15,8 @@ const {
     nbPage,
     erreurTab,
     setContrat,
-    setContrats
+    setContrats,
+    refreshErreur
 } = userContrat()
 
 export const useContratStore = defineStore('contrat', {
@@ -33,8 +34,7 @@ export const useContratStore = defineStore('contrat', {
     getters: {
         getContrat: (state) => state.contrat,
         getContrats: (state) => state.contrats,
-        isNewContrat: (state) => {
-            return state.newContrat}
+        isNewContrat: (state) => state.newContrat
     },
     actions: {
         async updateContrat(data) {
@@ -71,12 +71,13 @@ export const useContratStore = defineStore('contrat', {
             if (await getContrat(id)){
                 this.contrat = contrat
                 this.haveContratLoad = true
+                this.newContrat = false
+                refreshErreur()
                 return true
             }
             return false
         },
 
-        // liste des fonction pour la liste des contrats
         async getContratsByFiltre(filtre) {
             if (await getContrats(filtre)) {
                 this.contrats = contrats.value
@@ -86,8 +87,8 @@ export const useContratStore = defineStore('contrat', {
             }
             return false
         },
-        async gotoPage(nbPage) {
-            if (await gotoPage(nbPage)) {
+        async gotoPage(nbPageGo) {
+            if (await gotoPage(nbPageGo)) {
                 this.contrats = contrats.value
                 this.page = page.value
                 this.nbPage = nbPage.value
@@ -95,6 +96,7 @@ export const useContratStore = defineStore('contrat', {
         },
         setNewContrat() {
             this.newContrat = true
+            this.contrat = {}
         }
     }
 })

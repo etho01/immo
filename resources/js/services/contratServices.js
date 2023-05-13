@@ -20,7 +20,8 @@ const {
     nbPage,
     erreurTab,
     setElement,
-    setElements
+    setElements,
+    refreshErreur
 } = useServices('contrat');
 
 export default function userContrat(){
@@ -39,7 +40,8 @@ export default function userContrat(){
         nbPage,
         erreurTab,
         setContrat: setElement,
-        setContrats: setElements
+        setContrats: setElements,
+        refreshErreur
     }
 
 }
