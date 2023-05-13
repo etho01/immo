@@ -1,22 +1,22 @@
 <template>
 
     <div>
-        <Error :erreurTab="erreurTab" />
+        <Error :erreurTab="locataire.erreurTab" />
         <Title title="Informations locataire" />
         <div class="grid grid-cols-3 mt-3">
-            <Text label="Prénom du locataire" :value="getLocataireUse.prenom" @changeValue="changePrenom" placeholder="Prénom du locataire" />
-            <Text label="Nom du locataire " :value="getLocataireUse.nom" @changeValue="changeNom" placeholder="Nom du locataire"/>
-            <Text label="Date de naissance" :value="getLocataireUse.date_naissance" @changeValue="changeDateNaissance" type="date" />
-            <Text label="Email" :value="getLocataireUse.email" @changeValue="changeEmail" placeholder="Email du locataire" />
-            <Text label="Télèphone" :value="getLocataireUse.telephone" @changeValue="changeTelephone" placeholder="Télèphone" />
-            <Select :param="genreLoc" label="Genre du locataire" @changeValue="changeGenre" :valueDefault="getLocataireUse.genre" />
+            <Text label="Prénom du locataire" :value="locataire.getLocataire.prenom" @changeValue="changePrenom" placeholder="Prénom du locataire" />
+            <Text label="Nom du locataire " :value="locataire.getLocataire.nom" @changeValue="changeNom" placeholder="Nom du locataire"/>
+            <Text label="Date de naissance" :value="locataire.getLocataire.date_naissance" @changeValue="changeDateNaissance" type="date" />
+            <Text label="Email" :value="locataire.getLocataire.email" @changeValue="changeEmail" placeholder="Email du locataire" />
+            <Text label="Télèphone" :value="locataire.getLocataire.telephone" @changeValue="changeTelephone" placeholder="Télèphone" />
+            <Select :param="genreLoc" label="Genre du locataire" @changeValue="changeGenre" :valueDefault="locataire.getLocataire.genre" />
         </div>
         <Title title="Informations bancaires locataire" />
         <div class="grid grid-cols-2 mt-3">
-            <Text label="Iban" placeholder="Iban" @changeValue="changeIban" :value="getLocataireUse.iban" />
-            <Text label="Bic" placeholder="Bic" @changeValue="changeBic" :value="getLocataireUse.bic" />
+            <Text label="Iban" placeholder="Iban" @changeValue="changeIban" :value="locataire.getLocataire.iban" />
+            <Text label="Bic" placeholder="Bic" @changeValue="changeBic" :value="locataire.getLocataire.bic" />
         </div>
-        <div class="mt-5 flex justify-end" v-if="locataire_id != 'new'">
+        <div class="mt-5 flex justify-end" v-if="!locataire.isNewLocataire">
             <div class="bg-gray-200 hover:bg-gray-300 px-3 py-1 rounded-md cursor-pointer" @click="updateLocataireClick">
                 Modifier
             </div>
@@ -46,11 +46,10 @@ const { getLocataire, locataire, updateLocataire, deleteLocataire, createLocatai
 const { genreLoc } = LocataireConst();
 
     export default {
-        props: ['locataire_id', 'deleteProps', 'locataireBase'],
+        props: ['locataire', 'deleteProps'],
         data() {
             return {
                 genreLoc,
-                locataire,
 
                 data: {
                     nom: undefined,
@@ -62,24 +61,19 @@ const { genreLoc } = LocataireConst();
                     bic: undefined,
                     genre: undefined
                 },
-                erreurTab
             }
         },
         methods: {
-            getLocataire,
-            updateLocataire,
-            deleteLocataire,
-            createLocataire,
             updateLocataireClick() {
-                this.updateLocataire(this.getLocataireUse.id, this.data)
+                this.locataire.updateLocataire(this.data)
             },
             async deleteLocataireClick() {
-                if (await this.deleteLocataire(this.getLocataireUse.id)){
+                if (await this.locataire.deleteLocataire()){
                     this.$router.push({ name: 'locataire.menu'})
                 }
             },
             async createLocataireClick(){
-                let idNewIdLocataire = await this.createLocataire(this.data)
+                let idNewIdLocataire = await this.locataire.createLocataire(this.data)
                 if (idNewIdLocataire != 0){
                     this.$router.push({ name: 'locataire.show', params: { locataire_id: idNewIdLocataire } })
                 } 
@@ -110,20 +104,12 @@ const { genreLoc } = LocataireConst();
             }
         },
         computed: {
-            getLocataireUse() {
-                if (this.locataireBase == undefined){
-                    return this.locataire
-                }
-                return this.locataireBase;
-            },
             canDelete() {
                 return this.deleteProps == "true"
             },
         },
-        mounted(){
-            if (this.locataire_id != 'new' && this.locataireBase == undefined){
-                this.getLocataire(this.locataire_id)
-            }
+        updated() {
+
         },
         components: { Title, Text, Select, Error }
 }

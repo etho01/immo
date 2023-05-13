@@ -41,7 +41,7 @@
     <main class="w-full m-3" v-else>
         <TitlePage title="Nouveau contrat"></TitlePage>
         <section class="sm:container mx-auto border-4 p-3 rounded bg-state-50">
-            <InfoContrat ref-nav="infos_contrat" :contrat_id="contrat_id" />
+            <InfoContrat ref-nav="infos_contrat" :contrat="contrat" />
         </section>
     </main>
 </template>

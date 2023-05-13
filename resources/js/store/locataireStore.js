@@ -1,4 +1,5 @@
 import { defineStore } from "pinia";
+import {useContratStore} from './contratStore'
 
 import userLocataire from '../services/LocataireServices.js';
 
@@ -28,7 +29,8 @@ export const useLocataireStore = defineStore('locataire', {
             nbPage: 1,
             erreurTab,
             newLocataire : false,
-            haveLocataireLoad: false
+            haveLocataireLoad: false,
+            contrat : useContratStore()
         }
     },
     getters: {
@@ -73,6 +75,7 @@ export const useLocataireStore = defineStore('locataire', {
                 this.haveLocataireLoad = true
                 this.newLocataire = false
                 refreshErreur()
+                this.contrat.getContratsByFiltre({locataire_id: id})
                 return true
             }
             return false
