@@ -32,7 +32,7 @@ class PaiementRequest extends FormRequest
         return [
             'contrat_id' => ['required', 'exists:contrats,id'],
             'date_paiement' => ['required', 'date'],
-            'montant_paiement' => ['required', 'decimal:0;2'],
+            'montant_paiement' => ['required'],
             'origine' => ['required', Rule::in(array_keys(config('constant.PAIEMENT.ORIGINE')))]
         ];
     }
@@ -40,7 +40,6 @@ class PaiementRequest extends FormRequest
     public function update() {
         return [
             'date_paiement' => ['date'],
-            'montant_paiement' => ['decimal:0;2'],
             'contrat_id' => ['exists:contrats,id'],
             'origine' => [Rule::in(array_keys(config('constant.PAIEMENT.ORIGINE')))]
         ];

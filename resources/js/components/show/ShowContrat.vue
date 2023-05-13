@@ -22,18 +22,18 @@
                               /*  {
                                     nom : 'Etat des lieux',
                                     id : 'etat_des_lieu'
-                                },
+                                },*/
                                 {
                                     nom : 'Paiements',
                                     id : 'paiment'
-                                }        */                        
+                                }                               
             ]" activeItemDefault="infos_contrat">
             <InfoContrat ref-nav="infos_contrat" :contrat="contrat" deleteProps="true"  />
             <InfoAppart ref-nav="infos_appart" :appart="contrat.appart"/>
             <InfoLocataire ref-nav="infos_loc" :locataire="contrat.locataire" />
             <InfoPropio ref-nav="infos_proprio" :proprietaire="contrat.appart.proprietaire" />
-            <!--<ListeEtatDesLieu :filtres="{contrat_id: this.contrat_id}"  ref-nav="etat_des_lieu" :contrat_id="contrat_id" :appart_id="getAppartId"/>
-            <ListePaiment :filtres="{contrat_id: this.contrat_id}" :contrat_id="contrat_id" ref-nav="paiment"/> -->
+            <!--<ListeEtatDesLieu :filtres="{contrat_id: this.contrat_id}"  ref-nav="etat_des_lieu" :contrat_id="contrat_id" :appart_id="getAppartId"/>-->
+            <ListePaiment :paiement="contrat.paiement" ref-nav="paiment" :contrat_id="contrat.getContrat.id"/> 
         
         </Nav>
         </section>

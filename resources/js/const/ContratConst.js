@@ -7,9 +7,7 @@ export default function contratConst(){
                 actions : [
                     {
                         type: 'fonc',
-                        fonc: (contrat) => {
-                            console.log(contrat)
-                            return contrat.locataire.nom + " " + contrat.locataire.prenom},
+                        fonc: (contrat) => contrat.locataire.nom + " " + contrat.locataire.prenom,
                     },
                 ],
             },

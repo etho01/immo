@@ -1,9 +1,22 @@
 <template>
 
     <div>
-        <ListeElement :elements="getPaimentLoad" :cols="paiementCols" @gotoPage="gotoPage" :page="page" :nbPage="nbPage" @showPaiement="showPaiement" @createPaiement="createPaiement" />
-        <Modal ref="modalPayment" :title="getTitleModal">
-            <InfoPaiement deleteProps="true" :contrat_id="contrat_id" @refresh="refresh" :paiementBase="paimentLoad" :paiement_id="paiementIdLoad" />
+        <ListeElement 
+            :elements="paiement.getPaiements" 
+            :cols="paiementCols" 
+            @gotoPage="paiement.gotoPage" 
+            :page="paiement.page" 
+            :nbPage="paiement.nbPage" 
+            @showPaiement="showPaiement" 
+            @createPaiement="createPaiement" 
+        />
+       <Modal ref="modalPayment" :title="getTitleModal">
+            <InfoPaiement 
+                deleteProps="true" 
+                :paiement="paiement"
+                @refresh="refresh"
+                :contrat_id="contrat_id"
+            />
         </Modal>
     </div>
 
@@ -14,62 +27,31 @@ import ListeElement from '../utils/component/liste/ListeElement.vue';
 import paiementConst from '../../const/PaiementConst.js';
 const { paiementCols } = paiementConst();
 
-import usePaiement from '../../services/paimentServices.js';
 import Modal from '../utils/component/modal/Modal.vue';
 import InfoPaiement from '../info/InfoPaiement.vue';
-const { getPaiements, paiements, page, gotoPage, nbPage } = usePaiement();
 
 export default {
-    props: ['paiementBase','filtres', 'contrat_id'],
+    props: ['paiement', 'contrat_id'],
     data (){
         return {
             paiementCols,
-            paiements,
-            page,
-            nbPage,
             paimentLoad : undefined,
-            paiementIdLoad: undefined
+            paiementIdLoad: undefined,
         }
     },
     methods : {
-        getPaiements,
-        gotoPage,
         showPaiement(paiement) {
-            this.paimentLoad = paiement
-            this.paiementIdLoad = undefined;
+            this.paiement.getPaiementByObj(paiement)
             this.$refs.modalPayment.toogle()
         },
         createPaiement(){
-            this.paimentLoad = undefined;
-            this.paiementIdLoad = 'new';
+            this.paiement.setNewPaiement();
             this.$refs.modalPayment.toogle()
         },
         refresh() {
-            this.getPaiements(this.filtres);
+            this.paiement.getPaiementsByFiltre({contrat_id: this.contrat_id})
             this.$refs.modalPayment.toogle();
         }
-    },
-    computed: {
-        getPaimentLoad() {
-            if (this.paiementBase == undefined) {
-                return this.paiements
-            }
-            return this.paiementBase
-        },
-        getTitleModal() {
-            if (this.paiementIdLoad == "new"){
-                return "Nouveau paiement"
-            }
-            return 'Paiement'
-        }
-    },
-    mounted() {
-        if (this.paiementBase == undefined){
-            this.getPaiements(this.filtres);
-        }
-    },
-    watch: {
-        filtres: ((filtres) => {getPaiements(filtres)})
     },
     components: { ListeElement, Modal, InfoPaiement }
 }
