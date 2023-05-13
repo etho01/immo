@@ -7,14 +7,16 @@ export default function contratConst(){
                 actions : [
                     {
                         type: 'fonc',
-                        fonc: (contrat) => contrat.locataire.nom + " " + contrat.locataire.prenom,
+                        fonc: (contrat) => {
+                            console.log(contrat)
+                            return contrat.locataire.nom + " " + contrat.locataire.prenom},
                     },
                 ],
             },
             size: 1,
             id: 'loc.nom'
         },
-    /*    {
+        {
             nom : 'Adresse du bien',
             param: {
                 actions : [
@@ -52,7 +54,7 @@ export default function contratConst(){
             },
             size: 1,
             id: 'appart.charge'
-        },*/
+        },
         {
             nom: '',
             btnNom: {

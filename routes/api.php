@@ -35,7 +35,7 @@ Route::get('/login/error', function () {
        ],401);
 })->name('login');
 
-Route::middleware('auth:sanctum')->group(function() {
+//Route::middleware('auth:sanctum')->group(function() {
     Route::apiResource('agence', AgenceController::class);
     Route::apiResource('appart', AppartController::class);
     Route::apiResource('contrat', ContratController::class);
@@ -45,4 +45,4 @@ Route::middleware('auth:sanctum')->group(function() {
     Route::apiResource('paiement', PaiementController::class);
     Route::apiResource('proprietaire', PropietaireController::class);
     Route::apiResource('user', UserController::class);
-});
+//});
