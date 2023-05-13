@@ -1,22 +1,22 @@
 <template>
 
 <div>
-        <Error :erreurTab="erreurTab" />
+        <Error :erreurTab="proprietaire.erreurTab" />
         <Title title="Informations Proprietaire" />
         <div class="grid grid-cols-3 mt-3">
-            <Text label="Prénom du Proprietaire" :value="getProprietaireUse.prenom" @changeValue="changePrenom" placeholder="Prénom du Proprietaire" />
-            <Text label="Nom du Proprietaire " :value="getProprietaireUse.nom" @changeValue="changeNom" placeholder="Nom du Proprietaire"/>
-            <Text label="Date de naissance" :value="getProprietaireUse.date_naissance" @changeValue="changeDateNaissance" type="date" />
-            <Text label="Email" :value="getProprietaireUse.email" @changeValue="changeEmail" placeholder="Email du Proprietaire" />
-            <Text label="Télèphone" :value="getProprietaireUse.telephone" @changeValue="changeTelephone" placeholder="Télèphone" />
-            <Select :param="genreProprio" label="Genre du Proprietaire" @changeValue="changeGenre" :valueDefault="getProprietaireUse.genre" />
+            <Text label="Prénom du Proprietaire" :value="proprietaire.getProprietaire.prenom" @changeValue="changePrenom" placeholder="Prénom du Proprietaire" />
+            <Text label="Nom du Proprietaire " :value="proprietaire.getProprietaire.nom" @changeValue="changeNom" placeholder="Nom du Proprietaire"/>
+            <Text label="Date de naissance" :value="proprietaire.getProprietaire.date_naissance" @changeValue="changeDateNaissance" type="date" />
+            <Text label="Email" :value="proprietaire.getProprietaire.email" @changeValue="changeEmail" placeholder="Email du Proprietaire" />
+            <Text label="Télèphone" :value="proprietaire.getProprietaire.telephone" @changeValue="changeTelephone" placeholder="Télèphone" />
+            <Select :param="genreProprio" label="Genre du Proprietaire" @changeValue="changeGenre" :valueDefault="proprietaire.getProprietaire.genre" />
         </div>
         <Title title="Informations bancaires Proprietaire" />
         <div class="grid grid-cols-2 mt-3">
-            <Text label="Iban" placeholder="Iban" @changeValue="changeIban" :value="getProprietaireUse.iban" />
-            <Text label="Bic" placeholder="Bic" @changeValue="changeBic" :value="getProprietaireUse.bic" />
+            <Text label="Iban" placeholder="Iban" @changeValue="changeIban" :value="proprietaire.getProprietaire.iban" />
+            <Text label="Bic" placeholder="Bic" @changeValue="changeBic" :value="proprietaire.getProprietaire.bic" />
         </div>
-        <div class="mt-5 flex justify-end" v-if="proprietaire_id != 'new'">
+        <div class="mt-5 flex justify-end" v-if="!proprietaire.isNewProprietaire">
             <div class="bg-gray-200 hover:bg-gray-300 px-3 py-1 rounded-md cursor-pointer" @click="updateProprietaireClick">
                 Modifier
             </div>
@@ -37,22 +37,17 @@
 import Text from '../utils/input/Text.vue';
 import Title from '../utils/title/Title.vue';
 import Select from '../utils/input/select.vue';
-
 import Error from '../utils/Error.vue';
 
-import useProprietaire from '../../services/proprietaireServices.js'
 import proprietaireConst from '../../const/ProprietaireConst';
-
-const { getProprietaire, proprietaire, updateProprietaire, deleteProprietaire, createProprietaire, erreurTab } = useProprietaire();
 const { genreProprio } = proprietaireConst()
 
     export default {
 
-        props: ['proprietaire_id', 'deleteProps', 'proprietaireBase'],
+        props: ['proprietaire', 'deleteProps'],
         data() {
             return {
                 genreProprio,
-                proprietaire,
 
                 data: {
                     nom: undefined,
@@ -64,24 +59,19 @@ const { genreProprio } = proprietaireConst()
                     bic: undefined,
                     genre: undefined
                 },
-                erreurTab
             }
         },
         methods: {
-            getProprietaire,
-            updateProprietaire,
-            deleteProprietaire,
-            createProprietaire,
             updateProprietaireClick() {
-                this.updateProprietaire(this.getProprietaireUse.id, this.data)
+                this.proprietaire.updateProprietaire(this.data)
             },
             async deleteProprietaireClick() {
-                if (await this.deleteProprietaire(this.getProprietaireUse.id)){
+                if (await this.proprietaire.deleteProprietaire()){
                     this.$router.push({ name: 'proprio.menu'})
                 }
             },
             async createProprietaireClick(){
-                let idNewIdProprietaire = await this.createProprietaire(this.data)
+                let idNewIdProprietaire = await this.proprietaire.createProprietaire(this.data)
                 if (idNewIdProprietaire != 0){
                     this.$router.push({ name: 'proprio.show', params: { proprio_id: idNewIdProprietaire } })
                 } 
@@ -112,23 +102,13 @@ const { genreProprio } = proprietaireConst()
             }
         },
         computed: {
-            getProprietaireUse() {
-                if (this.proprietaireBase == undefined){
-                    return this.proprietaire
-                }
-                return this.proprietaireBase;
-            },
             canDelete() {
                 return this.deleteProps == "true"
             },
         },
-        mounted(){
-            if (this.proprietaire_id != 'new' && this.proprietaireBase == undefined){
-                this.getProprietaire(this.proprietaire_id)
-            }
+        updated() {
+
         },
-
-
         components: { Title, Text, Select, Error }
     }
 
