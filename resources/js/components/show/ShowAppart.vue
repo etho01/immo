@@ -11,7 +11,7 @@
                     nom: 'Informations appartement',
                     id: 'slow_appart'
                 },
-                {
+       /*         {
                     nom: 'informations proprietaire',
                     id: 'show_proprio'
                 },
@@ -22,15 +22,15 @@
                 {
                     nom: 'Etat des lieux',
                     id: 'etat_des_lieu'
-                }
-            ]" activeItemDefault="slow_appart">
-
-            <AppartInfo ref-nav="slow_appart" :appart_id="appart_id" deleteProps="true" :appartBase="appart"/>
-            <InfoPropio :proprietaireBase="appart.proprietaire" ref-nav="show_proprio" />
-          <!--  <ListeContrat :filtres="{appart_id: appart_id }" ref-nav="contrat_liste"/>-->
-            <ListeEtatDesLieu :filtres="{appart_id: appart_id}" ref-nav="etat_des_lieu" :appart_id="appart_id" />
+                }*/
+            ]" activeItemDefault="slow_appart"
+            >
+                <AppartInfo ref-nav="slow_appart" deleteProps="true" :appart="appart"/>
+                <!--<InfoPropio :proprietaireBase="appart.proprietaire" ref-nav="show_proprio" />
+                <ListeContrat :filtres="{appart_id: appart_id }" ref-nav="contrat_liste"/>
+                <ListeEtatDesLieu :filtres="{appart_id: appart_id}" ref-nav="etat_des_lieu" :appart_id="appart_id" />-->
             </Nav>
-            <AppartInfo ref-nav="slow_appart" :appart_id="appart_id" v-else/>
+            <AppartInfo ref-nav="slow_appart" :appart="appart" v-else/>
 
         </section>
 
@@ -42,57 +42,42 @@ import TitlePage from '../utils/TitlePage.vue';
 import Nav from '../utils/component/nav/Nav.vue';
 import AppartInfo from '../info/InfoAppart.vue';
 import ListeElement from '../utils/component/liste/ListeElement.vue';
-import userContrat from '../../services/contratServices.js';
-import useAppart from '../../services/appartServices.js';
-import useEtatDesLieu from '../../services/etatDesLieuServices.js';
-
-import etatDesLieuConst from '../../const/EtatDesLieuConst.js';
 import ListeContrat from '../liste/ListeContrat.vue';
 import ListeEtatDesLieu from '../liste/ListeEtatDesLieu.vue';
 import InfoPropio from '../info/InfoPropio.vue';
 
-const { etatDesLieuCols } = etatDesLieuConst();
+import { useAppartStore } from '../../store/appartStore';
 
-const { getEtatDesLieus, etatDesLieus } = useEtatDesLieu();
-const { getAppart, appart } = useAppart();
+const appart = useAppartStore();
 
     export default {
         data () {
             return {
                 appart_id: parseInt(this.$route.params.appart_id),
-                etatDesLieus,
                 appart,
-                etatDesLieuCols
-            }
-        },
-        methods: {
-            getEtatDesLieus,
-            getAppart
-        },
-        computed: {
-            getTitreAppart() {
-                if (this.appart_id == "new"){
-                    return "Nouvel appartement"
-                } else {
-                    return this.appart.adresse
-                }
             }
         },
         async mounted () {
             if (this.$route.params.appart_id == 'new'){
-                this.appart_id = "new"
+                this.appart.setNewAppart()
             } else if (isNaN(this.appart_id)) {
                 this.$router.push({ name: "appart.menu" });
             } else {
-                if (! await this.getAppart(this.appart_id)){
+                if (! await this.appart.getAppartById(this.appart_id)){
                     this.$router.push({ name: "appart.menu" });
                 }
             }
         },
-        updated(){
-            if (this.$route.params.appart_id != this.appart_id){
-                this.appart_id = this.$route.params.appart_id
-                this.getAppart(this.appart_id);
+        async updated(){
+            this.appart_id = parseInt(this.$route.params.appart_id);
+            if (this.$route.params.appart_id == 'new'){
+                this.appart.setNewAppart()
+            } else if (isNaN(this.appart_id)) {
+                this.$router.push({ name: "appart.menu" });
+            } else {
+                if (! await this.appart.getAppartById(this.appart_id)){
+                    this.$router.push({ name: "appart.menu" });
+                }
             }
         },
         components : { TitlePage, Nav, AppartInfo, ListeElement, ListeContrat, ListeEtatDesLieu, InfoPropio }

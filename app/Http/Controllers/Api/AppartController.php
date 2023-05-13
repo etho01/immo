@@ -44,6 +44,7 @@ class AppartController extends Controller
             'cp' => $request->cp,
             'pays' => $request->pays,
             'charge' => $request->charge,
+            'departement' => $request->departement,
             'loyer' => $request->loyer,
             'proprietaire_id' => $request->proprietaire_id
         ]));
@@ -66,6 +67,7 @@ class AppartController extends Controller
         $appart->adresse= $request->input('adresse', $appart->adresse);
         $appart->adresse_compl = $request->input('adresse_compl', $appart->adresse_compl);
         $appart->cp = $request->input('cp', $appart->cp);
+        $appart->departement = $request->input('departement', $appart->departement);
         $appart->pays = $request->input('pays', $appart->pays);
         $appart->charge =$request->input('charge', $appart->charge);
         $appart->loyer = $request->input('loyer', $appart->loyer);

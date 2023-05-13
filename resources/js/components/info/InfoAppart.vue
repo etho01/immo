@@ -1,28 +1,30 @@
 <template>
 
     <div>
-        <Error :erreurTab="erreurTab" />
+        <Error :erreurTab="appart.erreurTab" />
         <Title title="Adresse du bien" />
         <div class="grid grid-cols-6 mt-3">
-            <Text class="col-span-3" label="Adresse du bien" :value="getAppartUse.adresse" @changeValue="changeAdresse" placeholder="Adresse"/>
-            <Text class="col-span-3" label="Adresse compementaire du bien" :value="getAppartUse.adresse_compl" @changeValue="changeComp" placeholder="Adresse complementaire"/>
+            <Text class="col-span-3" label="Adresse du bien" :value="appart.getAppart.adresse" @changeValue="changeAdresse" placeholder="Adresse"/>
+            <Text class="col-span-3" label="Adresse compementaire du bien" :value="appart.getAppart.adresse_compl" @changeValue="changeComp" placeholder="Adresse complementaire"/>
 
-            <Text class="col-span-2" label="Code postal" placeholder="Code postal" :value="getAppartUse.cp" @changeValue="changeCp" />
-            <Text class="col-span-2" label="Departement" placeholder="Departement" :value="getAppartUse.departement" @changeValue="changeDep"/>
-            <Text class="col-span-2" label="Pays du bien" placeholder="Pays" :value="getAppartUse.pays" @changeValue="changePays" />
+            <Text class="col-span-2" label="Code postal" placeholder="Code postal" :value="appart.getAppart.cp" @changeValue="changeCp" />
+            <Text class="col-span-2" label="Departement" placeholder="Departement" :value="appart.getAppart.departement" @changeValue="changeDep"/>
+            <Text class="col-span-2" label="Pays du bien" placeholder="Pays" :value="appart.getAppart.pays" @changeValue="changePays" />
 
         </div>
         <Title title="Finance du bien" />
         <div class="grid grid-cols-2 mt-3">
-            <Text label="Loyer du bien" :value="getAppartUse.loyer" @changeValue="changeLoyer" />
-            <Text label="Charge du bien" :value="getAppartUse.charge" @changeValue="changeCharge" />
+            <Text label="Loyer du bien" :value="appart.getAppart.loyer" @changeValue="changeLoyer" />
+            <Text label="Charge du bien" :value="appart.getAppart.charge" @changeValue="changeCharge" />
         </div>
-        <Title title="Agence du bien" />
-        <div class="grid grid-cols-1 mt-3">
-            <SelectProprio @changeValue="changeProprio" :valueDefault="getidProprio"/>
-            <SelectAgence @changeValue="changeAgence" :valueDefault="getIdAgence" />
+        <div v-if="appart.isNewAppart">
+            <Title title="Agence du bien" />
+            <div class="grid grid-cols-1 mt-3">
+                <SelectProprio @changeValue="changeProprio" :valueDefault="getidProprio"/>
+                <SelectAgence @changeValue="changeAgence" :valueDefault="getIdAgence" />
+            </div>
         </div>
-        <div class="mt-5 flex justify-end" v-if="appart_id != 'new'">
+        <div class="mt-5 flex justify-end" v-if="!appart.isNewAppart">
             <div class="bg-gray-200 hover:bg-gray-300 px-3 py-1 rounded-md cursor-pointer" @click="updateAppartClick">
                 Modifier
             </div>
@@ -41,18 +43,15 @@
 <script>
 import Text from '../utils/input/Text.vue';
 import Title from '../utils/title/Title.vue';
-import useAppart from '../../services/appartServices';
 import SelectAgence from '../select/SelectAgence.vue';
 import Error from '../utils/Error.vue';
 import SelectProprio from '../select/SelectProprio.vue';
 
-const { getAppart, appart, createAppart, deleteAppart, updateAppart, erreurTab } = useAppart();
 
     export default {
-        props: ['appart_id', 'deleteProps', 'appartBase'],
+        props: ['appart', 'deleteProps'],
         data() {
             return {
-                appart,
                 data: {
                     adresse: undefined,
                     adresse_compl: undefined,
@@ -63,24 +62,19 @@ const { getAppart, appart, createAppart, deleteAppart, updateAppart, erreurTab }
                     charge: undefined,
                     agence_id: undefined
                 },
-                erreurTab
             }
         },
         methods: {
-            getAppart,
-            updateAppart,
-            deleteAppart,
-            createAppart,
             updateAppartClick() {
-                this.updateAppart(this.getAppartUse.id, this.getData);
+                this.appart.updateAppart( this.getData);
             },
             async deleteAppartClick() {
-                if (await this.deleteAppart(this.getAppartUse.id)){
+                if (await this.appart.deleteAppart()){
                     this.$router.push({ name: 'appart.menu'})
                 }
             },
             async createAppartClick() {
-                let idNewAppart = await this.createAppart(this.getData);
+                let idNewAppart = await this.appart.createAppart(this.getData);
                 if (idNewAppart != 0){
                     this.$router.push({ name: 'appart.show', params: { appart_id: idNewAppart } })
                 }
@@ -114,33 +108,12 @@ const { getAppart, appart, createAppart, deleteAppart, updateAppart, erreurTab }
             }
         },
         computed: {
-            getAppartUse() {
-                if (this.appartBase == undefined){
-                    return this.appart
-                }
-                return this.appartBase
-            },
-            getIdAgence() {
-                if (this.getAppartUse.agence != undefined) {
-                    return this.getAppartUse.agence.id;
-                }
-            },
-            getidProprio(){
-                if (this.getAppartUse.proprietaire != undefined){
-                    return this.getAppartUse.proprietaire.id;
-                }
-            },
             getData() {
                 return this.data
             },
             canDelete() {
                 return this.deleteProps == "true"
             },
-        },
-        mounted() {
-            if (this.appart_id != 'new' && this.appartBase == undefined){
-                this.getAppart(this.appart_id);
-            }
         },
         components: { Title, Text, SelectAgence, Error, SelectProprio }
     }

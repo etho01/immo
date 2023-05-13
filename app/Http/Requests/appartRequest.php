@@ -36,16 +36,15 @@ class appartRequest extends FormRequest
             'departement' => ['required', 'max:255'],
             'cp' => ['required', 'max:255'],
             'pays' => ['required', 'max:255'],
-            'charge' => ['required', 'decimal:0;2'],
-            'loyer' => ['required', 'decimal:0;2'],
+            'charge' => ['required'],
+            'loyer' => ['required'],
             'proprietaire_id' => ['required', 'exists:proprietaires,id']
         ];
     }
 
     public function update(){
         return [
-            'charge' => ['decimal:0;2'],
-            'loyer' => ['decimal:0;2'],
+
             'adresse_compl' => ['max:255'],
             'departement' => ['max:255'],
             'cp' => ['max:255'],
