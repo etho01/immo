@@ -20,7 +20,8 @@ const {
     nbPage,
     erreurTab,
     setElement,
-    setElements
+    setElements,
+    refreshErreur
 } = useServices('appart');
 
 export default function useAppart(){
@@ -38,7 +39,8 @@ export default function useAppart(){
         nbPage,
         erreurTab,
         setAppart: setElement,
-        setApparts: setElements
+        setApparts: setElements,
+        refreshErreur
     }
 
 }

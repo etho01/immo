@@ -20,7 +20,8 @@ const {
     nbPage,
     erreurTab,
     setElement,
-    setElements
+    setElements,
+    refreshErreur
 } = useServices('user');
 
 export default function useUser() {
@@ -62,7 +63,8 @@ export default function useUser() {
         erreurTab,
         logInApi,
         setUser: setElement,
-        setUsers: setElements
+        setUsers: setElements,
+        refreshErreur
     }
 
 }

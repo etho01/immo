@@ -40,7 +40,8 @@ export default function useEtatDesLieu(){
         erreurTab,
         refreshErreur,
         setEtatDesLieu: setElement,
-        setEtatDesLieus: setElements
+        setEtatDesLieus: setElements,
+        refreshErreur
     }
 
 }

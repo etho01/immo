@@ -20,7 +20,8 @@ const {
     nbPage,
     erreurTab,
     setElement,
-    setElements
+    setElements,
+    refreshErreur
 } = useServices('proprietaire');
 
 export default function useProprietaire(){
@@ -38,7 +39,8 @@ export default function useProprietaire(){
         nbPage,
         erreurTab,
         setProprietaire: setElement,
-        setProprietaires: setElements
+        setProprietaires: setElements,
+        refreshErreur
     }
 
 }
