@@ -36,7 +36,7 @@
 <script>
 import useUser from './feature/user/userServices'
 import Error from './utils/Error.vue';
-import userStore from './feature/user/userStore';
+import userStoreLog from './feature/user/userStoreLog';
 
     const { logInApi, erreurTab } = useUser();
 
@@ -46,7 +46,7 @@ import userStore from './feature/user/userStore';
             email: 'test@test.fr',
             password: 'testtest',
             erreurTab,
-            userStore
+            userStoreLog
         };
     },
     methods: {
@@ -54,7 +54,7 @@ import userStore from './feature/user/userStore';
         async logInApiClick() {
             let user = await this.logInApi(this.email, this.password);
             if (user != undefined && user.token != "") {
-                this.userStore.login(user);
+                this.userStoreLog.login(user);
                 this.$router.push({ name: "dashboard" });
             }
         }

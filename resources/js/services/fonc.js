@@ -1,5 +1,5 @@
 import router from "../router";
-import userStore from "../components/feature/user/userStore.js";
+import userStoreLog from "../components/feature/user/userStoreLog.js";
 
 const getErrors = function(erreur) {
     let erreurTab = new Array();
@@ -13,7 +13,7 @@ const getErrors = function(erreur) {
 
 const checkIsLog = function(erreur) {
     if (erreur.response.status == 401){
-        userStore.disconect()
+        userStoreLog.disconect()
     }
 }
 

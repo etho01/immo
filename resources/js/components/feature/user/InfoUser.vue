@@ -37,7 +37,7 @@ import Title from '../../utils/title/Title.vue';
 import useUser from './userServices.js'
 import Error from '../../utils/Error.vue';
 
-import userStore from './userStore';
+import userStoreLog from './userStoreLog';
 
 const { user, getUser, createUser, updateUser, deleteUser, erreurTab } = useUser()
     export default {
@@ -95,7 +95,7 @@ const { user, getUser, createUser, updateUser, deleteUser, erreurTab } = useUser
                 return this.userBase.value
             },
             canUpdatePassword() {
-                if (this.updatePassword == true ||this.user_id == 'new' || userStore.getUserLog.id == this.getUserUse.id){
+                if (this.updatePassword == true ||this.user_id == 'new' || userStoreLog.getUserLog.id == this.getUserUse.id){
                     return true
                 }
                 return false
@@ -106,7 +106,7 @@ const { user, getUser, createUser, updateUser, deleteUser, erreurTab } = useUser
                 }
             },
             canDelete() {
-                return this.deleteProps == "true" && userStore.getUserLog.id != this.getUserUse.id
+                return this.deleteProps == "true" && userStoreLog.getUserLog.id != this.getUserUse.id
             }
         },
         watch: {

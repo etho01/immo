@@ -1,6 +1,6 @@
 
 import axios from "axios";
 
-import userStore from '../components/feature/user/userStore.js';
+import userStoreLog from '../components/feature/user/userStoreLog.js';
 
 export default axios;

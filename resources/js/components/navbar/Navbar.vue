@@ -17,7 +17,7 @@
     <div class="mt-auto my-4 px-4">
 
         <Dropdown 
-            :textBotton="userStore.getNom" 
+            :textBotton="userStoreLog.getNom" 
             btnClass="text-xl text-neutral-400 my-2 px-1 hover:bg-neutral-700 border-slate-500  rounded-xl border-2 w-full cursor-pointer"
             dropClass="border-2 rounded-lg border-neutral-700 absolute bg-neutral-900 mt-2 z-50 flex flex-wrap w-40"
             dataPlacement="top"
@@ -46,7 +46,7 @@
     import router from '../../router';
 import Dropdown from '../utils/component/Dropdown.vue';
 
-import userStore from '../feature/user/userStore';
+import userStoreLog from '../feature/user/userStoreLog';
 
     export default {
     data() {
@@ -79,7 +79,7 @@ import userStore from '../feature/user/userStore';
             ],
             show: true,
             mouseOver: false,
-            userStore
+            userStoreLog
         };
     },
     computed: {
@@ -98,7 +98,7 @@ import userStore from '../feature/user/userStore';
             this.mouseOver = false;
         },
         disconect() {
-            userStore.disconect();
+            userStoreLog.disconect();
         }
     },
     components: { Dropdown, router }

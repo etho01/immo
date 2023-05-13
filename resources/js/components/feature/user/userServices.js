@@ -2,7 +2,7 @@ import {ref, computed} from "vue";
 import axios from "../../../services/axios.js";
 
 import { getErrors, checkIsLog} from '../../../services/fonc.js';
-import userStore from "./userStore.js";
+import userStoreLog from "./userStoreLog.js";
 
 import  useServices from '../../../services/baseServices.js'
 

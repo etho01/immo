@@ -4,7 +4,7 @@ import { defineStore } from 'pinia'
 import router from "../../../router";
 import axios from "../../../services/axios.js";
 
-const useUserStore = defineStore('user',{
+const useUserLogStore = defineStore('userLoh',{
     state: () => ({
         infosUser: {},
         isLog: false
@@ -51,5 +51,5 @@ const useUserStore = defineStore('user',{
         }
     }
 })
-let userStore = useUserStore(piniaUse);
-export default userStore
+let userStoreLogLogLog = useUserLogStore(piniaUse);
+export default userStoreLogLogLog

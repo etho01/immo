@@ -10,7 +10,7 @@
 </template>
 <script>
 import TitlePage from '../../utils/TitlePage.vue';
-import userStore from './userStore';
+import userStoreLog from './userStoreLog';
 import InfoUser from './InfoUser.vue';
 import userServices from "./userServices.js";
 
@@ -29,7 +29,7 @@ const { user, getUser } = userServices()
         computed: {
             getUserUse() {
                 if (this.$route.name == "me"){
-                    return userStore.getUserLog
+                    return userStoreLog.getUserLog
                 }
                 return user
             },

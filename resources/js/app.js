@@ -32,10 +32,10 @@ createApp(App)
 .component('font-awesome-icon', FontAwesomeIcon)
 .mount('#app');
 
-import userStore from './components/feature/user/userStore.js';
+import userStoreLog from './components/feature/user/userStoreLog.js';
 
 /*router.beforeEach(async  (to) => {
-    if (!userStore.getIsLog && to.name !== 'login' && isProd) {
+    if (!userStoreLog.getIsLog && to.name !== 'login' && isProd) {
         return { name: 'login' }
     }
 })*/

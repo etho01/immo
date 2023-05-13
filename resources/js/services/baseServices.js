@@ -2,7 +2,7 @@ import { ref } from "vue";
 import axios from "./axios.js";
 
 import { getErrors, checkIsLog} from './fonc.js';
-import userStore from "../components/feature/user/userStore.js";
+import userStoreLog from "../components/feature/user/userStoreLog.js";
 
 export default function useServices(nomRoute) {
     const element = ref([]);
@@ -17,8 +17,8 @@ export default function useServices(nomRoute) {
     
     const getElement = async (id) => {
         let validate = true;
-        let response = await axios.get('/api/' + nomRoute + '/'+ id, {params: { ...userStore.getInfosCallApi},
-        ...userStore.getHeaderRequest} ).
+        let response = await axios.get('/api/' + nomRoute + '/'+ id, {params: { ...userStoreLog.getInfosCallApi},
+        ...userStoreLog.getHeaderRequest} ).
             catch(function (erreur){
                 checkIsLog(erreur)
                 validate = false;
@@ -30,8 +30,8 @@ export default function useServices(nomRoute) {
 
     const deleteElement = async (id) => {
         let validate = true;
-        let response = await axios.delete('/api/' + nomRoute + '/'+ id, { ...userStore.getInfosCallApi},
-        userStore.getHeaderRequest)
+        let response = await axios.delete('/api/' + nomRoute + '/'+ id, { ...userStoreLog.getInfosCallApi},
+        userStoreLog.getHeaderRequest)
             .catch(function (erreur){
                 checkIsLog(erreur)
                 validate = false
@@ -42,8 +42,8 @@ export default function useServices(nomRoute) {
     const createElement = async (data) => {
         let validate = true
         erreurTab.value = []
-        let response = await axios.post('/api/' + nomRoute , {...data,...userStore.getInfosCallApi},
-        userStore.getHeaderRequest)
+        let response = await axios.post('/api/' + nomRoute , {...data,...userStoreLog.getInfosCallApi},
+        userStoreLog.getHeaderRequest)
         .catch(function (erreur){
             checkIsLog(erreur)
             erreurTab.value = getErrors(erreur.response.data.errors);
@@ -58,8 +58,8 @@ export default function useServices(nomRoute) {
     const updateElement = async (id, data) => {
         let validate = true
         erreurTab.value = []
-        let response = await axios.put('/api/' + nomRoute + '/'+ id,  {...data, ...userStore.getInfosCallApi},
-        userStore.getHeaderRequest)
+        let response = await axios.put('/api/' + nomRoute + '/'+ id,  {...data, ...userStoreLog.getInfosCallApi},
+        userStoreLog.getHeaderRequest)
         .catch(function (erreur){
             checkIsLog(erreur)
             erreurTab.value = getErrors(erreur.response.data.errors);
@@ -77,8 +77,8 @@ export default function useServices(nomRoute) {
 
     const sendGetElementsRequest = async (data) => {
         let validate = true;
-        let response = await axios.get('/api/' + nomRoute, {params: {...filtre, ...userStore.getInfosCallApi, page: page.value},
-        ...userStore.getHeaderRequest})
+        let response = await axios.get('/api/' + nomRoute, {params: {...filtre, ...userStoreLog.getInfosCallApi, page: page.value},
+        ...userStoreLog.getHeaderRequest})
             .catch(function (erreur){
                 checkIsLog(erreur)
                 validate = false
