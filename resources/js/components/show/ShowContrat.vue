@@ -19,10 +19,10 @@
                                     nom : 'Infos sur le locataire',
                                     id : 'infos_loc'
                                 },                                
-                              /*  {
+                                {
                                     nom : 'Etat des lieux',
                                     id : 'etat_des_lieu'
-                                },*/
+                                },
                                 {
                                     nom : 'Paiements',
                                     id : 'paiment'
@@ -32,7 +32,7 @@
             <InfoAppart ref-nav="infos_appart" :appart="contrat.appart"/>
             <InfoLocataire ref-nav="infos_loc" :locataire="contrat.locataire" />
             <InfoPropio ref-nav="infos_proprio" :proprietaire="contrat.appart.proprietaire" />
-            <!--<ListeEtatDesLieu :filtres="{contrat_id: this.contrat_id}"  ref-nav="etat_des_lieu" :contrat_id="contrat_id" :appart_id="getAppartId"/>-->
+            <ListeEtatDesLieu :etatDesLieu="contrat.etatDesLieu" ref-nav="etat_des_lieu" :contrat_id="contrat_id" :appart_id="contrat.appart.getAppart.id"/>
             <ListePaiment :paiement="contrat.paiement" ref-nav="paiment" :contrat_id="contrat.getContrat.id"/> 
         
         </Nav>

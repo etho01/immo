@@ -1,16 +1,16 @@
 <template>
 
     <div>
-        <Error :erreurTab="erreurTab" />
+        <Error :erreurTab="etatDesLieu.erreurTab" />
         <Title title="Informations sur l'état des lieux" />
         <div class="grid grid-cols-2 mt-3">
-            <Text label="Date de l'état des lieux" @changeValue="changeDate" :value="getEtatDesLieuUse.date" type="date" />
-            <Select :param="stadeEtatDesLieu" label="Stade de l'état des lieux" @changeValue="changeStade" :valueDefault="getEtatDesLieuUse.stade" />
+            <Text label="Date de l'état des lieux" @changeValue="changeDate" :value="etatDesLieu.getEtatDesLieu.date" type="date" />
+            <Select :param="stadeEtatDesLieu" label="Stade de l'état des lieux" @changeValue="changeStade" :valueDefault="etatDesLieu.getEtatDesLieu.stade" />
         </div>
         <div class="mt-3">
-            <Text label="Commentaire" :value="getEtatDesLieuUse.commentaire" @changeValue="changeCommentaire" />
+            <Text label="Commentaire" :value="etatDesLieu.getEtatDesLieu.commentaire" @changeValue="changeCommentaire" />
         </div>
-        <div class="mt-5 flex justify-end" v-if="etartdeslieu_id != 'new'">
+        <div class="mt-5 flex justify-end" v-if="!etatDesLieu.isNewEtatDesLieu">
             <div class="bg-gray-200 hover:bg-gray-300 px-3 py-1 rounded-md cursor-pointer" @click="updateEtatDesLieuClick">
                 Modifier
             </div>
@@ -30,7 +30,6 @@
 <script>
 import Text from '../utils/input/Text.vue';
 import Title from '../utils/title/Title.vue';
-import useEtatDesLieu from '../../services/etatDesLieuServices';
 import Error from '../utils/Error.vue';
 
 import Select from '../utils/input/select.vue';
@@ -38,13 +37,12 @@ import etatDesLieuConst from "../../const/EtatDesLieuConst.js";
 
 const { stadeEtatDesLieu } = etatDesLieuConst();
 
-const { etatDesLieu, getEtatDesLieu, createEtatDesLieu, deleteEtatDesLieu, updateEtatDesLieu, erreurTab, refreshErreur } = useEtatDesLieu();
 
     export default {
-        props: ['etartdeslieu_id', 'deleteProps', "EtatDesLieuBase", "contrat_id", 'appart_id'],
+        props: ['etatDesLieu', 'deleteProps', "contrat_id", 'appart_id'],
         data() {
             return {
-                etatDesLieu,
+                stadeEtatDesLieu,
                 data: {
                     date: undefined,
                     stade: undefined,
@@ -52,16 +50,9 @@ const { etatDesLieu, getEtatDesLieu, createEtatDesLieu, deleteEtatDesLieu, updat
                     contrat_id: this.contrat_id,
                     appart_id: this.appart_id
                 },
-                erreurTab,
-                stadeEtatDesLieu
             }
         },
         methods: {
-            getEtatDesLieu,
-            createEtatDesLieu,
-            deleteEtatDesLieu,
-            updateEtatDesLieu,
-            refreshErreur,
             changeDate(value){
                 this.data = {...this.data, date: value}
             },
@@ -72,37 +63,23 @@ const { etatDesLieu, getEtatDesLieu, createEtatDesLieu, deleteEtatDesLieu, updat
                 this.data = {...this.data, commentaire: value}
             },
             async createEtatDesLieuClick () {
-                if (await this.createEtatDesLieu(this.data) != 0){
+                if (await this.etatDesLieu.createEtatDesLieu(this.data) != 0){
                     this.$emit('refresh');
                 }
             },
             async updateEtatDesLieuClick (){
-                await this.updateEtatDesLieu(this.getEtatDesLieuUse.id, this.data);
+                await this.etatDesLieu.updateEtatDesLieu(this.data);
                 this.$emit('refresh');
             },
             async deleteEtatDesLieuClick (){
-                this.deleteEtatDesLieu(this.getEtatDesLieuUse.id);
+                await this.etatDesLieu.deleteEtatDesLieu();
                 this.$emit('refresh');
             }
         },
         computed: {
-            getEtatDesLieuUse() {
-                if (this.EtatDesLieuBase == undefined) {
-                    if (this.etatDesLieu == undefined) {
-                        return []
-                    }
-                    return this.etatDesLieu
-                }
-                return this.EtatDesLieuBase;
-            },
             canDelete() {
                 return this.deleteProps == "true"
             },
-        },
-        mounted () {
-            if (this.appart_id != 'new' && this.EtatDesLieuBase != undefined){
-                this.getEtatDesLieu(this.appart_id);
-            }
         },
         watch: {
             appart_id() {
@@ -111,12 +88,6 @@ const { etatDesLieu, getEtatDesLieu, createEtatDesLieu, deleteEtatDesLieu, updat
             contrat_id() {
                 this.data = {...this.data, contrat_id: this.contrat_id}
             },
-            EtatDesLieuBase() {
-                this.refreshErreur();
-            },
-            etartdeslieu_id() {
-                this.refreshErreur();
-            }
         },
         components: { Title, Text, Error, Select }
     }

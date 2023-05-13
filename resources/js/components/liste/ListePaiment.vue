@@ -35,8 +35,6 @@ export default {
     data (){
         return {
             paiementCols,
-            paimentLoad : undefined,
-            paiementIdLoad: undefined,
         }
     },
     methods : {

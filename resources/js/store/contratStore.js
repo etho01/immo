@@ -2,6 +2,7 @@ import { defineStore } from "pinia";
 import { useAppartStore } from './appartStore';
 import { useLocataireStore } from './locataireStore'
 import { usePaiementStore } from './paiementStore'
+import { useEtatDesLieuStore } from './etatDesLieuStore';
 
 import userContrat from '../services/contratServices.js';
 
@@ -34,7 +35,8 @@ export const useContratStore = defineStore('contrat', {
             haveContratLoad: false,
             locataire: useLocataireStore(),
             appart: useAppartStore(),
-            paiement: usePaiementStore()
+            paiement: usePaiementStore(),
+            etatDesLieu: useEtatDesLieuStore()
         }
     },
     getters: {
@@ -88,6 +90,7 @@ export const useContratStore = defineStore('contrat', {
             this.locataire.getLocataireByObject(this.getContrat.locataire)
             this.appart.getAppartByObj(this.getContrat.appart)
             this.paiement.getPaiementsByObj(this.getContrat.paiement)
+            this.etatDesLieu.getEtatDesLieusByObj(this.getContrat.etat_des_lieu)
             refreshErreur()
         },
 
