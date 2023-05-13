@@ -51,5 +51,5 @@ const useUserLogStore = defineStore('userLoh',{
         }
     }
 })
-let userStoreLogLogLog = useUserLogStore(piniaUse);
-export default userStoreLogLogLog
+let userStoreLog = useUserLogStore(piniaUse);
+export default userStoreLog
