@@ -7,7 +7,7 @@
                                     nom : 'Infos Contrat',
                                     id : 'infos_contrat'
                                 },
-                                {
+                         /*       {
                                     nom : 'Infos sur l\'appartement à louer',
                                     id : 'infos_appart'
                                 },
@@ -26,14 +26,14 @@
                                 {
                                     nom : 'Paiements',
                                     id : 'paiment'
-                                }                                
+                                }        */                        
             ]" activeItemDefault="infos_contrat">
-            <InfoContrat ref-nav="infos_contrat" :contrat_id="contrat_id" deleteProps="true" :contrat-base="contrat" />
-            <InfoAppart ref-nav="infos_appart" :appartBase="contrat.appart"/>
+            <InfoContrat ref-nav="infos_contrat" :contrat="contrat" deleteProps="true"  />
+       <!--     <InfoAppart ref-nav="infos_appart" :appartBase="contrat.appart"/>
             <InfoLocataire ref-nav="infos_loc" :locataireBase="contrat.locataire" />
             <InfoPropio ref-nav="infos_proprio" :proprietaireBase="getProprietaire" />
             <ListeEtatDesLieu :filtres="{contrat_id: this.contrat_id}"  ref-nav="etat_des_lieu" :contrat_id="contrat_id" :appart_id="getAppartId"/>
-            <ListePaiment :filtres="{contrat_id: this.contrat_id}" :contrat_id="contrat_id" ref-nav="paiment"/>
+            <ListePaiment :filtres="{contrat_id: this.contrat_id}" :contrat_id="contrat_id" ref-nav="paiment"/> -->
         
         </Nav>
         </section>
@@ -47,7 +47,6 @@
 </template>
 <script>
 
-    import userContrat from '../../services/contratServices.js';
     import TitlePage from '../utils/TitlePage.vue';
     import Nav from '../utils/component/nav/Nav.vue';
 
@@ -59,7 +58,10 @@
     import ListePaiment from '../liste/ListePaiment.vue';
 import InfoPropio from '../info/InfoPropio.vue';
 
-    const { contrat, getContrat } = userContrat()
+  //  const { contrat, getContrat } = userContrat()
+
+    import { useContratStore } from '../../store/contratStore';
+    const contrat = useContratStore()
 
     export default {
     data() {
@@ -68,43 +70,27 @@ import InfoPropio from '../info/InfoPropio.vue';
             contrat,
         };
     },
-    async created() {
-        if (this.$route.params.contrat_id == 'new'){
-            this.contrat_id = "new"
+    async mounted () {
+        if (this.$route.params.contrat_id == 'new') {
+            contrat.setNewContrat();
         } else if (isNaN(this.contrat_id)) {
             this.$router.push({ name: "contrat.menu" });
         } else {
-            if(! await this.getContrat(this.contrat_id)){
+            if(!await contrat.getContratById(this.contrat_id) ){
                 this.$router.push({ name: "contrat.menu" });
             }
         }
     },
-    methods: {
-        getContrat,
-    },
-    computed: {
-        getAppartId() {
-            if (this.contrat.appart != undefined){
-                return this.contrat.appart.id
+    async updated(){
+        this.contrat_id = parseInt(this.$route.params.contrat_id)
+        if (this.$route.params.contrat_id == 'new') {
+            contrat.setNewContrat();
+        } else if (isNaN(this.contrat_id)) {
+            this.$router.push({ name: "contrat.menu" });
+        } else {
+            if(!await contrat.getContratById(this.contrat_id) ){
+                this.$router.push({ name: "contrat.menu" });
             }
-            return undefined
-        },
-        getContratTitre() {
-            if (this.appart_id == "new"){
-                return "Nouveau contrat"
-            }
-            return "contrat " + this.contrat.id
-        },
-        getProprietaire() {
-            if (this.contrat.appart != undefined){
-                return this.contrat.appart.proprietaire
-            }
-        }
-    },
-    updated(){
-        if (this.$route.params.contrat_id != this.contrat_id){
-            this.contrat_id = this.$route.params.contrat_id
-            this.getContrat(this.contrat_id);
         }
     },
     components: { TitlePage, Nav, ListeElement, InfoContrat, InfoAppart, InfoLocataire, ListeEtatDesLieu, ListePaiment, InfoPropio }

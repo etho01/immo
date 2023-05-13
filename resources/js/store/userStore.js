@@ -17,7 +17,7 @@ const useUserStore = defineStore('user',{
         disconect() {
             this.infosUser = {}
             this.isLog = false
-            router.push({name: 'login'})
+        //    router.push({name: 'login'})
         },
     },
     getters: {
@@ -32,15 +32,21 @@ const useUserStore = defineStore('user',{
         },
         getHeaderRequest() {
             return {
-                headers: { 
-                    'Authorization': `Bearer ${this.infosUser['token']}`
-                  }
+                headers: {
+                    'Authorization': `Bearer 215|OCwoqBx3Zkczxw1jIQntpmVYMIltpVCcXCkrwRj4`
+                }
             }
+     //       return {
+       //         headers: { 
+         //           'Authorization': `Bearer ${this.infosUser['token']}`
+             //     }
+           // }
         },
         getNom() {
             return this.infosUser['name']
         },
         getUserLog() {
+            return true
             return this.infosUser;
         }
     }

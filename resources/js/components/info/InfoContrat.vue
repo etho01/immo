@@ -1,18 +1,18 @@
 <template>
     <div>
-        <Error :erreurTab="erreurTab" />
+        <Error :erreurTab="contrat.erreurTab" />
         <Title title="Information contrat" />
         <div class="grid grid-cols-2 mt-3">
-            <Text type="date" label="Date de début" :value="getContratUse.date_debut" @changeValue="changeDateDebut"/>
-            <Text type="date" label="Date de fin" :value="getContratUse.date_fin" @changeValue="chnageDateFin"/>
+            <Text type="date" label="Date de début" :value="contrat.getContrat.date_debut" @changeValue="changeDateDebut"/>
+            <Text type="date" label="Date de fin" :value="contrat.getContrat.date_fin" @changeValue="chnageDateFin"/>
         </div>
-        <div v-if="contrat_id == 'new'" class="grid grid-cols-2 mt-3">
+        <div v-if="contrat.isNewContrat" class="grid grid-cols-2 mt-3">
             <SelectAppart @changeValue="changeAppart">
 
             </SelectAppart>
             <SelectLocataire @changeValue="chnageLocataire"></SelectLocataire>
         </div>
-        <div class="mt-5 flex justify-end" v-if="contrat_id != 'new'">
+        <div class="mt-5 flex justify-end" v-if="!contrat.isNewContrat">
             <div class="bg-gray-200 hover:bg-gray-300 px-3 py-1 rounded-md cursor-pointer" @click="updateContratClick">
                 Modifier
             </div>
@@ -30,43 +30,34 @@
 </template>
 <script>
 
-import userContrat from '../../services/contratServices';
     import Text from '../utils/input/Text.vue';
     import Title from '../utils/title/Title.vue';
-import SelectAppart from '../select/SelectAppart.vue';
-import SelectLocataire from '../select/SelectLocataire.vue';
-import Error from '../utils/Error.vue';
-    const { getContrat, contrat, updateContrat, deleteContrat, createContrat, erreurTab } = userContrat();
+    import SelectAppart from '../select/SelectAppart.vue';
+    import SelectLocataire from '../select/SelectLocataire.vue';
+    import Error from '../utils/Error.vue';
 
     export default {
-        props: ['contrat_id', 'deleteProps', 'contratBase'],
+        props: ['contrat', 'deleteProps'],
         data() {
             return {
-                contrat,
 
-                date_debut: contrat.date_debut,
-                date_fin: contrat.date_fin,
+                date_debut: this.contrat.getContrat.date_debut,
+                date_fin: this.contrat.getContrat.date_fin,
                 appart_id: undefined,
                 locataire_id: undefined,
-
-                erreurTab
             }
         },
         methods : {
-            getContrat,
-            updateContrat,
-            deleteContrat,
-            createContrat, 
             updateContratClick() {
-                this.updateContrat(this.contrat_id, this.getData)
+                this.contrat.updateContrat(this.getData);
             },
             async deleteContratClick(){
-                if (await this.deleteContrat(this.contrat_id)){
+                if (await this.contrat.deleteContrat()){
                     this.$router.push({ name: 'contrat.menu'})
                 }
             },
             async createContratClick(){
-                let idNewIdContrat = await this.createContrat(this.getData);
+                let idNewIdContrat = await this.contrat.createContrat(this.getData);
                 if (idNewIdContrat != 0){
                     this.$router.push({ name: 'contrat.show', params: { contrat_id: idNewIdContrat } })
                 }
@@ -84,18 +75,7 @@ import Error from '../utils/Error.vue';
                 this.locataire_id = id
             },
         },
-        mounted() {
-            if (this.contrat_id != 'new' && this.contratBase == undefined){
-                this.getContrat(this.contrat_id);
-            }
-        },
         computed: {
-            getContratUse() {
-                if (this.contratBase == undefined){
-                    return this.contrat
-                }
-                return this.contratBase
-            },
             canDelete() {
                 return this.deleteProps == "true"
             },
@@ -107,6 +87,8 @@ import Error from '../utils/Error.vue';
                     locataire_id: this.locataire_id
                 }
             }
+        },
+        updated() {
         },
         components: { Title, Text, SelectAppart, SelectLocataire, Error }
 

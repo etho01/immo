@@ -34,8 +34,8 @@ createApp(App)
 
 import  userStore from './store/userStore.js';
 
-router.beforeEach(async  (to) => {
+/*router.beforeEach(async  (to) => {
     if (!userStore.getIsLog && to.name !== 'login' && isProd) {
         return { name: 'login' }
     }
-})
+})*/

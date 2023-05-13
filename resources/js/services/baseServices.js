@@ -29,37 +29,44 @@ export default function useServices(nomRoute) {
     }
 
     const deleteElement = async (id) => {
+        let validate = true;
         let response = await axios.delete('/api/' + nomRoute + '/'+ id, { ...userStore.getInfosCallApi},
         userStore.getHeaderRequest)
             .catch(function (erreur){
                 checkIsLog(erreur)
+                validate = false
             });
-        return true;
+        return validate;
     }
 
     const createElement = async (data) => {
+        let validate = true
         erreurTab.value = []
         let response = await axios.post('/api/' + nomRoute , {...data,...userStore.getInfosCallApi},
         userStore.getHeaderRequest)
         .catch(function (erreur){
             checkIsLog(erreur)
             erreurTab.value = getErrors(erreur.response.data.errors);
+            let validate = false
         })
-        if (erreurTab.value != []){
-            return 0;
+        if (validate){
+            return response.data.data.id;
         }
-        return response.data.data.id
+        return 0
     }
 
     const updateElement = async (id, data) => {
+        let validate = true
         erreurTab.value = []
         let response = await axios.put('/api/' + nomRoute + '/'+ id,  {...data, ...userStore.getInfosCallApi},
         userStore.getHeaderRequest)
         .catch(function (erreur){
             checkIsLog(erreur)
             erreurTab.value = getErrors(erreur.response.data.errors);
+            validate = false;
         })
         element.value = response.data.data;
+        return validate
     }
 
     const getElements = async (data) => {
