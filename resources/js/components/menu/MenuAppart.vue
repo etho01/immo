@@ -8,7 +8,7 @@
                 <Text label="Recherche" placeholder="Filtre sur l'adresse, le nom, le pays de l'appartement" @changeValue="onChangeRecherche"/>
 
         </section>
-        <ListeAppart :filtres="getFiltres" />
+        <ListeAppart :appart="appart" />
 
     </main>
 
@@ -21,8 +21,11 @@
 
 
     import ListeAppart from '../liste/ListeAppart.vue';
-import SelectAgence from '../select/SelectAgence.vue';
+    import SelectAgence from '../select/SelectAgence.vue';
 
+    import { useAppartStore } from '../../store/appartStore';
+
+    const appart = useAppartStore();
 
     export default {
 
@@ -30,14 +33,18 @@ import SelectAgence from '../select/SelectAgence.vue';
             return {
                 agence_id: -1,
                 recherche: '',
+
+                appart
             }
         },
         methods: {
             onChangeRecherche(text) {
                 this.recherche = text;
+                this.appart.getAppartsByFiltre(this.getFiltres);
             },
             onChangeAgence(agence_id){
                 this.agence_id = agence_id;
+                this.appart.getAppartsByFiltre(this.getFiltres);
             }
         },
         computed: {
@@ -47,7 +54,10 @@ import SelectAgence from '../select/SelectAgence.vue';
                     agence_id: this.agence_id
                 }
             }
-        },        
+        },   
+        mounted () {
+            this.appart.getAppartsByFiltre(this.getFiltres);
+        },
         components: { TitlePage, ListeElement, ListeAppart, Select, Text, SelectAgence }
     }
 </script>
