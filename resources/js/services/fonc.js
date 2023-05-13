@@ -1,5 +1,5 @@
 import router from "../router";
-import userStore from "../store/userStore.js";
+import userStore from "../components/feature/user/userStore.js";
 
 const getErrors = function(erreur) {
     let erreurTab = new Array();

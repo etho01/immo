@@ -2,7 +2,7 @@ import { ref } from "vue";
 import axios from "./axios.js";
 
 import { getErrors, checkIsLog} from './fonc.js';
-import userStore from "../store/userStore.js";
+import userStore from "../components/feature/user/userStore.js";
 
 export default function useServices(nomRoute) {
     const element = ref([]);

@@ -1,20 +1,20 @@
 import { createRouter, createWebHistory } from "vue-router";
 
-import ShowAppart from '../components/show/ShowAppart.vue';
-import ShowContrat from '../components/show/ShowContrat.vue';
-import ShowLocataire from '../components/show/ShowLocataire.vue';
-import ShowProprio from "../components/show/ShowProprio.vue";
+import ShowAppart from '../components/feature/appart/ShowAppart.vue';
+import ShowContrat from '../components/feature/contrat/ShowContrat.vue';
+import ShowLocataire from '../components/feature/locataire/ShowLocataire.vue';
+import ShowProprio from "../components/feature/proprietaire/ShowProprio.vue";
+import ShowAgence from '../components/feature/agence/ShowAgence.vue'
+import ShowUser from '../components/feature/user/ShowUser.vue';
 
-import ShowAgence from '../components/show/ShowAgence.vue'
+import MenuContrat from "../components/feature/contrat/MenuContrat.vue";
+import MenuAppart from "../components/feature/appart/MenuAppart.vue";
+import MenuLocataire from "../components/feature/locataire/MenuLocataire.vue";
+import MenuProprio from "../components/feature/proprietaire/MenuPropio.vue";
+import MenuAgence from "../components/feature/agence/MenuAgence.vue";
+import MenuUser from "../components/feature/user/MenuUser.vue";
 
-import MenuContrat from "../components/menu/MenuContrat.vue";
-import MenuAppart from "../components/menu/MenuAppart.vue";
-import MenuLocataire from "../components/menu/MenuLocataire.vue";
-import MenuProprio from "../components/menu/MenuPropio.vue";
-import MenuAgence from "../components/menu/MenuAgence.vue";
-import MenuUser from "../components/menu/MenuUser.vue";
 
-import ShowUser from '../components/show/ShowUser.vue';
 
 import Login from '../components/Login.vue';
 

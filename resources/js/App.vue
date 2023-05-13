@@ -10,9 +10,6 @@
 <script>
 
 import Navbar from "./components/navbar/Navbar.vue";
-import MenuContrat from "./components/menu/MenuContrat.vue";
-import MenuAppart from "./components/menu/MenuAppart.vue";
-import MenuLocataire from "./components/menu/MenuLocataire.vue";
 
 export default {
     name: 'App',
@@ -29,10 +26,7 @@ export default {
       }
     },
     components: {
-      MenuContrat,
       Navbar,
-      MenuAppart,
-      MenuLocataire
   }
 }
 </script>

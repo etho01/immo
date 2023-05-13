@@ -44,8 +44,9 @@
 <script>
 
     import router from '../../router';
-import userStore from '../../store/userStore';
 import Dropdown from '../utils/component/Dropdown.vue';
+
+import userStore from '../feature/user/userStore';
 
     export default {
     data() {
