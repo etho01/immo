@@ -37,9 +37,9 @@ class AgenceRequest extends FormRequest
 
     public function update() {
         return [
-            'nom' => ['required', 'max:255'],
-            'iban' => ['required', 'max:255'],
-            'bic' => ['required', 'max:255'],
+            'nom' => ['max:255'],
+            'iban' => ['max:255'],
+            'bic' => ['max:255'],
         ];
     }
 }

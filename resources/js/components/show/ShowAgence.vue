@@ -12,11 +12,11 @@
                 ]"
                 activeItemDefault="infos_agence"
             >
-                <InfoAgence ref-nav="infos_agence" :agenceBase="agence" deleteProps="true"/>
+                <InfoAgence ref-nav="infos_agence" :agence="agence" deleteProps="true"/>
         
             </Nav>
 
-            <InfoAgence v-else :agence_id="agence_id" />
+            <InfoAgence v-else :agence="agence" />
         </section>
         
     </main>
@@ -24,11 +24,12 @@
 </template>
 <script>
 
-    import useAgence from '../../services/agenceServices';
 import InfoAgence from '../info/InfoAgence.vue';
 import TitlePage from '../utils/TitlePage.vue';
 import Nav from '../utils/component/nav/Nav.vue';
-    const { agence, getAgence } = useAgence();
+
+import { useAgenceStore } from '../../store/agenceStore';
+const agence = useAgenceStore()
 
     export default {
     props: [],
@@ -38,34 +39,31 @@ import Nav from '../utils/component/nav/Nav.vue';
             agence
         };
     },
-    methods: {
-        getAgence
-    },
-    computed: {
-        getNomAgence() {
-            if (this.agence_id == "new") {
-                return "Nouval agence";
-            }
-            return this.agence.nom;
-        }
-    },
     async mounted() {
         if (this.$route.params.agence_id == "new") {
-            this.agence_id = "new";
+            this.agence.setNewAgence()
         }
         else if (isNaN(this.agence_id)) {
             this.$router.push({ name: "agence.menu" });
         }
         else {
-            if (!await this.getAgence(this.agence_id)) {
+            if (!await this.agence.getAgenceById(this.agence_id)) {
                 this.$router.push({ name: "agence.menu" });
             }
         }
     },
-    updated() {
-        if (this.$route.params.agence_id != this.agence_id) {
-            this.agence_id = this.$route.params.agence_id;
-            this.getAgence(this.agence_id);
+    async updated() {
+        this.agence_id = parseInt(this.$route.params.agence_id);
+        if (this.$route.params.agence_id == "new") {
+            this.agence.setNewAgence()
+        }
+        else if (isNaN(this.agence_id)) {
+            this.$router.push({ name: "agence.menu" });
+        }
+        else {
+            if (!await this.agence.getAgenceById(this.agence_id)) {
+                this.$router.push({ name: "agence.menu" });
+            }
         }
     },
     components: { TitlePage, Nav, InfoAgence }

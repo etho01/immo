@@ -58,7 +58,6 @@
     import ListePaiment from '../liste/ListePaiment.vue';
 import InfoPropio from '../info/InfoPropio.vue';
 
-  //  const { contrat, getContrat } = userContrat()
 
     import { useContratStore } from '../../store/contratStore';
     const contrat = useContratStore()

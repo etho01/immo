@@ -4,11 +4,11 @@
         <TitlePage title="Liste des agences" />
         <section class="grid grid-cols-2 sm:container mx-auto p-3 bg-state-50">
 
-            <Text label="Recherche" />
+            <Text label="Recherche" @changeValue="onChangeRecherche" />
 
         </section>
 
-        <ListeAgence :filtres="getFiltres" />
+        <ListeAgence :agence="agence" />
     </main>
 
 </template>
@@ -17,16 +17,20 @@ import ListeAgence from '../liste/ListeAgence.vue';
 import TitlePage from '../utils/TitlePage.vue';
 import Text from '../utils/input/Text.vue';
 
+import { useAgenceStore } from '../../store/agenceStore';
+const agence = useAgenceStore()
 
     export default {
         data() {
             return {
-                recherche: ''
+                recherche: '',
+                agence
             }
         },
         methods: {
             onChangeRecherche(value) {
                 this.recherche = value;
+                this.agence.getAgencesByFiltre(this.getFiltres);
             }
         },
         computed: {
@@ -35,6 +39,9 @@ import Text from '../utils/input/Text.vue';
                     recherche: this.recherche
                 }
             }
+        },
+        mounted() {
+            this.agence.getAgencesByFiltre(this.getFiltres);
         },
         components: { TitlePage, Text, ListeAgence }
     }
