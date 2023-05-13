@@ -1,4 +1,6 @@
 import { defineStore } from "pinia";
+import { useProprietaireStore } from './proprioStore.js';
+import { useContratStore } from './contratStore.js';
 
 import useAppart from '../services/appartServices.js';
 
@@ -28,7 +30,9 @@ export const useAppartStore = defineStore('appart', {
             nbPage: 1,
             erreurTab,
             newAppart : false,
-            haveAppartLoad: false
+            haveAppartLoad: false,
+            proprietaire: useProprietaireStore(),
+            contrat: useContratStore()
         }
     },
     getters: {
@@ -70,12 +74,23 @@ export const useAppartStore = defineStore('appart', {
         async getAppartById(id) {
             if (await getAppart(id)){
                 this.appart = appart
-                this.haveAppartLoad = true
-                this.newAppart = false
-                refreshErreur()
+                this.changeValueSetAppart()
                 return true
             }
             return false
+        },
+
+        getAppartByObj(appartObj) {
+            this.appart = appartObj
+            this.changeValueSetAppart()
+        },
+
+        changeValueSetAppart() {
+            this.haveAppartLoad = true
+            this.newAppart = false
+            refreshErreur(),
+            this.contrat.getContratsByFiltre({appart_id: this.getAppart.id})
+            this.proprietaire.getProprietaireByObjet(this.getAppart.proprietaire)
         },
 
         async getAppartsByFiltre(filtre) {

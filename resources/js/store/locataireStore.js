@@ -72,13 +72,21 @@ export const useLocataireStore = defineStore('locataire', {
         async getLocataireById(id) {
             if (await getLocataire(id)){
                 this.locataire = locataire
-                this.haveLocataireLoad = true
-                this.newLocataire = false
-                refreshErreur()
-                this.contrat.getContratsByFiltre({locataire_id: id})
+                this.changeValueSetLocataire()
                 return true
             }
             return false
+        },
+        getLocataireByObject(locataireObj) {
+            this.locataire = locataireObj
+            this.changeValueSetLocataire()
+        },
+
+        changeValueSetLocataire() {
+            this.haveLocataireLoad = true
+            this.newLocataire = false
+            refreshErreur()
+            this.contrat.getContratsByFiltre({locataire_id: this.getLocataire.id})
         },
 
         async getLocatairesByFiltre(filtre) {

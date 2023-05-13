@@ -70,12 +70,16 @@ export const useAgenceStore = defineStore('agence', {
         async getAgenceById(id) {
             if (await getAgence(id)){
                 this.agence = agence
-                this.haveAgenceLoad = true
-                this.newAgence = false
-                refreshErreur()
+                this.changeValueSetAgence()
                 return true
             }
             return false
+        },
+
+        changeValueSetAgence() {
+            this.haveAgenceLoad = true
+            this.newAgence = false
+            refreshErreur()
         },
 
         async getAgencesByFiltre(filtre) {

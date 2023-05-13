@@ -10,15 +10,15 @@
                         nom: 'Informations proprietaire',
                         id: 'info_proprio'
                     },
-             /*       {
+                  {
                         nom: 'Liste des appartements',
                         id : 'liste_apparts'
-                    }*/
+                    }
                 ]" 
                 activeItemDefault="info_proprio"
             >
                 <InfoPropio ref-nav="info_proprio" :proprietaire="proprietaire" deleteProps="true"/>
-           <!--     <ListeAppart ref-nav="liste_apparts" :filtres="{proprietaire_id: proprio_id}"/> -->
+                <ListeAppart ref-nav="liste_apparts" :appart="proprietaire.appart"/>
             </Nav>
 
             <InfoPropio :proprietaire="proprietaire" v-else />

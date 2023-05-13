@@ -11,7 +11,7 @@
                     nom: 'Informations appartement',
                     id: 'slow_appart'
                 },
-       /*         {
+                {
                     nom: 'informations proprietaire',
                     id: 'show_proprio'
                 },
@@ -19,16 +19,16 @@
                     nom: 'Liste des contrats',
                     id: 'contrat_liste'
                 },
-                {
+            /*    {
                     nom: 'Etat des lieux',
                     id: 'etat_des_lieu'
                 }*/
             ]" activeItemDefault="slow_appart"
             >
                 <AppartInfo ref-nav="slow_appart" deleteProps="true" :appart="appart"/>
-                <!--<InfoPropio :proprietaireBase="appart.proprietaire" ref-nav="show_proprio" />
-                <ListeContrat :filtres="{appart_id: appart_id }" ref-nav="contrat_liste"/>
-                <ListeEtatDesLieu :filtres="{appart_id: appart_id}" ref-nav="etat_des_lieu" :appart_id="appart_id" />-->
+                <InfoPropio :proprietaire="appart.proprietaire" ref-nav="show_proprio" />
+                <ListeContrat :contrat="appart.contrat" ref-nav="contrat_liste"/>
+               <!-- <ListeEtatDesLieu :filtres="{appart_id: appart_id}" ref-nav="etat_des_lieu" :appart_id="appart_id" />-->
             </Nav>
             <AppartInfo ref-nav="slow_appart" :appart="appart" v-else/>
 

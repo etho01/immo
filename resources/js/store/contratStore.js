@@ -1,4 +1,6 @@
 import { defineStore } from "pinia";
+import { useAppartStore } from './appartStore';
+import { useLocataireStore } from './locataireStore'
 
 import userContrat from '../services/contratServices.js';
 
@@ -28,7 +30,9 @@ export const useContratStore = defineStore('contrat', {
             nbPage: 1,
             erreurTab,
             newContrat : false,
-            haveContratLoad: false
+            haveContratLoad: false,
+            locataire: useLocataireStore(),
+            appart: useAppartStore()
         }
     },
     getters: {
@@ -70,12 +74,18 @@ export const useContratStore = defineStore('contrat', {
         async getContratById(id) {
             if (await getContrat(id)){
                 this.contrat = contrat
-                this.haveContratLoad = true
-                this.newContrat = false
-                refreshErreur()
+                this.changeValueSetContrat()
                 return true
             }
             return false
+        },
+
+        changeValueSetContrat() {
+            this.haveContratLoad = true
+            this.newContrat = false
+            this.locataire.getLocataireByObject(this.getContrat.locataire)
+            this.appart.getAppartByObj(this.getContrat.appart)
+            refreshErreur()
         },
 
         async getContratsByFiltre(filtre) {
@@ -87,6 +97,7 @@ export const useContratStore = defineStore('contrat', {
             }
             return false
         },
+
         async gotoPage(nbPageGo) {
             if (await gotoPage(nbPageGo)) {
                 this.contrats = contrats.value

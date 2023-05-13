@@ -7,7 +7,7 @@
                                     nom : 'Infos Contrat',
                                     id : 'infos_contrat'
                                 },
-                         /*       {
+                                {
                                     nom : 'Infos sur l\'appartement à louer',
                                     id : 'infos_appart'
                                 },
@@ -19,7 +19,7 @@
                                     nom : 'Infos sur le locataire',
                                     id : 'infos_loc'
                                 },                                
-                                {
+                              /*  {
                                     nom : 'Etat des lieux',
                                     id : 'etat_des_lieu'
                                 },
@@ -29,10 +29,10 @@
                                 }        */                        
             ]" activeItemDefault="infos_contrat">
             <InfoContrat ref-nav="infos_contrat" :contrat="contrat" deleteProps="true"  />
-       <!--     <InfoAppart ref-nav="infos_appart" :appartBase="contrat.appart"/>
-            <InfoLocataire ref-nav="infos_loc" :locataireBase="contrat.locataire" />
-            <InfoPropio ref-nav="infos_proprio" :proprietaireBase="getProprietaire" />
-            <ListeEtatDesLieu :filtres="{contrat_id: this.contrat_id}"  ref-nav="etat_des_lieu" :contrat_id="contrat_id" :appart_id="getAppartId"/>
+            <InfoAppart ref-nav="infos_appart" :appart="contrat.appart"/>
+            <InfoLocataire ref-nav="infos_loc" :locataire="contrat.locataire" />
+            <InfoPropio ref-nav="infos_proprio" :proprietaire="contrat.appart.proprietaire" />
+            <!--<ListeEtatDesLieu :filtres="{contrat_id: this.contrat_id}"  ref-nav="etat_des_lieu" :contrat_id="contrat_id" :appart_id="getAppartId"/>
             <ListePaiment :filtres="{contrat_id: this.contrat_id}" :contrat_id="contrat_id" ref-nav="paiment"/> -->
         
         </Nav>
