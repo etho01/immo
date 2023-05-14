@@ -2,7 +2,7 @@ import piniaUse from "../../../store/pinia";
 import { defineStore } from 'pinia'
 
 import router from "../../../router";
-import axios from "../../../services/axios.js";
+import getCoockie from "../../../utils/utils"
 
 const useUserLogStore = defineStore('userLoh',{
     state: () => ({
@@ -12,13 +12,26 @@ const useUserLogStore = defineStore('userLoh',{
     actions: {
         login(infosUser) {
             this.infosUser = infosUser;
+            document.cookie = 'user=' + JSON.stringify(this.infosUser) +';max-age=86400';
             this.isLog = true;
         },
         disconect() {
             this.infosUser = {}
+            document.cookie = 'user=;max-age=86400';
             this.isLog = false
-        //    router.push({name: 'login'})
+            router.push({name: 'login'})
         },
+        checkCoockieConnect() {
+            let valueCoockie = ""
+            let name="user"
+            const value = `; ${document.cookie}`;
+            const parts = value.split(`; ${name}=`);
+            if (parts.length === 2) valueCoockie = parts.pop().split(';').shift();
+            if (valueCoockie != "" ) {
+                this.infosUser = JSON.parse(valueCoockie)
+                this.isLog = true
+            }
+        }
     },
     getters: {
         getIsLog() {
@@ -32,21 +45,15 @@ const useUserLogStore = defineStore('userLoh',{
         },
         getHeaderRequest() {
             return {
-                headers: {
-                    'Authorization': `Bearer 215|OCwoqBx3Zkczxw1jIQntpmVYMIltpVCcXCkrwRj4`
-                }
+                headers: { 
+                    'Authorization': `Bearer ${this.infosUser['token']}`
+                  }
             }
-     //       return {
-       //         headers: { 
-         //           'Authorization': `Bearer ${this.infosUser['token']}`
-             //     }
-           // }
         },
         getNom() {
             return this.infosUser['name']
         },
         getUserLog() {
-            return true
             return this.infosUser;
         }
     }

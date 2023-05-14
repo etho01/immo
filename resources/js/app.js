@@ -25,7 +25,6 @@ import router from './router';
 
 import App from './App.vue'
 
-
 createApp(App)
 .use(piniaUse)
 .use(router) 
@@ -34,8 +33,10 @@ createApp(App)
 
 import userStoreLog from './components/feature/user/userStoreLog.js';
 
-/*router.beforeEach(async  (to) => {
+userStoreLog.checkCoockieConnect()
+
+router.beforeEach(async  (to) => {
     if (!userStoreLog.getIsLog && to.name !== 'login' && isProd) {
         return { name: 'login' }
     }
-})*/
+})
