@@ -15,7 +15,8 @@ class Contrat extends Model
         'appart_id',
         'locataire_id',
         'date_debut',
-        'date_fin',
+        'date_fin', 
+        'ref',
         'created_at',
         'updated_at'
     ];

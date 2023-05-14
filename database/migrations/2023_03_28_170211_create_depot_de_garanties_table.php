@@ -17,7 +17,8 @@ return new class extends Migration
             $table->foreignIdFor(Contrat::class)->constrained();
             $table->decimal('montant_encaisser');
             $table->date('date_encaissement');
-            $table->decimal('montant_restituer');
+            $table->decimal('montant_restituer')->nullable();
+            $table->date('date_restitution')->nullable();
             $table->timestamps();
         });
     }

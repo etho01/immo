@@ -25,6 +25,7 @@ class ContratResouce extends JsonResource
             'depot_de_garantie' => DepotDeGarantieResouce::collection($this->depotDeGaranties),
             'etat_des_lieu' => EtatDesLieuResouce::collection($this->etatDesLieus),
             'paiement' => PaiementResouce::collection($this->paiements),
+            'ref' => $this->ref,
             'date_debut' => $this->date_debut,
             'date_fin' => $this->date_fin
         ];

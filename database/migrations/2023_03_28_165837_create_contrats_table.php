@@ -18,7 +18,8 @@ return new class extends Migration
             $table->foreignIdFor(Appart::class)->constrained();
             $table->foreignIdFor(Locataire::class)->constrained();
             $table->date('date_debut');
-            $table->date('date_fin');
+            $table->date('date_fin')->nullable();
+            $table->text('ref');
             $table->timestamps();
         });
     }

@@ -19,7 +19,8 @@ class DepotDeGarantieResouce extends JsonResource
             'contrat_id' => $this->contrat_id,
             'montant_encaisser' => $this->montant_encaisser,
             'date_encaissement' => $this->date_encaissement,
-            'montant_restituer' => $this->montant_restituer
+            'montant_restituer' => $this->montant_restituer,
+            'date_restitution' => $this->date_restitution
         ];
     }
 }

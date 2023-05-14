@@ -15,6 +15,7 @@ class DepotDeGarantie extends Model
         'montant_encaisser',
         'date_encaissement',
         'montant_restituer',
+        'date_restitution',
         'created_at',
         'updated_at'
     ];

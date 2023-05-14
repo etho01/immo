@@ -32,6 +32,8 @@ class DepotDeGarantieRequest extends FormRequest
             'contrat_id' => ['required', 'exists:contrats,id'],
             'montant_encaisser' => ['required'],
             "date_encaissement" => ['required', 'date'],
+            'montant_restituer' => [],
+            'date_restitution' => ['date']
         ];
     }
 
@@ -39,6 +41,8 @@ class DepotDeGarantieRequest extends FormRequest
         return [
             'contrat_id' => ['exists:contrats,id'],
             "date_encaissement" => ['date'],
+            'montant_restituer' => [],
+            'date_restitution' => ['date']
         ];
     }
 }

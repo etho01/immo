@@ -35,6 +35,9 @@ return new class extends Migration
      */
     public function down(): void
     {
+        Schema::table('apparts', function(Blueprint $table) {
+            $table->dropColumn('proprietaire_id');
+        });
         Schema::dropIfExists('proprietaires');
     }
 };

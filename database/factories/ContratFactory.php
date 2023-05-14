@@ -24,6 +24,7 @@ class ContratFactory extends Factory
             'locataire_id' => Locataire::all()->random()->id,
             'date_debut' => fake()->date(),
             'date_fin' => fake()->date(),
+            'ref' => fake()->word()
         ];
     }
 }

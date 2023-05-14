@@ -33,6 +33,7 @@ class contratRequest extends FormRequest
             'locataire_id' => ['required', 'exists:locataires,id'],
             'date_debut' => ['required', 'date'],
             'date_fin' => ['required', 'date'],
+            'ref' => ['required', 'max:255']
         ];
     }
 
@@ -42,6 +43,7 @@ class contratRequest extends FormRequest
             'date_fin' => ['date'],
             'appart_id' => ['exists:apparts,id'],
             'locataire_id' => ['exists:locataires,id'],
+            'ref' => ['max:255']
         ];
     }
 

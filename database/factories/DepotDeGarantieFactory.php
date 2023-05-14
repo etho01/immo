@@ -22,6 +22,7 @@ class DepotDeGarantieFactory extends Factory
             'montant_encaisser' => fake()->randomFloat(2,0,50000),
             'date_encaissement' => fake()->date(),
             'montant_restituer' => fake()->randomFloat(2,0,50000),
+            'date_restitution' => fake()->date()
         ];
     }
 }
