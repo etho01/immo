@@ -51,6 +51,7 @@ class ContratController extends Controller
         return new ContratResouce (Contrat::create([
             'appart_id' => $request->appart_id,
             'locataire_id' => $request->locataire_id,
+            'ref' => $request->ref,
             'date_debut' => $request->date_debut,
             'date_fin' => $request->date_fin
         ]));
@@ -71,6 +72,7 @@ class ContratController extends Controller
     {
         $contrat->date_debut = $request->input('date_debut', $contrat->date_debut);
         $contrat->date_fin = $request->input('date_fin', $contrat->date_fin);
+        $contrat->ref = $request->input('ref' , $request->ref);
 
         $contrat->save();
         

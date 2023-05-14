@@ -4,6 +4,7 @@
         <Title title="Information contrat" />
         <div class="grid grid-cols-2 mt-3">
             <Text type="date" label="Date de début" :value="contrat.getContrat.date_debut" @changeValue="changeDateDebut"/>
+            <Text label="Ref du contrat" :value="contrat.getContrat.ref" @changeValue="changeRef" />
             <Text type="date" label="Date de fin" :value="contrat.getContrat.date_fin" @changeValue="chnageDateFin"/>
         </div>
         <div v-if="contrat.isNewContrat" class="grid grid-cols-2 mt-3">
@@ -45,6 +46,7 @@
                 date_fin: this.contrat.getContrat.date_fin,
                 appart_id: undefined,
                 locataire_id: undefined,
+                ref: undefined
             }
         },
         methods : {
@@ -74,6 +76,9 @@
             chnageLocataire(id){
                 this.locataire_id = id
             },
+            changeRef(newRef) {
+                this.ref = newRef
+            }
         },
         computed: {
             canDelete() {
@@ -83,6 +88,7 @@
                 return {
                     date_debut: this.date_debut,
                     date_fin: this.date_fin,
+                    ref: this.ref,
                     appart_id: this.appart_id,
                     locataire_id: this.locataire_id
                 }

@@ -2,6 +2,19 @@ export default function contratConst(){
 
     const ContratCols = [
         {
+            nom : "Reference du contrat",
+            param: {
+                actions: [
+                    {
+                        type: 'fonc',
+                        fonc: (contrat) => contrat.ref
+                    }
+                ]
+            },
+            size: 1,
+            id: 'contrat.ref'
+        },
+        {
             nom : 'Nom du locataire',
             param: {
                 actions : [
