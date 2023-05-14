@@ -21,7 +21,7 @@ class ContratController extends Controller
 
         $eloquent = Contrat::with([
             'locataire',
-            'depotDeGaranties',
+            'depotDeGarantie',
             'paiements',
             'etatDesLieus',
             'appart' => [

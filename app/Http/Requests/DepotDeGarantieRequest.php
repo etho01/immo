@@ -29,7 +29,7 @@ class DepotDeGarantieRequest extends FormRequest
 
     function store() {
         return [
-            'contrat_id' => ['required', 'exists:contrats,id'],
+            'contrat_id' => ['required', 'exists:contrats,id', 'unique:etat_des_lieus,contrat_id'],
             'montant_encaisser' => ['required'],
             "date_encaissement" => ['required', 'date'],
             'montant_restituer' => [],

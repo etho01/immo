@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\Http\Controllers\Controller;
-use App\Http\Resources\DepotDeGarantieResouce;
-use App\Models\DepotDeGarantie;
 use Illuminate\Http\Request;
+use App\Models\DepotDeGarantie;
+use App\Http\Controllers\Controller;
+use App\Http\Requests\DepotDeGarantieRequest;
+use App\Http\Resources\DepotDeGarantieResouce;
 
 class DepotDeGarantieController extends Controller
 {
@@ -24,13 +25,14 @@ class DepotDeGarantieController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(DepotDeGarantieRequest $request)
     {
         DepotDeGarantie::create([
             'contrat_id' => $request->contrat_id,
             'montant_encaisser' => $request->montant_encaisser,
             'date_encaissement' => $request->date_encaissement,
             'montant_restituer' => $request->montant_restituer, 
+            'date_restitution' => $request->date_restitution
         ]);
     }
 
@@ -45,14 +47,15 @@ class DepotDeGarantieController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, DepotDeGarantie $depotDeGarantie)
+    public function update(DepotDeGarantieRequest $request, DepotDeGarantie $depotDeGarantie)
     {
-        DepotDeGarantie::where('id', $depotDeGarantie->id)->update([
-            'contrat_id' => $request->contrat_id,
-            'montant_encaisser' => $request->montant_encaisser,
-            'date_encaissement' => $request->date_encaissement,
-            'montant_restituer' => $request->montant_restituer, 
-        ]);
+        $depotDeGarantie->montant_encaisser = $request->input('montant_encaisser', $depotDeGarantie->montant_encaisser);
+        $depotDeGarantie->date_encaissement = $request->input('date_encaissement', $depotDeGarantie->date_encaissement);
+        $depotDeGarantie->montant_restituer = $request->input('montant_restituer', $depotDeGarantie->montant_restituer);
+        $depotDeGarantie->date_restitution = $request->input('date_restitution', $depotDeGarantie->date_restitution);
+
+        $depotDeGarantie->save();
+
         return new DepotDeGarantieResouce(DepotDeGarantie::find($depotDeGarantie->id));
     }
 

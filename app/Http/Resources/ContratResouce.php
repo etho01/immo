@@ -22,7 +22,7 @@ class ContratResouce extends JsonResource
             'id' => $this->id,
             'appart' => new AppartResouce(Appart::find( $this->appart_id)),
             'locataire' => new LocataireResouce($this->locataire),
-            'depot_de_garantie' => DepotDeGarantieResouce::collection($this->depotDeGaranties),
+            'depot_de_garantie' => new DepotDeGarantieResouce($this->depotDeGarantie),
             'etat_des_lieu' => EtatDesLieuResouce::collection($this->etatDesLieus),
             'paiement' => PaiementResouce::collection($this->paiements),
             'ref' => $this->ref,

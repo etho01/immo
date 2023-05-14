@@ -39,7 +39,7 @@ Route::get('/login/error', function () {
     Route::apiResource('agence', AgenceController::class);
     Route::apiResource('appart', AppartController::class);
     Route::apiResource('contrat', ContratController::class);
-    Route::apiResource('depotGarantie', DepotDeGarantieController::class);
+    Route::apiResource('depotDeGarantie', DepotDeGarantieController::class);
     Route::apiResource('etatDesLieux', EtatDesLieuController::class);
     Route::apiResource('locataire' , LocataireController::class);
     Route::apiResource('paiement', PaiementController::class);

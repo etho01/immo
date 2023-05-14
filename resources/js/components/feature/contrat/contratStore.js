@@ -3,6 +3,7 @@ import { useAppartStore } from '../appart/appartStore';
 import { useLocataireStore } from '../locataire/locataireStore'
 import { usePaiementStore } from '../paiement/paiementStore'
 import { useEtatDesLieuStore } from '../etatDesLieu/etatDesLieuStore';
+import { useDepotDeGarantieStore } from '../depotDeGarantie/depotDeGarantieStore'
 
 import userContrat from './contratServices.js';
 
@@ -38,7 +39,8 @@ export const useContratStore = defineStore('contrat', {
             locataire: useLocataireStore(),
             appart: useAppartStore(),
             paiement: usePaiementStore(),
-            etatDesLieu: useEtatDesLieuStore()
+            etatDesLieu: useEtatDesLieuStore(),
+            depotDeGarantie: useDepotDeGarantieStore()
         }
     },
     getters: {
@@ -93,6 +95,12 @@ export const useContratStore = defineStore('contrat', {
             this.appart.getAppartByObj(this.getContrat.appart)
             this.paiement.getPaiementsByObj(this.getContrat.paiement)
             this.etatDesLieu.getEtatDesLieusByObj(this.getContrat.etat_des_lieu)
+            if (this.getContrat.depot_de_garantie == null) {
+                this.depotDeGarantie.setNewDepotDeGarantie()
+            } else {
+                this.depotDeGarantie.getDepotDeGarantieByObj(this.getContrat.depot_de_garantie)
+
+            }
             refreshErreur()
         },
 

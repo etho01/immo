@@ -33,8 +33,8 @@ class Contrat extends Model
         return $this->hasMany(EtatDesLieu::class);
     }
 
-    public function depotDeGaranties(){
-        return $this->hasMany(DepotDeGarantie::class);
+    public function depotDeGarantie(){
+        return $this->hasOne(DepotDeGarantie::class);
     }
 
     public function locataire(){
