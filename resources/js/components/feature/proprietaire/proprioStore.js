@@ -3,6 +3,8 @@ import { useAppartStore } from '../appart/appartStore';
 
 import userProprietaire from './proprietaireServices.js';
 
+import { deleteUndefine } from "../../../store/fonc";
+
 const {
     proprietaire,
     proprietaires,
@@ -42,7 +44,7 @@ export const useProprietaireStore = defineStore('proprietaire', {
         async updateProprietaire(data) {
             if (this.haveProprietaireLoad) {
                 if ( await updateProprietaire(this.getProprietaire.id, data)) {
-                    this.proprietaire = {...this.getProprietaire, ...data}
+                    this.proprietaire = {...this.getProprietaire, ...deleteUndefine(data)}
                     return true
                 }
             }
@@ -71,7 +73,7 @@ export const useProprietaireStore = defineStore('proprietaire', {
 
         async getProprietaireById(id) {
             if (await getProprietaire(id)){
-                this.proprietaire = proprietaire
+                this.proprietaire = {...proprietaire.value}
                 this.changeValueSetProprietaire()
                 return true
             }

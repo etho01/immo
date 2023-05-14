@@ -2,6 +2,8 @@ import { defineStore } from "pinia";
 
 import userAgence from './agenceServices.js';
 
+import { deleteUndefine } from "../../../store/fonc.js";
+
 const {
     agence,
     agences,
@@ -40,7 +42,7 @@ export const useAgenceStore = defineStore('agence', {
         async updateAgence(data) {
             if (this.haveAgenceLoad) {
                 if ( await updateAgence(this.getAgence.id, data)) {
-                    this.agence = {...this.getAgence, ...data}
+                    this.agence = {...this.getAgence, ...deleteUndefine(data)}
                     return true
                 }
             }
@@ -69,7 +71,7 @@ export const useAgenceStore = defineStore('agence', {
 
         async getAgenceById(id) {
             if (await getAgence(id)){
-                this.agence = agence
+                this.agence = {...agence.value}
                 this.changeValueSetAgence()
                 return true
             }

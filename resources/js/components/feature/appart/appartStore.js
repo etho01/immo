@@ -2,6 +2,8 @@ import { defineStore } from "pinia";
 import { useProprietaireStore } from '../proprietaire/proprioStore.js';
 import { useContratStore } from '../contrat/contratStore.js';
 
+import { deleteUndefine } from "../../../store/fonc.js";
+
 import useAppart from './appartServices.js';
 
 const {
@@ -44,7 +46,7 @@ export const useAppartStore = defineStore('appart', {
         async updateAppart(data) {
             if (this.haveAppartLoad) {
                 if ( await updateAppart(this.getAppart.id, data)) {
-                    this.appart = {...this.getAppart, ...data}
+                    this.appart = {...this.getAppart, ...deleteUndefine(data)}
                     return true
                 }
             }
@@ -73,7 +75,7 @@ export const useAppartStore = defineStore('appart', {
 
         async getAppartById(id) {
             if (await getAppart(id)){
-                this.appart = appart
+                this.appart = {...appart.value}
                 this.changeValueSetAppart()
                 return true
             }

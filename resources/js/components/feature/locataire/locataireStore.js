@@ -3,6 +3,8 @@ import { useContratStore } from '../contrat/contratStore'
 
 import userLocataire from './locataireServices.js';
 
+import { deleteUndefine } from "../../../store/fonc";
+
 const {
     locataire,
     locataires,
@@ -42,7 +44,7 @@ export const useLocataireStore = defineStore('locataire', {
         async updateLocataire(data) {
             if (this.haveLocataireLoad) {
                 if ( await updateLocataire(this.getLocataire.id, data)) {
-                    this.locataire = {...this.getLocataire, ...data}
+                    this.locataire = {...this.getLocataire, ...deleteUndefine(data)}
                     return true
                 }
             }
@@ -71,7 +73,7 @@ export const useLocataireStore = defineStore('locataire', {
 
         async getLocataireById(id) {
             if (await getLocataire(id)){
-                this.locataire = locataire
+                this.locataire = {...locataire.value}
                 this.changeValueSetLocataire()
                 return true
             }

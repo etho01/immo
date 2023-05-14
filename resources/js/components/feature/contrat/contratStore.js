@@ -6,6 +6,8 @@ import { useEtatDesLieuStore } from '../etatDesLieu/etatDesLieuStore';
 
 import userContrat from './contratServices.js';
 
+import { deleteUndefine } from "../../../store/fonc";
+
 const {
     contrat,
     contrats,
@@ -48,7 +50,7 @@ export const useContratStore = defineStore('contrat', {
         async updateContrat(data) {
             if (this.haveContratLoad) {
                 if ( await updateContrat(this.getContrat.id, data)) {
-                    this.contrat = {...this.getContrat, ...data}
+                    this.contrat = {...this.getContrat, ...deleteUndefine(data)}
                     return true
                 }
             }
@@ -77,7 +79,7 @@ export const useContratStore = defineStore('contrat', {
 
         async getContratById(id) {
             if (await getContrat(id)){
-                this.contrat = contrat
+                this.contrat = {...contrat.value}
                 this.changeValueSetContrat()
                 return true
             }
