@@ -51,6 +51,14 @@ export default {
             this.$refs.modalEtatDesLieu.toogle();
         }
     },
+    computed: {
+        getTitleModal() {
+            if (this.etatDesLieu.isNewEtatDesLieu) {
+                return 'Nouvel etat des lieu'
+            }
+            return 'Etat des lieu'
+        }
+    },
     components: { ListeElement, Modal, InfoEtatDesLieu }
 }
 

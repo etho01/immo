@@ -51,6 +51,14 @@ export default {
             this.$refs.modalPayment.toogle();
         }
     },
+    computed: {
+        getTitleModal() {
+            if (this.paiement.isNewPaiement) {
+                return 'Nouveau paiement'
+            }
+            return 'Paiement'
+        }
+    },
     components: { ListeElement, Modal, InfoPaiement }
 }
 
