@@ -18,6 +18,12 @@ class LocataireController extends Controller
     public function index(Request $request)
     {
         $elequent = Locataire::select('*');
+        if ($request->input('recherche', -1) != -1) {
+            $elequent->whereIn('id', Locataire::getIdByRecherche($request->input('recherche')));
+        }
+        if ($request->input('genre', "") != "") {
+            $elequent->where('genre', $request->input('genre'));
+        }
         if ($request->input('contrat_id', -1) != -1){
             $elequent->whereHas('contrats', function (Builder $query) use ($request) {
                 $query->where('id', $request->input('contrat_id'));

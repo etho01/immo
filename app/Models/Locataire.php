@@ -27,4 +27,13 @@ class Locataire extends Model
         return $this->hasMany(Contrat::class);
     }
 
+    public static function getIdByRecherche($recherche) {
+        $eloquent = Locataire::select('id');
+        $eloquent->orWhere('nom', 'like', '%'.$recherche.'%');
+        $eloquent->orWhere('prenom', 'like', '%'.$recherche.'%');
+        $eloquent->orWhere('email', 'like', '%'.$recherche.'%');
+        $eloquent->orWhere('telephone', 'like', '%'.$recherche.'%');
+        return ($eloquent->get()->pluck('id'));
+    }
+
 }

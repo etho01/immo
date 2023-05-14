@@ -17,7 +17,12 @@ class PropietaireController extends Controller
     public function index(Request $request)
     {
         $elequent = Proprietaire::select('*');
-
+        if ($request->input('recherche', -1) != -1) {
+            $elequent->whereIn('id', Proprietaire::getIdByRecherche($request->input('recherche')));
+        }
+        if ($request->input('genre', "") != "") {
+            $elequent->where('genre', $request->input('genre'));
+        }
         if ($request->input('appart_id', -1) != -1){
             $elequent->whereHas('apparts', function (Builder $query) use ($request) {
                 $query->where('id', $request->input('appart_id'));

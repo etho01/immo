@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Illuminate\Contracts\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -23,6 +24,21 @@ class Appart extends Model
         'created_at',
         'updated_at'
     ];
+
+    
+    public static function getIdByRecherche($recherche) {
+        $eloquent = Appart::select('id');
+        $eloquent->orWhere('adresse', 'like', '%'.$recherche.'%');
+        $eloquent->orWhere('adresse_compl', 'like', '%'.$recherche.'%');
+        $eloquent->orWhere('cp', 'like', '%'.$recherche.'%');
+        $eloquent->orWhere('departement', 'like', '%'.$recherche.'%');
+        $eloquent->orWhere('pays', 'like', '%'.$recherche.'%');
+
+        $eloquent->orWhereIn('proprietaire_id', Proprietaire::getIdByRecherche($recherche));
+        $eloquent->orWhereIn('agence_id', Agence::getIdByRecherche($recherche));
+
+        return ($eloquent->get()->pluck('id'));
+    }
 
     public function agence(){
         return $this->belongsTo(Agence::class);

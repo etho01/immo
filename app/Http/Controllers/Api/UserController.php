@@ -33,7 +33,11 @@ class UserController extends Controller
     }
 
     public function index(Request $request) {
-        return UserResource::collection(User::paginate(30));
+        $eloquent = User::select('*');
+        if ($request->input('recherche', -1) != -1) {
+            $eloquent->whereIn('id', User::getIdByRecherche($request->input('recherche')));
+        }
+        return UserResource::collection($eloquent->paginate(30));
     }
 
     public function store(UserRequest $request){

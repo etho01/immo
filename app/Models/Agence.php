@@ -21,4 +21,12 @@ class Agence extends Model
     public function apparts(){
         return $this->hasMany(Appart::class);
     }
+
+    public static function getIdByRecherche($recherche) {
+        $eloquent = Agence::select('id');
+        $eloquent->orWhere('nom', 'like', '%'.$recherche.'%');
+        $eloquent->orWhere('iban', 'like', '%'.$recherche.'%');
+        $eloquent->orWhere('bic', 'like', '%'.$recherche.'%');
+        return ($eloquent->get()->pluck('id'));
+    }
 }

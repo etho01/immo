@@ -15,7 +15,11 @@ class AgenceController extends Controller
      */
     public function index(Request $request)
     {
-        return AgenceResouce::collection(Agence::paginate(30));
+        $eloquent = Agence::select('*');
+        if ($request->input('recherche', -1) != -1) {
+            $eloquent->whereIn('id', Agence::getIdByRecherche($request->input('recherche')));
+        }
+        return AgenceResouce::collection($eloquent->paginate(30));
     }
 
     /**

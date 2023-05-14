@@ -40,4 +40,14 @@ class Contrat extends Model
     public function locataire(){
         return $this->belongsTo(Locataire::class, 'locataire_id', 'id', 'id', 'id');
     }
+
+    public static function getIdByRecherche($recherche) {
+        $eloquent = Contrat::select('id');
+        $eloquent->orWhere('ref', 'like', '%'.$recherche.'%');
+
+        $eloquent->orWhereIn('appart_id', Appart::getIdByRecherche($recherche));
+        $eloquent->orWhereIn('locataire_id', Locataire::getIdByRecherche($recherche));
+
+        return ($eloquent->get()->pluck('id'));
+    }
 }

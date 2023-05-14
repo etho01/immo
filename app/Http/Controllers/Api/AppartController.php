@@ -19,7 +19,14 @@ class AppartController extends Controller
     {
         $eloquent = Appart::with([
             'agence',
+            'proprietaire'
         ]);
+        if ($request->input('recherche', -1) != -1) {
+            $eloquent->whereIn('id', Appart::getIdByRecherche($request->input('recherche')));
+        }
+        if ($request->input('agence_id', -1) != -1) {
+            $eloquent->where('agence_id', $request->input('agence_id', -1));
+        }
         if ($request->input('contrat_id', -1) != -1){
             $request->whereHas('contrats', function (Builder $query) use ($request){
                 $query->where('id', $request->input('contrat_id'));

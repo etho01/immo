@@ -29,6 +29,10 @@ class ContratController extends Controller
             ]
         ]);
 
+        if ($request->input('recherche', -1) != -1) {
+            $eloquent->whereIn('id', Contrat::getIdByRecherche($request->input('recherche')));
+        }
+
         if ($request->input('agence_id', -1) != -1) {
             $eloquent->whereHas('appart', function (Builder $query) use ($request) {
                 $query->where('agence_id', $request->input('agence_id', -1));

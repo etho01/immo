@@ -41,4 +41,11 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public static function getIdByRecherche($recherche) {
+        $eloquent = User::select('id');
+        $eloquent->orWhere('name', 'like', '%'.$recherche.'%');
+        $eloquent->orWhere('email', 'like', '%'.$recherche.'%');
+        return ($eloquent->get()->pluck('id'));
+    }
 }
