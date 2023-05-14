@@ -1,5 +1,7 @@
 import { createRouter, createWebHistory } from "vue-router";
 
+import Dashboard from '../components/Dashboard.vue'
+
 import ShowAppart from '../components/feature/appart/ShowAppart.vue';
 import ShowContrat from '../components/feature/contrat/ShowContrat.vue';
 import ShowLocataire from '../components/feature/locataire/ShowLocataire.vue';
@@ -22,7 +24,7 @@ const routes = [
     {
         path: '/dashboard',
         name: 'dashboard',
-        component: MenuContrat
+        component: Dashboard
     },
     {
         path: '/contrat',
