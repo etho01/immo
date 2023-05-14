@@ -32,7 +32,7 @@ class contratRequest extends FormRequest
             'appart_id' => ['required', 'exists:apparts,id'],
             'locataire_id' => ['required', 'exists:locataires,id'],
             'date_debut' => ['required', 'date'],
-            'date_fin' => ['required', 'date'],
+            'date_fin' => ['date'],
             'ref' => ['required', 'max:255']
         ];
     }
