@@ -1,9 +1,3 @@
-import {ref, computed} from "vue";
-import axios from "../../../services/axios.js";
-
-import { getErrors, checkIsLog} from '../../../services/fonc.js';
-import userStoreLog from "../user/userStoreLog.js";
-
 import  useServices from '../../../services/baseServices.js'
 
 const {
