@@ -1,7 +1,7 @@
 <template>
 
     <main class="w-full">
-        <TitlePage :title="getTitle" />
+        <TitlePage :title="getTitlePage" />
         <section class="sm:container mx-auto p-3 bg-state-50">
             <InfoUser :user="user" deleteProps="true"/>
         </section>
@@ -47,16 +47,26 @@ const user = useUserStore()
         },
         async updated(){
             this.user_id = parseInt(this.$route.params.user_id);
-            if (this.$route.name == "me"){
-                this.user.getUserByObject(userStoreLog.getUserLog)
-            } else if (this.$route.params.user_id == 'new'){
-                this.user.setNewUser()
-            } else if (isNaN(this.user_id)) {
-                this.$router.push({ name: "user.menu" });
-            } else {
-                if (!await this.user.getUserById(this.user_id)){
+            if (this.user_id != this.$route.params.user_id){
+                if (this.$route.name == "me"){
+                    this.user.getUserByObject(userStoreLog.getUserLog)
+                } else if (this.$route.params.user_id == 'new'){
+                    this.user.setNewUser()
+                } else if (isNaN(this.user_id)) {
                     this.$router.push({ name: "user.menu" });
+                } else {
+                    if (!await this.user.getUserById(this.user_id)){
+                        this.$router.push({ name: "user.menu" });
+                    }
                 }
+            }
+        },
+        computed: {
+            getTitlePage() {
+                if (this.user.isNewUser) {
+                    return 'Nouvel utilisateur'
+                }
+                return this.user.getUser.name;
             }
         },
         components: { TitlePage, InfoUser }

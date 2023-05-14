@@ -1,7 +1,7 @@
 <template>
 
     <main class="w-full">
-        <TitlePage :title="getTitreAppart" />
+        <TitlePage :title="getTitlePage" />
 
         <section class="sm:container mx-auto p-3 bg-state-50">
 
@@ -69,15 +69,25 @@ const appart = useAppartStore();
             }
         },
         async updated(){
-            this.appart_id = parseInt(this.$route.params.appart_id);
-            if (this.$route.params.appart_id == 'new'){
-                this.appart.setNewAppart()
-            } else if (isNaN(this.appart_id)) {
-                this.$router.push({ name: "appart.menu" });
-            } else {
-                if (! await this.appart.getAppartById(this.appart_id)){
+            if (this.appart_id != this.$route.params.appart_id){
+                this.appart_id = parseInt(this.$route.params.appart_id);
+                if (this.$route.params.appart_id == 'new'){
+                    this.appart.setNewAppart()
+                } else if (isNaN(this.appart_id)) {
                     this.$router.push({ name: "appart.menu" });
+                } else {
+                    if (! await this.appart.getAppartById(this.appart_id)){
+                        this.$router.push({ name: "appart.menu" });
+                    }
                 }
+            }
+        },
+        computed: {
+            getTitlePage() {
+                if (this.appart.isNewAppart) {
+                    return 'Nouvel appartement'
+                }
+                return 'Appartement ' + this.appart.getAppart.adresse
             }
         },
         components : { TitlePage, Nav, AppartInfo, ListeElement, ListeContrat, ListeEtatDesLieu, InfoPropio }

@@ -38,7 +38,8 @@ export const useProprietaireStore = defineStore('proprietaire', {
     getters: {
         getProprietaire: (state) => state.proprietaire,
         getProprietaires: (state) => state.proprietaires,
-        isNewProprietaire: (state) => state.newProprietaire
+        isNewProprietaire: (state) => state.newProprietaire,
+        getNomProprietaire: (state) => state.proprietaire.prenom + ' ' + state.proprietaire.nom
     },
     actions: {
         async updateProprietaire(data) {

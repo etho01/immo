@@ -1,7 +1,7 @@
 <template>
 
     <main class="w-full">
-        <TitlePage :title="getNomAgence" />
+        <TitlePage :title="getTitlePage" />
         <section class="sm:container mx-auto p-3 bg-state-50">
             <Nav v-if="!agence.isNewAgence"
                 :labels="[
@@ -53,17 +53,26 @@ const agence = useAgenceStore()
         }
     },
     async updated() {
-        this.agence_id = parseInt(this.$route.params.agence_id);
-        if (this.$route.params.agence_id == "new") {
-            this.agence.setNewAgence()
-        }
-        else if (isNaN(this.agence_id)) {
-            this.$router.push({ name: "agence.menu" });
-        }
-        else {
-            if (!await this.agence.getAgenceById(this.agence_id)) {
-                this.$router.push({ name: "agence.menu" });
+        if (this.agence_id != this.$route.params.agence_id) {
+            this.agence_id = parseInt(this.$route.params.agence_id);
+            if (this.$route.params.agence_id == "new") {
+                this.agence.setNewAgence()
             }
+            else if (isNaN(this.agence_id)) {
+                this.$router.push({ name: "agence.menu" });
+            } else {
+                if (!await this.agence.getAgenceById(this.agence_id)) {
+                    this.$router.push({ name: "agence.menu" });
+                }
+            }
+        }
+    },
+    computed: {
+        getTitlePage() {
+            if (this.agence.isNewAgence) {
+                return 'Nouvel agence'
+            }
+            return 'Agence ' + this.agence.getAgence.nom
         }
     },
     components: { TitlePage, Nav, InfoAgence }

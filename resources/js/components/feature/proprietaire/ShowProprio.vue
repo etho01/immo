@@ -1,7 +1,7 @@
 <template>
 
     <main class="w-full">
-        <TitlePage :title="getTitreProprio" />
+        <TitlePage :title="getTitlePage" />
         <section class="sm:container mx-auto p-3 bg-state-50">
 
             <Nav v-if="!proprietaire.isNewProprietaire"
@@ -56,15 +56,25 @@ const proprietaire = useProprietaireStore();
             }
         },
         async updated(){
-            this.proprio_id = parseInt(this.$route.params.proprio_id)
-            if (this.$route.params.proprio_id == 'new'){
-                this.proprietaire.setNewProprietaire()
-            } else if (isNaN(this.proprio_id)) {
-                this.$router.push({ name: "proprio.menu" });
-            } else {
-                if (!await this.proprietaire.getProprietaireById(this.proprio_id)){
+            if (this.proprio_id != this.$route.proprio_id){
+                this.proprio_id = parseInt(this.$route.params.proprio_id)
+                if (this.$route.params.proprio_id == 'new'){
+                    this.proprietaire.setNewProprietaire()
+                } else if (isNaN(this.proprio_id)) {
                     this.$router.push({ name: "proprio.menu" });
+                } else {
+                    if (!await this.proprietaire.getProprietaireById(this.proprio_id)){
+                        this.$router.push({ name: "proprio.menu" });
+                    }
                 }
+            }
+        },
+        computed: {
+            getTitlePage() {
+                if (this.proprietaire.isNewProprietaire) {
+                    return 'Nouveau proprietaire'
+                }
+                return 'Proprietaire ' + this.proprietaire.getNomProprietaire
             }
         },
     components: { TitlePage, Nav, InfoPropio, ListeAppart }

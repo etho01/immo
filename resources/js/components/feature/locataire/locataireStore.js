@@ -38,7 +38,8 @@ export const useLocataireStore = defineStore('locataire', {
     getters: {
         getLocataire: (state) => state.locataire,
         getLocataires: (state) => state.locataires,
-        isNewLocataire: (state) => state.newLocataire
+        isNewLocataire: (state) => state.newLocataire,
+        getNomLocataire: (state) => state.locataire.prenom + ' ' + state.locataire.nom
     },
     actions: {
         async updateLocataire(data) {

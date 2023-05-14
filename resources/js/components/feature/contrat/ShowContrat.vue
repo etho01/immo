@@ -1,6 +1,6 @@
 <template>
     <main class="w-full" v-if="contrat_id != 'new'" >
-        <TitlePage :title="'Contrat '+contrat_id"></TitlePage>
+        <TitlePage :title="getTitlePage"></TitlePage>
         <section class="sm:container mx-auto p-3 bg-state-50">
             <Nav  v-if="!contrat.isNewContrat" :labels="[
                                 {
@@ -82,15 +82,25 @@
         }
     },
     async updated(){
-        this.contrat_id = parseInt(this.$route.params.contrat_id)
-        if (this.$route.params.contrat_id == 'new') {
-            contrat.setNewContrat();
-        } else if (isNaN(this.contrat_id)) {
-            this.$router.push({ name: "contrat.menu" });
-        } else {
-            if(!await contrat.getContratById(this.contrat_id) ){
+        if (this.contrat_id != this.$route.params.contrat_id){
+            this.contrat_id = parseInt(this.$route.params.contrat_id)
+            if (this.$route.params.contrat_id == 'new') {
+                contrat.setNewContrat();
+            } else if (isNaN(this.contrat_id)) {
                 this.$router.push({ name: "contrat.menu" });
+            } else {
+                if(!await contrat.getContratById(this.contrat_id) ){
+                    this.$router.push({ name: "contrat.menu" });
+                }
             }
+        }
+    },
+    computed: {
+        getTitlePage() {
+            if (this.contrat.isNewContrat) {
+                return 'Nouveau contrat'
+            }
+            return 'Contrat '+ this.contrat.getContrat.ref
         }
     },
     components: { TitlePage, Nav, ListeElement, InfoContrat, InfoAppart, InfoLocataire, ListeEtatDesLieu, ListePaiment, InfoPropio }

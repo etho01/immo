@@ -1,7 +1,7 @@
 <template>
 
     <main class="w-full">
-        <TitlePage :title="getTitreLocataire" />
+        <TitlePage :title="getTitlePage" />
         <section class="sm:container mx-auto p-3 bg-state-50">
 
             <Nav v-if="!locataire.isNewLocataire"
@@ -57,15 +57,25 @@
         }
     },
     async updated(){
-        this.locataire_id = parseInt(this.$route.params.locataire_id)
-        if (this.$route.params.locataire_id == 'new') {
-            locataire.setNewLocataire();
-        } else if (isNaN(this.locataire_id)) {
-            this.$router.push({ name: "locataire.menu" });
-        } else {
-            if(!await locataire.getLocataireById(this.locataire_id) ){
+        if (this.$route.params.locataire_id != this.locataire_id){
+            this.locataire_id = parseInt(this.$route.params.locataire_id)
+            if (this.$route.params.locataire_id == 'new') {
+                locataire.setNewLocataire();
+            } else if (isNaN(this.locataire_id)) {
                 this.$router.push({ name: "locataire.menu" });
+            } else {
+                if(!await locataire.getLocataireById(this.locataire_id) ){
+                    this.$router.push({ name: "locataire.menu" });
+                }
             }
+        }
+    },
+    computed: {
+        getTitlePage() {
+            if (this.locataire.isNewLocataire) {
+                return 'Nouveau locataire'
+            }
+            return 'Locataire '+ this.locataire.getNomLocataire
         }
     },
     components: { TitlePage, Nav, InfoLocataire, ListeContrat }
