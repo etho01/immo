@@ -5,7 +5,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Middleware\UserApiIsValid;
 use App\Http\Middleware\UserTokenIsValide;
-use App\Http\Controllers\api\UserController;
+//use App\Http\Controllers\api\UserController;
 use App\Http\Controllers\Api\AgenceController;
 use App\Http\Controllers\Api\AppartController;
 use App\Http\Controllers\Api\ContratController;
@@ -26,8 +26,7 @@ use App\Http\Controllers\api\PropietaireController;
 |
 */
 
-Route::get('login', [UserController::class, 'connect']);
-Route::get('register', [UserController::class, 'register']);
+//Route::get('login', [UserController::class, 'connect']);
 
 Route::get('/login/error', function () {
     return response()->json([
@@ -44,5 +43,5 @@ Route::get('/login/error', function () {
     Route::apiResource('locataire' , LocataireController::class);
     Route::apiResource('paiement', PaiementController::class);
     Route::apiResource('proprietaire', PropietaireController::class);
-    Route::apiResource('user', UserController::class);
+   // Route::apiResource('user', UserController::class);
 //});
