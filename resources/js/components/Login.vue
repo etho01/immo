@@ -25,6 +25,15 @@
             <input id="password" v-model="password" type="password" class=" rounded-lg border-gray-200 py-1 w-full mt-1"/>
         </div>
 
+        <div class="mt-5 text-sm mb-3">
+            <label for="remenber" class="ml-2 bg-gray-100 opacity-50 p-1 rounded-lg">
+                <span class="opacity-100">
+                    Me garder connecter
+                </span>
+            </label>
+            <input id="remenber" type="checkbox" class="ml-5" v-model="saveUser"/>
+        </div>
+
         <Error :erreurTab="erreurTab" class="text-sm" />
 
         <div class="mt-4 flex justify-center opacity-75 hover:opacity-100">
@@ -46,7 +55,8 @@ import userStoreLog from './feature/user/userStoreLog';
             email: 'test@test.fr',
             password: 'testtest',
             erreurTab,
-            userStoreLog
+            userStoreLog,
+            saveUser: false
         };
     },
     methods: {
@@ -54,7 +64,7 @@ import userStoreLog from './feature/user/userStoreLog';
         async logInApiClick() {
             let user = await this.logInApi(this.email, this.password);
             if (user != undefined && user.token != "") {
-                this.userStoreLog.login(user);
+                this.userStoreLog.login(user, this.saveUser);
                 this.$router.push({ name: "dashboard" });
             }
         }

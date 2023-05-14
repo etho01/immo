@@ -3,18 +3,19 @@
     <main class="w-full">
         <TitlePage :title="getTitle" />
         <section class="sm:container mx-auto p-3 bg-state-50">
-            <InfoUser :userBase="getUserUse" :updatePassword="canUpdatePassword" :user_id="user_id" deleteProps="true"/>
+            <InfoUser :user="user" deleteProps="true"/>
         </section>
     </main>
 
 </template>
 <script>
 import TitlePage from '../../utils/TitlePage.vue';
-import userStoreLog from './userStoreLog';
 import InfoUser from './InfoUser.vue';
-import userServices from "./userServices.js";
 
-const { user, getUser } = userServices()
+import userStoreLog from './userStoreLog';
+
+import { useUserStore } from './userStore';
+const user = useUserStore()
 
     export default {
         data() {
@@ -23,46 +24,39 @@ const { user, getUser } = userServices()
                 user
             }
         },
-        methods: {
-            getUser
-        },
         computed: {
-            getUserUse() {
-                if (this.$route.name == "me"){
-                    return userStoreLog.getUserLog
-                }
-                return user
-            },
             getTitle() {
                 if (this.getTitle != undefined){
                     return this.getTitle.name
                 }
                 return 'user';
             },
-            canUpdatePassword() {
-                if (this.$route.name == "me"){
-                    return true
-                }
-                return false;
-            }
         },
         async mounted() {
             if (this.$route.name == "me"){
-
+                this.user.getUserByObject(userStoreLog.getUserLog)
             } else if (this.$route.params.user_id == 'new'){
-                this.user_id = "new"
+                this.user.setNewUser()
             } else if (isNaN(this.user_id)) {
-                this.$router.push({ name: "proprio.menu" });
+                this.$router.push({ name: "user.menu" });
             } else {
-                if (!await this.getUser(this.user_id)){
-                    this.$router.push({ name: "proprio.menu" });
+                if (!await this.user.getUserById(this.user_id)){
+                    this.$router.push({ name: "user.menu" });
                 }
             }
         },
-        updated(){
-            if (this.$route.params.user_id != this.user_id){
-                this.user_id = this.$route.params.user_id
-                this.getUser(this.user_id)
+        async updated(){
+            this.user_id = parseInt(this.$route.params.user_id);
+            if (this.$route.name == "me"){
+                this.user.getUserByObject(userStoreLog.getUserLog)
+            } else if (this.$route.params.user_id == 'new'){
+                this.user.setNewUser()
+            } else if (isNaN(this.user_id)) {
+                this.$router.push({ name: "user.menu" });
+            } else {
+                if (!await this.user.getUserById(this.user_id)){
+                    this.$router.push({ name: "user.menu" });
+                }
             }
         },
         components: { TitlePage, InfoUser }

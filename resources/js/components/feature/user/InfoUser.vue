@@ -1,11 +1,11 @@
 <template>
 
     <div class="">
-        <Error :erreurTab="erreurTab" />
+        <Error :erreurTab="user.erreurTab" />
         <Title title="Informations" />
         <div class="grid grid-cols-1 mt-3">
-            <Text label="Nom" :value="getUserUse.name" @changeValue="changeName"/>
-            <Text label="Email" :value="getUserUse.email" @changeValue="changeEmail" />
+            <Text label="Nom" :value="user.getUser.name" @changeValue="changeName"/>
+            <Text label="Email" :value="user.getUser.email" @changeValue="changeEmail" />
         </div>
 
         <div v-if="canUpdatePassword" class="flex flex-col justify-center">
@@ -14,7 +14,7 @@
                 <Text label="Mot de passe" @changeValue="changePassword" />
             </div>
         </div>
-        <div class="mt-5 flex justify-end" v-if="update">
+        <div class="mt-5 flex justify-end" v-if="!user.isNewUser">
             <div class="bg-gray-200 hover:bg-gray-300 px-3 py-1 rounded-md cursor-pointer" @click="updateUserClick">
                 Modifier
             </div>
@@ -33,23 +33,18 @@
 <script>
 import Text from '../../utils/input/Text.vue';
 import Title from '../../utils/title/Title.vue';
-
-import useUser from './userServices.js'
 import Error from '../../utils/Error.vue';
 
 import userStoreLog from './userStoreLog';
 
-const { user, getUser, createUser, updateUser, deleteUser, erreurTab } = useUser()
     export default {
         props: [
-            'userBase',
-            'updatePassword',
-            'user_id',
-            'deleteProps'
+            'user',
+            'deleteProps',
+            'updatePassword'
         ],
         data() {
             return {
-                erreurTab,
                 data: {
                     password: undefined,
                     name: undefined,
@@ -58,20 +53,19 @@ const { user, getUser, createUser, updateUser, deleteUser, erreurTab } = useUser
             }
         },
         methods: {
-            createUser,
-            updateUser,
-            deleteUser,
             async createUserClick(){
-                let idNewIdUser = await this.createUser(this.data)
+                let idNewIdUser = await this.user.createUser(this.data)
                 if (idNewIdUser != 0) {
                     this.$router.push({name: 'user.show', params: { user_id: idNewIdUser }})
                 }
             },
-            updateUserClick(){
-                this.updateUser(this.getUserUse.id, this.data);
+            async updateUserClick(){
+                if (await this.user.updateUser(this.data) && this.user.isUserLog){
+                    userStoreLog.updateUserLog(this.data)
+                }
             },
             async deleteUserClick(){
-                if (await this.deleteUser(this.getUserUse.id)){
+                if (await this.user.deleteUser()){
                     this.$router.push({ name: 'user.menu'})
                 }
             },
@@ -86,32 +80,14 @@ const { user, getUser, createUser, updateUser, deleteUser, erreurTab } = useUser
             }
         },
         computed: {
-            getUserUse() {
-                if (this.user_id == 'new'){
-                    return {}
-                } else if (this.$route.name == "me"){
-                    return this.userBase
-                }
-                return this.userBase.value
-            },
             canUpdatePassword() {
-                if (this.updatePassword == true ||this.user_id == 'new' || userStoreLog.getUserLog.id == this.getUserUse.id){
+                if (this.updatePassword == true || this.user.canUpdatePassword){
                     return true
                 }
                 return false
             },
-            update() {
-                if (this.user_id != "new" || this.$route.name == "me"){
-                    return true;
-                }
-            },
             canDelete() {
-                return this.deleteProps == "true" && userStoreLog.getUserLog.id != this.getUserUse.id
-            }
-        },
-        watch: {
-            userBase() {
-
+                return this.deleteProps == "true" && !this.user.isUserLog
             }
         },
         components: { Title, Text, Error }

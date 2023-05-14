@@ -65,7 +65,9 @@ export default function useServices(nomRoute) {
             erreurTab.value = getErrors(erreur.response.data.errors);
             validate = false;
         })
-        element.value = response.data.data;
+        if (validate) {
+            element.value = response.data.data;
+        }
         return validate
     }
 

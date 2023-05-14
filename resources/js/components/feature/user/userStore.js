@@ -3,6 +3,10 @@ import { useContratStore } from '../contrat/contratStore'
 
 import userUser from './userServices.js';
 
+import userStoreLog from "./userStoreLog";
+
+import { deleteUndefine } from "../../../store/fonc";
+
 const {
     user,
     users,
@@ -36,13 +40,16 @@ export const useUserStore = defineStore('user', {
     getters: {
         getUser: (state) => state.user,
         getUsers: (state) => state.users,
-        isNewUser: (state) => state.newUser
+        isNewUser: (state) => state.newUser,
+        isUserLog: (state) => state.user.id == userStoreLog.getUserLog.id,
+        canUpdatePassword: (state) =>  state.newUser || state.user.id == userStoreLog.getUserLog['id'],
+        canUdate: (state) => !state.newUser || this.getUser.id == userStoreLog.getUserLog.id
     },
     actions: {
         async updateUser(data) {
             if (this.haveUserLoad) {
                 if ( await updateUser(this.getUser.id, data)) {
-                    this.user = {...this.getUser, ...data}
+                    this.user = {...this.user, ...deleteUndefine(data)}
                     return true
                 }
             }
@@ -71,7 +78,7 @@ export const useUserStore = defineStore('user', {
 
         async getUserById(id) {
             if (await getUser(id)){
-                this.user = user
+                this.user = {...user.value}
                 this.changeValueSetUser()
                 return true
             }

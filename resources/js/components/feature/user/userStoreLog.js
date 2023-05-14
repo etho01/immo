@@ -7,18 +7,24 @@ import getCoockie from "../../../utils/utils"
 const useUserLogStore = defineStore('userLoh',{
     state: () => ({
         infosUser: {},
-        isLog: false
+        isLog: false,
+        saveUser: false
     }),
     actions: {
-        login(infosUser) {
+        login(infosUser, saveUser) {
+            this.saveUser = saveUser
             this.infosUser = infosUser;
-            document.cookie = 'user=' + JSON.stringify(this.infosUser) +';max-age=86400';
             this.isLog = true;
+            if (this.saveUser) {
+                document.cookie = 'user=' + JSON.stringify(this.infosUser) +';max-age=86400';
+            }
         },
         disconect() {
             this.infosUser = {}
-            document.cookie = 'user=;max-age=86400';
             this.isLog = false
+            if (this.saveUser) {
+                document.cookie = 'user=;max-age=86400';
+            }
             router.push({name: 'login'})
         },
         checkCoockieConnect() {
@@ -30,6 +36,13 @@ const useUserLogStore = defineStore('userLoh',{
             if (valueCoockie != "" ) {
                 this.infosUser = JSON.parse(valueCoockie)
                 this.isLog = true
+                this.saveUser = true
+            }
+        },
+        updateUserLog(data) {
+            this.infosUser = {...this.infosUser, ...data};
+            if (this.saveUser) {
+                document.cookie = 'user=' + JSON.stringify(this.infosUser) +';max-age=86400';
             }
         }
     },
