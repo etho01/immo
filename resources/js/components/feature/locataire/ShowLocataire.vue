@@ -4,7 +4,7 @@
         <TitlePage :title="getTitreLocataire" />
         <section class="sm:container mx-auto p-3 bg-state-50">
 
-            <Nav v-if="locataire_id != 'new'"
+            <Nav v-if="!locataire.isNewLocataire"
                 :labels="[
                     {
                         nom: 'Informations locataire',

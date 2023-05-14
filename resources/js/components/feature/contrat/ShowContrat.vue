@@ -2,7 +2,7 @@
     <main class="w-full" v-if="contrat_id != 'new'" >
         <TitlePage :title="'Contrat '+contrat_id"></TitlePage>
         <section class="sm:container mx-auto p-3 bg-state-50">
-            <Nav :labels="[
+            <Nav  v-if="!contrat.isNewContrat" :labels="[
                                 {
                                     nom : 'Infos Contrat',
                                     id : 'infos_contrat'
@@ -36,6 +36,7 @@
             <ListePaiment :paiement="contrat.paiement" ref-nav="paiment" :contrat_id="contrat.getContrat.id"/> 
         
         </Nav>
+        <InfoContrat :contrat="contrat" v-else />
         </section>
     </main>
     <main class="w-full m-3" v-else>

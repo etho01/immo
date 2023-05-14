@@ -4,7 +4,7 @@
         <TitlePage :title="getTitreProprio" />
         <section class="sm:container mx-auto p-3 bg-state-50">
 
-            <Nav v-if="proprio_id != 'new'"
+            <Nav v-if="!proprietaire.isNewProprietaire"
                 :labels="[
                     {
                         nom: 'Informations proprietaire',

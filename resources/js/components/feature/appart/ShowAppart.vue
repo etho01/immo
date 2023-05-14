@@ -5,7 +5,7 @@
 
         <section class="sm:container mx-auto p-3 bg-state-50">
 
-            <Nav v-if="appart_id != 'new'"
+            <Nav v-if="!appart.isNewAppart"
             :labels="[
                 {
                     nom: 'Informations appartement',

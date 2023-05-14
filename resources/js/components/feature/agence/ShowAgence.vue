@@ -3,7 +3,7 @@
     <main class="w-full">
         <TitlePage :title="getNomAgence" />
         <section class="sm:container mx-auto p-3 bg-state-50">
-            <Nav v-if="agence_id != 'new'"
+            <Nav v-if="!agence.isNewAgence"
                 :labels="[
                     {
                         nom: 'Informations agence',
