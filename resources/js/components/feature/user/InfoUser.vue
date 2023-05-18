@@ -36,6 +36,7 @@ import Title from '../../utils/title/Title.vue';
 import Error from '../../utils/Error.vue';
 
 import userStoreLog from './userStoreLog';
+import successMessageStore from '../../navbar/SuccessMessageStore';
 
     export default {
         props: [
@@ -56,16 +57,21 @@ import userStoreLog from './userStoreLog';
             async createUserClick(){
                 let idNewIdUser = await this.user.createUser(this.data)
                 if (idNewIdUser != 0) {
+                    successMessageStore.addSuccessMessage('L\'utilisateur a été créé');
                     this.$router.push({name: 'user.show', params: { user_id: idNewIdUser }})
                 }
             },
             async updateUserClick(){
-                if (await this.user.updateUser(this.data) && this.user.isUserLog){
-                    userStoreLog.updateUserLog(this.data)
+                if (await this.user.updateUser(this.data)){
+                    successMessageStore.addSuccessMessage('L\'utilisateur a été modifié')
+                    if (this.user.isUserLog) {
+                        userStoreLog.updateUserLog(this.data)
+                    }
                 }
             },
             async deleteUserClick(){
                 if (await this.user.deleteUser()){
+                    successMessageStore.addSuccessMessage('L\'utilisateur a été suprimé')
                     this.$router.push({ name: 'user.menu'})
                 }
             },

@@ -29,7 +29,7 @@
 import Error from '../../utils/Error.vue';
 import Title from '../../utils/title/Title.vue';
 import Text from '../../utils/input/Text.vue';
-
+import successMessageStore from '../../navbar/SuccessMessageStore';
 
     export default {
     props: ["agence", "deleteProps"],
@@ -55,14 +55,18 @@ import Text from '../../utils/input/Text.vue';
         async createAgenceClick() {
             let idNewIdAgence = await this.agence.createAgence(this.data)
             if (idNewIdAgence != 0){
+                successMessageStore.addSuccessMessage('L\'agence a été créé')
                 this.$router.push({ name: 'agence.show', params: { agence_id: idNewIdAgence } })
             } 
         },
-        updateAgenceClick() {
-            this.agence.updateAgence(this.data)
+        async updateAgenceClick() {
+             if ( await this.agence.updateAgence(this.data)) {
+                successMessageStore.addSuccessMessage('Le contrat à été modifié')
+             }
         },
         async deleteAgenceClick() {
             if (await this.agence.deleteAgence()){
+                successMessageStore.addSuccessMessage('L\'agence a été suprimé')
                 this.$router.push({ name: 'agence.menu'})
             }
         }

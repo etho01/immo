@@ -76,7 +76,7 @@ class ContratController extends Controller
     {
         $contrat->date_debut = $request->input('date_debut', $contrat->date_debut);
         $contrat->date_fin = $request->input('date_fin', $contrat->date_fin);
-        $contrat->ref = $request->input('ref' , $request->ref);
+        $contrat->ref = $request->input('ref' , $contrat->ref);
 
         $contrat->save();
         

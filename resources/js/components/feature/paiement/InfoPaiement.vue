@@ -32,6 +32,7 @@ import Error from '../../utils/Error.vue';
 import Select from '../../utils/input/select.vue';
 
 import paiementConst from './PaiementConst.js';
+import successMessageStore from '../../navbar/SuccessMessageStore';
 
 const { originePaiement } = paiementConst();
 
@@ -59,15 +60,20 @@ const { originePaiement } = paiementConst();
                 this.data= {...this.data, origine: value}
             },
             async deletePaiementCLick() {
-                await this.paiement.deletePaiement();
+                if (await this.paiement.deletePaiement()) {
+                    successMessageStore.addSuccessMessage('Le paiement a été suprimé')
+                }
                 this.$emit('refresh');
             },
             async updatePaiementClick() {
-                await this.paiement.updatePaiement(this.data)
-                this.$emit('refresh');
+                if (await this.paiement.updatePaiement(this.data)) {
+                    successMessageStore.addSuccessMessage('Le paiement a été modifié')
+                    this.$emit('refresh');
+                }
             },
             async createPaiementClick() {
                 if (await this.paiement.createPaiement(this.data) != 0){
+                    successMessageStore.addSuccessMessage('Le paiement a été créé')
                     this.$emit('refresh');
                 }
             }

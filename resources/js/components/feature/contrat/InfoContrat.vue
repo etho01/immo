@@ -36,6 +36,7 @@
     import SelectAppart from '../appart/SelectAppart.vue';
     import SelectLocataire from '../locataire/SelectLocataire.vue';
     import Error from '../../utils/Error.vue';
+    import successMessageStore from '../../navbar/SuccessMessageStore';
 
     export default {
         props: ['contrat', 'deleteProps'],
@@ -50,17 +51,21 @@
             }
         },
         methods : {
-            updateContratClick() {
-                this.contrat.updateContrat(this.getData);
+            async updateContratClick() {
+                if (await this.contrat.updateContrat(this.getData)) {
+                    successMessageStore.addSuccessMessage('Le contrat a été modifié')
+                }
             },
             async deleteContratClick(){
                 if (await this.contrat.deleteContrat()){
+                    successMessageStore.addSuccessMessage('Le contrat a été supprimé')
                     this.$router.push({ name: 'contrat.menu'})
                 }
             },
             async createContratClick(){
                 let idNewIdContrat = await this.contrat.createContrat(this.getData);
                 if (idNewIdContrat != 0){
+                    successMessageStore.addSuccessMessage('Le contrat a été créé')
                     this.$router.push({ name: 'contrat.show', params: { contrat_id: idNewIdContrat } })
                 }
             },

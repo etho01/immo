@@ -32,7 +32,7 @@
 import Error from '../../utils/Error.vue';
 import Text from '../../utils/input/Text.vue';
 import Title from '../../utils/title/Title.vue';
-
+import successMessageStore from '../../navbar/SuccessMessageStore';
 
     export default {
         props : ['depotDeGarantie', 'deleteProps', 'contrat_id'],
@@ -58,21 +58,24 @@ import Title from '../../utils/title/Title.vue';
                 this.data = {...this.data, montant_restituer: value}
             },
             changeDateResitution(value) {
-                this.data = {...this.dat, date_restitution: value}
+                this.data = {...this.data, date_restitution: value}
             },
             async updateDepotDeGarantieClick() {
                 console.log(this.depotDeGarantie)
                 if (await this.depotDeGarantie.updateDepotDeGarantie(this.data)) {
+                    successMessageStore.addSuccessMessage('Le depôt de garantie a été modifié')
                     this.$emit('refresh');
                 }
             },
             async deleteDepotDeGarantieCLick() {
                 if (await this.depotDeGarantie.deleteDepotDeGarantie()) {
+                    successMessageStore.addSuccessMessage('Le depôt de garantie a été suprimé')
                     this.$emit('refresh')
                 }
             },
             async createDepotDeGarantieClick() {
                 if (await this.depotDeGarantie.createDepotDeGarantie(this.data)) {
+                    successMessageStore.addSuccessMessage('Le depôt de garantie a été créé')
                     this.$emit('refresh')
                 }
             }

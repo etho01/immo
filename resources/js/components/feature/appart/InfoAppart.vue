@@ -46,7 +46,7 @@ import Title from '../../utils/title/Title.vue';
 import SelectAgence from '../agence/SelectAgence.vue';
 import Error from '../../utils/Error.vue';
 import SelectProprio from '../proprietaire/SelectProprio.vue';
-
+import successMessageStore from '../../navbar/SuccessMessageStore';
 
     export default {
         props: ['appart', 'deleteProps'],
@@ -65,17 +65,21 @@ import SelectProprio from '../proprietaire/SelectProprio.vue';
             }
         },
         methods: {
-            updateAppartClick() {
-                this.appart.updateAppart( this.getData);
+            async updateAppartClick() {
+                if (await this.appart.updateAppart( this.getData)) {
+                    successMessageStore.addSuccessMessage('L\'appartement a été modifié ')
+                }
             },
             async deleteAppartClick() {
                 if (await this.appart.deleteAppart()){
+                    successMessageStore.addSuccessMessage('L\'appartement a été suprimé ')
                     this.$router.push({ name: 'appart.menu'})
                 }
             },
             async createAppartClick() {
                 let idNewAppart = await this.appart.createAppart(this.getData);
                 if (idNewAppart != 0){
+                    successMessageStore.addSuccessMessage('L\'appartement a été créé ')
                     this.$router.push({ name: 'appart.show', params: { appart_id: idNewAppart } })
                 }
             },

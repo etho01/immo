@@ -39,6 +39,8 @@ import Title from '../../utils/title/Title.vue';
 import Select from '../../utils/input/select.vue';
 import Error from '../../utils/Error.vue';
 
+import successMessageStore from '../../navbar/SuccessMessageStore';
+
 import proprietaireConst from './ProprietaireConst';
 const { genreProprio } = proprietaireConst()
 
@@ -62,17 +64,21 @@ const { genreProprio } = proprietaireConst()
             }
         },
         methods: {
-            updateProprietaireClick() {
-                this.proprietaire.updateProprietaire(this.data)
+            async updateProprietaireClick() {
+                if (await this.proprietaire.updateProprietaire(this.data)) {
+                    successMessageStore.addSuccessMessage('Le proprietaire a été modifié')
+                }
             },
             async deleteProprietaireClick() {
                 if (await this.proprietaire.deleteProprietaire()){
+                    successMessageStore.addSuccessMessage('Le proprietaire a été suprimé')
                     this.$router.push({ name: 'proprio.menu'})
                 }
             },
             async createProprietaireClick(){
                 let idNewIdProprietaire = await this.proprietaire.createProprietaire(this.data)
                 if (idNewIdProprietaire != 0){
+                    successMessageStore.addSuccessMessage('Le proprietaire a été créé')
                     this.$router.push({ name: 'proprio.show', params: { proprio_id: idNewIdProprietaire } })
                 } 
             },

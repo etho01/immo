@@ -40,6 +40,7 @@ import Select from '../../utils/input/select.vue';
 
 import useLocataire from './locataireServices';
 import Error from '../../utils/Error.vue';
+import successMessageStore from '../../navbar/SuccessMessageStore';
 
 const { getLocataire, locataire, updateLocataire, deleteLocataire, createLocataire, erreurTab } = useLocataire()
 
@@ -64,17 +65,21 @@ const { genreLoc } = LocataireConst();
             }
         },
         methods: {
-            updateLocataireClick() {
-                this.locataire.updateLocataire(this.data)
+            async updateLocataireClick() {
+                if ( await this.locataire.updateLocataire(this.data)) {
+                    successMessageStore.addSuccessMessage('Le locataire a etait modifié')
+                }
             },
             async deleteLocataireClick() {
                 if (await this.locataire.deleteLocataire()){
+                    successMessageStore.addSuccessMessage('Le locataire a etait supprimé')
                     this.$router.push({ name: 'locataire.menu'})
                 }
             },
             async createLocataireClick(){
                 let idNewIdLocataire = await this.locataire.createLocataire(this.data)
                 if (idNewIdLocataire != 0){
+                    successMessageStore.addSuccessMessage('Le locataire a etait créé')
                     this.$router.push({ name: 'locataire.show', params: { locataire_id: idNewIdLocataire } })
                 } 
             },
