@@ -6,14 +6,15 @@ use Exception;
 use App\Models\Appart;
 use App\Models\Contrat;
 use App\Pdf\QuittancePdf;
+use App\Mail\QuittanceMail;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Mail;
 use App\Http\Requests\contratRequest;
 use App\Http\Resources\ContratResouce;
-use App\Mail\QuittanceMail;
+use App\Http\Requests\QuittanceRequest;
 use Symfony\Component\HttpFoundation\Response;
 use Illuminate\Contracts\Database\Eloquent\Builder;
-use Illuminate\Support\Facades\Mail;
 
 class ContratController extends Controller
 {
@@ -96,28 +97,26 @@ class ContratController extends Controller
     }
 
     
-    public function downloadQuittance(Contrat $contrat) {
-        try {
+    public function downloadQuittance(QuittanceRequest $request, Contrat $contrat) {
+
             $appart = $contrat->appart;
             $locataire = $contrat->locataire;
             $agence = $appart->agence;
-            $pdf = new QuittancePdf($appart, $contrat, $locataire, $agence);
+            $proprietaire = $appart->proprietaire;
+            $pdf = new QuittancePdf($appart, $contrat, $locataire, $agence, $proprietaire, $request->date_debut, $request->date_fin);
             return $pdf->stream();
 
-        } catch (Exception $e) {
-            return response([
-                'message' => 'erreur'
-            ]);
-        }
+
     }
 
-    public function sendMailQuittance(Contrat $contrat) {
+    public function sendMailQuittance(QuittanceRequest $request,Contrat $contrat) {
 
             $appart = $contrat->appart;
             $locataire = $contrat->locataire;
             $agence = $appart->agence;
-            $pdf = new QuittancePdf($appart, $contrat, $locataire, $agence);
-            Mail::to('test@test.fr')
+            $proprietaire = $appart->proprietaire;
+            $pdf = new QuittancePdf($appart, $contrat, $locataire, $agence, $proprietaire, $request->date_debut, $request->date_fin);
+            Mail::to($locataire->email)
             ->send(new QuittanceMail($appart, $locataire, $agence, $pdf));
 
     }

@@ -35,4 +35,8 @@ class Proprietaire extends Model
         $eloquent->orWhere('telephone', 'like', '%'.$recherche.'%');
         return ($eloquent->get()->pluck('id'));
     }
+
+    public function getNom() {
+        return $this->prenom . ' ' . $this->nom;
+    }
 }

@@ -27,26 +27,13 @@ class Paiement extends Model
         return $this->belongsTo(Contrat::class);
     }
 
-    public static function getSumPaiyerForPeriode($dateDebut, $dateFin, $contrat = null) {
+    public static function getPaiementsByDuree($dateDebut, $dateFin, $contrat = null) {
         $eloquent = Paiement::whereBetween('date_paiement', [$dateDebut, $dateFin]);
         if ($contrat != null) {
             $eloquent->where('contrat_id', $contrat);
         }
-        return $eloquent->sum('montant_paiement');
+        return $eloquent->get();
     }
 
-    public function GenerateQuittance() {
-
-        $contrat = $this->contrat;
-        $appart = $contrat->appart;
-
-        new QuittancePdf($this, $appart, $contrat);
-
-        if (Paiement::getSumPaiyerForPeriode('1991-03-01', '1992-03-01', $contrat->id) >= $appart->getSumForPeriode('1991-03-01', '1992-03-01')) {
-            Mail::to('test@test.fr')->send(new QuittanceMail($this, $appart, $contrat));
-            return true;
-        }
-        return false;
-    }
 
 }

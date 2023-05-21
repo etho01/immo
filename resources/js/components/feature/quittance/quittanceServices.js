@@ -8,16 +8,16 @@ export default function useQuittance() {
     const sendMailQuittance = async (contrat_id, data) => {
         let haveError = false
         let response = await axios.get('/api/contrat/sendMailQuittance/' + contrat_id,
-        {params: {data}})
+        {params: data})
             .catch((error) => {
-                erreurTab.value = ['Erreur le loyer n\'est pas entierement payé']
+                erreurTab.value = ['Erreur']
             })
     }
 
     const downloadQuittance = async (contrat_id, data) => {
         let haveError = false 
         let response = await axios.get('/api/contrat/downloadQuittance/' + contrat_id,
-        { responseType: 'blob', params: {data}})
+        { responseType: 'blob', params: data})
             .then((response) => {
                 console.log(response);
                 const href = URL.createObjectURL(response.data);
@@ -34,7 +34,7 @@ export default function useQuittance() {
                 URL.revokeObjectURL(href);
             })
             .catch((error) => {
-                erreurTab.value = ['Erreur le loyer n\'est pas entierement payé']
+                erreurTab.value = ['Erreur']
             })
     }
 

@@ -3,8 +3,8 @@
         <Error :erreurTab="erreurTab" />
         <Title title="Date" />
         <div class="grid grid-cols-2 mt-3">
-            <Text type="date" label="Date de debut de quittance"/>
-            <Text type="date" label="Date de fin de quittance"/>
+            <Text type="date" label="Date de debut de quittance" @changeValue="changeDateDebut"/>
+            <Text type="date" label="Date de fin de quittance" @changeValue="changeDateFin"/>
         </div>
         <div class="mt-5 flex justify-end">
             <div class="bg-gray-200 hover:bg-gray-300 px-3 py-1 rounded-md cursor-pointer" @click="downloadQuittanceClick">

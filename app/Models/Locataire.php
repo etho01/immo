@@ -36,4 +36,8 @@ class Locataire extends Model
         return ($eloquent->get()->pluck('id'));
     }
 
+    public function getNom() {
+        return $this->prenom . ' ' . $this->nom;
+    }
+
 }

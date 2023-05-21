@@ -42,11 +42,13 @@ class Appart extends Model
     }
 
     public function getSumForPeriode($date_debut, $date_fin) {
+        return ($this->charge + $this->loyer) * $this->getNbMois($date_debut, $date_fin);
+    }
+
+    public function getNbMois($date_debut, $date_fin){
         $dateFin = Carbon::parse($date_fin);
         $dateDebut = Carbon::parse($date_debut);
-        $nbMois = $dateDebut->diffInMonths($dateFin);
-
-        return ($this->charge + $this->loyer) * $nbMois;
+        return $dateDebut->diffInMonths($dateFin) + 1;
     }
 
     public function getAdresse() {
