@@ -14,12 +14,18 @@
             <SelectLocataire @changeValue="chnageLocataire"></SelectLocataire>
         </div>
         <div class="mt-5 flex justify-end" v-if="!contrat.isNewContrat">
-            <div class="bg-gray-200 hover:bg-gray-300 px-3 py-1 rounded-md cursor-pointer" @click="updateContratClick">
+            <div class="bg-gray-200 hover:bg-gray-300 px-3 py-1 rounded-md cursor-pointer" @click="createQuittance">
+                Créer une quittance
+            </div>
+            <div class="bg-gray-200 hover:bg-gray-300 px-3 py-1 rounded-md ml-2 cursor-pointer" @click="updateContratClick">
                 Modifier
             </div>
             <div class="bg-red-400 hover:bg-red-500 px-3 py-1 rounded-md ml-2 cursor-pointer" v-if="canDelete" @click="deleteContratClick">
                 Supprimer
             </div>
+            <Modal ref="modalQuittance" title="Créer une quittance" >
+                <CreateQuitance :contrat_id="contrat.getContrat.id" />
+            </Modal>
         </div>
         <div v-else class="mt-5 flex justify-end">
             <div class="bg-gray-200 hover:bg-gray-300 px-3 py-1 rounded-md cursor-pointer" @click="createContratClick">
@@ -37,6 +43,8 @@
     import SelectLocataire from '../locataire/SelectLocataire.vue';
     import Error from '../../utils/Error.vue';
     import successMessageStore from '../../navbar/SuccessMessageStore';
+    import Modal from '../../utils/component/modal/Modal.vue';
+    import CreateQuitance from '../quittance/CreateQuitance.vue';
 
     export default {
         props: ['contrat', 'deleteProps'],
@@ -68,6 +76,9 @@
                     successMessageStore.addSuccessMessage('Le contrat a été créé')
                     this.$router.push({ name: 'contrat.show', params: { contrat_id: idNewIdContrat } })
                 }
+            },
+            createQuittance (){
+                this.$refs.modalQuittance.toogle();
             },
             changeDateDebut(newDateDebut){
                 this.date_debut = newDateDebut;
@@ -101,7 +112,7 @@
         },
         updated() {
         },
-        components: { Title, Text, SelectAppart, SelectLocataire, Error }
+        components: { Title, Text, SelectAppart, SelectLocataire, Error, Modal, CreateQuitance }
 
     }
 

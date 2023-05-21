@@ -2,7 +2,7 @@
 
     <div class=" line-title">
 
-        <span class="text-xl relative bg-white z-10 ml-5 px-2"> {{ title }} </span>
+        <span class="text-xl relative bg-white ml-5 px-2"> {{ title }} </span>
     </div>
 
 </template>

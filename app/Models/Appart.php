@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Carbon\Carbon;
 use Illuminate\Contracts\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -38,6 +39,18 @@ class Appart extends Model
         $eloquent->orWhereIn('agence_id', Agence::getIdByRecherche($recherche));
 
         return ($eloquent->get()->pluck('id'));
+    }
+
+    public function getSumForPeriode($date_debut, $date_fin) {
+        $dateFin = Carbon::parse($date_fin);
+        $dateDebut = Carbon::parse($date_debut);
+        $nbMois = $dateDebut->diffInMonths($dateFin);
+
+        return ($this->charge + $this->loyer) * $nbMois;
+    }
+
+    public function getAdresse() {
+        return $this->adresse. ' '. $this->cp;
     }
 
     public function agence(){

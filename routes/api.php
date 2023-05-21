@@ -12,6 +12,8 @@ use App\Http\Controllers\Api\LocataireController;
 use App\Http\Controllers\Api\EtatDesLieuController;
 use App\Http\Controllers\Api\DepotDeGarantieController;
 use App\Http\Controllers\Api\PropietaireController;
+use App\Models\Contrat;
+use App\Models\Paiement;
 
 /*
 |--------------------------------------------------------------------------
@@ -42,4 +44,7 @@ Route::get('/login/error', function () {
     Route::apiResource('paiement', PaiementController::class);
     Route::apiResource('proprietaire', PropietaireController::class);
     Route::apiResource('user', UserController::class);
+
+    Route::get('contrat/downloadQuittance/{contrat}', [ContratController::class, 'downloadQuittance']);
+    Route::get('contrat/sendMailQuittance/{contrat}', [ContratController::class, 'sendMailQuittance']);
 //});

@@ -1,8 +1,8 @@
 <template>
 
 <div class="bloc-modale" v-show="isShow">
-    <div class="overlay"></div>
-    <div class="sm:container bg-white border-2 rounded p-2 z-30">
+    <div class="overlay "></div>
+    <div class="sm:container bg-white border-2 rounded p-2 z-50">
         <div class="flex justify-between text-3xl">
             <span>
                 {{ title }}
@@ -59,7 +59,7 @@ export default {
         bottom: 0;
         left: 0;
         right: 0%;
-        z-index: 20;
+        z-index: 40;
     }
 
     .modale-card{

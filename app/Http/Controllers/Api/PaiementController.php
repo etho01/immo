@@ -7,6 +7,8 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\PaiementRequest;
 use App\Http\Resources\PaiementResouce;
+use App\Pdf\QuittancePdf;
+use Exception;
 
 class PaiementController extends Controller
 {
@@ -27,12 +29,14 @@ class PaiementController extends Controller
      */
     public function store(PaiementRequest $request)
     {
-        return new PaiementResouce(Paiement::create([
+        $newPaiement = Paiement::create([
             'contrat_id' => $request->contrat_id,
             'date_paiement' => $request->date_paiement,
             'montant_paiement' => $request->montant_paiement,
             'origine' => $request->origine
-        ]));
+        ]);
+
+        return new PaiementResouce($newPaiement);
     }
 
     /**
@@ -64,4 +68,5 @@ class PaiementController extends Controller
     {
         $paiement->delete();
     }
+
 }
