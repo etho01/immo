@@ -34,7 +34,7 @@ Route::get('/login/error', function () {
        ],401);
 })->name('login');
 
-//Route::middleware('auth:sanctum')->group(function() {
+Route::middleware('auth:sanctum')->group(function() {
     Route::apiResource('agence', AgenceController::class);
     Route::apiResource('appart', AppartController::class);
     Route::apiResource('contrat', ContratController::class);
@@ -47,4 +47,4 @@ Route::get('/login/error', function () {
 
     Route::get('contrat/downloadQuittance/{contrat}', [ContratController::class, 'downloadQuittance']);
     Route::get('contrat/sendMailQuittance/{contrat}', [ContratController::class, 'sendMailQuittance']);
-//});
+});
