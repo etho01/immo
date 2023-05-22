@@ -32,7 +32,7 @@ class PaiementRequest extends FormRequest
         return [
             'contrat_id' => ['required', 'exists:contrats,id'],
             'date_paiement' => ['required', 'date'],
-            'montant_paiement' => ['required'],
+            'montant_paiement' => ['required', 'regex:/^(\d){1,8}(\.(\d){1,2})?$/'],
             'origine' => ['required', Rule::in(array_keys(config('constant.PAIEMENT.ORIGINE')))]
         ];
     }
@@ -41,6 +41,7 @@ class PaiementRequest extends FormRequest
         return [
             'date_paiement' => ['date'],
             'contrat_id' => ['exists:contrats,id'],
+            'montant_paiement' => ['regex:/^(\d){1,8}(\.(\d){1,2})?$/'],
             'origine' => [Rule::in(array_keys(config('constant.PAIEMENT.ORIGINE')))]
         ];
     }
@@ -54,7 +55,8 @@ class PaiementRequest extends FormRequest
             "date_paiement.date" => "La date de paiement doit etre une date",
             "montant_paiement.required" => "Le montat du paiement est requis",
             "origine.required" => "L'origine est requis",
-            "origine.in" => "L'origine est incorecte"
+            "origine.in" => "L'origine est incorecte",
+            "montant_encaisser.regex" => "Le montant du paiement est invalide",
         ];
     }
 }

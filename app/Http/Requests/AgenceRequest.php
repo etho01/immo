@@ -29,7 +29,7 @@ class AgenceRequest extends FormRequest
 
     public function store() {
         return [
-            'nom' => ['required', 'max:255'],
+            'nom' => ['required', 'max:255', 'unique:agences,nom'],
             'iban' => ['required', 'max:255'],
             'bic' => ['required', 'max:255'],
         ];
@@ -37,7 +37,7 @@ class AgenceRequest extends FormRequest
 
     public function update() {
         return [
-            'nom' => ['max:255'],
+            'nom' => ['max:255', 'unique:agences,nom'],
             'iban' => ['max:255'],
             'bic' => ['max:255'],
         ];
@@ -51,7 +51,8 @@ class AgenceRequest extends FormRequest
             "bic.required" => "le bic de l'agence est requis",
             'nom.max' => 'le nom de l\'agence est trop grand',
             'iban.max' => "l'iban de l'agence est trop grand",
-            "bic.max" => "le bic de l'agence est trop grand"
+            "bic.max" => "le bic de l'agence est trop grand",
+            'nom.unique' => "Le nom de l'agence existe deja"
         ];
     }
 }

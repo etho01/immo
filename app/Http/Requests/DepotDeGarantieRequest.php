@@ -30,9 +30,9 @@ class DepotDeGarantieRequest extends FormRequest
     function store() {
         return [
             'contrat_id' => ['required', 'exists:contrats,id', 'unique:etat_des_lieus,contrat_id'],
-            'montant_encaisser' => ['required'],
+            'montant_encaisser' => ['required', 'regex:/^(\d){1,8}(\.(\d){1,2})?$/'],
             "date_encaissement" => ['required', 'date'],
-            'montant_restituer' => [],
+            'montant_restituer' => ['regex:/^(\d){1,8}(\.(\d){1,2})?$/'],
             'date_restitution' => ['date']
         ];
     }
@@ -41,8 +41,9 @@ class DepotDeGarantieRequest extends FormRequest
         return [
             'contrat_id' => ['exists:contrats,id'],
             "date_encaissement" => ['date'],
-            'montant_restituer' => [],
-            'date_restitution' => ['date']
+            'montant_restituer' => ['regex:/^(\d){1,8}(\.(\d){1,2})?$/'],
+            'date_restitution' => ['date'],
+            'montant_encaisser' => ['regex:/^(\d){1,8}(\.(\d){1,2})?$/']
         ];
     }
     
@@ -55,7 +56,9 @@ class DepotDeGarantieRequest extends FormRequest
             "montant_encaisser.required" => "Le montant encaisser ne soit pas etre null",
             "date_encaissement.required" => "La date d'encaissement du depot de garantie est requis",
             "date_encaissement.date" => "La date d'encaissement doit etre une date",
-            "date_restitution.date" => "La date de restitution du depot de garantie doit etre une date"
+            "date_restitution.date" => "La date de restitution du depot de garantie doit etre une date",
+            "montant_restituer.regex" => "Le montant restituer est invalide",
+            "montant_encaisser.regex" => "Le montant encaisser est invalide",
         ];
     }
 }

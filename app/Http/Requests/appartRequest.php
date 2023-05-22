@@ -36,8 +36,8 @@ class appartRequest extends FormRequest
             'departement' => ['required', 'max:255'],
             'cp' => ['required', 'max:255'],
             'pays' => ['required', 'max:255'],
-            'charge' => ['required'],
-            'loyer' => ['required'],
+            'charge' => ['required', 'regex:/^(\d){1,8}(\.(\d){1,2})?$/'],
+            'loyer' => ['required', 'regex:/^(\d){1,8}(\.(\d){1,2})?$/'],
             'proprietaire_id' => ['required', 'exists:proprietaires,id']
         ];
     }
@@ -49,6 +49,8 @@ class appartRequest extends FormRequest
             'departement' => ['max:255'],
             'cp' => ['max:255'],
             'pays' => ['max:255'],
+            'charge' => ['regex:/^(\d){1,8}(\.(\d){1,2})?$/'],
+            'loyer' => ['regex:/^(\d){1,8}(\.(\d){1,2})?$/'],
             'adresse' => ['max:255'],
             'agence_id' => ['exists:agences,id'],
             'proprietaire_id' => ['exists:proprietaires,id']
@@ -76,7 +78,9 @@ class appartRequest extends FormRequest
             'pays.max' => "Le champs pays est trop grand",
             'adresse.max' => "Le champs adresse est trop grand",
             "proprietaire_id.exists" => "Le propretaire n'existe pas",
-            "agence_id.exists" => "L'agence n'existe pas"
+            "agence_id.exists" => "L'agence n'existe pas",
+            "charge.regex" => "Le montant des charges est invalide",
+            "loyer.regex" => "Le montant du loyer est invalide",
         ];
     }
 }
