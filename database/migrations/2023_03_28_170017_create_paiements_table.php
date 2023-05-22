@@ -18,6 +18,7 @@ return new class extends Migration
             $table->date('date_paiement');
             $table->decimal('montant_paiement');
             $table->integer('origine');
+            $table->integer('methode');
             $table->timestamps();
         });
     }

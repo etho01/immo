@@ -52,6 +52,9 @@ class ProprietaireRequest extends FormRequest
             'iban' => ['max:255'],
             'bic' => ['max:255'],
             'genre' => [Rule::in(array_keys(config('constant.SEXE')))],
+            'adresse' => ['required', 'max:255'],
+            'cp' => ['required', 'max:255'],
+            'ville' => ['required', 'max:255']
         ];
     }
 
@@ -74,7 +77,13 @@ class ProprietaireRequest extends FormRequest
             "telephone.max" => "Le numero de telephone est trop long",
             "iban.max" => "L'iban est trop long",
             "bic.max" => "Le champs bic est trop long",
-            "genre.in" => "Le grenre n'exite pas"
+            "genre.in" => "Le grenre n'exite pas",
+            "adresse.required" => "L'adresse est requis",
+            "adresse.max" => "L'adresse st trop grande",
+            "cp.required" => "Le code postal est requis",
+            "cp.max" => "Le code postal est trop grand",
+            "ville.requied" => "La ville est requise",
+            "ville.max" => "Le nom de la ville est trop grand"
         ];
     }
 }

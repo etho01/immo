@@ -20,12 +20,19 @@ class Proprietaire extends Model
         'iban',
         'bic',
         'genre',
+        'adresse',
+        'cp',
+        'ville',
         'created_at',
         'updated_at'
     ];
 
     public function apparts(){
         return $this->hasMany(Appart::class);
+    }
+
+    public function getAdresse() {
+        return $this->adresse. ' '. $this->cp . ' ' . $this->ville;
     }
 
     public static function getIdByRecherche($recherche) {

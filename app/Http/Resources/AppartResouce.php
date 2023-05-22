@@ -27,7 +27,8 @@ class AppartResouce extends JsonResource
             'pays' => $this->pays,
             'charge' => $this->charge,
             'loyer' => $this->loyer,
-            'proprietaire' => new ProprietaireResource($this->proprietaire)
+            'proprietaire' => new ProprietaireResource($this->proprietaire),
+            'ville' => $this->ville
         ];
     }
 }

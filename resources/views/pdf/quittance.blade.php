@@ -8,11 +8,11 @@
     </h1>
     <div style="text-align: start;">
         Nom, prénom du bailleur: {{ $proprietaire->getNom() }} <br>
-        Adresse du bailleur<br>
+        Adresse du bailleur {{ $proprietaire->getAdresse() }}<br>
     </div>
     <div style="display: flex; justify-content: end;">
         Nom, prénom du locataire : {{ $locataire->getNom() }}<br>
-        Adresse du locataire<br>
+        Adresse du locataire {{ $locataire->getAdresse() }}<br>
     </div>
 
     <h4>Adresse de la location:</h4>

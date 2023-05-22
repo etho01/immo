@@ -56,7 +56,7 @@ const proprietaire = useProprietaireStore();
             }
         },
         async updated(){
-            if (this.proprio_id != this.$route.proprio_id){
+            if (this.proprio_id != this.$route.params.proprio_id){
                 this.proprio_id = parseInt(this.$route.params.proprio_id)
                 if (this.$route.params.proprio_id == 'new'){
                     this.proprietaire.setNewProprietaire()

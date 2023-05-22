@@ -45,7 +45,10 @@ class PropietaireController extends Controller
             'telephone' => $request->telephone,
             'iban' => $request->iban,
             'bic' => $request->bic,
-            'genre' => $request->genre
+            'genre' => $request->genre,
+            'ville' => $request->ville,
+            "cp" => $request->cp,
+            "adresse" => $request->adresse
         ]));
     }
 
@@ -69,7 +72,12 @@ class PropietaireController extends Controller
         $proprietaire->telephone = $request->input('telephone', $proprietaire->telephone);
         $proprietaire->iban = $request->input('iban', $proprietaire->iban);
         $proprietaire->bic = $request->input('bic', $proprietaire->bic);
-        $proprietaire->genre = $request->input('genre', $proprietaire->genre);  
+        $proprietaire->genre = $request->input('genre', $proprietaire->genre); 
+        
+        
+        $proprietaire->adresse = $request->input('ville', $proprietaire->adresse);
+        $proprietaire->cp = $request->input('cp', $proprietaire->cp);
+        $proprietaire->ville = $request->input('ville', $proprietaire->ville);
 
         $proprietaire->save();
 

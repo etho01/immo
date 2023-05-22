@@ -34,7 +34,8 @@ class PaiementRequest extends FormRequest
             'contrat_id' => ['required', 'exists:contrats,id'],
             'date_paiement' => ['required', 'date'],
             'montant_paiement' => ['required', 'regex:/^(\d){1,8}(\.(\d){1,2})?$/'],
-            'origine' => ['required', Rule::in(array_keys(config('constant.PAIEMENT.ORIGINE')))]
+            'origine' => ['required', Rule::in(array_keys(config('constant.PAIEMENT.ORIGINE')))],
+            'methode' => ['required', Rule::in(array_keys(config('constant.PAIEMENT.TYPE')))]
         ];
     }
 
@@ -43,7 +44,8 @@ class PaiementRequest extends FormRequest
             'date_paiement' => ['date'],
             'contrat_id' => ['exists:contrats,id'],
             'montant_paiement' => ['regex:/^(\d){1,8}(\.(\d){1,2})?$/'],
-            'origine' => [Rule::in(array_keys(config('constant.PAIEMENT.ORIGINE')))]
+            'origine' => [Rule::in(array_keys(config('constant.PAIEMENT.ORIGINE')))],
+            'methode' => [ Rule::in(array_keys(config('constant.PAIEMENT.TYPE')))]
         ];
     }
 
@@ -58,6 +60,8 @@ class PaiementRequest extends FormRequest
             "origine.required" => "L'origine est requis",
             "origine.in" => "L'origine est incorecte",
             "montant_encaisser.regex" => "Le montant du paiement est invalide",
+            "methode.required" => "La methide de paiement est requis",
+            "methode.in" => "La methode du paiement est invalide"
         ];
     }
 }

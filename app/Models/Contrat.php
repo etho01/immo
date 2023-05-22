@@ -50,4 +50,15 @@ class Contrat extends Model
 
         return ($eloquent->get()->pluck('id')); // convertie la collecion (passe d'une collection de model de contrat a celle de l'id du contrat)
     }
+
+    public function getSolde() {
+        $sumPaiements = Paiement::getPaiementsByContrat($this->id)->sum('montant_paiement');
+        if ($this->date_fin != '') {
+            $date_fin = $this->date_fin;
+        } else {
+            $date_fin = now();
+        }
+        $montantDu = $this->appart->getSumForPeriode($this->date_debut, now());
+        return round( $montantDu - $sumPaiements, 2);
+    }
 }

@@ -11,6 +11,12 @@
             <Text label="Télèphone" :value="locataire.getLocataire.telephone" @changeValue="changeTelephone" placeholder="Télèphone" />
             <Select :param="genreLoc" label="Genre du locataire" @changeValue="changeGenre" :valueDefault="locataire.getLocataire.genre" />
         </div>
+        <Title title="Adresse" />
+        <div class="grid grid-cols-3 mt-3">
+            <Text label="adresse" :value="locataire.getLocataire.adresse" placeholder="adresse" @changeValue="changeAdresse" />
+            <Text label="code postal" :value="locataire.getLocataire.cp" placeholder="code postal" @changeValue="changeCp" />
+            <Text label="ville" :value="locataire.getLocataire.ville" placeholder="ville" @changeValue="changeVille" />
+        </div>
         <Title title="Informations bancaires locataire" />
         <div class="grid grid-cols-2 mt-3">
             <Text label="Iban" placeholder="Iban" @changeValue="changeIban" :value="locataire.getLocataire.iban" />
@@ -38,11 +44,9 @@ import Title from '../../utils/title/Title.vue';
 import LocataireConst from './LocataireConst.js';
 import Select from '../../utils/input/select.vue';
 
-import useLocataire from './locataireServices';
 import Error from '../../utils/Error.vue';
 import successMessageStore from '../../navbar/SuccessMessageStore';
 
-const { getLocataire, locataire, updateLocataire, deleteLocataire, createLocataire, erreurTab } = useLocataire()
 
 const { genreLoc } = LocataireConst();
 
@@ -60,7 +64,10 @@ const { genreLoc } = LocataireConst();
                     telephone: undefined,
                     iban: undefined,
                     bic: undefined,
-                    genre: undefined
+                    genre: undefined,
+                    cp: undefined,
+                    ville: undefined,
+                    adresse: undefined
                 },
             }
         },
@@ -82,6 +89,15 @@ const { genreLoc } = LocataireConst();
                     successMessageStore.addSuccessMessage('Le locataire a etait créé')
                     this.$router.push({ name: 'locataire.show', params: { locataire_id: idNewIdLocataire } })
                 } 
+            },
+            changeAdresse(value) {
+                this.data = {...this.data, adresse: value}
+            },
+            changeCp(value) {
+                this.data = {...this.data, cp: value}
+            },
+            changeVille(value) {
+                this.data = { ...this.data, ville: value}
             },
             changeNom(value){
                 this.data = {...this.data, nom: value}

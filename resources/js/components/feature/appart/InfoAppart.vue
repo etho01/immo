@@ -4,8 +4,9 @@
         <Error :erreurTab="appart.erreurTab" />
         <Title title="Adresse du bien" />
         <div class="grid grid-cols-6 mt-3">
-            <Text class="col-span-3" label="Adresse du bien" :value="appart.getAppart.adresse" @changeValue="changeAdresse" placeholder="Adresse"/>
-            <Text class="col-span-3" label="Adresse compementaire du bien" :value="appart.getAppart.adresse_compl" @changeValue="changeComp" placeholder="Adresse complementaire"/>
+            <Text class="col-span-2" label="Adresse du bien" :value="appart.getAppart.adresse" @changeValue="changeAdresse" placeholder="Adresse"/>
+            <Text class="col-span-2" label="Adresse compementaire du bien" :value="appart.getAppart.adresse_compl" @changeValue="changeComp" placeholder="Adresse complementaire"/>
+            <Text class="col-span-2" label="ville" :value="appart.getAppart.ville" @changeValue="updateVille" placeholder="ville"/>
 
             <Text class="col-span-2" label="Code postal" placeholder="Code postal" :value="appart.getAppart.cp" @changeValue="changeCp" />
             <Text class="col-span-2" label="Departement" placeholder="Departement" :value="appart.getAppart.departement" @changeValue="changeDep"/>
@@ -60,7 +61,8 @@ import successMessageStore from '../../navbar/SuccessMessageStore';
                     departement: undefined,
                     loyer : undefined,
                     charge: undefined,
-                    agence_id: undefined
+                    agence_id: undefined,
+                    ville: undefined
                 },
             }
         },
@@ -82,6 +84,9 @@ import successMessageStore from '../../navbar/SuccessMessageStore';
                     successMessageStore.addSuccessMessage('L\'appartement a été créé ')
                     this.$router.push({ name: 'appart.show', params: { appart_id: idNewAppart } })
                 }
+            },
+            updateVille(value) {
+                this.data = {...this.data, ville: value}
             },
             changeCharge(value) {
                 this.data = {...this.data, charge: value}

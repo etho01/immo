@@ -19,7 +19,8 @@ class PaiementResouce extends JsonResource
             'contrat_id' => $this->id,
             'date_paiement' => $this->date_paiement,
             'montant_paiement' => $this->montant_paiement,
-            'origine' => $this->origine
+            'origine' => $this->origine,
+            'methode' => $this->methode
         ];
     }
 }

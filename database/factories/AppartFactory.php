@@ -27,7 +27,8 @@ class AppartFactory extends Factory
             'pays' => fake()->country(),
             'charge' => fake()->randomFloat(2,0,500),
             'loyer' => fake()->randomFloat(2,0,500),
-            'proprietaire_id' => Proprietaire::all()->random()->id
+            'proprietaire_id' => Proprietaire::all()->random()->id,
+            'ville' => fake()->city()
         ];
     }
 }

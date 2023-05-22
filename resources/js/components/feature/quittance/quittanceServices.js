@@ -1,14 +1,16 @@
 import axios from "../../../services/axios.js";
 import { ref } from "vue";
+import userStoreLog from "../user/userStoreLog.js";
 let erreurTab = ref([]);
 
 export default function useQuittance() {
     let erreurTab = ref([]); // set un tableau modififiable et reactive
 
     const sendMailQuittance = async (contrat_id, data) => {
+        erreurTab.value = []
         let haveError = false
         let response = await axios.get('/api/contrat/sendMailQuittance/' + contrat_id, // envoie l'appel que l'api doit envoyer le mail
-        {params: data})
+        {params: data,  ...userStoreLog.getHeaderRequest})
             .catch((error) => {
                 erreurTab.value = ['Erreur']
                 haveError = true
@@ -18,8 +20,9 @@ export default function useQuittance() {
 
     const downloadQuittance = async (contrat_id, data) => {
         let haveError = false 
+        erreurTab.value = []
         let response = await axios.get('/api/contrat/downloadQuittance/' + contrat_id,
-        { responseType: 'blob', params: data})
+        { responseType: 'blob', params: data, ...userStoreLog.getHeaderRequest})
             .then((response) => {
                 console.log(response);
                 const href = URL.createObjectURL(response.data);
@@ -37,7 +40,7 @@ export default function useQuittance() {
             })
             .catch((error) => {
                 erreurTab.value = ['Erreur']
-                let haveError = true
+                haveError = true
             })
         return !haveError
     }

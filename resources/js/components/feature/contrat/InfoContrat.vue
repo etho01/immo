@@ -2,6 +2,9 @@
     <div>
         <Error :erreurTab="contrat.erreurTab" />
         <Title title="Information contrat" />
+        <div class="my-5 text-center">
+            Solde du contrat: {{ contrat.getContrat.solde }} euros
+        </div>
         <div class="grid grid-cols-2 mt-3">
             <Text type="date" label="Date de début" :value="contrat.getContrat.date_debut" @changeValue="changeDateDebut"/>
             <Text label="Ref du contrat" :value="contrat.getContrat.ref" @changeValue="changeRef" />

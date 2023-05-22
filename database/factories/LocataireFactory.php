@@ -24,7 +24,10 @@ class LocataireFactory extends Factory
             'telephone' => fake()->phoneNumber(),
             'iban' => fake()->iban(),
             'bic' => fake()->swiftBicNumber(),
-            'genre' => rand(0, 1) ? 'homme' : 'femme'
+            'genre' => rand(0, 1) ? 'homme' : 'femme',
+            'ville' => fake()->city(),
+            'adresse' => fake()->streetAddress(),
+            'cp' => fake()->postcode()
         ];
     }
 }

@@ -2,7 +2,6 @@ import piniaUse from "../../../store/pinia";
 import { defineStore } from 'pinia'
 
 import router from "../../../router";
-import getCoockie from "../../../utils/utils"
 
 const useUserLogStore = defineStore('userLoh',{
     state: () => ({
@@ -16,7 +15,7 @@ const useUserLogStore = defineStore('userLoh',{
             this.infosUser = infosUser;
             this.isLog = true;
             if (this.saveUser) {
-                document.cookie = 'user=' + JSON.stringify(this.infosUser) +';max-age=86400'; // ajoute un coockie de log
+                document.cookie = 'user=' + JSON.stringify(this.infosUser) +';max-age=86400;path=/'; // ajoute un coockie de log
             }
             // connect a user
         },

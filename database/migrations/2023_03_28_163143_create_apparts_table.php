@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('adresse');
             $table->string('adresse_compl')->nullable();
             $table->string('cp');
+            $table->string('ville');
             $table->string('departement');
             $table->string('pays');
             $table->decimal('charge');

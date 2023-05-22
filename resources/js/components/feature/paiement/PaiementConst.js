@@ -62,6 +62,17 @@ export default function paiementConst(){
     const originePaiement = [
         {
             id: 1,
+            nom: "Locataire"
+        },
+        {
+            id: 2,
+            nom: "CAF"
+        },
+    ];
+
+    const methodePaiement = [
+        {
+            id: 1,
             nom: "Virement bancaire"
         },
         {
@@ -80,6 +91,7 @@ export default function paiementConst(){
 
     return {
         paiementCols,
+        methodePaiement,
         originePaiement
     }
 }

@@ -36,14 +36,14 @@ const { downloadQuittance, sendMailQuittance, erreurTab } = useQuittance();
             }
         },
         methods: {
-            downloadQuittanceClick() {
-                if (downloadQuittance(this.contrat_id, this.data)) {
+            async downloadQuittanceClick() {
+                if (await downloadQuittance(this.contrat_id, this.data)) {
                     successMessageStore.addSuccessMessage('La quittance a été telecharger')
                 }
             },
-            sendMailQuittanceClick() {
-                if (sendMailQuittance(this.contrat_id, this.data)){
-                    successMessageStore.addSuccessMessage('La quittance a été anvoyer')
+            async sendMailQuittanceClick() {
+                if (await sendMailQuittance(this.contrat_id, this.data)){
+                    successMessageStore.addSuccessMessage('La quittance a été envoyer')
                 }
             },
             changeDateDebut(value) {

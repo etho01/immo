@@ -23,7 +23,10 @@ class ProprietaireResource extends JsonResource
             'telephone' => $this->telephone,
             'iban' => $this->iban,
             'bic' => $this->bic,
-            'genre' => $this->genre
+            'genre' => $this->genre,
+            'ville' => $this->ville,
+            "cp" => $this->cp,
+            "adresse" => $this->adresse
         ];
     }
 }

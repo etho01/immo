@@ -21,6 +21,7 @@ class Appart extends Model
         'pays',
         'charge',
         'loyer',
+        'ville',
         'proprietaire_id',
         'created_at',
         'updated_at'
@@ -52,7 +53,7 @@ class Appart extends Model
     }
 
     public function getAdresse() {
-        return $this->adresse. ' '. $this->cp;
+        return $this->adresse. ' '. $this->cp. ' ' . $this->ville;
     }
 
     public function agence(){

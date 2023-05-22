@@ -45,7 +45,10 @@ class LocataireController extends Controller
             'telephone' => $request->telephone,
             'iban' => $request->iban,
             'bic' => $request->bic,
-            'genre' => $request->genre
+            'genre' => $request->genre,
+            'ville' => $request->ville,
+            "cp" => $request->cp,
+            "adresse" => $request->adresse
         ]));
     }
 
@@ -70,6 +73,10 @@ class LocataireController extends Controller
         $locataire->iban = $request->input('iban', $locataire->iban);
         $locataire->bic = $request->input('bic', $locataire->bic);
         $locataire->genre = $request->input('genre', $locataire->genre);  
+
+        $locataire->adresse = $request->input('ville', $locataire->adresse);
+        $locataire->cp = $request->input('cp', $locataire->cp);
+        $locataire->ville = $request->input('ville', $locataire->ville);
 
         $locataire->save();
 

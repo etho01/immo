@@ -113,7 +113,7 @@ class ContratController extends Controller
             return $pdf->stream(); // affiche le pdf (sur le front cela va le telecharger)
         } catch (Exception $e) {
             return response([
-                'error' => 'error'
+                'error' => $e->getMessage()
             ],422);
         }
 
@@ -131,7 +131,7 @@ class ContratController extends Controller
             ->send(new QuittanceMail($appart, $locataire, $agence, $pdf));
         } catch (Exception $e) {
             return response([
-                'error' => 'error'
+                'error' => $e->getMessage()
             ],422);
         }
     }

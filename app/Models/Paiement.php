@@ -20,6 +20,7 @@ class Paiement extends Model
         'date_paiement',
         'montant_paiement',
         'origine',
+        'methode',
         'created_at',
         'updated_at'
     ];
@@ -34,6 +35,10 @@ class Paiement extends Model
             $eloquent->where('contrat_id', $contrat);
         }
         return $eloquent->get();
+    }
+
+    public static function getPaiementsByContrat($contrat_id) {
+        return  Paiement::where('contrat_id', $contrat_id)->get();
     }
 
 

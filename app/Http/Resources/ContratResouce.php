@@ -27,7 +27,8 @@ class ContratResouce extends JsonResource
             'paiement' => PaiementResouce::collection($this->paiements),
             'ref' => $this->ref,
             'date_debut' => $this->date_debut,
-            'date_fin' => $this->date_fin
+            'date_fin' => $this->date_fin,
+            'solde' => $this->getSolde()
         ];
     }
 }

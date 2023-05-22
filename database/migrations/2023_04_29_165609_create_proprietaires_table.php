@@ -22,6 +22,9 @@ return new class extends Migration
             $table->string('telephone');
             $table->string('iban');
             $table->string('bic');
+            $table->string('adresse');
+            $table->string('cp');
+            $table->string('ville');
             $table->enum('genre', ['homme', 'femme']);
             $table->timestamps();
         });

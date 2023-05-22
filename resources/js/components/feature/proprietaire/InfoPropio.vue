@@ -11,6 +11,12 @@
             <Text label="Télèphone" :value="proprietaire.getProprietaire.telephone" @changeValue="changeTelephone" placeholder="Télèphone" />
             <Select :param="genreProprio" label="Genre du Proprietaire" @changeValue="changeGenre" :valueDefault="proprietaire.getProprietaire.genre" />
         </div>
+        <Title title="Adresse" />
+        <div class="grid grid-cols-3 mt-3">
+            <Text label="adresse" :value="proprietaire.getProprietaire.adresse" placeholder="adresse" @changeValue="changeAdresse" />
+            <Text label="code postal" :value="proprietaire.getProprietaire.cp" placeholder="code postal" @changeValue="changeCp" />
+            <Text label="ville" :value="proprietaire.getProprietaire.ville" placeholder="ville" @changeValue="changeVille" />
+        </div>
         <Title title="Informations bancaires Proprietaire" />
         <div class="grid grid-cols-2 mt-3">
             <Text label="Iban" placeholder="Iban" @changeValue="changeIban" :value="proprietaire.getProprietaire.iban" />
@@ -59,7 +65,10 @@ const { genreProprio } = proprietaireConst()
                     telephone: undefined,
                     iban: undefined,
                     bic: undefined,
-                    genre: undefined
+                    genre: undefined,
+                    cp: undefined,
+                    ville: undefined,
+                    adresse: undefined
                 },
             }
         },
@@ -81,6 +90,15 @@ const { genreProprio } = proprietaireConst()
                     successMessageStore.addSuccessMessage('Le proprietaire a été créé')
                     this.$router.push({ name: 'proprio.show', params: { proprio_id: idNewIdProprietaire } })
                 } 
+            },
+            changeAdresse(value) {
+                this.data = {...this.data, adresse: value}
+            },
+            changeCp(value) {
+                this.data = {...this.data, cp: value}
+            },
+            changeVille(value) {
+                this.data = { ...this.data, ville: value}
             },
             changeNom(value){
                 this.data = {...this.data, nom: value}

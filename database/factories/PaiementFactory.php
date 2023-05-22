@@ -21,7 +21,8 @@ class PaiementFactory extends Factory
             'contrat_id' => Contrat::all()->random()->id,
             'date_paiement' => fake()->date(),
             'montant_paiement' => fake()->randomFloat(2,0,50000),
-            'origine' => fake()->randomDigitNotNull()
+            'origine' => fake()->randomDigitNotNull(),
+            'methode' => fake()->randomDigitNotNull()
         ];
     }
 }

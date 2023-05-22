@@ -33,7 +33,8 @@ class PaiementController extends Controller
             'contrat_id' => $request->contrat_id,
             'date_paiement' => $request->date_paiement,
             'montant_paiement' => $request->montant_paiement,
-            'origine' => $request->origine
+            'origine' => $request->origine,
+            'methode' => $request->methode
         ]);
 
         return new PaiementResouce($newPaiement);
@@ -55,6 +56,7 @@ class PaiementController extends Controller
         $paiement->date_paiement = $request->input('date_paiement', $paiement->date_paiement);
         $paiement->montant_paiement = $request->input('montant_paiement', $paiement->montant_paiement);
         $paiement->origine = $request->input('origine', $paiement->origine);
+        $paiement->methode = $request->input('methode', $paiement->methode);
 
         $paiement->save();
 
