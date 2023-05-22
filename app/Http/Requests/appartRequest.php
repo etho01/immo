@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Requests;
+// doc soir contrat
 
 use Illuminate\Validation\Validator;
 use Illuminate\Foundation\Http\FormRequest;

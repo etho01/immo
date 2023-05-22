@@ -22,13 +22,13 @@ class QuittancePdf {
         $date_debut,
         $date_fin
     ) {
-        $paiements = Paiement::getPaiementsByDuree($date_debut, $date_fin, $contrat->id);
+        $paiements = Paiement::getPaiementsByDuree($date_debut, $date_fin, $contrat->id); // get les variables
         $sommeDu = $appart->getSumForPeriode($date_debut, $date_fin);
         $nbMois = $appart->getNbMois($date_debut, $date_fin);
-        if ($paiements->sum('montant_paiement') < $appart->getSumForPeriode($date_debut, $date_fin)) {
-            throw new Exception('');
+        if ($paiements->sum('montant_paiement') < $appart->getSumForPeriode($date_debut, $date_fin)) { // check que le montant payer est suffisant sur la periode
+            throw new Exception('montant payer infereur');
         }
-        $this->pdf = PDF::loadView('pdf.quittance', compact(
+        $this->pdf = PDF::loadView('pdf.quittance', compact( // crée le pdf en fonction de la vue pdf.quittance en utilisant des variables
             'appart', 
             'contrat', 
             'locataire', 
@@ -42,7 +42,7 @@ class QuittancePdf {
         ));
     }
 
-    public function stream(){
+    public function stream(){ // envoie le stean du pdf
         return $this->pdf->stream();
     }
     

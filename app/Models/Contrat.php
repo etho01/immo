@@ -9,7 +9,7 @@ use League\CommonMark\Extension\CommonMark\Node\Inline\Code;
 class Contrat extends Model
 {
     use HasFactory;
-
+    // set les valeurs modifiables
     protected $fillable = [
         'id',
         'appart_id',
@@ -21,7 +21,7 @@ class Contrat extends Model
         'updated_at'
     ];
 
-    public function appart(){
+    public function appart(){ // set la relation l'appartement (c'est une fonction mais a l'utilisation c'est une variable de classe)
         return $this->hasOne(Appart::class, 'id');
     }
 
@@ -42,12 +42,12 @@ class Contrat extends Model
     }
 
     public static function getIdByRecherche($recherche) {
-        $eloquent = Contrat::select('id');
-        $eloquent->orWhere('ref', 'like', '%'.$recherche.'%');
+        $eloquent = Contrat::select('id'); // select la liste des id des contrats correspodant aus recherche
+        $eloquent->orWhere('ref', 'like', '%'.$recherche.'%'); // like sur la col ref
 
-        $eloquent->orWhereIn('appart_id', Appart::getIdByRecherche($recherche));
+        $eloquent->orWhereIn('appart_id', Appart::getIdByRecherche($recherche)); // fais un in avec les id des appart correspondant a la recherche
         $eloquent->orWhereIn('locataire_id', Locataire::getIdByRecherche($recherche));
 
-        return ($eloquent->get()->pluck('id'));
+        return ($eloquent->get()->pluck('id')); // convertie la collecion (passe d'une collection de model de contrat a celle de l'id du contrat)
     }
 }

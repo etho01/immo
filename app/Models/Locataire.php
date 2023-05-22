@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Models;
+// doc principale voir contrat
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;

@@ -1,5 +1,5 @@
 <?php
-
+// doc principale voir contrat
 namespace App\Models;
 
 use Carbon\Carbon;

@@ -24,7 +24,7 @@ class QuittanceMail extends Mailable
     /**
      * Create a new message instance.
      */
-    public function __construct(
+    public function __construct( // definie les varaibles en tant que variable de classe
         public Appart $appart,
         public Locataire $locataire,
         public Agence $agence,

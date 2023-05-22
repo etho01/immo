@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Requests;
-
+// doc soir contrat
 use Illuminate\Foundation\Http\FormRequest;
 
 class AgenceRequest extends FormRequest

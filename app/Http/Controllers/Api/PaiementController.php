@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers\Api;
-
+// doc voir contrat
 use App\Models\Paiement;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;

@@ -21,14 +21,15 @@ class contratRequest extends FormRequest
      */
     public function rules(): array
     {
-        return match($this->method()){
+        return match($this->method()){ // renvoie des regles differants si crée ou modification
             'POST' => $this->store(),
             'PUT', 'PATCH' => $this->update(),
         };
     }
 
     public function store(){
-        return [
+        return [ // regles 
+            // 'nom_value' => tableau de regle
             'appart_id' => ['required', 'exists:apparts,id'],
             'locataire_id' => ['required', 'exists:locataires,id'],
             'date_debut' => ['required', 'date'],
@@ -49,7 +50,9 @@ class contratRequest extends FormRequest
 
     public function messages()
     {
+        // renvoie les messages d'erreurs en fonctions des erreur
         return [
+            // col.regle_failed => "message"
             'appart_id.required' => "Il faut renseigner un appartement",
             "locataire_id.required" => "Il faut renseigner un locataire",
             "date_debut.required" => "Il fait renseigner la date de debut du contrat",
