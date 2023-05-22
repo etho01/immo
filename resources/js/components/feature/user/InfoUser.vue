@@ -65,7 +65,7 @@ import successMessageStore from '../../navbar/SuccessMessageStore';
                 if (await this.user.updateUser(this.data)){
                     successMessageStore.addSuccessMessage('L\'utilisateur a été modifié')
                     if (this.user.isUserLog) {
-                        userStoreLog.updateUserLog(this.data)
+                        userStoreLog.updateUserLog(this.user.getUser)
                     }
                 }
             },
