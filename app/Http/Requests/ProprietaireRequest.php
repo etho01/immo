@@ -53,4 +53,27 @@ class ProprietaireRequest extends FormRequest
             'genre' => [Rule::in(array_keys(config('constant.SEXE')))],
         ];
     }
+
+    public function messages()
+    {
+        return [
+            'nom.required' => "Le nom de proprietaire est requis",
+            "prenom.requied" => "Le prenom du proprietaire est requis",
+            "date_naissance.required" => "La date de naissance est requis",
+            "email.requied" => "L'adresse email du proprietaire est requis",
+            "telephone.requied" =>  "Le numero de telephone du proprietaire est requis",
+            "iban.required" => "Le champs iban est requis",
+            "bic.requied" => "Le champs bic est requis",
+            "genre.required" => "Le genre du proprietaire est requis",
+            'nom.max' => "Le nom du proprietaire est trop long",
+            "prenom.max" => "Le prenom du proprietaire est trop long",
+            "date_naissance.date" => "La date de naissance du proprietaire doit etre une date",
+            "email.email" => "Le champs email doit etre une adresse email valide",
+            "email.max" => "L'adresse email est trop longue",
+            "telephone.max" => "Le numero de telephone est trop long",
+            "iban.max" => "L'iban est trop long",
+            "bic.max" => "Le champs bic est trop long",
+            "genre.in" => "Le grenre n'exite pas"
+        ];
+    }
 }

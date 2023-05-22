@@ -44,4 +44,17 @@ class PaiementRequest extends FormRequest
             'origine' => [Rule::in(array_keys(config('constant.PAIEMENT.ORIGINE')))]
         ];
     }
+
+    public function messages()
+    {
+        return [
+            'contrat_id.required' => "Un contrat est requis pour le paiement",
+            "contrat_id.exists" => "le contrat n'exite pas",
+            "date_paiement.required" => "La date du paiement est requis",
+            "date_paiement.date" => "La date de paiement doit etre une date",
+            "montant_paiement.required" => "Le montat du paiement est requis",
+            "origine.required" => "L'origine est requis",
+            "origine.in" => "L'origine est incorecte"
+        ];
+    }
 }

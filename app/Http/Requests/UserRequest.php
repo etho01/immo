@@ -43,4 +43,17 @@ class UserRequest extends FormRequest
             'email' => ['max:255', 'email']
         ];
     }
+
+    public function messages()
+    {
+        return [
+            "password.min" => "Le mot de passe n'est pas assez puissant",
+            "password.required" => "Le mot de passe est requis",
+            "name.required" => "Le nom est requis",
+            "email.required" => "L'email est requis",
+            "name.max" => "Le nom est trop grand",
+            "email.max" => "L'email est trop grand",
+            "email.email" => "L'adresse email doit etre un email"
+        ];
+    }
 }

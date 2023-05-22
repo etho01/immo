@@ -30,10 +30,10 @@ class EtatDesLieuRequest extends FormRequest
 
     public function store() {
         return [
-            'contrat_id' => ['required', 'exists:contrats,id'],
-            'appart_id' => ['required', 'exists:apparts,id'],
+            'contrat_id' => ['exists:contrats,id'],
+            'appart_id' => ['exists:apparts,id'],
             'date' => ['required', 'date'],
-            'commentaire' => ['required'],
+            'commentaire' => ['required', 'max:65535'],
             'stade' => ['required', Rule::in(array_keys(config('constant.ETAT_DES_LIEU.STADE')))]
         ];
     }
@@ -43,7 +43,22 @@ class EtatDesLieuRequest extends FormRequest
             'date' => ['date'],
             'appart_id' => ['exists:apparts,id'],
             'contrat_id' => ['exists:contrats,id'],
-            'stade' => [Rule::in(array_keys(config('constant.ETAT_DES_LIEU.STADE')))]
+            'stade' => [Rule::in(array_keys(config('constant.ETAT_DES_LIEU.STADE')))],
+            'commentaire' => ['max:65535']
+        ];
+    }
+
+    public function messages()
+    {
+        return [
+            "date.required" => "Une date de l'etat des lieu est neccesaire",
+            "date.date" => "La date de l'etat des lieu doit etre un date",
+            "commentaire.required" => "L'ajout d'un commentaire est requis",
+            "stade.required" => "Le stade de l'etat des lieu est requis",
+            'stade.id' => "Le stade n'existe pas",
+            "commentaire.max" => "Le commentaire est trop grand",
+            "contrat_id.exists" => "Le contrat n'existe pas",
+            "appart_id.exists" => "L'appartement n'exite pas"
         ];
     }
 }

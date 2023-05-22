@@ -32,7 +32,7 @@ class appartRequest extends FormRequest
         return [
            'agence_id' => ['required', 'exists:agences,id'],
             'adresse' => ['required', 'max:255'],
-            'adresse_compl' => ['required', 'max:255'],
+            'adresse_compl' => ['max:255'],
             'departement' => ['required', 'max:255'],
             'cp' => ['required', 'max:255'],
             'pays' => ['required', 'max:255'],
@@ -57,5 +57,26 @@ class appartRequest extends FormRequest
 
     public function destroy(){
         return [];
+    }
+
+    public function messages()
+    {
+        return [
+            'agence_id.required' => "Il faut renseigner un contrat",
+            'adresse.requird' => "une adresse est requis",
+            'departement.required' => "Un departement est requis",
+            'cp.required' => "un code postal est requis",
+            'pays.required' => 'Un pays est requis',
+            "charge.required" => "Un motant de charge est requis",
+            "loyer.required" => "Un montant de loyer est requis",
+            "proprietaire_id.required" => "Il faut renseigner un appartement",
+            'adresse_compl.max' => "Le champs adresse complementaire est trop grand",
+            'departement.max' => "Le champs departement est trop grand",
+            'cp.max' => "Le champs code postal est trop grand",
+            'pays.max' => "Le champs pays est trop grand",
+            'adresse.max' => "Le champs adresse est trop grand",
+            "proprietaire_id.exists" => "Le propretaire n'existe pas",
+            "agence_id.exists" => "L'agence n'existe pas"
+        ];
     }
 }

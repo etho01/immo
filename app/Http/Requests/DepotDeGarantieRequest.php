@@ -45,4 +45,17 @@ class DepotDeGarantieRequest extends FormRequest
             'date_restitution' => ['date']
         ];
     }
+    
+    public function messages()
+    {
+        return [
+            "contrat_id.required" => "Il faut renseinger un contrat",
+            "contrat_id.exists" => "Le contrat n'existe pas",
+            "contrat_id.unique" => "Le contrat a deja un depot de garantie",
+            "montant_encaisser.required" => "Le montant encaisser ne soit pas etre null",
+            "date_encaissement.required" => "La date d'encaissement du depot de garantie est requis",
+            "date_encaissement.date" => "La date d'encaissement doit etre une date",
+            "date_restitution.date" => "La date de restitution du depot de garantie doit etre une date"
+        ];
+    }
 }

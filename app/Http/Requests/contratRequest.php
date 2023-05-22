@@ -47,4 +47,19 @@ class contratRequest extends FormRequest
         ];
     }
 
+    public function messages()
+    {
+        return [
+            'appart_id.required' => "Il faut renseigner un appartement",
+            "locataire_id.required" => "Il faut renseigner un locataire",
+            "date_debut.required" => "Il fait renseigner la date de debut du contrat",
+            "ref.required" => "La referance du contrat est requis",
+            "date_debut.date" => "La date de debut du contrat n'est pas une date",
+            "date_fin.date" => "La date de fin du contrat n'est pas une date",
+            "appart_id.exists" => "L'appartment n'exite pas",
+            "locataire_id.exists" => "Le locataire n'existe pas",
+            "ref.max" => "La referance est trop grand"
+        ];
+    }
+
 }

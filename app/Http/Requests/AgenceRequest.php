@@ -42,4 +42,16 @@ class AgenceRequest extends FormRequest
             'bic' => ['max:255'],
         ];
     }
+
+    public function messages()
+    {
+        return [
+            'nom.required' => 'le nom de l\'agence est requis',
+            'iban.required' => "l'iban de l'agence est requis",
+            "bic.required" => "le bic de l'agence est requis",
+            'nom.max' => 'le nom de l\'agence est trop grand',
+            'iban.max' => "l'iban de l'agence est trop grand",
+            "bic.max" => "le bic de l'agence est trop grand"
+        ];
+    }
 }

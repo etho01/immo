@@ -53,4 +53,27 @@ class LocataireRequest extends FormRequest
             'genre' => [Rule::in(array_keys(config('constant.SEXE')))],
         ];
     }
+
+    public function messages()
+    {
+        return [
+            'nom.required' => "Le nom de locataire est requis",
+            "prenom.requied" => "Le prenom du locataire est requis",
+            "date_naissance.required" => "La date de naissance est requis",
+            "email.requied" => "L'adresse email du locataire est requis",
+            "telephone.requied" =>  "Le numero de telephone du locataire est requis",
+            "iban.required" => "Le champs iban est requis",
+            "bic.requied" => "Le champs bic est requis",
+            "genre.required" => "Le genre du locataire est requis",
+            'nom.max' => "Le nom du locataire est trop long",
+            "prenom.max" => "Le prenom du locataire est trop long",
+            "date_naissance.date" => "La date de naissance du locataire doit etre une date",
+            "email.email" => "Le champs email doit etre une adresse email valide",
+            "email.max" => "L'adresse email est trop longue",
+            "telephone.max" => "Le numero de telephone est trop long",
+            "iban.max" => "L'iban est trop long",
+            "bic.max" => "Le champs bic est trop long",
+            "genre.in" => "Le grenre n'exite pas"
+        ];
+    }
 }
