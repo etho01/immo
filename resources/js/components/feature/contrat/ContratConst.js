@@ -1,18 +1,18 @@
 export default function contratConst(){
-
+    // colonne de la lise des contrats
     const ContratCols = [
         {
-            nom : "Reference du contrat",
-            param: {
-                actions: [
+            nom : "Reference du contrat", // com de la colonne
+            param: { 
+                actions: [ // liste des action de la colone
                     {
-                        type: 'fonc',
-                        fonc: (contrat) => contrat.ref
+                        type: 'fonc', // type
+                        fonc: (contrat) => contrat.ref // fonction de renvoe
                     }
                 ]
             },
-            size: 1,
-            id: 'contrat.ref'
+            size: 1, // taille de la colline
+            id: 'contrat.ref' // di de la colone 
         },
         {
             nom : 'Nom du locataire',
@@ -68,12 +68,12 @@ export default function contratConst(){
         },
         {
             nom: '',
-            btnNom: {
+            btnNom: { // infos boutton thead
                 event: {
-                    nomEvent: 'newContrat',
+                    nomEvent: 'newContrat', // non de l'event
                 },
-                class: 'bg-gray-100 px-2 py-1 rounded-xl border-gray-200 border-2 cursor-pointer',
-                icone: {
+                class: 'bg-gray-100 px-2 py-1 rounded-xl border-gray-200 border-2 cursor-pointer',// classe du boutton
+                icone: {// icone du boutton
                     icone: ['fas', 'plus'],
                 }
             },
@@ -82,12 +82,12 @@ export default function contratConst(){
                 actions: [
                     {
                         type: 'button',
-                        event: {
+                        event: { // descprion de l'emit d'appuie sur le boutton
                             nomEvent: 'showContrat',
                             data: (contrat) => contrat.id 
                         },
-                        class: 'bg-gray-100 px-2 py-1 rounded-xl border-gray-200 border-2 cursor-pointer',
-                        icone: {
+                        class: 'bg-gray-100 px-2 py-1 rounded-xl border-gray-200 border-2 cursor-pointer', // classe du boutton
+                        icone: { // icone du boutton
                             icone: ['fas', 'arrow-up-right-from-square'],
                         }
                     }

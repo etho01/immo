@@ -1,5 +1,6 @@
 import { defineStore } from "pinia";
 import { useContratStore } from '../contrat/contratStore'
+// voir contrat
 
 import userLocataire from './locataireServices.js';
 

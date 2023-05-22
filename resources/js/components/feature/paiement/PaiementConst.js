@@ -1,5 +1,5 @@
 export default function paiementConst(){
-
+// voir contrat
     const paiementCols = [
         {
             nom : 'Date du paiement',

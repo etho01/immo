@@ -1,5 +1,5 @@
 import foncConst from "../../../const/fonctConst";
-
+// voir contrat
 const { getValueList } = foncConst();
 
 export default function proprietaireConst(){

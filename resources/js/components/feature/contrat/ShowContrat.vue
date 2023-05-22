@@ -77,12 +77,12 @@ import InfoDepotDeGarantie from '../depotDeGarantie/InfoDepotDeGarantie.vue';
         };
     },
     async mounted () {
-        if (this.$route.params.contrat_id == 'new') {
+        if (this.$route.params.contrat_id == 'new') { // si page new contrat
             contrat.setNewContrat();
-        } else if (isNaN(this.contrat_id)) {
+        } else if (isNaN(this.contrat_id)) { // si id est in nombre
             this.$router.push({ name: "contrat.menu" });
         } else {
-            if(!await contrat.getContratById(this.contrat_id) ){
+            if(!await contrat.getContratById(this.contrat_id) ){ // si le contrat n'existe pas
                 this.$router.push({ name: "contrat.menu" });
             }
         }

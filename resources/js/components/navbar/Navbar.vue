@@ -80,7 +80,7 @@ import userStoreLog from '../feature/user/userStoreLog';
                     nom: "User",
                     name: 'user.menu'
                 }
-            ],
+            ], // page a afficher
             show: true,
             mouseOver: false,
             userStoreLog

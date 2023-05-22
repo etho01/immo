@@ -1,4 +1,5 @@
 export default function userConst() {
+    // voir contrat
     const userCols = [
         {
             nom : 'Nom',

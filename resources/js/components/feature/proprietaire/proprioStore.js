@@ -1,6 +1,6 @@
 import { defineStore } from "pinia";
 import { useAppartStore } from '../appart/appartStore';
-
+// voir contrat
 import userProprietaire from './proprietaireServices.js';
 
 import { deleteUndefine } from "../../../store/fonc";

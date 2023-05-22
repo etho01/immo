@@ -81,7 +81,7 @@ export const useEtatDesLieuStore = defineStore('etatDesLieu', {
             this.changeValueSetEtatDesLieu();
         },
 
-        changeValueSetEtatDesLieu() {
+        changeValueSetEtatDesLieu() { // change les données qaund un nouvel etat des lieu est charger
             this.haveEtatDesLieuLoad = true
             this.newEtatDesLieu = false
             refreshErreur()
@@ -101,7 +101,8 @@ export const useEtatDesLieuStore = defineStore('etatDesLieu', {
             return false
         },
 
-        changeValueSetEtatDesLieus() {
+        changeValueSetEtatDesLieus() { // change les donnée quand une liste de composant est mise a jour
+            
             this.page = page.value
             this.nbPage = nbPage.value
         },

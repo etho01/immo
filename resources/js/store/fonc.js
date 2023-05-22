@@ -1,4 +1,4 @@
-const deleteUndefine = function (data) {
+const deleteUndefine = function (data) { // delete les elements undefine des objets
     let filtered = Object.entries(data).filter(([key, value]) => {
         return value != undefined
     })

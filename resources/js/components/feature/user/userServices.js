@@ -1,6 +1,6 @@
 import {ref, computed} from "vue";
 import axios from "../../../services/axios.js";
-
+    // voir contrat
 import { getErrors, checkIsLog} from '../../../services/fonc.js';
 import userStoreLog from "./userStoreLog.js";
 
@@ -32,10 +32,10 @@ export default function useUser() {
         let response = await axios.get('/api/login', {params: {
             email,
             password
-        }})
+        }}) // envoie la requette pour se log
         .catch(function (erreur) {
             haveError = true
-            setError(getErrors(erreur.response.data.errors))
+            setError(getErrors(erreur.response.data.errors)) 
         });
         if (response.data.data == undefined){
             setError(erreurTab.value = [

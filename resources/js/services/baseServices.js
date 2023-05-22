@@ -5,6 +5,7 @@ import { getErrors, checkIsLog} from './fonc.js';
 import userStoreLog from "../components/feature/user/userStoreLog.js";
 
 export default function useServices(nomRoute) {
+    // definie les elements recative qui seront utilisé par les stores
     const element = ref([]);
     const elements = ref([]);
 
@@ -18,13 +19,13 @@ export default function useServices(nomRoute) {
     const getElement = async (id) => {
         let validate = true;
         let response = await axios.get('/api/' + nomRoute + '/'+ id, {params: { ...userStoreLog.getInfosCallApi},
-        ...userStoreLog.getHeaderRequest} ).
+        ...userStoreLog.getHeaderRequest} ). // envoie la requette
             catch(function (erreur){
-                checkIsLog(erreur)
+                checkIsLog(erreur) // si erreur api
                 validate = false;
             });
 
-        if (validate) element.value = response.data.data;
+        if (validate) element.value = response.data.data; // change la value de l'element la requette a marcher
         return validate;
     }
 
@@ -32,11 +33,11 @@ export default function useServices(nomRoute) {
         let validate = true;
         let response = await axios.delete('/api/' + nomRoute + '/'+ id, { ...userStoreLog.getInfosCallApi},
         userStoreLog.getHeaderRequest)
-            .catch(function (erreur){
-                checkIsLog(erreur)
+            .catch(function (erreur){// envoie la requette
+                checkIsLog(erreur) // si erreur api
                 validate = false
             });
-        return validate;
+        return validate; // retourne si l'api a eu une erreir
     }
 
     const createElement = async (data) => {
@@ -50,9 +51,9 @@ export default function useServices(nomRoute) {
             let validate = false
         })
         if (validate){
-            return response.data.data.id;
+            return response.data.data.id; // si l'api n'a pas eu d'erreur retourne l'id du nouvel element
         }
-        return 0
+        return 0 
     }
 
     const updateElement = async (id, data) => {
@@ -71,7 +72,7 @@ export default function useServices(nomRoute) {
         return validate
     }
 
-    const getElements = async (data) => {
+    const getElements = async (data) => { // referech la pagination quand de nouvea filtres sont envoyer
         filtre = data
         page.value = 1;
         return await sendGetElementsRequest()
@@ -80,23 +81,23 @@ export default function useServices(nomRoute) {
     const sendGetElementsRequest = async (data) => {
         let validate = true;
         let response = await axios.get('/api/' + nomRoute, {params: {...filtre, ...userStoreLog.getInfosCallApi, page: page.value},
-        ...userStoreLog.getHeaderRequest})
+        ...userStoreLog.getHeaderRequest}) // envoie de la requette
             .catch(function (erreur){
-                checkIsLog(erreur)
+                checkIsLog(erreur) // si erreur
                 validate = false
             });
-        elements.value = response.data.data;
-        nbPage.value = response.data.meta.last_page;
+        elements.value = response.data.data; // change les elements
+        nbPage.value = response.data.meta.last_page; // change la valeur de la derneires page
         return validate
     }
 
     const gotoPage = async (newPage) => {
-        page.value = newPage;
+        page.value = newPage; // change la page
         return await sendGetElementsRequest();
     }
 
     const setError = (error) => {
-        erreurTab.value = error;
+        erreurTab.value = error; // set les erreurs
     }
 
     const refreshErreur = () => {

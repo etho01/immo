@@ -3,15 +3,17 @@ import { ref } from "vue";
 let erreurTab = ref([]);
 
 export default function useQuittance() {
-    let erreurTab = ref([]);
+    let erreurTab = ref([]); // set un tableau modififiable et reactive
 
     const sendMailQuittance = async (contrat_id, data) => {
         let haveError = false
-        let response = await axios.get('/api/contrat/sendMailQuittance/' + contrat_id,
+        let response = await axios.get('/api/contrat/sendMailQuittance/' + contrat_id, // envoie l'appel que l'api doit envoyer le mail
         {params: data})
             .catch((error) => {
                 erreurTab.value = ['Erreur']
+                haveError = true
             })
+        return !haveError
     }
 
     const downloadQuittance = async (contrat_id, data) => {
@@ -35,7 +37,9 @@ export default function useQuittance() {
             })
             .catch((error) => {
                 erreurTab.value = ['Erreur']
+                let haveError = true
             })
+        return !haveError
     }
 
     return {

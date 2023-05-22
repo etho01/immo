@@ -1,5 +1,5 @@
 export default function agenceConst() {
-
+// voir contrat
     const agenceCol = [
         {
             nom: "Nom de l'agence",

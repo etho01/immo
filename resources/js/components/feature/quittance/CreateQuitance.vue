@@ -21,6 +21,7 @@ import Error from '../../utils/Error.vue';
 import Text from '../../utils/input/Text.vue';
 import Title from '../../utils/title/Title.vue';
 import useQuittance from './quittanceServices';
+import successMessageStore from '../../navbar/SuccessMessageStore';
 const { downloadQuittance, sendMailQuittance, erreurTab } = useQuittance();
 
     export default {
@@ -36,10 +37,14 @@ const { downloadQuittance, sendMailQuittance, erreurTab } = useQuittance();
         },
         methods: {
             downloadQuittanceClick() {
-                downloadQuittance(this.contrat_id, this.data)
+                if (downloadQuittance(this.contrat_id, this.data)) {
+                    successMessageStore.addSuccessMessage('La quittance a été telecharger')
+                }
             },
             sendMailQuittanceClick() {
-                sendMailQuittance(this.contrat_id, this.data)
+                if (sendMailQuittance(this.contrat_id, this.data)){
+                    successMessageStore.addSuccessMessage('La quittance a été anvoyer')
+                }
             },
             changeDateDebut(value) {
                 this.data = {...this.data, date_debut: value}

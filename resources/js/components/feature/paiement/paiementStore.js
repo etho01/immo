@@ -1,5 +1,5 @@
 import { defineStore } from "pinia";
-
+// voir etat des lieu
 import userPaiement from './paimentServices.js';
 
 const {

@@ -24,18 +24,18 @@ const {
     setContrat,
     setContrats,
     refreshErreur
-} = userContrat()
+} = userContrat() // get les elements de l'api
 
 export const useContratStore = defineStore('contrat', {
     state: () => {
         return {
-            contrats: [],
-            contrat: {},
-            page: 1,
-            nbPage: 1,
-            erreurTab,
-            newContrat : false,
-            haveContratLoad: false,
+            contrats: [], // liste des contrats
+            contrat: {}, // contrat
+            page: 1, // page actuel
+            nbPage: 1, // nombre de page
+            erreurTab, // tableau d'erreur
+            newContrat : false, // si c'est un nex contrat
+            haveContratLoad: false, // save si un contrat est load
             locataire: useLocataireStore(),
             appart: useAppartStore(),
             paiement: usePaiementStore(),
@@ -51,7 +51,7 @@ export const useContratStore = defineStore('contrat', {
     actions: {
         async updateContrat(data) {
             if (this.haveContratLoad) {
-                if ( await updateContrat(this.getContrat.id, data)) {
+                if ( await updateContrat(this.getContrat.id, data)) { // si la modification n'a pas echouer
                     this.contrat = {...this.getContrat, ...deleteUndefine(data)}
                     return true
                 }
@@ -60,7 +60,7 @@ export const useContratStore = defineStore('contrat', {
         },
         async deleteContrat() {
             if (this.haveContratLoad) {
-                if (await deleteContrat(this.getContrat.id)) {
+                if (await deleteContrat(this.getContrat.id)) {  // si la suppression n'a pas echouer
                     this.haveContratLoad = false
                     this.contrat = {}
                     return true
@@ -69,7 +69,7 @@ export const useContratStore = defineStore('contrat', {
             return false
         },
         async createContrat(data) {
-            let idNewContrat = await createContrat(data)
+            let idNewContrat = await createContrat(data) //  // si la création n'a pas echouer
             if (idNewContrat != 0) {
                 await this.getContratById(idNewContrat)
                 this.newContrat = false
@@ -88,7 +88,7 @@ export const useContratStore = defineStore('contrat', {
             return false
         },
 
-        changeValueSetContrat() {
+        changeValueSetContrat() { // change la valeur des donnée aussin que les stores des composant enfant qaund un nouveau contrat est charger
             this.haveContratLoad = true
             this.newContrat = false
             this.locataire.getLocataireByObject(this.getContrat.locataire)

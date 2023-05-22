@@ -16,8 +16,9 @@ const useUserLogStore = defineStore('userLoh',{
             this.infosUser = infosUser;
             this.isLog = true;
             if (this.saveUser) {
-                document.cookie = 'user=' + JSON.stringify(this.infosUser) +';max-age=86400';
+                document.cookie = 'user=' + JSON.stringify(this.infosUser) +';max-age=86400'; // ajoute un coockie de log
             }
+            // connect a user
         },
         disconect() {
             this.infosUser = {}
@@ -27,7 +28,7 @@ const useUserLogStore = defineStore('userLoh',{
             }
             router.push({name: 'login'})
         },
-        checkCoockieConnect() {
+        checkCoockieConnect() { // check si un utilisateur est pas connecter par la presente d'un coockie
             let valueCoockie = ""
             let name="user"
             const value = `; ${document.cookie}`;
@@ -40,9 +41,9 @@ const useUserLogStore = defineStore('userLoh',{
             }
         },
         updateUserLog(data) {
-            this.infosUser = {...this.infosUser, ...data};
+            this.infosUser = {...this.infosUser, ...data}; // modifie les infos de l'utilisateur connecter
             if (this.saveUser) {
-                document.cookie = 'user=' + JSON.stringify(this.infosUser) +';max-age=86400';
+                document.cookie = 'user=' + JSON.stringify(this.infosUser) +';max-age=86400';  // regenre le coockie de log
             }
         }
     },
@@ -71,5 +72,5 @@ const useUserLogStore = defineStore('userLoh',{
         }
     }
 })
-let userStoreLog = useUserLogStore(piniaUse);
+let userStoreLog = useUserLogStore(piniaUse); // permet d'avoir toujours meme intantce n'importe ou dans le projet
 export default userStoreLog
