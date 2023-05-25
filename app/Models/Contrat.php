@@ -69,7 +69,7 @@ class Contrat extends Model
         foreach ($this->etatDesLieus as $etatDesLieu ) {
             $etatDesLieu->del();
         }
-        $this->depotDeGarantie->del();
+        if ($this->depotDeGarantie != null) $this->depotDeGarantie->del();
         $this->delete();
     }
 }

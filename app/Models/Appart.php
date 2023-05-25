@@ -81,6 +81,9 @@ class Appart extends Model
     }
 
     public function del() {
+        foreach ($this->etatDesLieus as $etatDesLieu ) {
+            $etatDesLieu->del();
+        }
         foreach ($this->contrats as $contrat) {
             $contrat->del();
         }

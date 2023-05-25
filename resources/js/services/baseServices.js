@@ -31,7 +31,7 @@ export default function useServices(nomRoute) {
 
     const deleteElement = async (id) => {
         let validate = true;
-        let response = await axios.delete('/api/' + nomRoute + '/'+ id, { ...userStoreLog.getInfosCallApi},
+        let response = await axios.delete('/api/' + nomRoute + '/'+ id, 
         userStoreLog.getHeaderRequest)
             .catch(function (erreur){// envoie la requette
                 checkIsLog(erreur) // si erreur api

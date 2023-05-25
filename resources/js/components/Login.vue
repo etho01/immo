@@ -52,8 +52,8 @@ import userStoreLog from './feature/user/userStoreLog';
     export default {
     data() {
         return {
-            email: 'test@test.fr',
-            password: 'testtest',
+            email: undefined,
+            password: undefined,
             erreurTab,
             userStoreLog,
             saveUser: false
