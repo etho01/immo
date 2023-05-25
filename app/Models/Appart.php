@@ -80,4 +80,11 @@ class Appart extends Model
         return $this->belongsTo(Proprietaire::class);
     }
 
+    public function del() {
+        foreach ($this->contrats as $contrat) {
+            $contrat->del();
+        }
+        $this->delete();
+    }
+
 }

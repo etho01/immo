@@ -28,4 +28,8 @@ class EtatDesLieu extends Model
     public function contrat(){
         return $this->belongsTo(Contrat::class);
     }
+
+    public function del() {
+        $this->delete();
+    }
 }

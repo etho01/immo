@@ -47,4 +47,11 @@ class Proprietaire extends Model
     public function getNom() {
         return $this->prenom . ' ' . $this->nom;
     }
+
+    public function del() {
+        foreach ($this->apparts as $appart) {
+            $appart->del();
+        }
+        $this->delete();
+    }
 }

@@ -92,6 +92,6 @@ class AppartController extends Controller
      */
     public function destroy(Appart $appart)
     {
-        $appart->delete();
+        $appart->del();
     }
 }

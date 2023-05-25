@@ -59,6 +59,6 @@ class AgenceController extends Controller
      */
     public function destroy(Agence $agence)
     {
-        $agence->delete();
+        $agence->del();
     }
 }

@@ -25,4 +25,8 @@ class DepotDeGarantie extends Model
         return $this->belongsTo(Contrat::class);
     }
 
+    public function del() {
+        $this->delete();
+    }
+
 }

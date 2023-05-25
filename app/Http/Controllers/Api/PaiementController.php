@@ -68,7 +68,7 @@ class PaiementController extends Controller
      */
     public function destroy(Paiement $paiement)
     {
-        $paiement->delete();
+        $paiement->del();
     }
 
 }

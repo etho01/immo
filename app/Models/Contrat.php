@@ -61,4 +61,15 @@ class Contrat extends Model
         $montantDu = $this->appart->getSumForPeriode($this->date_debut, now());
         return round( $montantDu - $sumPaiements, 2);
     }
+
+    public function del() {
+        foreach ($this->paiements as $paiement ) {
+            $paiement->del();
+        }
+        foreach ($this->etatDesLieus as $etatDesLieu ) {
+            $etatDesLieu->del();
+        }
+        $this->depotDeGarantie->del();
+        $this->delete();
+    }
 }

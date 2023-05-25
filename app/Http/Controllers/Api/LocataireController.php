@@ -88,6 +88,6 @@ class LocataireController extends Controller
      */
     public function destroy(Locataire $locataire)
     {
-        $locataire->delete();
+        $locataire->del();
     }
 }

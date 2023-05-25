@@ -1,6 +1,7 @@
 import { defineStore } from "pinia";
 import { useProprietaireStore } from '../proprietaire/proprioStore.js';
 import { useContratStore } from '../contrat/contratStore.js';
+import { useEtatDesLieuStore } from "../etatDesLieu/etatDesLieuStore.js";
 // voir contrat
 
 import { deleteUndefine } from "../../../store/fonc.js";
@@ -35,7 +36,8 @@ export const useAppartStore = defineStore('appart', {
             newAppart : false,
             haveAppartLoad: false,
             proprietaire: useProprietaireStore(),
-            contrat: useContratStore()
+            contrat: useContratStore(),
+            etatDesLieu: useEtatDesLieuStore()
         }
     },
     getters: {

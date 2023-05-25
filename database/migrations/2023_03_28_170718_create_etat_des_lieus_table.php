@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('etat_des_lieus', function (Blueprint $table) {
             $table->id();
-            $table->foreignIdFor(Contrat::class)->constrained()->nullable();
+            $table->foreignIdFor(Contrat::class)->nullable();
             $table->foreignIdFor(Appart::class)->constrained();
             $table->date('date');
             $table->text('commentaire');

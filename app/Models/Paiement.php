@@ -41,5 +41,9 @@ class Paiement extends Model
         return  Paiement::where('contrat_id', $contrat_id)->get();
     }
 
+    public function del() {
+        $this->delete();
+    }
+
 
 }

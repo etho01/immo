@@ -64,6 +64,6 @@ class DepotDeGarantieController extends Controller
      */
     public function destroy(DepotDeGarantie $depotDeGarantie)
     {
-        $depotDeGarantie->delete();
+        $depotDeGarantie->del();
     }
 }

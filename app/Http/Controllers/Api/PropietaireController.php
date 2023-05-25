@@ -89,6 +89,6 @@ class PropietaireController extends Controller
      */
     public function destroy(Proprietaire $proprietaire)
     {
-        $proprietaire->delete();
+        $proprietaire->del();
     }
 }

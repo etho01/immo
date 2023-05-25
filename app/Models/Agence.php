@@ -30,4 +30,11 @@ class Agence extends Model
         $eloquent->orWhere('bic', 'like', '%'.$recherche.'%');
         return ($eloquent->get()->pluck('id'));
     }
+
+    public function del() {
+        foreach ($this->apparts as $appart) {
+            $appart->del();
+        }
+        $this->delete();
+    }
 }

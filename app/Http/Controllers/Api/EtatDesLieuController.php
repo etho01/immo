@@ -70,6 +70,6 @@ class EtatDesLieuController extends Controller
     {
         $etatDesLieu = EtatDesLieu::find($request->etatDesLieux);
 
-        $etatDesLieu->delete();
+        $etatDesLieu->del();
     }
 }

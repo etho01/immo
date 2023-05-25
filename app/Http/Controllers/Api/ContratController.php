@@ -98,7 +98,7 @@ class ContratController extends Controller
     public function destroy(Contrat $contrat)
     {
         // suprime le contrat
-        $contrat->delete();
+        $contrat->del();
     }
 
     

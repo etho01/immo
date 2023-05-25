@@ -48,4 +48,11 @@ class Locataire extends Model
         return $this->prenom . ' ' . $this->nom;
     }
 
+    public function del() {
+        foreach ($this->contrats as $contrat) {
+            $contrat->del();
+        }
+        $this->delete();
+    }
+
 }
