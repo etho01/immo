@@ -2,8 +2,9 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use League\CommonMark\Extension\CommonMark\Node\Inline\Code;
 
 class Contrat extends Model
@@ -52,14 +53,30 @@ class Contrat extends Model
     }
 
     public function getSolde() {
-        $sumPaiements = Paiement::getPaiementsByContrat($this->id)->sum('montant_paiement');
-        if ($this->date_fin != '') {
-            $date_fin = $this->date_fin;
-        } else {
-            $date_fin = now();
-        }
-        $montantDu = $this->appart->getSumForPeriode($this->date_debut, now());
-        return round( $montantDu - $sumPaiements, 2);
+        return (DB::select('select 
+        (
+            (ROUND (DATEDIFF(
+                    (
+                        
+                        CASE WHEN c.date_fin > now() 
+                        THEN now() ELSE c.date_fin END 
+                    )
+                , c.date_debut) /30) 
+                    + 
+                    CASE WHEN c.date_fin > NOW() THEN 0 ELSE 1 END
+                )
+                *
+                ( a.charge + a.loyer) 
+        ) - 
+        (
+            SELECT SUM(p.montant_paiement) from paiements p 
+            where p.contrat_id = c.id
+        ) AS VALUE
+             
+        from contrats c
+        JOIN apparts a on c.appart_id = a.id
+        where c.id = '. $this->id
+        )[0]->VALUE);
     }
 
     public function del() {
@@ -71,5 +88,33 @@ class Contrat extends Model
         }
         if ($this->depotDeGarantie != null) $this->depotDeGarantie->del();
         $this->delete();
+    }
+
+    public static function getContratSoldeSuffistant() {
+        $tab_data = (DB::select('
+        select c.id
+        from contrats c
+        JOIN apparts a on c.appart_id = a.id
+        where 
+            (
+            (ROUND (DATEDIFF(
+                     (
+                          
+                         CASE WHEN c.date_fin > now() 
+                         THEN now() ELSE c.date_fin END 
+                     )
+                 , c.date_debut) /30) )
+                 *
+                 ( a.charge + a.loyer) 
+        ) - 
+        (
+            SELECT SUM(p.montant_paiement) from paiements p 
+            where p.contrat_id = c.id
+        ) <= 0'));
+        $tab_resp = [];
+        foreach ($tab_data as $data) {
+            $tab_resp[] = $data->id;
+        }
+        return ($tab_resp);
     }
 }

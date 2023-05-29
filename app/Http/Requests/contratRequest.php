@@ -33,7 +33,7 @@ class contratRequest extends FormRequest
             'appart_id' => ['required', 'exists:apparts,id'],
             'locataire_id' => ['required', 'exists:locataires,id'],
             'date_debut' => ['required', 'date'],
-            'date_fin' => ['date'],
+            'date_fin' => ['date', 'after:date_debut'],
             'ref' => ['required', 'max:255']
         ];
     }
@@ -41,7 +41,7 @@ class contratRequest extends FormRequest
     public function update(){
         return [
             'date_debut' => ['date'],
-            'date_fin' => ['date'],
+            'date_fin' => ['date' , 'after:date_debut'],
             'appart_id' => ['exists:apparts,id'],
             'locataire_id' => ['exists:locataires,id'],
             'ref' => ['max:255']
@@ -61,7 +61,8 @@ class contratRequest extends FormRequest
             "date_fin.date" => "La date de fin du contrat n'est pas une date",
             "appart_id.exists" => "L'appartment n'exite pas",
             "locataire_id.exists" => "Le locataire n'existe pas",
-            "ref.max" => "La referance est trop grand"
+            "ref.max" => "La referance est trop grand",
+            "after" => "La date de fin doit apres la date de debut du contrat"
         ];
     }
 

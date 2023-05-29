@@ -2,7 +2,7 @@
     <div>
         <Error :erreurTab="contrat.erreurTab" />
         <Title title="Information contrat" />
-        <div class="my-5 text-center">
+        <div class="my-5 text-center" v-if="!contrat.isNewContrat">
             Solde du contrat: {{ contrat.getContrat.solde }} euros
         </div>
         <div class="grid grid-cols-2 mt-3">
@@ -105,8 +105,8 @@
             },
             getData() {
                 return {
-                    date_debut: this.date_debut,
-                    date_fin: this.date_fin,
+                    date_debut: this.date_debut == undefined ? this.contrat.getContrat.date_debut : this.date_debut,
+                    date_fin: this.date_fin  == undefined ? this.contrat.getContrat.date_fin : this.date_fin,
                     ref: this.ref,
                     appart_id: this.appart_id,
                     locataire_id: this.locataire_id

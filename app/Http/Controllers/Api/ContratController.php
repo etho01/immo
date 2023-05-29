@@ -50,6 +50,20 @@ class ContratController extends Controller
         if ($request->input('appart_id', -1) != -1){
             $eloquent->where('appart_id', $request->input('appart_id'));
         }
+        if ($request->input('statut', 0) == 1) {
+            $eloquent->where(function (Builder $query) {
+                $query->whereNull('date_fin');
+                $query->orwhere('date_fin', '>', now());
+            });
+        }
+        if ($request->input('statut', 0) == 2) {
+            $eloquent->where('date_fin', '<', now());
+        }
+        if ($request->input('statut_solde', 0) == 1) {
+            $eloquent->whereNotIn('id', Contrat::getContratSoldeSuffistant());
+        } else if ($request->input('statut_solde', 0) == 2) {
+            $eloquent->whereIn('id', Contrat::getContratSoldeSuffistant());
+        }
         // envoie les données du contrats sous la forme d'un json typé (liste de 30 contarts max)
         return ContratResouce::collection($eloquent->paginate(30));
     }

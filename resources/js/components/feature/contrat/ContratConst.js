@@ -98,7 +98,31 @@ export default function contratConst(){
         }
     ];
 
+    const statutContrat = [
+        {
+            id: 1,
+            nom: 'En cours'
+        },
+        {
+            id: 2,
+            nom: 'Terminer'
+        }
+    ];
+
+    const statutSoldeContrat = [
+        {
+            id: 1,
+            nom: "Solde negatif"
+        },
+        {
+            id: 2,
+            nom: "Solde positif"
+        }
+    ]
+
     return {
         ContratCols,
+        statutContrat,
+        statutSoldeContrat
     }
 }

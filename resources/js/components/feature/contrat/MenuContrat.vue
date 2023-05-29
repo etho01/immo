@@ -5,6 +5,8 @@
             <SelectAgence @changeValue="onChangeAgence" />
 
             <Text label="Recherche" placeholder="Filtre sur l'adresse de l'appartement et le nom du locataire" @changeValue="onChangeRecherche"/>
+            <Select label="Statut" @changeValue="changeStatut" :param="statutContrat" />
+            <Select label="Satut du solde" @changeValue="changeStatutSolde" :param="statutSoldeContrat" />
         </section>
 
         <ListeContrat :contrat="contrat"/>
@@ -24,12 +26,19 @@
     import { useContratStore } from './contratStore';
     const contrat = useContratStore()
 
+    import contratConst from './ContratConst.js';
+    const { statutContrat, statutSoldeContrat } = contratConst();
+
     export default {
         data() {
             return {
                 agence_id: -1,
                 recherche: '',
-                contrat
+                statut: undefined,
+                statut_solde: undefined,
+                contrat,
+                statutContrat,
+                statutSoldeContrat
             }
         },
         methods: {
@@ -40,13 +49,23 @@
             onChangeAgence(agence_id){
                 this.agence_id = agence_id;
                 this.contrat.getContratsByFiltre(this.getFiltres)
-            }
+            },
+            changeStatut(statut) {
+                this.statut = statut;
+                this.contrat.getContratsByFiltre(this.getFiltres)
+            },
+            changeStatutSolde(statut){
+                this.statut_solde = statut;
+                this.contrat.getContratsByFiltre(this.getFiltres)
+            }            
         },
         computed: {
             getFiltres() {
                 return {
                     recherche: this.recherche,
-                    agence_id: this.agence_id
+                    agence_id: this.agence_id,
+                    statut: this.statut,
+                    statut_solde: this.statut_solde
                 }
             }
         },
